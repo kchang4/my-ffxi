@@ -105,14 +105,10 @@ class LuaStyleCheck:
         """Displays error_string along with filename and line.  Increments errcount for the class."""
 
         if self.show_errors:
-            print(f"{error_string}: {self.filename}:{self.counter}")
-
+            print(f"#### {error_string}:\n")
+            print(f"> {self.filename}:{self.counter}\n")
             if not suppress_line_ref:
-                print(
-                    f"{self.lines[self.counter - 1].strip()}                              <-- HERE"
-                )
-
-            print("")
+                print(f"```lua\n{self.lines[self.counter - 1].strip()}\n```\n")
 
         self.errcount += 1
 
@@ -407,7 +403,7 @@ class LuaStyleCheck:
 
     def run_style_check(self):
         if self.filename is None:
-            print("ERROR: No filename provided to LuaStyleCheck class.")
+            print("### ERROR: No filename provided to LuaStyleCheck class.\n")
             return
 
         with open(self.filename, "r") as f:
@@ -649,7 +645,7 @@ elif target == "scripts":
         total_errors += LuaStyleCheck(filename).errcount
 elif target == "test":
     total_errors = LuaStyleCheck(
-        "tools/ci/tests/stylecheck.lua", show_errors=False
+        "tools/ci/sanity_checks/lua_stylecheck.lua", show_errors=False
     ).errcount
     expected_errors = 93
 else:
@@ -657,8 +653,8 @@ else:
 
 if total_errors != expected_errors:
     if target != "test":
-        print(f"Lua styling errors: {total_errors}")
+        print(f"#### Lua styling errors: {total_errors}\n")
     else:
         print(
-            f"Stylecheck Unit tests failed! Expected {expected_errors} errors and found {total_errors}."
+            f"### Stylecheck Unit tests failed! Expected {expected_errors} errors and found {total_errors}.\n"
         )
