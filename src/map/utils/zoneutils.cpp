@@ -109,7 +109,6 @@ namespace zoneutils
             return g_PZoneList.at(zoneId);
         }
 
-        ShowWarning(fmt::format("Invalid zone requested: {}", zoneId));
         return nullptr;
     }
 
@@ -812,8 +811,6 @@ namespace zoneutils
             }
         }
 
-        luautils::InitInteractionGlobal(zonesToLoad);
-
         Async::getInstance()->setThreadpoolSize(1U);
     }
 
@@ -829,6 +826,7 @@ namespace zoneutils
         }
 
         LoadZones(zoneIds);
+        luautils::InitInteractionGlobal();
     }
 
     /************************************************************************
