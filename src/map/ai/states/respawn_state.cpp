@@ -36,7 +36,7 @@ bool CRespawnState::Update(timer::time_point tick)
     auto* PMob = dynamic_cast<CMobEntity*>(m_PEntity);
     if (PMob)
     {
-        if (!WasExitDelayed() && !PMob->m_AllowRespawn)
+        if ((!WasExitDelayed() && !PMob->m_AllowRespawn) || (PMob->m_spawnGroup && !PMob->CanSpawnFromGroup()))
         {
             if (m_spawnTime > 0s)
             {

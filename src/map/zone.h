@@ -34,6 +34,7 @@
 #include "battlefield_handler.h"
 #include "campaign_handler.h"
 #include "packets/weather.h"
+#include "spawn_group.h"
 #include "trigger_area.h"
 
 //
@@ -648,8 +649,9 @@ public:
     CBattlefieldHandler* m_BattlefieldHandler; // BCNM Instances in this zone
     CCampaignHandler*    m_CampaignHandler;    // WOTG campaign information for this zone
 
-    std::unique_ptr<CNavMesh> m_navMesh;
-    std::unique_ptr<ZoneLos>  lineOfSight;
+    std::unique_ptr<CNavMesh>                       m_navMesh;
+    std::unique_ptr<ZoneLos>                        lineOfSight;
+    std::map<uint32_t, std::unique_ptr<spawnGroup>> m_spawnGroups;
 
     timer::time_point m_LoadedAt; // The time the zone was loaded
 
