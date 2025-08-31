@@ -1,10 +1,9 @@
 -----------------------------------
--- Asthenic Fog
---
--- Description: A mist drowns all nearby targets.
--- Type: Enfeebling
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: Unknown radial
+-- Fluorescence
+-- Description: Emits radiation to boost next attack.
+-- Type: Enhancing
+-- Utsusemi/Blink absorb: N/A
+-- Range: Self
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -14,9 +13,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.DROWN, 15, 0, 60))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.BOOST, 400, 0, 5))
 
-    return xi.effect.DROWN
+    return xi.effect.BOOST
 end
 
 return mobskillObject

@@ -33,14 +33,14 @@ end
 -- Hpemde take 100% increased damage and deal 2x base damage in open mouth form
 local function openMouth(mob)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, mob:getMainLvl() + 2)
-    mob:addMod(xi.mod.DMG, 10000)
+    mob:setMod(xi.mod.DMG, 10000)
     mob:setAnimationSub(3)
     mob:wait(2000)
 end
 
 local function closeMouth(mob)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 0)
-    mob:delMod(xi.mod.DMG, 10000)
+    mob:setMod(xi.mod.DMG, 0)
     mob:setLocalVar('[hpemde]changeTime', mob:getBattleTime() + 30)
     mob:setAnimationSub(6)
     mob:wait(2000)
