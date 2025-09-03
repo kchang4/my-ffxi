@@ -208,4 +208,10 @@ void CMobSkillState::Cleanup(timer::time_point tick)
             }
         }
     }
+
+    if (m_PSkill->getFinalAnimationSub().has_value() && m_PEntity && m_PEntity->isAlive())
+    {
+        m_PEntity->animationsub = m_PSkill->getFinalAnimationSub().value();
+        m_PEntity->updatemask |= UPDATE_COMBAT;
+    }
 }

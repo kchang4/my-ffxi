@@ -5837,7 +5837,7 @@ void CLuaBaseEntity::setAnimation(uint8 animation)
 
 /************************************************************************
  *  Function: getAnimationSub()
- *  Purpose : Returns animation sub for an entity or updates if var supplied
+ *  Purpose : Returns animation sub for an entity
  *  Example :
  *  Notes   :
  ************************************************************************/
@@ -5849,7 +5849,7 @@ uint8 CLuaBaseEntity::getAnimationSub()
 
 /************************************************************************
  *  Function: setAnimationSub()
- *  Purpose : Returns animation sub for an entity or updates if var supplied
+ *  Purpose : Updates the animationsub for an entity and sends an update packet immediately if specified
  *  Example :
  *  Notes   : sendUpdate is true by default (false is the edge case.)
  ************************************************************************/
