@@ -76,6 +76,8 @@ xi.mobSkill =
     MEIKYO_SHISUI_1          =  730, -- Tenzen, etc...
     MIJIN_GAKURE_1           =  731, -- Season's Greetings KSNM 30 (Ulagohvsdi Tlugvi)
 
+    CALL_WYVERN              =  732,
+
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
     DISPELLING_WIND          =  813,
