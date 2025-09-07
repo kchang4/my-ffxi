@@ -1260,7 +1260,7 @@ INSERT INTO `mob_groups` VALUES (45,5884,33,'Ruaern_rng',0,128,0,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (46,5885,33,'Ruaern_mnk',0,128,0,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (47,5886,33,'Ruaern_blm',0,128,0,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (48,5887,33,'Ruaern_pld',0,128,0,0,0,70,71,0);
-INSERT INTO `mob_groups` VALUES (49,2132,33,'Jailer_of_Hope',0,128,1398,34000,0,85,85,0);
+INSERT INTO `mob_groups` VALUES (49,2132,33,'Jailer_of_Hope',0,128,1398,29200,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (50,2133,33,'Jailer_of_Justice',0,128,1399,37000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (51,3271,33,'Qnxzomit',0,128,0,2500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (52,2135,33,'Jailer_of_Prudence',0,128,1401,34000,0,85,85,0);
