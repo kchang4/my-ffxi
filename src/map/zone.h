@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _CZONE_H
-#define _CZONE_H
+#pragma once
 
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
@@ -704,5 +703,3 @@ protected:
 
     std::unordered_map<std::string, uint32> m_localVars;
 };
-
-#endif
