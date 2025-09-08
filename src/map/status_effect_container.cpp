@@ -572,6 +572,8 @@ bool CStatusEffectContainer::AddStatusEffect(CStatusEffect* PStatusEffect, Effec
 void CStatusEffectContainer::DeleteStatusEffects()
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     bool update_icons    = false;
     bool effects_removed = false;
     for (auto effect_iter = m_StatusEffectSet.begin(); effect_iter != m_StatusEffectSet.end();)
@@ -1663,13 +1665,14 @@ auto CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect) -> voi
 
 void CStatusEffectContainer::LoadStatusEffects()
 {
-    TracyZoneScoped;
-
     if (m_POwner->objtype != TYPE_PC)
     {
         ShowWarning("Non-PC calling function (%s).", m_POwner->getName());
         return;
     }
+
+    TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     const char* Query = "SELECT "
                         "effectid, "
@@ -1857,6 +1860,7 @@ void CStatusEffectContainer::CheckEffectsExpiry(timer::time_point tick)
     }
 
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1871,6 +1875,8 @@ void CStatusEffectContainer::CheckEffectsExpiry(timer::time_point tick)
 void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 {
     TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
+
     CBattleEntity* PEntity    = m_POwner;
     AURA_TARGET    auraTarget = static_cast<AURA_TARGET>(PStatusEffect->GetTier());
 
@@ -2070,13 +2076,14 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 
 void CStatusEffectContainer::TickEffects(timer::time_point tick)
 {
-    TracyZoneScoped;
-
     if (m_POwner == nullptr)
     {
         ShowWarning("CStatusEffectContainer::TickRegen() - m_POwner is null.");
         return;
     }
+
+    TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     if (!m_POwner->isDead())
     {
@@ -2106,13 +2113,14 @@ void CStatusEffectContainer::TickEffects(timer::time_point tick)
 
 void CStatusEffectContainer::TickRegen(timer::time_point tick)
 {
-    TracyZoneScoped;
-
     if (m_POwner == nullptr)
     {
         ShowWarning("CStatusEffectContainer::TickRegen() - m_POwner is null.");
         return;
     }
+
+    TracyZoneScoped;
+    TracyZoneString(m_POwner->getName());
 
     if (!m_POwner->isDead())
     {
