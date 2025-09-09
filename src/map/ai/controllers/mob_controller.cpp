@@ -401,7 +401,6 @@ auto CMobController::TrySpecialSkill() -> bool
     // get my special skill
     CMobSkill*     PSpecialSkill  = battleutils::GetMobSkill(PMob->getMobMod(MOBMOD_SPECIAL_SKILL));
     CBattleEntity* PAbilityTarget = nullptr;
-    m_LastSpecialTime             = m_Tick;
 
     if (PSpecialSkill == nullptr)
     {
@@ -444,7 +443,11 @@ auto CMobController::TrySpecialSkill() -> bool
 
     if (luautils::OnMobSkillCheck(PAbilityTarget, PMob, PSpecialSkill) == 0)
     {
-        return MobSkill(PAbilityTarget->targid, PSpecialSkill->getID(), std::nullopt);
+        if (MobSkill(PAbilityTarget->targid, PSpecialSkill->getID(), std::nullopt))
+        {
+            m_LastSpecialTime = m_Tick;
+            return true;
+        }
     }
 
     return false;
@@ -1017,9 +1020,15 @@ void CMobController::DoRoamTick(timer::time_point tick)
             }
             else
             {
+                if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && PMob->PMaster != nullptr && !PMob->PMaster->isAlive())
+                {
+                    // despawn pets if they are disengaged and master is dead
+                    PMob->PAI->Despawn();
+                    return;
+                }
+
                 // No longer including conditional for ROAMFLAG_AMBUSH now that using mixin to handle mob hiding
-                if (PMob->getMobMod(MOBMOD_SPECIAL_SKILL) != 0 &&
-                    m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL)) && TrySpecialSkill())
+                if (IsSpecialSkillReady(0) && TrySpecialSkill())
                 {
                     // I spawned a pet
                 }
