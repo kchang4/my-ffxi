@@ -350,12 +350,12 @@ INSERT INTO `abilities` VALUES (342,'caper_emissarius',20,96,2,3600,254,0,0,290,
 INSERT INTO `abilities` VALUES (343,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0.0,0,1,300,0,4,'SOA'); -- check animation
 INSERT INTO `abilities` VALUES (344,'swipe',22,25,4,90,241,110,0,0,2000,0,15,4.5,0,80,320,0,0,'SOA');
 INSERT INTO `abilities` VALUES (345,'full_circle',21,5,1,10,243,0,0,94,2000,0,6,20.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,256,300,244,663,0,306,2000,0,6,10.0,0,1,300,1730,0,'SOA');
-INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,256,300,244,664,0,307,2000,0,6,10.0,0,1,300,1730,0,'SOA');
+INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,257,300,244,663,0,306,2000,0,6,10.0,0,1,300,1730,0,'SOA');
+INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,257,300,244,664,0,307,2000,0,6,10.0,0,1,300,1730,0,'SOA');
 INSERT INTO `abilities` VALUES (348,'collimated_fervor',21,40,1,300,245,100,0,304,2000,0,6,0.0,0,1,300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (349,'life_cycle',21,50,256,600,246,306,0,309,2000,0,6,20.0,0,1,300,1732,0,'SOA');
+INSERT INTO `abilities` VALUES (349,'life_cycle',21,50,257,600,246,306,0,309,2000,0,6,20.0,0,1,300,1732,0,'SOA');
 INSERT INTO `abilities` VALUES (350,'blaze_of_glory',21,60,1,600,247,100,0,308,2000,0,6,20.0,0,1,300,1734,0,'SOA');
-INSERT INTO `abilities` VALUES (351,'dematerialize',21,70,256,600,248,319,0,310,2000,0,6,20.0,0,1,300,1736,0,'SOA');
+INSERT INTO `abilities` VALUES (351,'dematerialize',21,70,257,600,248,319,0,310,2000,0,6,20.0,0,1,300,1736,0,'SOA');
 INSERT INTO `abilities` VALUES (352,'theurgic_focus',21,80,1,300,249,100,0,305,2000,0,6,0.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (353,'concentric_pulse',21,90,4,300,250,0,0,94,2000,0,6,10.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (354,'mending_halation',21,75,3,300,251,0,0,94,2000,0,6,10.0,0,1,0,3392,0,'SOA');
@@ -602,9 +602,9 @@ INSERT INTO `abilities` VALUES (748,'corrosive_ooze',9,25,257,3,102,0,0,0,2000,0
 INSERT INTO `abilities` VALUES (749,'back_heel',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (750,'jettatura',9,25,257,4,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (751,'choke_breath',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (752,'fantod',9,25,257,2,103,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (752,'fantod',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (753,'tortoise_stomp',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (754,'harden_shell',9,25,257,2,103,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (754,'harden_shell',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (755,'aqua_breath',9,25,257,3,102,1,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (756,'wing_slap',9,25,257,2,102,0,1,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (757,'beak_lunge',9,25,257,1,102,0,1,0,2000,0,6,18.0,0,1,60,0,0,NULL);
