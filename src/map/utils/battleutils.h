@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _BATTLEUTILS_H
-#define _BATTLEUTILS_H
+#pragma once
 
 #include "blue_spell.h"
 #include "common/cbasetypes.h"
@@ -275,5 +274,3 @@ namespace battleutils
     void           ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered);
     float          CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType);
 }; // namespace battleutils
-
-#endif
