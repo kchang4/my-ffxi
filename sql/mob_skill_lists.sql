@@ -2448,6 +2448,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Jug_Mandragora',734,679);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Tiger',735,680);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Tiger',735,681);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Tiger',735,682);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Tiger',735,795);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Tiger',735,796);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lizard',736,683);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lizard',736,684);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Lizard',736,685);
