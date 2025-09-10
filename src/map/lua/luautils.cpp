@@ -2826,6 +2826,30 @@ namespace luautils
         }
     }
 
+    void OnSpellInterrupted(CBattleEntity* PCaster, CSpell* PSpell)
+    {
+        TracyZoneScoped;
+
+        if (PCaster->objtype != TYPE_MOB)
+        {
+            return;
+        }
+
+        sol::function onSpellInterrupted = getEntityCachedFunction(PCaster, "onSpellInterrupted");
+        if (!onSpellInterrupted.valid())
+        {
+            return;
+        }
+
+        auto result = onSpellInterrupted(PCaster, PSpell);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onSpellInterrupted: %s", err.what());
+            ReportErrorToPlayer(PCaster, err.what());
+        }
+    }
+
     std::optional<SpellID> OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId)
     {
         TracyZoneScoped;
