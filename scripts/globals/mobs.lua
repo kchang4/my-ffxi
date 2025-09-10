@@ -246,6 +246,7 @@ xi.mob.additionalEffect =
     WEIGHT     = 22,
     ENAMNESIA  = 23,
     DISPEL     = 24,
+    BIND       = 25,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -561,6 +562,20 @@ local additionalEffects =
         msg         = xi.msg.basic.ADD_EFFECT_DISPEL,
         applyEffect = false,
         power       = 1,
+    },
+
+    [xi.mob.ae.BIND] =
+    {
+        chance      = 10,
+        ele         = xi.element.ICE,
+        sub         = xi.subEffect.DISPEL, -- TODO
+        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff         = xi.effect.BIND,
+        power       = 1,
+        duration    = 30,
+        minDuration = 1,
+        maxDuration = 90,
     },
 }
 
