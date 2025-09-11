@@ -1273,7 +1273,7 @@ INSERT INTO `mob_groups` VALUES (58,6197,33,'Ulaern_brd',960,0,2514,0,0,70,73,0)
 INSERT INTO `mob_groups` VALUES (59,6194,33,'Ulaern_pld',960,0,2514,0,0,70,73,0);
 INSERT INTO `mob_groups` VALUES (60,7033,33,'Omhpemde_nodive',960,0,1854,0,0,73,77,0);
 INSERT INTO `mob_groups` VALUES (61,2615,33,'Ulxzomit',330,0,3231,0,0,68,71,0); -- Follower Ul'Xzomit
-INSERT INTO `mob_groups` VALUES (62,7094,33,'Omxzomit',960,0,1856,0,0,72,76,0); -- Follower Om'Xzomit
+INSERT INTO `mob_groups` VALUES (62,7095,33,'Omxzomit',960,0,1856,0,0,72,76,0); -- Follower Om'Xzomit
 
 -- ------------------------------------------------------------
 -- Grand_Palace_of_HuXzoi (Zone 34)
@@ -1307,6 +1307,7 @@ INSERT INTO `mob_groups` VALUES (25,3269,34,'Qnaern_rdm',0,128,0,7500,0,80,80,0)
 INSERT INTO `mob_groups` VALUES (26,4651,34,'Qnaern_whm',0,128,0,7500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (27,7057,34,'Quasilumin',0,128,0,1000,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (28,7093,34,'Eoeuvhi_closed',960,0,776,0,0,74,77,0);
+INSERT INTO `mob_groups` VALUES (29,7092,34,'Eozdei_Left',960,0,778,0,0,77,78,0);
 
 -- ------------------------------------------------------------
 -- The_Garden_of_RuHmet (Zone 35)
@@ -1346,6 +1347,9 @@ INSERT INTO `mob_groups` VALUES (31,2112,35,'Ixaern_drg',0,128,2843,21000,0,82,8
 INSERT INTO `mob_groups` VALUES (32,5536,35,'Ixaern_drgs_Wynav',0,128,0,0,0,78,79,0);
 INSERT INTO `mob_groups` VALUES (33,7039,35,'Ixzdei_RDM',0,128,0,6500,0,78,78,0);
 INSERT INTO `mob_groups` VALUES (34,7092,35,'Aweuvhi_closed',960,0,199,0,0,78,82,0);
+INSERT INTO `mob_groups` VALUES (35,7096,35,'Awzdei_Left',960,0,778,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (36,7097,35,'Awzdei_Fast',960,0,778,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (37,7098,35,'Awzdei_LeftFast',960,0,778,0,0,80,80,0);
 
 -- ------------------------------------------------------------
 -- Empyreal_Paradox (Zone 36)
