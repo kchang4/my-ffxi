@@ -4,7 +4,6 @@
 -----------------------------------
 ---@type TAbilityPet
 local abilityObject = {}
-local skillName = 'fantod'
 
 abilityObject.onAbilityCheck = function(player, target, ability)
     -- TODO implement this ability

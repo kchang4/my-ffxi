@@ -2514,6 +2514,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Jug_Ladybug',750,738);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Raptor',751,743);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Raptor',751,744);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Raptor',751,745);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Slug',752,747);
+INSERT INTO `mob_skill_lists` VALUES ('Jug_Slug',752,748);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,749);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,750);
 INSERT INTO `mob_skill_lists` VALUES ('Jug_Hippogryph',753,751);
