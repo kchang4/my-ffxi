@@ -34,20 +34,6 @@ LOCK TABLES `mob_pets` WRITE;
 /*!40000 ALTER TABLE `mob_pets` DISABLE KEYS */;
 
 -- ------------------------------------------------------------
--- Uleguerand_Range (Zone 5)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16797840,1,15,'Stygian_Demon','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797845,1,15,'Stygian_Demon','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797876,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797883,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797891,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797917,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797925,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797959,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797964,1,15,'Kindred_Summoner','Demons_Elemental');
-
--- ------------------------------------------------------------
 -- Attohwa_Chasm (Zone 7)
 -- ------------------------------------------------------------
 
