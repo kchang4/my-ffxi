@@ -599,9 +599,9 @@ INSERT INTO `abilities` VALUES (745,'chomp_rush',9,25,257,3,102,0,0,0,2000,0,6,1
 INSERT INTO `abilities` VALUES (746,'charged_whisker',9,26,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (747,'purulent_ooze',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (748,'corrosive_ooze',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (749,'back_heel',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (750,'jettatura',9,25,257,4,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
-INSERT INTO `abilities` VALUES (751,'choke_breath',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (749,'back_heel',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (750,'jettatura',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (751,'choke_breath',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (752,'fantod',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (753,'tortoise_stomp',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (754,'harden_shell',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,1,60,0,0,NULL);
@@ -638,6 +638,8 @@ INSERT INTO `abilities` VALUES (779,'spider_web',9,25,257,2,102,0,0,0,2000,0,6,1
 INSERT INTO `abilities` VALUES (790,'frenzied_rage',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,2,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (795,'crossthrash',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,2,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (796,'predatory_glare',9,25,257,2,102,0,0,0,2000,0,6,18.0,0,2,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (797,'hoof_volley',9,25,257,3,102,0,0,0,2000,0,6,18.0,0,2,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (798,'nihility_song',9,25,257,1,102,0,0,0,2000,0,6,18.0,0,2,60,0,0,NULL);
 INSERT INTO `abilities` VALUES (960,'clarsach_call',15,1,4,60,173,0,0,175,2000,0,6,7.0,1,1,60,0,2,NULL);
 INSERT INTO `abilities` VALUES (961,'welt',15,1,4,60,173,326,317,176,2000,0,6,7.0,0,0,60,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (962,'katabatic_blades',15,1,1,0,300,0,0,???,2000,0,6,30.0,0,0,60,0,0,NULL);

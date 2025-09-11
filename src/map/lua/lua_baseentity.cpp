@@ -13241,7 +13241,7 @@ void CLuaBaseEntity::resetEnmity(CLuaBaseEntity* PEntity)
 {
     if (m_PBaseEntity->objtype != TYPE_MOB)
     {
-        ShowWarning("Attempting to reset enmnity for invalid entity type (%s).", m_PBaseEntity->getName());
+        ShowWarning("Attempting to reset enmity for invalid entity type (%s).", m_PBaseEntity->getName());
         return;
     }
 
