@@ -64,6 +64,8 @@ xi.mobSkill =
 
     TRANSMOGRIFICATION       =  487, -- Mammet-800
 
+    SELF_DESTRUCT            =  511,
+
     DANSE_MACABRE            =  533,
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
