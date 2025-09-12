@@ -231,6 +231,9 @@ INSERT INTO `pet_skills` VALUES (731,3899,396,'blaster',0,7.0,2000,1500,4,185,@S
 INSERT INTO `pet_skills` VALUES (732,3900,158,'suction',0,7.0,2000,1500,4,185,@SKILLFLAG_NONE,0,11,0,@SC_COMPRESSION,0,0);
 INSERT INTO `pet_skills` VALUES (733,3901,161,'drainkiss',0,7.0,2000,1500,4,187,@SKILLFLAG_NONE,0,11,0,0,0,0);
 INSERT INTO `pet_skills` VALUES (735,3903,37,'wild_carrot',1,7.0,2000,1500,3,238,@SKILLFLAG_NONE,0,11,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (736,2178,1576,'sudden_lunge',0,10.0,2000,1800,4,185,@SKILLFLAG_NONE,0,11,0,@SC_IMPACTION,0,0); -- TODO get proper mobskill/animation IDs
+INSERT INTO `pet_skills` VALUES (737,2181,1579,'spiral_spin',4,10.0,2000,1000,4,185,@SKILLFLAG_NONE,0,11,0,@SC_SCISSION,0,0); -- TODO get proper mobskill/animation IDs
+INSERT INTO `pet_skills` VALUES (738,2179,1577,'noisome_powder',1,10.0,2000,1000,4,242,@SKILLFLAG_NONE,0,11,0,0,0,0); -- TODO get proper mobskill/animation IDs
 INSERT INTO `pet_skills` VALUES (740,3907,159,'acid_mist',1,15.0,2000,1500,4,185,@SKILLFLAG_NONE,0,11,0,0,0,0);
 INSERT INTO `pet_skills` VALUES (741,3908,164,'tp_drainkiss',0,7.0,2000,1500,4,226,@SKILLFLAG_NONE,0,11,0,0,0,0);
 INSERT INTO `pet_skills` VALUES (743,380,124,'scythe_tail',0,7.0,2000,1500,4,185,@SKILLFLAG_NONE,0,11,0,@SC_LIQUEFACTION,0,0); -- TODO get proper mobskill/animation IDs
