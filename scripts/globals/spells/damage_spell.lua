@@ -674,6 +674,20 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
     return magicBonusDiff
 end
 
+xi.spells.damage.calculateMagicCriticalMultiplier = function(caster)
+    -- Also known as "Magic Critical Hit II"
+    -- https://www.bg-wiki.com/ffxi/Magic_Critical_Hit
+    -- https://www.bg-wiki.com/ffxi/Sroda_Tathlum
+    local criticalMultiplier = 1
+    local criticalChance     = caster:getMod(xi.mod.MAGIC_CRITHITRATE_II)
+
+    if math.random(1, 100) <= criticalChance then
+        criticalMultiplier = 1.25
+    end
+
+    return criticalMultiplier
+end
+
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- SDT follow-up. This time for specific modifiers.
 -- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
@@ -1102,6 +1116,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local sdt                       = xi.spells.damage.calculateSDT(target, spellElement)
     local dayAndWeather             = xi.spells.damage.calculateDayAndWeather(caster, spellElement, forceDayWeatherBonus)
     local magicBonusDiff            = xi.spells.damage.calculateMagicBonusDiff(caster, target, spellId, skillType, spellElement)
+    local criticalDamageMultiplier  = xi.spells.damage.calculateMagicCriticalMultiplier(caster)
     local divineSealMultiplier      = xi.spells.damage.calculateDivineSealMultiplier(caster, skillType)
     local divineEmblemMultiplier    = xi.spells.damage.calculateDivineEmblemMultiplier(caster, skillType)
     local eleSealMultiplier         = xi.spells.damage.calculateEnhancedElementalSealMultiplier(caster, skillType, spellElement)
@@ -1124,6 +1139,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * additionalResistTier)
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
+    finalDamage = math.floor(finalDamage * criticalDamageMultiplier)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
     finalDamage = math.floor(finalDamage * divineSealMultiplier)
     finalDamage = math.floor(finalDamage * divineEmblemMultiplier)
