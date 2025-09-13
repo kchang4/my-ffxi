@@ -30,6 +30,7 @@
 #include "entities/mobentity.h"
 #include "job_points.h"
 #include "lua/luautils.h"
+#include "mob_modifier.h"
 #include "packets/action.h"
 #include "packets/message_basic.h"
 #include "spell.h"
@@ -411,6 +412,14 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
 
 bool CMagicState::HasCost()
 {
+    if (auto PMob = dynamic_cast<CMobEntity*>(m_PEntity))
+    {
+        if (PMob->getMobMod(MOBMOD_NO_SPELL_COST) > 0)
+        {
+            m_flags |= MAGICFLAGS_IGNORE_MP;
+        }
+    }
+
     if (m_PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
     {
         if (m_PEntity->objtype == TYPE_PC && !(m_flags & MAGICFLAGS_IGNORE_TOOLS) && !battleutils::HasNinjaTool(m_PEntity, GetSpell(), false))
@@ -435,6 +444,14 @@ bool CMagicState::HasCost()
 
 void CMagicState::SpendCost()
 {
+    if (auto PMob = dynamic_cast<CMobEntity*>(m_PEntity))
+    {
+        if (PMob->getMobMod(MOBMOD_NO_SPELL_COST) > 0)
+        {
+            m_flags |= MAGICFLAGS_IGNORE_MP;
+        }
+    }
+
     if (m_PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
     {
         if (!(m_flags & MAGICFLAGS_IGNORE_TOOLS))
