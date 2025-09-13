@@ -92,6 +92,8 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "items/item_furnishing.h"
+#include "items/item_linkshell.h"
 
 #include "packets/action.h"
 #include "packets/auction_house.h"

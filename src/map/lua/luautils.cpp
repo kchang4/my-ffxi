@@ -77,6 +77,7 @@
 #include "fishingcontest.h"
 #include "instance.h"
 #include "ipc_client.h"
+#include "items/item_furnishing.h"
 #include "map_engine.h"
 #include "mob_modifier.h"
 #include "mobskill.h"
