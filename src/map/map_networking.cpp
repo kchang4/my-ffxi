@@ -140,8 +140,6 @@ auto MapNetworking::doSocketsBlocking(timer::duration next) -> timer::duration
 
     mapSocket_->recvFor(next);
 
-    _sql->TryPing();
-
     tapStatistics();
 
     return timer::now() - start;
