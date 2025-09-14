@@ -84,6 +84,8 @@ xi.mobSkill =
 
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
+    GREAT_WHIRLWIND          =  803, -- "The Scarlet King" KSNM 30 (Purson)
+
     DISPELLING_WIND          =  813,
     DEADLY_DRIVE             =  814,
     WIND_WALL                =  815,
