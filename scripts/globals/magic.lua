@@ -176,11 +176,6 @@ function isValidHealTarget(caster, target)
             target:getObjType() == xi.objType.FELLOW)
 end
 
--- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(actor, target, element, skillType, bonusMacc)
-    return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, skillType, 0, element, 0, 0, bonusMacc)
-end
-
 -- Applies resistance for additional effects
 function applyResistanceAddEffect(actor, target, element, bonusMacc)
     return xi.combat.magicHitRate.calculateResistRate(actor, target, 0, xi.skill.NONE, 0, element, 0, 0, bonusMacc)
