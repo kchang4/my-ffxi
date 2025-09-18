@@ -7,10 +7,6 @@ require('scripts/globals/utils')
 xi = xi or {}
 xi.magic = xi.magic or {}
 
--- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
-local softCap = 60 --guesstimated
-local hardCap = 120 --guesstimated
-
 -----------------------------------
 -- Returns the staff bonus for the caster and spell.
 -----------------------------------
@@ -79,31 +75,6 @@ local function calculateMagicBurst(caster, spell, target, params)
     burst = modburst * skillchainburst
 
     return burst
-end
-
-function calculateMagicDamage(caster, target, spell, params)
-    local dINT = caster:getStat(params.attribute) - target:getStat(params.attribute)
-    local dmg = params.dmg
-
-    if dINT <= 0 then --if dINT penalises, it's always M=1
-        dmg = dmg + dINT
-        if dmg <= 0 then --dINT penalty cannot result in negative damage (target absorption)
-            return 0
-        end
-    elseif dINT > 0 and dINT <= softCap then --The standard calc, most spells hit this
-        dmg = dmg + (dINT * params.multiplier)
-    elseif dINT > 0 and dINT > softCap and dINT < hardCap then --After softCap, INT is only half effective
-        dmg = dmg + softCap * params.multiplier + ((dINT - softCap) * params.multiplier) / 2
-    elseif dINT > 0 and dINT > softCap and dINT >= hardCap then --After hardCap, INT has no xi.effect.
-        dmg = dmg + hardCap * params.multiplier
-    end
-
-    if params.skillType == xi.skill.DIVINE_MAGIC and target:isUndead() then
-        -- 150% bonus damage
-        dmg = dmg * 1.5
-    end
-
-    return dmg
 end
 
 -----------------------------------
