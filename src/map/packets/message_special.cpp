@@ -27,19 +27,20 @@
 
 #include "entities/baseentity.h"
 
+
 CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messageID, uint32 param0, uint32 param1, uint32 param2, uint32 param3, bool ShowName)
 {
     this->setType(0x2A);
     this->setSize(0x20);
 
-    ref<uint32>(0x04) = PEntity->id;
+    ref<uint32>(0x04) = PEntity->id; //UniqueNo
 
-    ref<uint32>(0x08) = param0;
-    ref<uint32>(0x0C) = param1;
-    ref<uint32>(0x10) = param2;
-    ref<uint32>(0x14) = param3;
+    ref<uint32>(0x08) = param0; // num[0]
+    ref<uint32>(0x0C) = param1; // num[1]
+    ref<uint32>(0x10) = param2; // num[2]
+    ref<uint32>(0x14) = param3; // num[3]
 
-    ref<uint16>(0x18) = PEntity->targid;
+    ref<uint16>(0x18) = PEntity->targid; // ActIndex
 
     if (ShowName)
     {
@@ -51,5 +52,5 @@ CMessageSpecialPacket::CMessageSpecialPacket(CBaseEntity* PEntity, uint16 messag
         messageID += 0x8000;
     }
 
-    ref<uint16>(0x1A) = messageID;
+    ref<uint16>(0x1A) = messageID; // MesNum
 }
