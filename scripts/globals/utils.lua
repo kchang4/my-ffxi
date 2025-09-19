@@ -1330,29 +1330,29 @@ function utils.timeIsBefore(current, target)
     return current.hour < target.hour
 end
 
--- Assigns loot to the treasurepool for "player"
+-- Selects loot from a structured table of loot groups
 -- loot is chosen by randomly assigning based on weights from loot groups within lootTable. Example:
 --[[
 lootTable =
 {
     {
-        { itemid = xi.item.GIL, amount = 10000, weight = 1000 },
+        { itemId = xi.item.GIL, amount = 10000, weight = 1000 },
     },
 
     {
         quantity = 2,
-        { itemid = xi.item.REMEDY, weight = 900 },
-        { itemid = 0,              weight = 100 },
+        { itemId = xi.item.REMEDY, weight = 900 },
+        { itemId = 0,              weight = 100 },
     },
 
     {
-        { itemid = xi.item.REMEDY, weight = 200 },
-        { itemid = 0,              weight = 800 },
+        { itemId = xi.item.REMEDY, weight = 200 },
+        { itemId = 0,              weight = 800 },
     },
 
 --]]
 
----@param player CBaseEntity
+---@param actor CBaseEntity
 ---@param lootTable table<table>
 ---@return table
 function utils.selectFromLootGroups(actor, lootTable)
@@ -1369,7 +1369,7 @@ function utils.selectFromLootGroups(actor, lootTable)
             if type(entry) == 'table' then
                 max = max + entry.weight
 
-                if entry.itemid == nil then
+                if entry.itemId == nil then
                     print(fmt('[ERROR] Player ({}) has encountered nil item at index {} of lootGroup with index {}', actor:getName(), j, i))
                 end
             end
@@ -1387,7 +1387,7 @@ function utils.selectFromLootGroups(actor, lootTable)
 
                     if current >= roll then
                         -- xi.item.NONE gives a chance to drop nothing from a group
-                        if entry.itemid == 0 or entry.itemid == nil then
+                        if entry.itemId == 0 or entry.itemId == nil then
                             break
                         end
 
