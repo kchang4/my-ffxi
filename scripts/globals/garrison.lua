@@ -325,31 +325,16 @@ end
 
 -- Distributes loot amongst all players
 xi.garrison.handleLootRolls = function(levelCap, players)
-    local lootTable = xi.garrison.loot[levelCap]
-    local max       = 0
+    local lootGroup = xi.garrison.loot[levelCap]
+    local firstPlayer = players[1]
 
-    for _, entry in ipairs(lootTable) do
-        max = max + entry.droprate
-    end
-
-    local roll = math.random(max)
-
-    for _, entry in pairs(lootTable) do
-        max = max - entry.droprate
-
-        if roll > max then
-            if entry.itemid ~= 0 then
-                for _, player in ipairs(players) do
-                    if player ~= nil then
-                        player:addTreasure(entry.itemid)
-
-                        return
-                    end
-                end
-            end
-
-            break
-        end
+    -- completion of garrison gives a random item from the pool per player
+    lootGroup.quantity = #players
+    local lootTable = { lootGroup }
+    local selectedLoot = utils.selectFromLootGroups(firstPlayer, lootTable)
+    for _, entry in ipairs(selectedLoot) do
+        -- garrison completion loot has no gil
+        firstPlayer:addTreasure(entry.item) -- nil npc parameter for addTreasure gives no message, on purpose
     end
 end
 
