@@ -1336,14 +1336,18 @@ end
 lootTable =
 {
     {
-        quantity = 2,
-        { item = xi.item.REMEDY, weight = 900 },
-        { item = 0,              weight = 100 },
+        { itemid = xi.item.GIL, amount = 10000, weight = 1000 },
     },
 
     {
-        { item = xi.item.REMEDY, weight = 200 },
-        { item = 0,              weight = 800 },
+        quantity = 2,
+        { itemid = xi.item.REMEDY, weight = 900 },
+        { itemid = 0,              weight = 100 },
+    },
+
+    {
+        { itemid = xi.item.REMEDY, weight = 200 },
+        { itemid = 0,              weight = 800 },
     },
 
 --]]
@@ -1365,7 +1369,7 @@ function utils.selectFromLootGroups(actor, lootTable)
             if type(entry) == 'table' then
                 max = max + entry.weight
 
-                if entry.item == nil then
+                if entry.itemid == nil then
                     print(fmt('[ERROR] Player ({}) has encountered nil item at index {} of lootGroup with index {}', actor:getName(), j, i))
                 end
             end
@@ -1383,7 +1387,7 @@ function utils.selectFromLootGroups(actor, lootTable)
 
                     if current >= roll then
                         -- xi.item.NONE gives a chance to drop nothing from a group
-                        if entry.item == 0 or entry.item == nil then
+                        if entry.itemid == 0 or entry.itemid == nil then
                             break
                         end
 

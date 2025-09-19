@@ -334,7 +334,7 @@ xi.garrison.handleLootRolls = function(levelCap, players)
     local selectedLoot = utils.selectFromLootGroups(firstPlayer, lootTable)
     for _, entry in ipairs(selectedLoot) do
         -- garrison completion loot has no gil
-        firstPlayer:addTreasure(entry.item) -- nil npc parameter for addTreasure gives no message, on purpose
+        firstPlayer:addTreasure(entry.itemid) -- nil npc parameter for addTreasure gives no message, on purpose
     end
 end
 

@@ -1602,7 +1602,7 @@ xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
     if npc:getLocalVar('UnappraisedItem') == 0 then
         local selectedLoot = utils.selectFromLootGroups(player, qItemTable)
         if #selectedLoot > 0 then
-            npc:setLocalVar('UnappraisedItem', selectedLoot[1].item)
+            npc:setLocalVar('UnappraisedItem', selectedLoot[1].itemid)
         end
     end
 end
@@ -1641,7 +1641,7 @@ xi.appraisal.assaultChestTrigger = function(player, npc, qItemTable, regItemTabl
         local selectedLoot = utils.selectFromLootGroups(player, regItemTable)
         for _, entry in ipairs(selectedLoot) do
             -- regItemTable is guaranteed to not have xi.item.GIL in the table
-            player:addTreasure(entry.item, npc)
+            player:addTreasure(entry.itemid, npc)
         end
     end
 end

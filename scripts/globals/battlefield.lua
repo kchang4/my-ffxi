@@ -1266,8 +1266,8 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
 
     local selectedLoot = utils.selectFromLootGroups(firstPlayer, lootTable)
     for _, entry in ipairs(selectedLoot) do
-        if entry.item ~= xi.item.GIL then
-            firstPlayer:addTreasure(entry.item, npc)
+        if entry.itemid ~= xi.item.GIL then
+            firstPlayer:addTreasure(entry.itemid, npc)
         else
             local gilPerPlayer = entry.amount / #players
 
