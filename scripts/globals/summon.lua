@@ -1,7 +1,6 @@
 -----------------------------------
 -- Avatar Global Functions
 -----------------------------------
-require('scripts/globals/combat/level_correction')
 require('scripts/globals/combat/physical_utilities')
 -----------------------------------
 xi = xi or {}

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Magian Trial Global
 -----------------------------------
-require('scripts/globals/combat/element_tables')
 require('scripts/globals/magian_data')
 require('scripts/globals/npc_util')
 -----------------------------------

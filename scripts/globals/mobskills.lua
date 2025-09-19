@@ -8,7 +8,6 @@ require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magicburst')
 require('scripts/globals/magic')
 require('scripts/globals/spells/damage_spell')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}

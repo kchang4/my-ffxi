@@ -1,11 +1,6 @@
 -----------------------------------
 -- Global file for magic based skills magic hit rate.
 -----------------------------------
-require('scripts/globals/combat/element_tables')
-require('scripts/globals/combat/level_correction')
-require('scripts/globals/combat/skill_ranks')
-require('scripts/globals/combat/status_effect_tables')
------------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.magicHitRate = xi.combat.magicHitRate or {}

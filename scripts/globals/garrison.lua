@@ -2,12 +2,10 @@
 -- Garrison
 -----------------------------------
 require('scripts/globals/common')
-require('scripts/globals/npc_util')
 require('scripts/globals/garrison_data')
 require('scripts/globals/mobs')
 require('scripts/globals/npc_util')
 require('scripts/globals/pathfind')
-require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.garrison = xi.garrison or {}

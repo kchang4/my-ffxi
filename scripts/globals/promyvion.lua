@@ -1,8 +1,6 @@
 -----------------------------------
 -- Promyvion global file
 -----------------------------------
-require('scripts/globals/combat/element_tables')
------------------------------------
 xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 -----------------------------------
