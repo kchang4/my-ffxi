@@ -2232,7 +2232,7 @@ local function  handleDiggingLayer(player, zoneId, currentLayer)
         if
             isElementalOreZone and                                              -- Zone can drop ore.
             playerRank >= xi.craftRank.CRAFTSMAN and                            -- Digging level must be 60+
-            xi.combat.element.getWeatherElement(weather) ~= xi.element.NONE and -- Weather must be elemental.
+            xi.data.element.getWeatherElement(weather) ~= xi.element.NONE and -- Weather must be elemental.
             moon >= 7 and moon <= 21 and                                        -- Moon must be between those values.
             randomRoll <= 100
         then

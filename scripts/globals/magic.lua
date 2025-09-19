@@ -294,9 +294,9 @@ function addBonuses(caster, spell, target, dmg, params)
 
         local mdefBarBonus = 0
         if ele >= xi.element.FIRE and ele <= xi.element.WATER then
-            mab = mab + caster:getMerit(xi.combat.element.getElementalPotencyMerit(ele))
-            if target:hasStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)) then -- bar- spell magic defense bonus
-                mdefBarBonus = target:getStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)):getSubPower()
+            mab = mab + caster:getMerit(xi.data.element.getElementalPotencyMerit(ele))
+            if target:hasStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele)) then -- bar- spell magic defense bonus
+                mdefBarBonus = target:getStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele)):getSubPower()
             end
         end
 
@@ -337,9 +337,9 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     if
         ele >= xi.element.FIRE and
         ele <= xi.element.WATER and
-        target:hasStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele))
+        target:hasStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele))
     then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(xi.combat.element.getAssociatedBarspellEffect(ele)):getSubPower()
+        mdefBarBonus = target:getStatusEffect(xi.data.element.getAssociatedBarspellEffect(ele)):getSubPower()
     end
 
     if params ~= nil and params.bonusmab ~= nil and params.includemab then

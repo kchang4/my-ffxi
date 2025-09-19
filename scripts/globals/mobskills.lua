@@ -176,7 +176,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, ftp
         attMod = fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
 
-    local applyLevelCorrection  = xi.combat.levelCorrection.isLevelCorrectedZone(mob)
+    local applyLevelCorrection  = xi.data.levelCorrection.isLevelCorrectedZone(mob)
     local weaponType            = xi.skill.NONE -- use NONE for mobs
     local canCrit               = false         -- TODO: implement which skills can crit
     local useDefInPlaceOfAttack = isCannonball or false
@@ -608,7 +608,7 @@ end
 -- Adds a status effect to a target
 xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subType, subPower, tier)
     if target:canGainStatusEffect(typeEffect, power) then
-        local fullResist = xi.combat.statusEffect.isTargetResistant(mob, target, typeEffect)
+        local fullResist = xi.data.statusEffect.isTargetResistant(mob, target, typeEffect)
         if fullResist then
             return xi.msg.basic.SKILL_MISS -- resist !
         end
