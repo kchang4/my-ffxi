@@ -58,6 +58,12 @@ local function handleZoneIn(player, prevZone)
         local zone    = player:getZone(true)
         local weather = zone:getWeather()
 
+        -- Exception: Handle Sunshine weather as weather ID 0 (NONE) for the time being.
+        if weather == xi.weather.SUNSHINE then
+            weather = xi.weather.NONE
+        end
+
+        -- Fetch weather element if it's a valid element.
         if validWeatherTable[weather] then
             local lightBitMask = quest:getVar(player, 'Light')
             local element      = xi.combat.element.getWeatherElement(weather)
