@@ -152,7 +152,7 @@ local setupTrainFollowing = function(mob)
     local followTarget = mob
     for _, slaveGlobeID in ipairs(slaveGlobes) do
         local currentSlave = GetMobByID(slaveGlobeID)
-        if currentSlave and currentSlave:isSpawned() then
+        if currentSlave and currentSlave:isAlive() then
             local action = currentSlave:getCurrentAction()
             if action ~= xi.act.NONE and action ~= xi.act.DEATH then
                 currentSlave:follow(followTarget, xi.followType.ROAM)
@@ -178,12 +178,6 @@ local trySpawnSlaveGlobe = function(mob)
     end
 
     if xi.mob.callPets(mob, slaveGlobes, callPetParams) then
-        -- Set up train following after pet spawns (with delay for spawn animation)
-        mob:timer(6000, function(mobArg)
-            if mobArg then
-                setupTrainFollowing(mobArg)
-            end
-        end)
         mob:setLocalVar('nextSlaveSpawnTime', currentTime + 35)
     end
 end
@@ -229,16 +223,14 @@ entity.onPath = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    local nowTime = GetSystemTime()
-
     -- Try to spawn slaves while roaming
     trySpawnSlaveGlobe(mob)
 
-    -- Restore train formation periodically (every 10 seconds) and only if slaves exist
-    local lastTrainSetup = mob:getLocalVar('lastTrainSetup')
-    if nowTime >= lastTrainSetup + 10 and countSpawnedSlaves() > 0 then
+    local lastSlaveCount = mob:getLocalVar('lastSlaveCount')
+    if countSpawnedSlaves() ~= lastSlaveCount then
         setupTrainFollowing(mob)
-        mob:setLocalVar('lastTrainSetup', nowTime)
+
+        mob:setLocalVar('lastSlaveCount', countSpawnedSlaves())
     end
 
     -- Handle circular room patrolling when not in combat
@@ -252,7 +244,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENTHUNDER)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENTHUNDER, { damage = 110 })
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -264,6 +256,11 @@ entity.onMobDeath = function(mob, player, optParams)
             DespawnMob(slaveGlobeID)
         end
     end
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setLocalVar('isPatrolling', 0) -- reset patrol so it can pick a new path
+    setupTrainFollowing(mob)
 end
 
 entity.onMobDespawn = function(mob)
