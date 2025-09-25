@@ -1,20 +1,22 @@
 -----------------------------------
--- Area: Carpenters' Landing
---  NPC: Coupulie
--- !pos -313.585 -3.628 490.944 2
+-- Area: Phanauet Channel
+--  NPC: Luquillaue
+-- Type: Adventurer's Assistant
+-- !pos 4.066 -4.5 -10.450 1
 -----------------------------------
----@type TNpcEntity
 local entity = {}
 
+entity.onTrade = function(player, npc, trade)
+end
+
 entity.onTrigger = function(player, npc)
-    xi.barge.onTicketShopTrigger(player, 32)
+    xi.barge.timekeeperOnTrigger(player, xi.barge.location.PHANAUET_CHANNEL, 4)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.barge.onTicketShopEventFinish(player, csid, option, npc)
 end
 
 return entity

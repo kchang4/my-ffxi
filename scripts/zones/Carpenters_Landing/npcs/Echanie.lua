@@ -1,13 +1,12 @@
 -----------------------------------
 -- Area: Carpenters' Landing
---  NPC: Coupulie
--- !pos -313.585 -3.628 490.944 2
+--  NPC: Echanie
+-- !pos -148.5785 -2.9479 45.7221 2
 -----------------------------------
----@type TNpcEntity
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    xi.barge.onTicketShopTrigger(player, 32)
+    xi.barge.onTicketShopTrigger(player, 43)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
