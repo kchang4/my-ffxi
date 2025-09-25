@@ -302,7 +302,7 @@ bool CMagicState::Update(timer::time_point tick)
             PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", PTarget, m_PEntity, m_PSpell.get(), &action);
         }
 
-        if (!m_interrupted && !(GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG))
+        if (m_interrupted || (!m_interrupted && !(GetSpell()->getFlag() & SPELLFLAG_NO_FINISH_MSG)))
         {
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
         }
