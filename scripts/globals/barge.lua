@@ -275,7 +275,7 @@ xi.barge.onZoneIn = function(player, prevZone)
         zoneId == xi.zone.CARPENTERS_LANDING and
         prevZone == xi.zone.PHANAUET_CHANNEL
     then
-        -- Zoning into Carptener's Landing. Play the cs saved when we started the ride.
+        -- Zoning into Carpenter's Landing. Play the cs saved when we started the ride.
         local bargeDestinationId = player:getCharVar('[barge]destinationDockId')
         player:setCharVar('[barge]destinationDockId', 0)
 
@@ -283,15 +283,14 @@ xi.barge.onZoneIn = function(player, prevZone)
         local bargeDestinationData = dockEventData[bargeDestinationId] or dockEventData[destinations.CENTRAL_LANDING]
         player:setPos(bargeDestinationData.arrivalPos)
 
-        return bargeDestinationData.arrivalCsId
+        return { bargeDestinationData.arrivalCsId, -1, bit.bor(xi.cutsceneFlag.UNKNOWN_1, xi.cutsceneFlag.NO_PCS) }
     end
 
     return -1
 end
 
 xi.barge.onTransportEvent = function(player, zoneId, transportId)
-    local ID = zones[player:getZoneID()]
-    local aboard = player:getLocalVar('[barge]aboard')
+    local aboard   = player:getLocalVar('[barge]aboard')
     local destData = nil
 
     for _, bargeDestinationData in pairs(dockEventData) do
@@ -312,24 +311,43 @@ xi.barge.onTransportEvent = function(player, zoneId, transportId)
         -- was in trigger area but no in-service boat was departing from this dock
         player:startEvent(destData.kickEvent)
     elseif player:hasKeyItem(xi.ki.BARGE_TICKET) then
-        player:messageSpecial(ID.text.BARGE_TICKET_USED, 0, xi.ki.BARGE_TICKET)
+        -- This is technically done on event end but does not matter
         player:delKeyItem(xi.ki.BARGE_TICKET)
-        -- was in trigger area and had a ticket
-        player:startEvent(destData.departEvent)
+
+        player:startEvent(destData.departEvent,
+            {
+                [0] = 0,
+                [1] = xi.ki.BARGE_TICKET,
+                [2] = 0, -- Important to be set to 0
+                flags = bit.bor(
+                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.NO_PCS,
+                    xi.cutsceneFlag.UNKNOWN_4,
+                    xi.cutsceneFlag.UNKNOWN_7
+                ),
+            })
     elseif player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET) then
         local usesLeft = player:getCharVar('[barge]multiTicket') - 1
 
         if usesLeft <= 0 then
             usesLeft = 0
-            player:messageSpecial(ID.text.BARGE_TICKET_USED, 0, xi.ki.BARGE_MULTI_TICKET)
             player:delKeyItem(xi.ki.BARGE_MULTI_TICKET)
-        else
-            player:messageSpecial(ID.text.BARGE_TICKET_REMAINING, 0, xi.ki.BARGE_MULTI_TICKET, usesLeft)
         end
 
         player:setCharVar('[barge]multiTicket', usesLeft)
         -- was in trigger area and had a ticket
-        player:startEvent(destData.departEvent)
+        player:startEvent(destData.departEvent,
+            {
+                [0] = usesLeft,     -- Not actually used by CS but passed in
+                [1] = xi.ki.BARGE_MULTI_TICKET,
+                [2] = usesLeft + 1, -- This expects the number of uses before it get decremented
+                flags = bit.bor(
+                    xi.cutsceneFlag.UNKNOWN_1,
+                    xi.cutsceneFlag.NO_PCS,
+                    xi.cutsceneFlag.UNKNOWN_4,
+                    xi.cutsceneFlag.UNKNOWN_7
+                ),
+            })
     else
         -- was in trigger area but didn't have a ticket
         player:startEvent(destData.kickEvent)
