@@ -449,7 +449,8 @@ public:
         {
             if (packet->getSize() == 0)
             {
-                packet->setSize(sizeof(T::PacketData));
+                // PacketData does not declare the header, so add it now.
+                packet->setSize(sizeof(typename T::PacketData) + sizeof(GP_SERV_HEADER));
             }
         }
 

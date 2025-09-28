@@ -24,7 +24,6 @@
 #include "common/cbasetypes.h"
 #include "common/tracy.h"
 #include "common/utils.h"
-#include "enums/packet_s2c.h"
 
 #include <cstdio>
 #include <cstring>
@@ -109,11 +108,6 @@ public:
     {
         ref<uint16>(0) &= ~0x1FF;
         ref<uint16>(0) |= id & 0x1FF;
-    }
-
-    void setType(PacketS2C id)
-    {
-        setType(static_cast<uint16>(id));
     }
 
     // The length "byte" is actually just the highest 7 bits.
