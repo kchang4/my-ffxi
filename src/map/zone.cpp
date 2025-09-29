@@ -330,7 +330,7 @@ void CZone::LoadZoneWeather()
 
     const auto rset = db::preparedStmt("SELECT weather "
                                        "FROM zone_weather "
-                                       "WHERE zone = ?",
+                                       "WHERE zone = ? LIMIT 1",
                                        m_zoneID);
     FOR_DB_SINGLE_RESULT(rset)
     {

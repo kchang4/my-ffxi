@@ -2703,7 +2703,7 @@ namespace charutils
 
         const auto rset = db::preparedStmt("SELECT main, sub, ranged, ammo, head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1, ring2, back "
                                            "FROM char_equip_saved AS equip "
-                                           "WHERE charid = ? AND jobid = ?",
+                                           "WHERE charid = ? AND jobid = ? LIMIT 1",
                                            PChar->id, PChar->GetMJob());
         FOR_DB_SINGLE_RESULT(rset)
         {
@@ -6458,7 +6458,7 @@ namespace charutils
         const auto rset = db::preparedStmt("SELECT partyid, allianceid, partyflag & ? AS partyflag "
                                            "FROM accounts_sessions s JOIN accounts_parties p ON "
                                            "s.charid = p.charid "
-                                           "WHERE p.charid = ?",
+                                           "WHERE p.charid = ? LIMIT 1",
                                            (PARTY_SECOND | PARTY_THIRD), PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
@@ -7054,7 +7054,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start FROM char_unlocks WHERE charid = ?", PChar->id);
+        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start FROM char_unlocks WHERE charid = ? LIMIT 1", PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             return earth_time::time_point(std::chrono::seconds(rset->get<uint32>("start")));
@@ -7075,7 +7075,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        const auto rset = db::preparedStmt("SELECT traverser_claimed FROM char_unlocks WHERE charid = ?", PChar->id);
+        const auto rset = db::preparedStmt("SELECT traverser_claimed FROM char_unlocks WHERE charid = ? LIMIT 1", PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             return rset->get<uint32>("traverser_claimed");
@@ -7105,7 +7105,7 @@ namespace charutils
         earth_time::time_point traverserEpoch   = earth_time::time_point::min();
         uint32                 traverserClaimed = 0;
 
-        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start, traverser_claimed FROM char_unlocks WHERE charid = ?", PChar->id);
+        const auto rset = db::preparedStmt("SELECT UNIX_TIMESTAMP(traverser_start) AS start, traverser_claimed FROM char_unlocks WHERE charid = ? LIMIT 1", PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
             traverserEpoch   = earth_time::time_point(std::chrono::seconds(rset->get<uint32>("start")));
@@ -7150,7 +7150,7 @@ namespace charutils
                                            "chats_sent, npc_interactions, battles_fought, "
                                            "gm_calls, distance_travelled "
                                            "FROM char_history "
-                                           "WHERE charid = ?",
+                                           "WHERE charid = ? LIMIT 1",
                                            PChar->id);
         FOR_DB_SINGLE_RESULT(rset)
         {
