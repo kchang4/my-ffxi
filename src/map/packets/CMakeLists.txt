@@ -79,8 +79,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/currency2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/downloading_data.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/downloading_data.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_animation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_animation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_enable_list.cpp
