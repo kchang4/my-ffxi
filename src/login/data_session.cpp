@@ -435,6 +435,9 @@ void data_session::read_func()
                     .destinationZoneId = ZoneID,
                 });
 
+                db::preparedStmt("UPDATE char_flags SET disconnecting = 0 WHERE charid = ?", charid);
+                db::preparedStmt("UPDATE char_stats SET zoning = 2 WHERE charid = ?", charid);
+
                 zmqDealerWrapper_.outgoingQueue_.enqueue(zmq::message_t(payload.data(), payload.size()));
             }
 
