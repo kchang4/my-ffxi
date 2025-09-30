@@ -137,8 +137,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/lock_on.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/lock_on.h
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.cpp

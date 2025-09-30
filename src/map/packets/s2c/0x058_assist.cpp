@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,26 @@
 ===========================================================================
 */
 
-#ifndef _CLOCKONPACKET_H
-#define _CLOCKONPACKET_H
+#include "0x058_assist.h"
 
-#include "common/cbasetypes.h"
+#include "entities/battleentity.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CCharEntity;
-class CBattleEntity;
-
-class CLockOnPacket : public CBasicPacket
+GP_SERV_COMMAND_ASSIST::GP_SERV_COMMAND_ASSIST(const CCharEntity* PChar, const CBattleEntity* PTarget)
 {
-public:
-    CLockOnPacket(CCharEntity* PChar, CBattleEntity* PTarget);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.UniqueNo = PChar->id;
+    packet.ActIndex = PChar->targid;
+
+    if (PTarget != nullptr)
+    {
+        packet.AssistNo  = PTarget->id;
+        packet.padding00 = PTarget->targid;
+    }
+    else
+    {
+        packet.AssistNo  = 0;
+        packet.padding00 = 0;
+    }
+}

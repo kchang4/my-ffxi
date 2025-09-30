@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,22 +19,25 @@
 ===========================================================================
 */
 
-#include "lock_on.h"
+#pragma once
 
-#include "entities/battleentity.h"
-#include "entities/charentity.h"
+#include "base.h"
 
-CLockOnPacket::CLockOnPacket(CCharEntity* PChar, CBattleEntity* PTarget)
+class CCharEntity;
+class CBattleEntity;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0058
+// This packet is sent by the server to respond to a client assist request. (/assist)
+class GP_SERV_COMMAND_ASSIST final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_ASSIST, GP_SERV_COMMAND_ASSIST>
 {
-    this->setType(0x58);
-    this->setSize(0x10);
-
-    ref<uint32>(0x04) = PChar->id;
-    ref<uint16>(0x0C) = PChar->targid;
-
-    if (PTarget != nullptr)
+public:
+    struct PacketData
     {
-        ref<uint32>(0x08) = PTarget->id;
-        ref<uint16>(0x0E) = PTarget->targid;
-    }
-}
+        uint32_t UniqueNo;
+        uint32_t AssistNo;
+        uint16_t ActIndex;
+        uint16_t padding00;
+    };
+
+    GP_SERV_COMMAND_ASSIST(const CCharEntity* PChar, const CBattleEntity* PTarget);
+};

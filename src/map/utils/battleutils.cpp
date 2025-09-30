@@ -65,7 +65,7 @@
 #include "notoriety_container.h"
 #include "packets/char_abilities.h"
 #include "packets/char_recast.h"
-#include "packets/lock_on.h"
+#include "packets/s2c/0x058_assist.h"
 #include "packets/pet_sync.h"
 #include "packets/position.h"
 #include "party.h"
@@ -5385,13 +5385,13 @@ namespace battleutils
                 if (EntityToLockon != nullptr)
                 {
                     // lock on to the new target!
-                    PChar->pushPacket<CLockOnPacket>(PChar, EntityToLockon);
+                    PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToLockon);
                 }
             }
             else if (EntityToAssist->GetBattleTargetID() != 0)
             {
                 // lock on to the new target!
-                PChar->pushPacket<CLockOnPacket>(PChar, EntityToAssist->GetBattleTarget());
+                PChar->pushPacket<GP_SERV_COMMAND_ASSIST>(PChar, EntityToAssist->GetBattleTarget());
             }
         }
     }

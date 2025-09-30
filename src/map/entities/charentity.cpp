@@ -38,7 +38,7 @@
 #include "packets/event_string.h"
 #include "packets/inventory_finish.h"
 #include "packets/key_items.h"
-#include "packets/lock_on.h"
+#include "packets/s2c/0x058_assist.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
@@ -1211,7 +1211,7 @@ void CCharEntity::OnChangeTarget(CBattleEntity* PNewTarget)
 {
     TracyZoneScoped;
     battleutils::RelinquishClaim(this);
-    pushPacket<CLockOnPacket>(this, PNewTarget);
+    pushPacket<GP_SERV_COMMAND_ASSIST>(this, PNewTarget);
     PLatentEffectContainer->CheckLatentsTargetChange();
 }
 
