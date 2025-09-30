@@ -81,8 +81,10 @@ end
 -- Returns an integer number of minutes since midnight from a time string like "HH:MM"
 ---@nodiscard
 ---@param timeString string
+---@param addDays integer?
 ---@return integer
-utils.timeStringToMinutes = function(timeString)
+function utils.timeStringToMinutes(timeString, addDays)
+    addDays = addDays or 0
     local hours, minutes = timeString:match('^(%d%d?):(%d%d)$')
     hours   = tonumber(hours)
     minutes = tonumber(minutes)
@@ -97,5 +99,5 @@ utils.timeStringToMinutes = function(timeString)
         return -1
     end
 
-    return hours * 60 + minutes
+    return hours * 60 + minutes + addDays * 1440
 end
