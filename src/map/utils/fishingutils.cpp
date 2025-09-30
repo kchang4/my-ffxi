@@ -3011,7 +3011,7 @@ namespace fishingutils
             fish->item            = rset->get<bool>("item");
             fish->maxhook         = rset->get<uint8>("max_hook");
             fish->rarity          = rset->get<uint16>("rarity");
-            fish->reqKeyItem      = static_cast<KeyItem>(rset->get<uint32>("required_keyitem"));
+            fish->reqKeyItem      = rset->get<KeyItem>("required_keyitem");
 
             fish->reqFish = new std::vector<uint16>();
 
