@@ -27,7 +27,7 @@
 #include "common/vana_time.h"
 
 #include "packets/caught_fish.h"
-#include "packets/caught_monster.h"
+#include "packets/s2c/0x043_talknumname.h"
 #include "packets/char_skills.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
@@ -1589,7 +1589,7 @@ namespace fishingutils
 
         PChar->animation = ANIMATION_FISHING_MONSTER;
         PChar->updatemask |= UPDATE_HP;
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtMonsterPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_MONSTER));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMNAME>(PChar, MessageOffset + FISHMESSAGEOFFSET_MONSTER));
 
         position_t p = PChar->loc.p;
         position_t m;
@@ -1645,7 +1645,7 @@ namespace fishingutils
 
         PChar->animation = ANIMATION_FISHING_CAUGHT;
         PChar->updatemask |= UPDATE_HP;
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CCaughtMonsterPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CATCH_CHEST));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_TALKNUMNAME>(PChar, MessageOffset + FISHMESSAGEOFFSET_CATCH_CHEST));
 
         position_t p = PChar->loc.p;
         position_t m;
