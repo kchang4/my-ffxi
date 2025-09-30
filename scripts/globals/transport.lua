@@ -109,52 +109,52 @@ local scheduleTable =
     -- used by ship and selbina dock timekeepers
     [xi.transport.routes.SELBINA_MHAURA] = -- Ship bound for [Mhaura/Selbina]
     {
-        { startTime =    0, endTime = utils.timeStringToMinutes('06:40'),    action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at SELBINA
-        { startTime =  400, endTime = utils.timeStringToMinutes('08:00'),    action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
-        { startTime =  480, endTime = utils.timeStringToMinutes('14:40'),    action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at SELBINA
-        { startTime =  880, endTime = utils.timeStringToMinutes('16:00'),    action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
-        { startTime =  960, endTime = utils.timeStringToMinutes('22:40'),    action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at SELBINA
-        { startTime = 1360, endTime = utils.timeStringToMinutes('00:00', 1), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
+        { endTime = utils.timeStringToMinutes('06:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at SELBINA
+        { endTime = utils.timeStringToMinutes('08:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
+        { endTime = utils.timeStringToMinutes('14:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at SELBINA
+        { endTime = utils.timeStringToMinutes('16:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
+        { endTime = utils.timeStringToMinutes('22:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at SELBINA
+        { endTime = utils.timeStringToMinutes('24:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
     },
 
     -- used by ship and southern whitegate dock timekeepers
     [xi.transport.routes.OPEN_SEA] = -- Open sea route to [Al Zahbi/Mhaura]
     {
-        { startTime =    0, endTime = utils.timeStringToMinutes('02:40'),    action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
-        { startTime =  160, endTime = utils.timeStringToMinutes('04:00'),    action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
-        { startTime =  240, endTime = utils.timeStringToMinutes('10:40'),    action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
-        { startTime =  640, endTime = utils.timeStringToMinutes('12:00'),    action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
-        { startTime =  720, endTime = utils.timeStringToMinutes('18:40'),    action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
-        { startTime = 1120, endTime = utils.timeStringToMinutes('20:00'),    action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
-        { startTime = 1200, endTime = utils.timeStringToMinutes('02:40', 1), action = direction.ARRIVE, target = 0 },
+        { endTime = utils.timeStringToMinutes('02:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
+        { endTime = utils.timeStringToMinutes('04:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
+        { endTime = utils.timeStringToMinutes('10:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
+        { endTime = utils.timeStringToMinutes('12:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
+        { endTime = utils.timeStringToMinutes('18:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
+        { endTime = utils.timeStringToMinutes('20:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
+        { endTime = utils.timeStringToMinutes('24:00'), action = direction.ARRIVE, target = 0 },
     },
 
     -- used by ship and nashmau/whitegate dock timekeepers
     [xi.transport.routes.SILVER_SEA] = -- Silver Sea route to [Al Zahbi/Nashmau]
     {
-        { startTime =    0, endTime = utils.timeStringToMinutes('05:00'),    action = direction.ARRIVE, target = 0 },
-        { startTime =  300, endTime = utils.timeStringToMinutes('08:00'),    action = direction.DEPART, target = 0 },
-        { startTime =  480, endTime = utils.timeStringToMinutes('13:00'),    action = direction.ARRIVE, target = 0 },
-        { startTime =  780, endTime = utils.timeStringToMinutes('16:00'),    action = direction.DEPART, target = 0 },
-        { startTime =  960, endTime = utils.timeStringToMinutes('21:00'),    action = direction.ARRIVE, target = 0 },
-        { startTime = 1260, endTime = utils.timeStringToMinutes('00:00', 1), action = direction.DEPART, target = 0 },
+        { endTime = utils.timeStringToMinutes('05:00'), action = direction.ARRIVE, target = 0 },
+        { endTime = utils.timeStringToMinutes('08:00'), action = direction.DEPART, target = 0 },
+        { endTime = utils.timeStringToMinutes('13:00'), action = direction.ARRIVE, target = 0 },
+        { endTime = utils.timeStringToMinutes('16:00'), action = direction.DEPART, target = 0 },
+        { endTime = utils.timeStringToMinutes('21:00'), action = direction.ARRIVE, target = 0 },
+        { endTime = utils.timeStringToMinutes('24:00'), action = direction.DEPART, target = 0 },
     },
 
     -- used by Dieh Yamilsiah and Laughin Bison (Mhaura dock only)
     [xi.transport.routes.SELBINA_MHAURA_OPEN_SEA] = -- Combination of Ship bound for [Mhaura/Selbina] and Open sea route to [Al Zahbi/Mhaura]
     {
-        { startTime =    0, endTime = utils.timeStringToMinutes('02:40'),    action = direction.ARRIVE, target = destination.AL_ZAHBI },
-        { startTime =  160, endTime = utils.timeStringToMinutes('04:00'),    action = direction.DEPART, target = destination.AL_ZAHBI },
-        { startTime =  240, endTime = utils.timeStringToMinutes('06:40'),    action = direction.ARRIVE, target = destination.SELBINA  },
-        { startTime =  400, endTime = utils.timeStringToMinutes('08:00'),    action = direction.DEPART, target = destination.SELBINA  },
-        { startTime =  480, endTime = utils.timeStringToMinutes('10:40'),    action = direction.ARRIVE, target = destination.AL_ZAHBI },
-        { startTime =  640, endTime = utils.timeStringToMinutes('12:00'),    action = direction.DEPART, target = destination.AL_ZAHBI },
-        { startTime =  720, endTime = utils.timeStringToMinutes('14:40'),    action = direction.ARRIVE, target = destination.SELBINA  },
-        { startTime =  880, endTime = utils.timeStringToMinutes('16:00'),    action = direction.DEPART, target = destination.SELBINA  },
-        { startTime =  960, endTime = utils.timeStringToMinutes('18:40'),    action = direction.ARRIVE, target = destination.AL_ZAHBI },
-        { startTime = 1120, endTime = utils.timeStringToMinutes('20:00'),    action = direction.DEPART, target = destination.AL_ZAHBI },
-        { startTime = 1200, endTime = utils.timeStringToMinutes('22:40'),    action = direction.ARRIVE, target = destination.SELBINA  },
-        { startTime = 1360, endTime = utils.timeStringToMinutes('00:00', 1), action = direction.DEPART, target = destination.SELBINA  },
+        { endTime = utils.timeStringToMinutes('02:40'), action = direction.ARRIVE, target = destination.AL_ZAHBI },
+        { endTime = utils.timeStringToMinutes('04:00'), action = direction.DEPART, target = destination.AL_ZAHBI },
+        { endTime = utils.timeStringToMinutes('06:40'), action = direction.ARRIVE, target = destination.SELBINA  },
+        { endTime = utils.timeStringToMinutes('08:00'), action = direction.DEPART, target = destination.SELBINA  },
+        { endTime = utils.timeStringToMinutes('10:40'), action = direction.ARRIVE, target = destination.AL_ZAHBI },
+        { endTime = utils.timeStringToMinutes('12:00'), action = direction.DEPART, target = destination.AL_ZAHBI },
+        { endTime = utils.timeStringToMinutes('14:40'), action = direction.ARRIVE, target = destination.SELBINA  },
+        { endTime = utils.timeStringToMinutes('16:00'), action = direction.DEPART, target = destination.SELBINA  },
+        { endTime = utils.timeStringToMinutes('18:40'), action = direction.ARRIVE, target = destination.AL_ZAHBI },
+        { endTime = utils.timeStringToMinutes('20:00'), action = direction.DEPART, target = destination.AL_ZAHBI },
+        { endTime = utils.timeStringToMinutes('22:40'), action = direction.ARRIVE, target = destination.SELBINA  },
+        { endTime = utils.timeStringToMinutes('24:00'), action = direction.DEPART, target = destination.SELBINA  },
     },
 }
 
@@ -212,10 +212,7 @@ xi.transport.onBoatTimekeeperTrigger = function(player, route, travelMessage, ar
     local timeDiff    = 0
 
     for i = 1, #scheduleTable[route] do
-        if
-            currentTime >= scheduleTable[route][i].startTime and
-            currentTime < scheduleTable[route][i].endTime
-        then
+        if currentTime < scheduleTable[route][i].endTime then
             timeDiff = scheduleTable[route][i].endTime - currentTime
 
             break
@@ -240,10 +237,7 @@ xi.transport.onDockTimekeeperTrigger = function(player, npc)
     local scheduleStep = 0
 
     for i = 1, #scheduleTable[route] do
-        if
-            currentTime >= scheduleTable[route][i].startTime and
-            currentTime < scheduleTable[route][i].endTime
-        then
+        if currentTime < scheduleTable[route][i].endTime then
             scheduleStep = i
 
             break
