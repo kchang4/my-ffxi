@@ -179,8 +179,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/position.h
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/release_special.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/release_special.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_questlog.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_questlog.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.cpp

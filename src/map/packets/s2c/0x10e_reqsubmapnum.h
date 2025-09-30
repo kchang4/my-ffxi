@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2018 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,17 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CRELEASE_SPECIALPACKET_H
-#define _CRELEASE_SPECIALPACKET_H
+#pragma once
 
-#include "basic.h"
+#include "base.h"
 
 class CCharEntity;
 
-class CSpecialReleasePacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x010E
+// This packet is sent by the server to update the clients sub map number.
+class GP_SERV_COMMAND_REQSUBMAPNUM final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_REQSUBMAPNUM, GP_SERV_COMMAND_REQSUBMAPNUM>
 {
 public:
-    CSpecialReleasePacket(CCharEntity* PChar);
-};
+    struct PacketData
+    {
+        uint32_t MapNum;
+    };
 
-#endif
+    GP_SERV_COMMAND_REQSUBMAPNUM(uint32_t mapNum);
+};

@@ -31,14 +31,8 @@ GP_SERV_COMMAND_ASSIST::GP_SERV_COMMAND_ASSIST(const CCharEntity* PChar, const C
     packet.UniqueNo = PChar->id;
     packet.ActIndex = PChar->targid;
 
-    if (PTarget != nullptr)
+    if (PTarget)
     {
-        packet.AssistNo  = PTarget->id;
-        packet.padding00 = PTarget->targid;
-    }
-    else
-    {
-        packet.AssistNo  = 0;
-        packet.padding00 = 0;
+        packet.AssistNo = PTarget->id;
     }
 }

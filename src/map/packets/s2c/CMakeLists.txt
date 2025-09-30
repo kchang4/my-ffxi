@@ -23,5 +23,7 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.cpp
     PARENT_SCOPE
 )

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2018 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,13 +19,11 @@
 ===========================================================================
 */
 
-#include "release_special.h"
-#include "entities/charentity.h"
+#include "0x10e_reqsubmapnum.h"
 
-CSpecialReleasePacket::CSpecialReleasePacket(CCharEntity* PChar)
+GP_SERV_COMMAND_REQSUBMAPNUM::GP_SERV_COMMAND_REQSUBMAPNUM(const uint32_t mapNum)
 {
-    this->setType(0x10E);
-    this->setSize(0x08);
+    auto& packet = this->data();
 
-    ref<uint8>(0x04) = 0; // unknown1
+    packet.MapNum = mapNum;
 }

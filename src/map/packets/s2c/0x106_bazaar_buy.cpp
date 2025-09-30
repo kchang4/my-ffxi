@@ -25,10 +25,10 @@
 
 #include "entities/charentity.h"
 
-GP_SERV_COMMAND_BAZAAR_BUY::GP_SERV_COMMAND_BAZAAR_BUY(const CCharEntity* PChar, const bool result)
+GP_SERV_COMMAND_BAZAAR_BUY::GP_SERV_COMMAND_BAZAAR_BUY(const CCharEntity* PChar, const GP_BAZAAR_BUY_STATE state)
 {
     auto& packet = this->data();
 
-    packet.State = result ? GP_BAZAAR_BUY_STATE::OK : GP_BAZAAR_BUY_STATE::ERR;
+    packet.State = state;
     std::memcpy(packet.sName, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.sName)));
 }

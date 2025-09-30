@@ -43,5 +43,5 @@ public:
         uint8_t             sName[16];
     };
 
-    GP_SERV_COMMAND_BAZAAR_BUY(const CCharEntity* PChar, bool result);
+    GP_SERV_COMMAND_BAZAAR_BUY(const CCharEntity* PChar, GP_BAZAAR_BUY_STATE state);
 };
