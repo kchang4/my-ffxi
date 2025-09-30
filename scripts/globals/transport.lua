@@ -126,7 +126,7 @@ local scheduleTable =
         { endTime = utils.timeStringToMinutes('12:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
         { endTime = utils.timeStringToMinutes('18:40'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI
         { endTime = utils.timeStringToMinutes('20:00'), action = direction.DEPART, target = 0 }, -- (from dock) headed to MHAURA
-        { endTime = utils.timeStringToMinutes('24:00'), action = direction.ARRIVE, target = 0 },
+        { endTime = utils.timeStringToMinutes('24:00'), action = direction.ARRIVE, target = 0 }, -- (from dock) arrives at AL_ZAHBI. Continues up to 2:40 AM next day (first entry in this table)
     },
 
     -- used by ship and nashmau/whitegate dock timekeepers
@@ -159,7 +159,7 @@ local scheduleTable =
 }
 
 -----------------------------------
--- public functions
+-- Public functions
 -----------------------------------
 
 xi.transport.captainMessage = function(npc, triggerID, messages)
@@ -169,33 +169,21 @@ xi.transport.captainMessage = function(npc, triggerID, messages)
     end
 end
 
-local dockNpcPos =
-{
-    mhaura =
-    {
-        ARRIVING  =
-        {
-            { x = 7.06, y = -1.36, z = 2.20, rotation = 211 },
-        },
-        DEPARTING =
-        {
-            { x = 8.26, y = -1.36, z = 2.20, rotation = 193 },
-        },
-    },
-    selbina =
-    {
-        ARRIVING  =
-        {
-            { x = 16.768, y = -1.38, z = -58.843, rotation = 209 },
-        },
-        DEPARTING =
-        {
-            { x = 17.979, y = -1.389, z = -58.800, rotation = 191 },
-        },
-    },
-}
-
 xi.transport.dockMessage = function(npc, triggerID, messages, dock)
+    local dockNpcPos =
+    {
+        mhaura =
+        {
+            ARRIVING  = { { x = 7.06, y = -1.36, z = 2.20, rotation = 211 }, },
+            DEPARTING = { { x = 8.26, y = -1.36, z = 2.20, rotation = 193 }, },
+        },
+        selbina =
+        {
+            ARRIVING  = { { x = 16.768, y = -1.38,  z = -58.843, rotation = 209 }, },
+            DEPARTING = { { x = 17.979, y = -1.389, z = -58.800, rotation = 191 }, },
+        },
+    }
+
     npc:showText(npc, messages[triggerID])
     if (triggerID % 2) == 0 then
         npc:pathThrough(dockNpcPos[dock].ARRIVING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
@@ -228,23 +216,23 @@ end
 
 xi.transport.onDockTimekeeperTrigger = function(player, npc)
     -- Fetch NPC data.
-    local npcName = npc:getName()
-    local eventId = dockTable[npcName][1]
-    local route   = dockTable[npcName][2]
+    local npcName  = npc:getName()
+    local eventId  = dockTable[npcName][1]
+    local schedule = scheduleTable[dockTable[npcName][2]]
 
     -- Fetch Schedule
     local currentTime  = VanadielHour() * 60 + VanadielMinute()
     local scheduleStep = 0
 
-    for i = 1, #scheduleTable[route] do
-        if currentTime < scheduleTable[route][i].endTime then
+    for i = 1, #schedule do
+        if currentTime < schedule[i].endTime then
             scheduleStep = i
 
             break
         end
     end
 
-    local timeLeft = math.floor((scheduleTable[route][scheduleStep].endTime - currentTime) * 60 / 25)
+    local timeLeft = math.floor((schedule[scheduleStep].endTime - currentTime) * 60 / 25)
 
-    player:startEvent(eventId, timeLeft, scheduleTable[route][scheduleStep].action, 0, scheduleTable[route][scheduleStep].target)
+    player:startEvent(eventId, timeLeft, schedule[scheduleStep].action, 0, schedule[scheduleStep].target)
 end
