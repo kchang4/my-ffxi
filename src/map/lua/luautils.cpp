@@ -375,11 +375,23 @@ namespace luautils
             }
         }
 
-        // Load globals
-        // Truly global files first
-        // TODO: Audit utilities and properly organize them outside of globals folder
-        lua.safe_script_file("./scripts/globals/common.lua");
-        lua.safe_script_file("./scripts/globals/utils.lua");
+        // Load global utilities
+        for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/utils"))
+        {
+            if (entry.extension() == ".lua")
+            {
+                auto relative_path_string = entry.relative_path().generic_string();
+
+                ShowTrace("Loading utility script %s", relative_path_string);
+
+                auto result = lua.safe_script_file(relative_path_string);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError(err.what());
+                }
+            }
+        }
 
         // Load global data
         for (auto const& entry : sorted_directory_iterator<std::filesystem::directory_iterator>("./scripts/data"))
