@@ -74,6 +74,8 @@ CLuaClientEntityPair::~CLuaClientEntityPair()
 
 void CLuaClientEntityPair::tick()
 {
+    TracyZoneScoped;
+
     testChar_->session()->last_update = timer::now();
     packets().parseIncoming();
 }
