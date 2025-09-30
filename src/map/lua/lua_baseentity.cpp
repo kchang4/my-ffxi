@@ -117,7 +117,6 @@
 #include "packets/entity_enable_list.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/event_string.h"
 #include "packets/s2c/0x05c_pendingnum.h"
 #include "packets/s2c/0x05d_pendingstr.h"
 #include "packets/guild_menu.h"

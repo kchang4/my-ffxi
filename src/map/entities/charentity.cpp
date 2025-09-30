@@ -35,9 +35,9 @@
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/event_string.h"
 #include "packets/inventory_finish.h"
 #include "packets/key_items.h"
+#include "packets/s2c/0x033_eventstr.h"
 #include "packets/s2c/0x058_assist.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
@@ -3241,7 +3241,7 @@ void CCharEntity::tryStartNextEvent()
     }
     else
     {
-        pushPacket<CEventStringPacket>(this, currentEvent);
+        pushPacket<GP_SERV_COMMAND_EVENTSTR>(this, currentEvent);
     }
 }
 

@@ -1,5 +1,7 @@
 set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/base.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.h
