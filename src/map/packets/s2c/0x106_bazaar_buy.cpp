@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,16 @@
 ===========================================================================
 */
 
-#ifndef _CBAZAARPURCHASEPACKET_H
-#define _CBAZAARPURCHASEPACKET_H
+#include "0x106_bazaar_buy.h"
 
-#include "common/cbasetypes.h"
+#include <cstring>
 
-#include "basic.h"
+#include "entities/charentity.h"
 
-class CCharEntity;
-
-class CBazaarPurchasePacket : public CBasicPacket
+GP_SERV_COMMAND_BAZAAR_BUY::GP_SERV_COMMAND_BAZAAR_BUY(const CCharEntity* PChar, const bool result)
 {
-public:
-    CBazaarPurchasePacket(CCharEntity* PChar, bool result);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.State = result ? GP_BAZAAR_BUY_STATE::OK : GP_BAZAAR_BUY_STATE::ERR;
+    std::memcpy(packet.sName, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.sName)));
+}

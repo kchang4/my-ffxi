@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,18 +19,29 @@
 ===========================================================================
 */
 
-#include "entities/charentity.h"
+#pragma once
 
-#include <cstring>
+#include "base.h"
 
-#include "bazaar_purchase.h"
-
-CBazaarPurchasePacket::CBazaarPurchasePacket(CCharEntity* PChar, bool result)
+enum class GP_BAZAAR_BUY_STATE : uint32_t
 {
-    this->setType(0x106);
-    this->setSize(0x1A);
+    OK  = 0,
+    ERR = 1,
+    END = 2
+};
 
-    ref<uint8>(0x04) = !result;
+class CCharEntity;
 
-    std::memcpy(buffer_.data() + 0x08, PChar->getName().c_str(), PChar->getName().size());
-}
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0106
+// This packet is sent by the server when the client has made, or attempted to make, a purchase from another players Bazaar.
+class GP_SERV_COMMAND_BAZAAR_BUY final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BAZAAR_BUY, GP_SERV_COMMAND_BAZAAR_BUY>
+{
+public:
+    struct PacketData
+    {
+        GP_BAZAAR_BUY_STATE State;
+        uint8_t             sName[16];
+    };
+
+    GP_SERV_COMMAND_BAZAAR_BUY(const CCharEntity* PChar, bool result);
+};
