@@ -51,8 +51,8 @@
 #include "packets/inventory_count.h"
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
-#include "packets/inventory_modify.h"
 #include "packets/key_items.h"
+#include "packets/s2c/0x01e_item_num.h"
 #include "packets/linkshell_equip.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
@@ -1601,7 +1601,7 @@ namespace charutils
                              "WHERE charid = ? AND location = ? AND slot = ?",
                              newQuantity, PChar->id, LocationID, slotID);
             PItem->setQuantity(newQuantity);
-            PChar->pushPacket<CInventoryModifyPacket>(LocationID, slotID, newQuantity);
+            PChar->pushPacket<GP_SERV_COMMAND_ITEM_NUM>(static_cast<CONTAINER_ID>(LocationID), slotID, newQuantity);
         }
         else if (newQuantity == 0)
         {

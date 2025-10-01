@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,17 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _CINVENTORYMODIFYPACKET_H
-#define _CINVENTORYMODIFYPACKET_H
+#include "0x01e_item_num.h"
 
-#include "common/cbasetypes.h"
+#include "item_container.h"
 
-#include "basic.h"
-
-class CInventoryModifyPacket : public CBasicPacket
+GP_SERV_COMMAND_ITEM_NUM::GP_SERV_COMMAND_ITEM_NUM(const CONTAINER_ID locationId, const uint8_t slotId, const uint32_t quantity)
 {
-public:
-    CInventoryModifyPacket(uint8 LocationID, uint8 slotID, uint32 quantity);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.ItemNum   = quantity;
+    packet.Category  = locationId;
+    packet.ItemIndex = slotId;
+}

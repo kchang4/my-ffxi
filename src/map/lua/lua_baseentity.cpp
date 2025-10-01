@@ -124,7 +124,6 @@
 #include "packets/inventory_assign.h"
 #include "packets/inventory_finish.h"
 #include "packets/inventory_item.h"
-#include "packets/inventory_modify.h"
 #include "packets/inventory_size.h"
 #include "packets/key_items.h"
 #include "packets/linkshell_equip.h"
