@@ -59,7 +59,7 @@ quest.sections =
                         quest:getVar(player, 'Prog') == 2 and
                         npcUtil.tradeHasExactly(trade, xi.item.SHEET_OF_PARCHMENT)
                     then
-                        return quest:progressEvent(2)
+                        return quest:progressCutscene(2)
                     end
                 end,
 

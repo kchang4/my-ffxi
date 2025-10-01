@@ -7,12 +7,8 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    -- THE OLD MONUMENT
-    if player:getCharVar('TheOldMonument_Event') == 1 then
-        player:startEvent(141) -- looks like his girlfriend dumped him
-
     -- PAINFUL MEMORY
-    elseif player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == xi.questStatus.QUEST_ACCEPTED then
         player:startEvent(140) -- he's forgotten why he took up the lute in the first place
 
     -- THE REQUIEM
