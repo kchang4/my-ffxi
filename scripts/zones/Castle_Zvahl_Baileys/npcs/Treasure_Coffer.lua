@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.treasure.onTrigger(player, xi.treasure.type.COFFER)
+    xi.treasure.onTrigger(player, npc)
 end
 
 return entity
