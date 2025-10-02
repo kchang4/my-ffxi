@@ -12105,7 +12105,8 @@ void CLuaBaseEntity::sendRaise(uint8 raiseLevel)
         {
             PChar->m_hasArise = true;
         }
-        PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, TYPE_RAISE);
+
+        PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Raise);
     }
 }
 
@@ -12162,7 +12163,7 @@ void CLuaBaseEntity::sendTractor(float xPos, float yPos, float zPos, uint8 rotat
         PChar->m_StartActionPos.z        = zPos;
         PChar->m_StartActionPos.rotation = rotation;
 
-        PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, TYPE_TRACTOR);
+        PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Tractor);
     }
 }
 

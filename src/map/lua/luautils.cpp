@@ -2333,7 +2333,7 @@ namespace luautils
         if (PChar->currentEvent->scriptFile.find("/bcnms/") > 0 && PChar->health.hp <= 0)
         { // for some reason the event doesnt enforce death afterwards
             PChar->animation = ANIMATION_DEATH;
-            PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, TYPE_HOMEPOINT);
+            PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Homepoint);
             PChar->updatemask |= UPDATE_HP;
         }
 

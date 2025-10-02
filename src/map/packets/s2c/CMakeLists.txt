@@ -21,6 +21,10 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x041_black_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x041_black_list.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x042_black_edit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x042_black_edit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04f_equip_clear.h

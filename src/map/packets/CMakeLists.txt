@@ -17,8 +17,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist_edit_response.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/blacklist_edit_response.h
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp

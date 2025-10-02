@@ -23,11 +23,11 @@
 
 #include "entities/charentity.h"
 
-GP_SERV_COMMAND_RES::GP_SERV_COMMAND_RES(CCharEntity* PChar, REVIVAL_TYPE type)
+GP_SERV_COMMAND_RES::GP_SERV_COMMAND_RES(const CCharEntity* PChar, GP_SERV_COMMAND_RES_TYPE type)
 {
     auto& packet = this->data();
 
     packet.UniqueNo = PChar->id;
     packet.ActIndex = PChar->targid;
-    packet.type     = static_cast<uint16_t>(type);
+    packet.type     = type;
 }

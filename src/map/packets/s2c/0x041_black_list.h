@@ -21,28 +21,23 @@
 
 #pragma once
 
+#include "common/cbasetypes.h"
+
 #include "base.h"
+#include "packets/c2s/0x03d_black_edit.h"
 
-class CCharEntity;
+#include <vector>
 
-enum class GP_SERV_COMMAND_RES_TYPE : uint16_t
-{
-    Homepoint = 0,
-    Raise     = 1,
-    Tractor   = 2,
-};
-
-// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00F9
-// This packet is sent by the server to adjust the clients homepoint menu.
-class GP_SERV_COMMAND_RES final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_RES, GP_SERV_COMMAND_RES>
+class GP_SERV_COMMAND_BLACK_LIST final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BLACK_LIST, GP_SERV_COMMAND_BLACK_LIST>
 {
 public:
     struct PacketData
     {
-        uint32_t                 UniqueNo; // PS2: UniqueNo
-        uint16_t                 ActIndex; // PS2: ActIndex
-        GP_SERV_COMMAND_RES_TYPE type;     // PS2: type
+        SAVE_BLACK List[12];  // PS2: List
+        int8_t     Stat;      // PS2: Stat
+        int8_t     Num;       // PS2: Num
+        uint16_t   padding00; // PS2: (New; did not exist.)
     };
 
-    GP_SERV_COMMAND_RES(const CCharEntity* PChar, GP_SERV_COMMAND_RES_TYPE type);
+    GP_SERV_COMMAND_BLACK_LIST(std::vector<std::pair<uint32, std::string>> blacklist, bool resetClientBlist, bool lastBlistPacket);
 };

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,26 +19,28 @@
 ===========================================================================
 */
 
-#include "blacklist_edit_response.h"
-#include "entities/charentity.h"
+#pragma once
 
-CBlacklistEditResponsePacket::CBlacklistEditResponsePacket(uint32 accid, const std::string& targetName, int8 action)
+#include "base.h"
+#include "common/cbasetypes.h"
+#include "packets/c2s/0x03d_black_edit.h"
+
+enum class GP_SERV_COMMAND_BLACK_EDIT_MODE : int8_t
 {
-    this->setType(0x42);
-    this->setSize(0x1C);
+    Add    = 0,
+    Delete = 1,
+    Error  = 2,
+};
 
-    switch (action)
+class GP_SERV_COMMAND_BLACK_EDIT final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_BLACK_EDIT, GP_SERV_COMMAND_BLACK_EDIT>
+{
+public:
+    struct PacketData
     {
-        case 0x00: // Added successfully..
-        case 0x01: // Removed successfully..
-            ref<uint32>(0x04) = accid;
-            ref<uint8>(0x18)  = action;
-            std::memcpy(buffer_.data() + 0x08, targetName.c_str(), targetName.size());
-            break;
+        SAVE_BLACK                      Data;         // PS2: Data
+        GP_SERV_COMMAND_BLACK_EDIT_MODE Mode;         // PS2: Mode
+        uint8_t                         padding00[3]; // PS2: (New; did not exist.)
+    };
 
-        case 0x02: // Command error..
-            ref<uint32>(0x04) = 0x00000000;
-            ref<uint8>(0x18)  = action;
-            break;
-    }
-}
+    GP_SERV_COMMAND_BLACK_EDIT(uint32 accId, const std::string& targetName, GP_SERV_COMMAND_BLACK_EDIT_MODE mode);
+};

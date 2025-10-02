@@ -19,30 +19,29 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x041_black_list.h"
 
-#include "base.h"
+#include "0x042_black_edit.h"
 
-class CCharEntity;
-
-enum class GP_SERV_COMMAND_RES_TYPE : uint16_t
+GP_SERV_COMMAND_BLACK_LIST::GP_SERV_COMMAND_BLACK_LIST(std::vector<std::pair<uint32, std::string>> blacklist, bool resetClientBlist, bool lastBlistPacket)
 {
-    Homepoint = 0,
-    Raise     = 1,
-    Tractor   = 2,
-};
+    auto& packet = this->data();
 
-// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00F9
-// This packet is sent by the server to adjust the clients homepoint menu.
-class GP_SERV_COMMAND_RES final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_RES, GP_SERV_COMMAND_RES>
-{
-public:
-    struct PacketData
+    if (resetClientBlist)
     {
-        uint32_t                 UniqueNo; // PS2: UniqueNo
-        uint16_t                 ActIndex; // PS2: ActIndex
-        GP_SERV_COMMAND_RES_TYPE type;     // PS2: type
-    };
+        packet.Stat |= 0x01;
+    }
 
-    GP_SERV_COMMAND_RES(const CCharEntity* PChar, GP_SERV_COMMAND_RES_TYPE type);
-};
+    if (lastBlistPacket)
+    {
+        packet.Stat |= 0x02;
+    }
+
+    packet.Num = static_cast<int8_t>(blacklist.size());
+
+    for (size_t i = 0; i < static_cast<size_t>(packet.Num) && i < 12; i++)
+    {
+        packet.List[i].ID = blacklist[i].first;
+        std::memcpy(packet.List[i].Name, blacklist[i].second.c_str(), std::min<size_t>(blacklist[i].second.length(), sizeof(packet.List[i].Name)));
+    }
+}

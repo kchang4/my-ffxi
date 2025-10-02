@@ -71,7 +71,7 @@ bool CDeathState::Update(timer::time_point tick)
             auto* PChar = static_cast<CCharEntity*>(m_PEntity);
             if (PChar->m_hasRaise)
             {
-                PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, TYPE_RAISE);
+                PChar->pushPacket<GP_SERV_COMMAND_RES>(PChar, GP_SERV_COMMAND_RES_TYPE::Raise);
                 m_raiseSent = true;
             }
         }
