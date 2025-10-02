@@ -40,8 +40,8 @@
 
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
-#include "packets/wide_scan.h"
 #include "packets/s2c/0x0f4_tracking_list.h"
+#include "packets/s2c/0x0f6_tracking_state.h"
 
 #include "lua/luautils.h"
 

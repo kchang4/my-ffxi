@@ -203,8 +203,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_request.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/wide_scan_track.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/wide_scan_track.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_visited.cpp
