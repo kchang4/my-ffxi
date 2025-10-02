@@ -203,8 +203,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_request.h
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/treasure_lot_item.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/treasure_lot_item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/wide_scan.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/wide_scan.h
     ${CMAKE_CURRENT_SOURCE_DIR}/wide_scan_track.cpp

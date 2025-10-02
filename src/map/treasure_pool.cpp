@@ -23,8 +23,8 @@
 #include "common/timer.h"
 #include "roe.h"
 
-#include "packets/treasure_lot_item.h"
 #include "packets/s2c/0x0d2_trophy_list.h"
+#include "packets/s2c/0x0d3_trophy_solution.h"
 
 #include "item_container.h"
 #include "recast_container.h"
@@ -366,7 +366,7 @@ void CTreasurePool::lotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     // Player lots Item for XXX message
     for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(highestLotter, highestLot, PChar, SlotID, Lot);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(highestLotter, highestLot, PChar, SlotID, Lot);
     }
 
     // if all lotters have lotted, evaluate immediately.
@@ -426,7 +426,7 @@ void CTreasurePool::passItem(CCharEntity* PChar, uint8 SlotID)
     // Player lots Item for XXX message
     for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(highestLotter, highestLot, PChar, SlotID, PassedLot);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(highestLotter, highestLot, PChar, SlotID, PassedLot);
     }
 
     // if all lotters have lotted, evaluate immediately.
@@ -582,7 +582,7 @@ void CTreasurePool::treasureWon(CCharEntity* winner, uint8 SlotID)
 
     for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(winner, SlotID, 0, ITEMLOT_WIN);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(winner, SlotID, 0, GP_TROPHY_SOLUTION_STATE::Win);
     }
     m_count--;
 
@@ -602,7 +602,7 @@ void CTreasurePool::treasureError(CCharEntity* winner, uint8 SlotID)
 
     for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(winner, SlotID, -1, ITEMLOT_WINERROR);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(winner, SlotID, -1, GP_TROPHY_SOLUTION_STATE::WinError);
     }
     m_count--;
 
@@ -622,7 +622,7 @@ void CTreasurePool::treasureLost(uint8 SlotID)
 
     for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureLotItemPacket>(SlotID, ITEMLOT_WINERROR);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_SOLUTION>(SlotID, GP_TROPHY_SOLUTION_STATE::WinError);
     }
     m_count--;
 
