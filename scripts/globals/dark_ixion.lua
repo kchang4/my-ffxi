@@ -312,9 +312,10 @@ xi.darkixion.roamingMods = function(mob)
 
     -- don't take damage until the fight officially starts
     mob:setMod(xi.mod.UDMGPHYS, -10000)
-    mob:setMod(xi.mod.UDMGRANGE, -10000)
+    mob:setMod(xi.mod.UDMGRANGE, 0) -- TODO figure out how to make Ixion only take damage from stygian ash
     mob:setMod(xi.mod.UDMGBREATH, -10000)
     mob:setMod(xi.mod.UDMGMAGIC, -10000)
+    mob:setMod(xi.mod.REGAIN, 0)
 
     -- restore hp just in case something caused him to regen while roaming
     if xi.darkixion.hpValue == 0 then
@@ -596,11 +597,16 @@ xi.darkixion.onMobRoam = function(mob)
 end
 
 xi.darkixion.onMobEngage = function(mob, target)
-    mob:setMod(xi.mod.REGAIN, 20) -- 'has tp regen': https://www.bluegartr.com/threads/59044-Ixion-discussion-thread/page8
     xi.darkixion.roamingMods(mob)
+
     -- if stygian ash missed or aggro via any other means, immediately disengage (even if hearing/sight aggro 'If you get too close, DI runs away')
-    if mob:getLocalVar('StygianLanded') ~= 1 then
+    if mob:getLocalVar('aeFromItemId') == xi.item.PINCH_OF_STYGIAN_ASH then
+        mob:setLocalVar('RunAway', 0)
+    else
         mob:disengage()
+        -- TODO figure out how to make Ixion only take damage from stygian ash
+        -- Note that xi.darkixion.roamingMods resets his hp to the stored value, so this is a display issue only
+        -- i.e. there's no concern of say hitting him with high dmg WS, letting him run away, and doing it again when you find him in another zone
         return
     end
 
@@ -608,6 +614,7 @@ xi.darkixion.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGBREATH, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 0)
+    mob:setMod(xi.mod.REGAIN, 20) -- 'has tp regen': https://www.bluegartr.com/threads/59044-Ixion-discussion-thread/page8
     mob:setLocalVar('phaseChange', GetSystemTime() + math.random(60, 240))
 end
 
@@ -629,7 +636,7 @@ xi.darkixion.onMobDisengage = function(mob)
 
     -- no chance of him staying in this zone unless an ash is landed before he runs away and despawns
     mob:setAggressive(false)
-    mob:setLocalVar('StygianLanded', 0)
+    mob:setLocalVar('aeFromItemId', 0)
 end
 
 xi.darkixion.onMobFight = function(mob, target)
