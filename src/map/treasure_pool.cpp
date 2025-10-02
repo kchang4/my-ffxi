@@ -23,8 +23,8 @@
 #include "common/timer.h"
 #include "roe.h"
 
-#include "packets/treasure_find_item.h"
 #include "packets/treasure_lot_item.h"
+#include "packets/s2c/0x0d2_trophy_list.h"
 
 #include "item_container.h"
 #include "recast_container.h"
@@ -264,7 +264,7 @@ uint8 CTreasurePool::addItem(uint16 ItemID, CBaseEntity* PEntity)
 
     for (const auto& member : m_Members)
     {
-        member->pushPacket<CTreasureFindItemPacket>(&m_PoolItems[FreeSlotID], PEntity, false);
+        member->pushPacket<GP_SERV_COMMAND_TROPHY_LIST>(&m_PoolItems[FreeSlotID], PEntity, false);
     }
 
     if (memberCount() == 1)
@@ -287,7 +287,7 @@ void CTreasurePool::updatePool(CCharEntity* PChar)
     {
         for (auto& m_PoolItem : m_PoolItems)
         {
-            PChar->pushPacket<CTreasureFindItemPacket>(&m_PoolItem, nullptr, true);
+            PChar->pushPacket<GP_SERV_COMMAND_TROPHY_LIST>(&m_PoolItem, nullptr, true);
         }
     }
 }
