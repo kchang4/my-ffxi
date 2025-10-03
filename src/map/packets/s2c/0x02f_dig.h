@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,16 +19,26 @@
 ===========================================================================
 */
 
-#include "chocobo_digging.h"
+#pragma once
 
-#include "entities/charentity.h"
+#include "common/cbasetypes.h"
 
-CChocoboDiggingPacket::CChocoboDiggingPacket(CCharEntity* PChar)
+#include "base.h"
+
+class CCharEntity;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x002F
+// This packet is sent by the server to inform the client to play a digging animation on the given entity.
+class GP_SERV_COMMAND_DIG final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_DIG, GP_SERV_COMMAND_DIG>
 {
-    this->setType(0x2F);
-    this->setSize(0x0C);
+public:
+    struct PacketData
+    {
+        uint32_t TarUniqueNo; // PS2: TarUniqueNo
+        uint16_t TarActIndex; // PS2: TarActIndex
+        uint8_t  Flags;       // PS2: Flags
+        uint8_t  padding00;   // PS2: padding00
+    };
 
-    ref<uint32>(0x04) = PChar->id;
-    ref<uint16>(0x08) = PChar->targid;
-    ref<uint8>(0x0A)  = 0x01;
-}
+    GP_SERV_COMMAND_DIG(const CCharEntity* PChar);
+};

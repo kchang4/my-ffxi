@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _CCHOCOBODIGGINGPACKET_H
-#define _CCHOCOBODIGGINGPACKET_H
+#include "0x02f_dig.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CCharEntity;
-
-class CChocoboDiggingPacket : public CBasicPacket
+GP_SERV_COMMAND_DIG::GP_SERV_COMMAND_DIG(const CCharEntity* PChar)
 {
-public:
-    CChocoboDiggingPacket(CCharEntity* PChar);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.TarUniqueNo = PChar->id;
+    packet.TarActIndex = PChar->targid;
+    packet.Flags       = 0x01;
+}

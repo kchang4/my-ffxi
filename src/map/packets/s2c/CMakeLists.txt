@@ -13,6 +13,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x026_item_subcontainer.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02e_openmogmenu.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x02f_dig.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x02f_dig.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x038_schedulor.h

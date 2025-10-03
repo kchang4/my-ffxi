@@ -49,8 +49,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/chocobo_digging.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/chocobo_digging.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/cs_position.cpp
