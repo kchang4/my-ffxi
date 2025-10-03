@@ -64,6 +64,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05d_pendingstr.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x05f_music.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x082_guild_buy.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x082_guild_buy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x086_guild_open.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x086_guild_open.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.h
