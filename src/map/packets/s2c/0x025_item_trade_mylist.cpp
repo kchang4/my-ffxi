@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,18 @@
 ===========================================================================
 */
 
+#include "0x025_item_trade_mylist.h"
+
 #include "utils/itemutils.h"
 
-#include "trade_item.h"
-
-CTradeItemPacket::CTradeItemPacket(CItem* PItem, uint8 slot)
+GP_SERV_COMMAND_ITEM_TRADE_MYLIST::GP_SERV_COMMAND_ITEM_TRADE_MYLIST(const CItem* PItem, const uint8 slot)
 {
-    this->setType(0x25);
-    this->setSize(0x0C);
+    auto& packet = this->data();
 
-    uint32 amount = PItem->getReserve();
+    const uint32 amount = PItem->getReserve();
 
-    ref<uint32>(0x04) = amount == 0 ? 0 : amount;
-    ref<uint16>(0x08) = amount == 0 ? 0 : PItem->getID();
-    ref<uint8>(0x0A)  = slot;
-    ref<uint8>(0x0B)  = amount == 0 ? 0 : PItem->getSlotID();
+    packet.ItemNum    = amount == 0 ? 0 : amount;
+    packet.ItemNo     = amount == 0 ? 0 : PItem->getID();
+    packet.TradeIndex = slot;
+    packet.ItemIndex  = amount == 0 ? 0 : PItem->getSlotID();
 }

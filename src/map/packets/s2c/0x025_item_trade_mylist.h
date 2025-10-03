@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,27 @@
 ===========================================================================
 */
 
-#ifndef _CTRADEUPDATEPACKET_H
-#define _CTRADEUPDATEPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
-#include <string.h>
 
-#include "basic.h"
+#include "base.h"
 
 class CItem;
 
-class CTradeUpdatePacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0025
+// This packet is sent by the server to inform the player of a trade item update.
+// (This update is related to the local player's items.)
+class GP_SERV_COMMAND_ITEM_TRADE_MYLIST final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_ITEM_TRADE_MYLIST, GP_SERV_COMMAND_ITEM_TRADE_MYLIST>
 {
 public:
-    CTradeUpdatePacket(CItem* PItem, uint8 slot);
-};
+    struct PacketData
+    {
+        uint32_t ItemNum;    // PS2: ItemNum
+        uint16_t ItemNo;     // PS2: ItemNo
+        uint8_t  TradeIndex; // PS2: TradeIndex
+        uint8_t  ItemIndex;  // PS2: ItemIndex
+    };
 
-#endif
+    GP_SERV_COMMAND_ITEM_TRADE_MYLIST(const CItem* PItem, uint8 slot);
+};

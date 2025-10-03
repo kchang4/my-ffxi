@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,15 +19,25 @@
 ===========================================================================
 */
 
-#include "entities/charentity.h"
+#pragma once
 
-#include "trade_request.h"
+#include "common/cbasetypes.h"
 
-CTradeRequestPacket::CTradeRequestPacket(CCharEntity* PChar)
+#include "base.h"
+
+class CCharEntity;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0021
+// This packet is sent by the server to inform the player of a trade request.
+class GP_SERV_COMMAND_ITEM_TRADE_REQ final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_ITEM_TRADE_REQ, GP_SERV_COMMAND_ITEM_TRADE_REQ>
 {
-    this->setType(0x21);
-    this->setSize(0x0C);
+public:
+    struct PacketData
+    {
+        uint32_t UniqueNo;  // PS2: UniqueNo
+        uint16_t ActIndex;  // PS2: ActIndex
+        uint16_t padding00; // PS2: dammy2
+    };
 
-    ref<uint32>(0x04) = PChar->id;
-    ref<uint16>(0x08) = PChar->targid;
-}
+    GP_SERV_COMMAND_ITEM_TRADE_REQ(const CCharEntity* PChar);
+};
