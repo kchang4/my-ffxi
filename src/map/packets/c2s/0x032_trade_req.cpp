@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 #include "packets/message_system.h"
-#include "packets/trade_request.h"
+#include "packets/s2c/0x021_item_trade_req.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 #include "trade_container.h"
 #include "universal_container.h"
@@ -125,5 +125,5 @@ void GP_CLI_COMMAND_TRADE_REQ::process(MapSession* PSession, CCharEntity* PChar)
     PTarget->lastTradeInvite     = currentTime;
     PTarget->TradePending.id     = PChar->id;
     PTarget->TradePending.targid = PChar->targid;
-    PTarget->pushPacket<CTradeRequestPacket>(PChar);
+    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_REQ>(PChar);
 }
