@@ -7,7 +7,14 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.treasure.onTrade(player, npc, trade, 0, 0)
+    if
+        player:getCharVar('UnderOathCS') == 3 and
+        not player:hasKeyItem(xi.keyItem.MIQUES_PAINTBRUSH)
+    then
+        xi.treasure.onTrade(player, npc, trade, 2, xi.keyItem.MIQUES_PAINTBRUSH)
+    else
+        xi.treasure.onTrade(player, npc, trade, 0, 0)
+    end
 end
 
 entity.onTrigger = function(player, npc)
