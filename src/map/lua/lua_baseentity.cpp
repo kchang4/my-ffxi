@@ -120,7 +120,7 @@
 #include "packets/event.h"
 #include "packets/guild_menu.h"
 #include "packets/guild_menu_buy.h"
-#include "packets/independent_animation.h"
+#include "packets/s2c/0x03a_magicschedulor.h"
 #include "packets/instance_entry.h"
 #include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/linkshell_equip.h"
@@ -12382,7 +12382,7 @@ void CLuaBaseEntity::enableEntities(sol::object const& obj)
  ************************************************************************/
 void CLuaBaseEntity::independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode)
 {
-    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<CIndependentAnimationPacket>(m_PBaseEntity, PTarget->GetBaseEntity(), animId, mode));
+    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_MAGICSCHEDULOR>(m_PBaseEntity, PTarget->GetBaseEntity(), animId, static_cast<GP_SERV_COMMAND_MAGICSCHEDULOR_TYPE>(mode)));
 }
 
 /************************************************************************

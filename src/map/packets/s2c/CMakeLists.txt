@@ -19,6 +19,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x038_schedulor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x039_mapschedulor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_magicschedulor.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x03a_magicschedulor.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03d_shop_sell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x03f_shop_buy.h

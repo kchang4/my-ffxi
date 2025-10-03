@@ -81,8 +81,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/independent_animation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/independent_animation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/instance_entry.h
     ${CMAKE_CURRENT_SOURCE_DIR}/jobpoint_details.cpp

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -19,17 +19,21 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x03a_magicschedulor.h"
 
-#include "common/cbasetypes.h"
+#include "entities/baseentity.h"
 
-#include "basic.h"
-
-class CBaseEntity;
-
-// This is sometimes sent along with an Action Message packet, to provide an animation for an action message.
-class CIndependentAnimationPacket : public CBasicPacket
+GP_SERV_COMMAND_MAGICSCHEDULOR::GP_SERV_COMMAND_MAGICSCHEDULOR(const CBaseEntity* PEntity, const CBaseEntity* PTarget, const uint16 animId, const GP_SERV_COMMAND_MAGICSCHEDULOR_TYPE type)
 {
-public:
-    CIndependentAnimationPacket(CBaseEntity* PEntity, CBaseEntity* PTarget, uint16 animId, uint8 type);
-};
+    auto& packet = this->data();
+
+    if (PEntity)
+    {
+        packet.UniqueNoCas  = PEntity->id;
+        packet.UniqueNoTar  = PTarget->id;
+        packet.ActIndexCast = PEntity->targid;
+        packet.ActIndexTar  = PTarget->targid;
+        packet.fileNum      = animId;
+        packet.type         = type;
+    }
+}
