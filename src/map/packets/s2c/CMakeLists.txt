@@ -36,6 +36,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04f_equip_clear.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x051_grap_list.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x051_grap_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x052_eventucoff.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x052_eventucoff.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x055_scenarioitem.h

@@ -37,7 +37,7 @@
 #include "ai/states/range_state.h"
 
 #include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "packets/char_equip.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
@@ -2949,7 +2949,7 @@ namespace charutils
             CheckUnarmedWeapon(PChar);
         }
 
-        PChar->pushPacket<CCharAppearancePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
 
         BuildingCharWeaponSkills(PChar);
         PChar->RequestPersist(CHAR_PERSIST::EQUIP);

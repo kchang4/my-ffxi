@@ -23,7 +23,7 @@
 
 #include "aman.h"
 #include "entities/charentity.h"
-#include "packets/char_appearance.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x0b4_config.h"
@@ -108,7 +108,7 @@ void GP_CLI_COMMAND_CONFIG::process(MapSession* PSession, CCharEntity* PChar) co
         if (PChar->getEquip(SLOT_HEAD))
         {
             // Only blink if you have headgear
-            PChar->pushPacket<CCharAppearancePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         }
 
         PChar->pushPacket<CMessageStandardPacket>(value ? MsgStd::HeadgearHide : MsgStd::HeadgearShow);

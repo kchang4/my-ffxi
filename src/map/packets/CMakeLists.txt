@@ -15,8 +15,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_appearance.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_appearance.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.cpp

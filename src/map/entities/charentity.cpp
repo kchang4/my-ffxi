@@ -27,7 +27,7 @@
 
 #include "packets/action.h"
 #include "packets/basic.h"
-#include "packets/char_appearance.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "packets/char_health.h"
 #include "packets/char_recast.h"
 #include "packets/char_status.h"
@@ -1058,7 +1058,7 @@ void CCharEntity::PostTick()
     {
         updatemask |= UPDATE_HP;
         m_EquipSwap = false;
-        pushPacket<CCharAppearancePacket>(this);
+        pushPacket<GP_SERV_COMMAND_GRAP_LIST>(this);
     }
 
     // notify client containers are dirty and then no longer dirty

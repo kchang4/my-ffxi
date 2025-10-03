@@ -99,7 +99,7 @@
 #include "packets/action.h"
 #include "packets/auction_house.h"
 #include "packets/char_abilities.h"
-#include "packets/char_appearance.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x05a_motionmes.h"
 #include "packets/char_equip.h"
 #include "packets/char_health.h"
@@ -5157,7 +5157,7 @@ void CLuaBaseEntity::lockEquipSlot(uint8 slot)
     charutils::EquipItem(PChar, 0, slot, LOC_INVENTORY);
 
     PChar->m_EquipBlock |= 1 << slot;
-    PChar->pushPacket<CCharAppearancePacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
     PChar->pushPacket<CEquipPacket>(0, slot, LOC_INVENTORY);
     PChar->pushPacket<CCharJobsPacket>(PChar);
     PChar->updatemask |= UPDATE_LOOK;
@@ -5720,7 +5720,7 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
         if (m_PBaseEntity->objtype == TYPE_PC)
         {
             auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-            PChar->pushPacket<CCharAppearancePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
         }
     }
     else
@@ -5831,7 +5831,7 @@ void CLuaBaseEntity::setCostume2(uint16 costume)
     {
         PChar->m_Costume2 = costume;
         PChar->updatemask |= UPDATE_LOOK;
-        PChar->pushPacket<CCharAppearancePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
     }
 }
 /************************************************************************
