@@ -155,8 +155,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/trade_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.h
     PARENT_SCOPE

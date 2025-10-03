@@ -24,7 +24,7 @@
 #include "common/async.h"
 #include "entities/charentity.h"
 #include "items/item_linkshell.h"
-#include "packets/trade_update.h"
+#include "packets/s2c/0x023_item_trade_list.h"
 #include "packets/s2c/0x025_item_trade_mylist.h"
 #include "universal_container.h"
 
@@ -144,7 +144,7 @@ void GP_CLI_COMMAND_TRADE_LIST::process(MapSession* PSession, CCharEntity* PChar
     PChar->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_MYLIST>(PItem, TradeIndex);
 
     ShowDebug("GP_CLI_COMMAND_TRADE_LIST: %s->%s trade pushing packet to %s", PChar->getName(), PTarget->getName(), PTarget->getName());
-    PTarget->pushPacket<CTradeUpdatePacket>(PItem, TradeIndex);
+    PTarget->pushPacket<GP_SERV_COMMAND_ITEM_TRADE_LIST>(PItem, TradeIndex);
 
     PChar->UContainer->UnLock();
     PTarget->UContainer->UnLock();
