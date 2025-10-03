@@ -17,8 +17,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_emote_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_health.cpp
