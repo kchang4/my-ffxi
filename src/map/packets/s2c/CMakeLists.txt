@@ -63,6 +63,10 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x108_bazaar_shopping.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x108_bazaar_shopping.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x109_bazaar_sell.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x109_bazaar_sell.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x10a_bazaar_sale.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x10a_bazaar_sale.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x106_bazaar_buy.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.cpp

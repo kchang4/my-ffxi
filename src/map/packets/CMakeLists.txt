@@ -9,8 +9,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.h
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_confirmation.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_confirmation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_item.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/bazaar_item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.cpp

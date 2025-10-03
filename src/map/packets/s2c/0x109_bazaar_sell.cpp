@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,21 +19,17 @@
 ===========================================================================
 */
 
-#ifndef _CBAZAARCONFIRMATIONPACKET_H
-#define _CBAZAARCONFIRMATIONPACKET_H
+#include "0x109_bazaar_sell.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CCharEntity;
-class CItem;
-
-class CBazaarConfirmationPacket : public CBasicPacket
+GP_SERV_COMMAND_BAZAAR_SELL::GP_SERV_COMMAND_BAZAAR_SELL(const CCharEntity* PChar, const uint8 slotId, const uint8 quantity)
 {
-public:
-    CBazaarConfirmationPacket(CCharEntity* PChar, uint8 SlotID, uint8 Quantity);
-    CBazaarConfirmationPacket(CCharEntity* PChar, CItem* PItem);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.UniqueNo  = PChar->id;
+    packet.ItemNum   = quantity;
+    packet.ItemIndex = slotId;
+
+    std::memcpy(packet.sName, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.sName)));
+}

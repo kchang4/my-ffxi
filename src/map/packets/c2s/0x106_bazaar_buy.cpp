@@ -23,7 +23,8 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
-#include "packets/bazaar_confirmation.h"
+#include "packets/s2c/0x109_bazaar_sell.h"
+#include "packets/s2c/0x10a_bazaar_sale.h"
 #include "packets/bazaar_item.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x020_item_attr.h"
@@ -146,7 +147,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
 
         PChar->pushPacket<GP_SERV_COMMAND_BAZAAR_BUY>(PTarget, GP_BAZAAR_BUY_STATE::OK);
 
-        PTarget->pushPacket<CBazaarConfirmationPacket>(PChar, PItem);
+        PTarget->pushPacket<GP_SERV_COMMAND_BAZAAR_SALE>(PChar, PItem);
 
         charutils::UpdateItem(PTarget, LOC_INVENTORY, BazaarItemIndex, -static_cast<int32>(BuyNum));
 
@@ -179,7 +180,7 @@ void GP_CLI_COMMAND_BAZAAR_BUY::process(MapSession* PSession, CCharEntity* PChar
             {
                 if (PCustomer->id != PChar->id)
                 {
-                    PCustomer->pushPacket<CBazaarConfirmationPacket>(PChar, BazaarItemIndex, BuyNum);
+                    PCustomer->pushPacket<GP_SERV_COMMAND_BAZAAR_SELL>(PChar, BazaarItemIndex, BuyNum);
                 }
                 PCustomer->pushPacket<CBazaarItemPacket>(PBazaar->GetItem(BazaarItemIndex), BazaarItemIndex, PChar->loc.zone->GetTax());
 

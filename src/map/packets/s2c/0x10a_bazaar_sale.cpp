@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,35 +19,20 @@
 ===========================================================================
 */
 
-#include <cstring>
-
-#include "bazaar_confirmation.h"
+#include "0x10a_bazaar_sale.h"
 
 #include "entities/charentity.h"
-#include "utils/itemutils.h"
+#include "items/item.h"
 
-CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, uint8 SlotID, uint8 Quantity)
+GP_SERV_COMMAND_BAZAAR_SALE::GP_SERV_COMMAND_BAZAAR_SALE(const CCharEntity* PChar, const CItem* PItem)
 {
-    this->setType(0x109);
-    this->setSize(0x26);
-
-    ref<uint32>(0x04) = PChar->id;
-    ref<uint8>(0x08)  = Quantity;
-    ref<uint8>(0x20)  = SlotID;
-
-    std::memcpy(buffer_.data() + 0x10, PChar->getName().c_str(), PChar->getName().size());
-}
-
-CBazaarConfirmationPacket::CBazaarConfirmationPacket(CCharEntity* PChar, CItem* PItem)
-{
-    this->setType(0x10A);
-    this->setSize(0x22);
+    auto& packet = this->data();
 
     if (PItem)
     {
-        ref<uint32>(0x04) = PItem->getQuantity();
-        ref<uint16>(0x08) = PItem->getID();
+        packet.ItemNum = PItem->getQuantity();
+        packet.ItemNo  = PItem->getID();
     }
 
-    std::memcpy(buffer_.data() + 0x0A, PChar->getName().c_str(), PChar->getName().size());
+    std::memcpy(packet.sName, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.sName)));
 }
