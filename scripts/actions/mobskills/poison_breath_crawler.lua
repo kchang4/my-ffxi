@@ -1,7 +1,7 @@
 -----------------------------------
--- Splash Breath
--- Family: Pugils
--- Description: Deals Water damage in a fan-shaped cone area of effect.
+-- Poison Breath
+-- Family: Crawler
+-- Description: Deals Water damage to enemies within a fan-shaped area originating from the caster. Additional Effect: Poison.
 -----------------------------------
 ---@type TMobSkill
 local mobskillObject = {}
@@ -13,9 +13,9 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local params = {}
 
-    params.percentMultipier  = 0.10
+    params.percentMultipier  = 0.103
     params.element           = xi.element.WATER
-    params.damageCap         = 400
+    params.damageCap         = 405
     params.bonusDamage       = 0
     params.mAccuracyBonus    = { 0, 0, 0 }
     params.resistStat        = xi.mod.INT
@@ -25,6 +25,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     if not xi.mobskills.hasMissMessage(mob, target, skill, damage) then
         target:takeDamage(damage, mob, xi.attackType.BREATH, xi.damageType.WATER)
+
+        local power    = 1
+        local duration = 60 -- TODO: Capture duration
+
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, power, 3, duration)
     end
 
     return damage
