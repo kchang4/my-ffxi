@@ -61,8 +61,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/fishing.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_buy_update.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_buy_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell.h
     ${CMAKE_CURRENT_SOURCE_DIR}/guild_menu_sell_update.cpp
