@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,20 +19,25 @@
 ===========================================================================
 */
 
-#ifndef _CGUILDMENUBUYPACKET_H
-#define _CGUILDMENUBUYPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-#include "basic.h"
+#include "base.h"
 
 class CCharEntity;
-class CItemContainer;
 
-class CGuildMenuBuyPacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0084
+// This packet is sent by the server to inform the client of a completed sale to a guild vendor.
+class GP_SERV_COMMAND_GUILD_SELL final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GUILD_SELL, GP_SERV_COMMAND_GUILD_SELL>
 {
 public:
-    CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGuild);
-};
+    struct PacketData
+    {
+        uint16_t ItemNo;
+        uint8_t  Count;
+        int8_t   Trade;
+    };
 
-#endif
+    GP_SERV_COMMAND_GUILD_SELL(const CCharEntity* PChar, uint8 stock, uint16 itemId, uint8 quantity);
+};

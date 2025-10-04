@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,29 +19,34 @@
 ===========================================================================
 */
 
-#include "common/utils.h"
+#pragma once
 
-#include "guild_menu.h"
+#include "common/cbasetypes.h"
 
-CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, uint8 holiday)
+#include "base.h"
+
+class CCharEntity;
+class CItemContainer;
+
+struct GP_GUILD_ITEM
 {
-    this->setType(0x86);
-    this->setSize(0x0C);
+    uint16_t ItemNo;
+    uint8_t  Count;
+    uint8_t  Max;
+    int32_t  Price;
+};
 
-    ref<uint8>(0x04) = status;
-
-    switch (status)
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0083
+// This packet is sent by the server to inform the client of a guild shops item list available for purchase.
+class GP_SERV_COMMAND_GUILD_BUYLIST final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GUILD_BUYLIST, GP_SERV_COMMAND_GUILD_BUYLIST>
+{
+public:
+    struct PacketData
     {
-        case GUILD_OPEN:
-        case GUILD_CLOSE:
-        {
-            packBitsBE(buffer_.data() + 0x08, 0xFFFFFF, open, close - open);
-        }
-        break;
-        case GUILD_HOLYDAY:
-        {
-            ref<uint8>(0x08) = holiday;
-        }
-        break;
-    }
-}
+        GP_GUILD_ITEM List[30];
+        uint8_t       Count;
+        uint8_t       Stat;
+    };
+
+    GP_SERV_COMMAND_GUILD_BUYLIST(CCharEntity* PChar, const CItemContainer* PGuild);
+};
