@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,18 +19,17 @@
 ===========================================================================
 */
 
-#include "synth_animation.h"
+#include "0x030_effect.h"
+
 #include "entities/charentity.h"
 
-CSynthAnimationPacket::CSynthAnimationPacket(CCharEntity* PChar, uint16 effect, uint8 param)
+GP_SERV_COMMAND_EFFECT::GP_SERV_COMMAND_EFFECT(const CCharEntity* PChar, const SynthesisEffect effect, const uint8 param)
 {
-    this->setType(0x30);
-    this->setSize(0x10);
+    auto& packet = this->data();
 
-    ref<uint32>(0x04) = PChar->id;
-    ref<uint16>(0x08) = PChar->targid;
-
-    ref<uint16>(0x0A) = effect;
-    ref<uint8>(0x0C)  = param;
-    ref<uint8>(0x0D)  = PChar->animation;
+    packet.UniqueNo  = PChar->id;
+    packet.ActIndex  = PChar->targid;
+    packet.EffectNum = effect;
+    packet.Type      = param;
+    packet.Status    = PChar->animation;
 }
