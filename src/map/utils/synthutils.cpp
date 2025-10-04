@@ -35,7 +35,6 @@
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
-#include "packets/synth_message.h"
 #include "packets/synth_result.h"
 
 #include "item_container.h"
@@ -50,6 +49,7 @@
 #include "enums/synthesis_result.h"
 #include "itemutils.h"
 #include "packets/s2c/0x030_effect.h"
+#include "packets/s2c/0x06f_combine_ans.h"
 #include "zone.h"
 #include "zoneutils.h"
 
@@ -324,7 +324,7 @@ namespace synthutils
 
             if (!luautils::IsContentEnabled(recipe.ContentTag))
             {
-                PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_BADRECIPE);
+                PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
                 return false;
             }
 
@@ -348,7 +348,7 @@ namespace synthutils
 
                     if (currentSkill < (skillValue * 10 - 150)) // Check player skill against recipe level. Range must be 14 or less.
                     {
-                        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_NOSKILL);
+                        PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelSkillTooLow);
                         return false;
                     }
                 }
@@ -357,7 +357,7 @@ namespace synthutils
         }
 
         // Otherwise, fall through to failure
-        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_BADRECIPE);
+        PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::CancelBadRecipe);
         return false;
     }
 
@@ -997,7 +997,7 @@ namespace synthutils
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, SYNTH_FAIL));
         }
 
-        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_FAIL, 29695);
+        PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::Failed, 29695);
     }
 
     /**************************************************************************
@@ -1069,7 +1069,7 @@ namespace synthutils
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, SYNTH_FAIL_CRITICAL));
         }
 
-        PChar->pushPacket<CSynthMessagePacket>(PChar, SYNTH_FAIL_CRITICAL, 29695);
+        PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, SynthesisResult::InterruptedCritical, 29695);
     }
 
     /*********************************************************************
@@ -1290,10 +1290,10 @@ namespace synthutils
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
 
             // Use appropiate message (Regular or desynthesis)
-            const auto message = PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS ? SYNTH_SUCCESS_DESYNTH : SYNTH_SUCCESS;
+            const auto message = PChar->CraftContainer->getCraftType() == CRAFT_DESYNTHESIS ? SynthesisResult::SuccessDesynth : SynthesisResult::Success;
 
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE, std::make_unique<CSynthResultMessagePacket>(PChar, message, itemID, quantity));
-            PChar->pushPacket<CSynthMessagePacket>(PChar, message, itemID, quantity);
+            PChar->pushPacket<GP_SERV_COMMAND_COMBINE_ANS>(PChar, message, itemID, quantity);
 
             // Calculate what craft this recipe "belongs" to based on highest skill required
             uint32 skillType    = 0;

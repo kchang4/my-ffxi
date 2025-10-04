@@ -135,8 +135,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/shop_menu.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_result.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_result.h
     ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.cpp
