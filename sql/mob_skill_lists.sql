@@ -4073,11 +4073,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Himinrjot',2042,497); -- Lowing
 -- Himinrjot auto-attacks
 INSERT INTO `mob_skill_lists` VALUES ('Himinrjot_aa',2043,2127); -- Snort (2127)
 
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,316);  -- Impale
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,317);  -- Vampiric Lash
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,319);  -- Bad Breath
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,320);  -- Sweet Breath
-INSERT INTO `mob_skill_lists` VALUES ('Morbol_Emperor',2044,1793); -- Vampiric Root
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,316);  -- Impale
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,317);  -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,319);  -- Bad Breath
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,320);  -- Sweet Breath
+INSERT INTO `mob_skill_lists` VALUES ('Morbol_ToAU',2044,1793); -- Vampiric Root
 
 INSERT INTO `mob_skill_lists` VALUES ('Nihhus',2045,2099); -- Batterhorn
 INSERT INTO `mob_skill_lists` VALUES ('Nihhus',2045,2100); -- Clobber
