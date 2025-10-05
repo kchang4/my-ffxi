@@ -564,12 +564,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Hecteyes',139,440);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,576);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,578);
 -- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,579);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,580);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,580);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',140,2828);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,576);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,578);
 -- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,579);
--- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,580);
+INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,580);
 -- INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,1330);
 INSERT INTO `mob_skill_lists` VALUES ('Hippogryph',141,2828);
 INSERT INTO `mob_skill_lists` VALUES ('Hound',142,465);
@@ -2655,7 +2655,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Alexander_LowHP',785,2147); -- Divine Jud
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,576); -- back heel
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,578); -- nihlity song
 -- INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,579); -- choke breath
--- INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,580); -- fantod
+INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,580); -- fantod
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,1330); -- hoof volley
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,2828); -- jettatura
 -- 787: free
