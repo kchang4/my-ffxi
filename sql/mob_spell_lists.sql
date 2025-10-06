@@ -683,6 +683,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,53,1,255);  -- blink (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,157,1,255); -- aero_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,186,1,255); -- aeroga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,208,1,255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,216,1,255); -- gravity (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Seiryu',25,237,1,255); -- choke (1~255)
 
 -- Byakko (26)
