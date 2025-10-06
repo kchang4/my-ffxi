@@ -2526,18 +2526,18 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (PItem->getAoE())
     {
         // clang-format off
-        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
+        PTarget->ForParty([this, PItem, PTarget, &action](CBattleEntity* PMember)
         {
             if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
-                luautils::OnItemUse(this, PMember, PItem);
+                luautils::OnItemUse(this, PMember, PItem, action);
             }
         });
         // clang-format on
     }
     else
     {
-        luautils::OnItemUse(this, PTarget, PItem);
+        luautils::OnItemUse(this, PTarget, PItem, action);
     }
 
     action.id         = this->id;
