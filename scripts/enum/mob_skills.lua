@@ -79,6 +79,9 @@ xi.mobSkill =
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
 
+    BLOW                     =  581,
+    BLANK_GAZE              =   586,
+
     VULTURE_3                =  626,
 
     CRYSTAL_RAIN             =  678,
@@ -178,6 +181,8 @@ xi.mobSkill =
     RANGED_ATTACK_12         = 1212,
     RANGED_ATTACK_13         = 1213,
     RANGED_ATTACK_14         = 1214,
+
+    COUNTERSTANCE            = 1331, -- The Waughroon Kid
 
     MANTLE_PIERCE            = 1349,
 
