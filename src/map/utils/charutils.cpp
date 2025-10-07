@@ -56,7 +56,6 @@
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
-#include "packets/roe_update.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01e_item_num.h"
 #include "packets/s2c/0x01f_item_list.h"
@@ -108,6 +107,7 @@
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 #include "packets/s2c/0x110_unity.h"
+#include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"
 
 /************************************************************************
@@ -1230,7 +1230,7 @@ namespace charutils
         if (settings::get<bool>("main.ENABLE_ROE"))
         {
             // Current RoE quests
-            PChar->pushPacket<CRoeUpdatePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_ROE_ACTIVELOG>(PChar);
 
             // Players logging in to a new timed record get one-time message
             if (PChar->m_eminenceCache.notifyTimedRecord)

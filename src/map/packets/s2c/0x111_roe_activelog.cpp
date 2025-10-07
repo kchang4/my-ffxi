@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,14 +19,13 @@
 ===========================================================================
 */
 
-#include "roe_update.h"
+#include "0x111_roe_activelog.h"
 
 #include "entities/charentity.h"
 
-CRoeUpdatePacket::CRoeUpdatePacket(CCharEntity* PChar)
+GP_SERV_COMMAND_ROE_ACTIVELOG::GP_SERV_COMMAND_ROE_ACTIVELOG(const CCharEntity* PChar)
 {
-    this->setType(0x111);
-    this->setSize(0x104);
+    auto& packet = this->data();
 
     /*  Each 4-bit nibble in the 4-byte chunk is labeled here. The second number is it's position.
                     (0 is the lowest order. IE the right-most bits)
@@ -34,9 +33,9 @@ CRoeUpdatePacket::CRoeUpdatePacket(CCharEntity* PChar)
 
     for (uint32 i = 0; i < 31; i++)
     {
-        uint32 id                    = PChar->m_eminenceLog.active[i];
-        uint32 progress              = PChar->m_eminenceLog.progress[i];
-        int    c_offset              = i < 30 ? i * 0x04 : 0xFC; // The time-limited record is a special case, it goes at the end (0x100).
-        ref<uint32>(0x04 + c_offset) = ((progress & 0xFFFFF) << 12) + (id & 0xFFF);
+        const uint32 id          = PChar->m_eminenceLog.active[i];
+        const uint32 progress    = PChar->m_eminenceLog.progress[i];
+        const int    c_offset    = i < 30 ? i : 60; // The time-limited record is a special case, it goes at the end (index 60).
+        packet.records[c_offset] = record_t{ .Id = id, .Count = progress };
     }
 }
