@@ -233,6 +233,8 @@ xi.mobSkill =
     LAVA_SPIT                = 1785,
     GATES_OF_HADES           = 1790,
 
+    VAMPIRIC_ROOT            = 1793,
+
     XENOGLOSSIA              = 1823, -- Unique entry.
 
     SANDBLAST_2              = 1841,
