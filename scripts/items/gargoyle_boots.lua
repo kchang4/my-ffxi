@@ -16,9 +16,16 @@ itemObject.onItemCheck = function(target, item, param, caster)
     return 0
 end
 
-itemObject.onItemUse = function(target)
-    -- 60 second 200 dmg stoneskin
-    target:addStatusEffect(xi.effect.STONESKIN, 200, 0, 60)
+itemObject.onItemUse = function(target, user, item, action)
+    if target:addStatusEffect(xi.effect.STONESKIN, 200, 0, 60) then
+        action:messageID(target:getID(), xi.msg.basic.ITEM_RECEIVES_EFFECT)
+
+        return xi.effect.STONESKIN
+    end
+
+    action:messageID(target:getID(), xi.msg.basic.ITEM_NO_EFFECT) -- Guessed
+
+    return 0
 end
 
 return itemObject
