@@ -167,8 +167,9 @@ INSERT INTO `mob_family_system` VALUES (115,'Fomor',68,'Shadow',19,'Undead',0.00
 INSERT INTO `mob_family_system` VALUES (116,'Funguar',69,'Funguar',17,'Plantoid',0.00,40,102,110,3,4,4,4,5,4,4,1,3,1,3,8.0,2,1);
 -- 117 Free
 INSERT INTO `mob_family_system` VALUES (118,'Gargouille',70,'Gargouille',9,'Demon',0.00,40,100,120,3,3,3,3,3,3,3,1,3,1,3,2.0,259,0);
-INSERT INTO `mob_family_system` VALUES (119,'Gear',71,'Gear',4,'ArchaicMachine',0.00,40,90,90,1,3,4,5,6,6,5,1,3,1,5,0.0,312,0);
-INSERT INTO `mob_family_system` VALUES (120,'Gear',71,'Gear',4,'ArchaicMachine',1.00,40,90,90,1,3,4,5,6,6,5,1,3,1,5,0.0,56,0);
+-- TODO: Do Gear/Gear-Triple have an element/drop crystals?
+INSERT INTO `mob_family_system` VALUES (119,'Gear',71,'Gear',4,'ArchaicMachine',1.00,40,90,90,1,3,4,5,6,6,5,1,3,1,5,0.0,35,0);
+INSERT INTO `mob_family_system` VALUES (120,'Gear-Triple',71,'Gear',4,'ArchaicMachine',1.00,40,90,90,1,3,4,5,6,6,5,1,3,1,5,0.0,35,0);
 INSERT INTO `mob_family_system` VALUES (121,'Ghost',28,'Ghost',19,'Undead',1.00,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2.0,6,0);
 INSERT INTO `mob_family_system` VALUES (122,'Ghrah',72,'Ghrah',16,'Luminion',0.00,40,120,140,1,1,3,3,1,3,3,1,3,1,3,7.0,2,0);
 -- 123 Free
@@ -354,7 +355,7 @@ INSERT INTO `mob_family_system` VALUES (300,'Bomb-Reacton',32,'Bomb',3,'Arcana',
 INSERT INTO `mob_family_system` VALUES (301,'Imp-Verdelet',89,'Imp',9,'Demon',1.00,70,65,140,6,3,3,3,1,5,4,1,3,1,3,8.0,1,0);
 INSERT INTO `mob_family_system` VALUES (302,'Acrolith-Wulgaru',1,'Acrolith',3,'Arcana',2.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,0.0,2,0);
 INSERT INTO `mob_family_system` VALUES (303,'ZareehklTheJu',117,'Qutrub',19,'Undead',1.00,40,100,140,1,3,3,3,1,5,4,1,3,1,3,8.0,7,0);
-INSERT INTO `mob_family_system` VALUES (304,'Gear-ArmedGears',71,'Gear',4,'ArchaicMachine',1.00,40,90,90,1,3,4,5,6,6,5,1,3,1,5,0.0,35,0);
+-- 304 Free
 INSERT INTO `mob_family_system` VALUES (305,'Mamool_Ja-GotohZhaTheRe',98,'Mamool_Ja',7,'Beastmen',2.00,40,100,120,2,4,3,3,3,3,3,1,3,1,3,3.0,272,0);
 INSERT INTO `mob_family_system` VALUES (306,'Wivre-Dea',147,'Wivre',14,'Lizard',4.00,43,120,90,2,5,1,6,6,3,3,1,3,1,3,4.0,4,0);
 INSERT INTO `mob_family_system` VALUES (307,'Wamoura-Achamoth',144,'Wamoura',20,'Vermin',2.00,40,90,90,1,3,4,3,6,6,5,1,3,1,3,1.0,34,0);
