@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,30 +19,27 @@
 ===========================================================================
 */
 
-#include "roe_sparkupdate.h"
+#include "0x110_unity.h"
 
 #include "common/database.h"
-
 #include "entities/charentity.h"
 
-CRoeSparkUpdatePacket::CRoeSparkUpdatePacket(CCharEntity* PChar)
+GP_SERV_COMMAND_UNITY::GP_SERV_COMMAND_UNITY(const CCharEntity* PChar)
 {
-    this->setType(0x110);
-    this->setSize(0x14);
+    auto& packet = this->data();
 
-    earth_time::duration vanaTime        = std::chrono::seconds(earth_time::vanadiel_timestamp());
-    uint32               daysSinceEpoch  = std::chrono::floor<std::chrono::days>(vanaTime).count();
-    uint32               weeksSinceEpoch = std::chrono::floor<std::chrono::weeks>(vanaTime).count();
+    const earth_time::duration vanaTime        = std::chrono::seconds(earth_time::vanadiel_timestamp());
+    const uint32               daysSinceEpoch  = std::chrono::floor<std::chrono::days>(vanaTime).count();
+    const uint32               weeksSinceEpoch = std::chrono::floor<std::chrono::weeks>(vanaTime).count();
 
     const auto rset = db::preparedStmt("SELECT spark_of_eminence, deeds, plaudits FROM char_points WHERE charid = ? LIMIT 1", PChar->id);
-    if (rset && rset->rowsCount() && rset->next())
+    FOR_DB_SINGLE_RESULT(rset)
     {
-        ref<uint32>(0x04) = rset->get<uint32>("spark_of_eminence");
-        ref<uint16>(0x08) = rset->get<uint16>("deeds");
-        ref<uint16>(0x0A) = rset->get<uint16>("plaudits");
-        ref<uint8>(0x0C)  = daysSinceEpoch % 6;  // Unity Shared Daily (0-5)
-        ref<uint8>(0x0D)  = weeksSinceEpoch % 4; // Unity Leader Weekly (0-3)
-        ref<uint16>(0x0E) = 0xFFFF;
-        ref<uint32>(0x10) = 0xFFFFFFFF;
+        packet.Sparks         = rset->get<uint32>("spark_of_eminence");
+        packet.Deeds          = rset->get<uint16>("deeds");
+        packet.Plaudits       = rset->get<uint16>("plaudits");
+        packet.RoEUnityShared = daysSinceEpoch % 6;  // Unity Shared Daily (0-5)
+        packet.RoEUnityLeader = weeksSinceEpoch % 4; // Unity Leader Weekly (0-3)
+        std::memset(packet.unknown0E, 0xFF, sizeof(packet.unknown0E));
     }
 }

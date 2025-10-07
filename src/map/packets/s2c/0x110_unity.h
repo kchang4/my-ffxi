@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,29 @@
 ===========================================================================
 */
 
-#ifndef _CROESPARKPACKET_H
-#define _CROESPARKPACKET_H
+#pragma once
 
 #include "common/cbasetypes.h"
 
-#include "basic.h"
+#include "base.h"
 
 class CCharEntity;
 
-class CRoeSparkUpdatePacket : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0110
+// This packet is sent by the server to update the client's Unity quest information.
+class GP_SERV_COMMAND_UNITY final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_UNITY, GP_SERV_COMMAND_UNITY>
 {
 public:
-    CRoeSparkUpdatePacket(CCharEntity* PChar);
-};
+    struct PacketData
+    {
+        uint32_t Sparks : 24;
+        uint32_t unused00 : 8;
+        uint16_t Deeds;
+        uint16_t Plaudits; // XiPackets: Documented as padding00
+        uint8_t  RoEUnityShared;
+        uint8_t  RoEUnityLeader;
+        uint8_t  unknown0E[6];
+    };
 
-#endif
+    GP_SERV_COMMAND_UNITY(const CCharEntity* PChar);
+};

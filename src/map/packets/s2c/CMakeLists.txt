@@ -106,6 +106,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x107_bazaar_close.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x10e_reqsubmapnum.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x110_unity.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x110_unity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x112_roe_log.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x112_roe_log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.h

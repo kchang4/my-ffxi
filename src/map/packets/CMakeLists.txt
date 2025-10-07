@@ -119,8 +119,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/position.h
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/quest_mission_log.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/roe_sparkupdate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/roe_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/server_ip.cpp

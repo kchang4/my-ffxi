@@ -56,7 +56,6 @@
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
-#include "packets/roe_sparkupdate.h"
 #include "packets/roe_update.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01e_item_num.h"
@@ -108,6 +107,7 @@
 #include "enums/key_items.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
+#include "packets/s2c/0x110_unity.h"
 #include "packets/s2c/0x112_roe_log.h"
 
 /************************************************************************
@@ -1225,7 +1225,7 @@ namespace charutils
     void SendRecordsOfEminenceLog(CCharEntity* PChar)
     {
         // Send spark updates
-        PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
 
         if (settings::get<bool>("main.ENABLE_ROE"))
         {
@@ -6652,7 +6652,7 @@ namespace charutils
 
         if (strcmp(type, "spark_of_eminence") == 0)
         {
-            PChar->pushPacket<CRoeSparkUpdatePacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_UNITY>(PChar);
         }
     }
 
