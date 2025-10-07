@@ -6345,6 +6345,25 @@ void CLuaBaseEntity::setWallhack(bool enabled)
 }
 
 /************************************************************************
+ *  Function: setFreezeFlag()
+ *  Purpose : Locks (or releases) a player, disallowing them from moving.
+ *  Example : player:setFreezeFlag(true)
+ ************************************************************************/
+
+void CLuaBaseEntity::setFreezeFlag(bool isFrozen)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    auto* PChar            = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->isFrozenFlagged = isFrozen;
+    PChar->updatemask |= UPDATE_HP;
+}
+
+/************************************************************************
  *  Function: isJailed()
  *  Purpose : Returns true if a player is a violent felon
  *  Example : if player:isJailed() then
@@ -19621,6 +19640,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setGMHidden", CLuaBaseEntity::setGMHidden);
     SOL_REGISTER("getWallhack", CLuaBaseEntity::getWallhack);
     SOL_REGISTER("setWallhack", CLuaBaseEntity::setWallhack);
+    SOL_REGISTER("setFreezeFlag", CLuaBaseEntity::setFreezeFlag);
 
     SOL_REGISTER("isJailed", CLuaBaseEntity::isJailed);
     SOL_REGISTER("jail", CLuaBaseEntity::jail);

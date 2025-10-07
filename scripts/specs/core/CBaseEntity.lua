@@ -1405,6 +1405,11 @@ end
 function CBaseEntity:setWallhack(enable)
 end
 
+---@param isFrozen boolean
+---@return nil
+function CBaseEntity:setFreezeFlag(isFrozen)
+end
+
 ---@nodiscard
 ---@return boolean
 function CBaseEntity:isJailed()
