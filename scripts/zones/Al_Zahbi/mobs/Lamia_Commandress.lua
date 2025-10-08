@@ -1,17 +1,12 @@
 -----------------------------------
--- Area: Arrapago Reef
---  Mob: Lamia Dancer
------------------------------------
-mixins = { require('scripts/mixins/weapon_break') }
+-- Area: Al Zahbi
+--  Mob: Lamia Commandress
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Lamias_Elemental')
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

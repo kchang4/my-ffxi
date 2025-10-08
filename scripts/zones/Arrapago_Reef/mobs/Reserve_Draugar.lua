@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Arrapago Reef
---  Mob: Lamia Dancer
+--  Mob: Reserve Draugar
 -----------------------------------
 mixins = { require('scripts/mixins/weapon_break') }
 -----------------------------------
@@ -8,10 +8,7 @@ mixins = { require('scripts/mixins/weapon_break') }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    xi.pet.setMobPet(mob, 1, 'Lamias_Elemental')
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    xi.pet.setMobPet(mob, 1, 'Draugars_Wyvern')
 end
 
 return entity
