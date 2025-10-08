@@ -7,14 +7,14 @@ require('scripts/globals/mixins')
 -- keyed on avatar modelId
 local abilityData =
 {
-    [791]  = { petId = xi.petId.CARBUNCLE, abilityId = 919 },
-    [792]  = { petId = xi.petId.FENRIR,    abilityId = 839 },
-    [793]  = { petId = xi.petId.IFRIT,     abilityId = 913 },
-    [794]  = { petId = xi.petId.TITAN,     abilityId = 914 },
-    [795]  = { petId = xi.petId.LEVIATHAN, abilityId = 915 },
-    [796]  = { petId = xi.petId.GARUDA,    abilityId = 916 },
-    [797]  = { petId = xi.petId.SHIVA,     abilityId = 917 },
-    [798]  = { petId = xi.petId.RAMUH,     abilityId = 918 },
+    [ 791] = { petId = xi.petId.CARBUNCLE, abilityId =  919 },
+    [ 792] = { petId = xi.petId.FENRIR,    abilityId =  839 },
+    [ 793] = { petId = xi.petId.IFRIT,     abilityId =  913 },
+    [ 794] = { petId = xi.petId.TITAN,     abilityId =  914 },
+    [ 795] = { petId = xi.petId.LEVIATHAN, abilityId =  915 },
+    [ 796] = { petId = xi.petId.GARUDA,    abilityId =  916 },
+    [ 797] = { petId = xi.petId.SHIVA,     abilityId =  917 },
+    [ 798] = { petId = xi.petId.RAMUH,     abilityId =  918 },
     [1145] = { petId = xi.petId.DIABOLOS,  abilityId = 1911 },
 }
 
@@ -91,10 +91,10 @@ g_mixins.families.avatar = function(avatarMob)
     end)
 
     avatarMob:addListener('ENGAGE', 'AVATAR_ENGAGE', function(mob, target)
-        local modelId = mob:getModelId()
-        -- use AF ability AVATAR_ASTRAL_DELAY milliseconds after spawn/engage (engaged immediately in astral_flow.lua)
-        local abilityId = abilityData[modelId] and abilityData[modelId].abilityId or 0
+        local modelId       = mob:getModelId()
+        local abilityId     = abilityData[modelId] and abilityData[modelId].abilityId or 0 -- Use AF ability AVATAR_ASTRAL_DELAY milliseconds after spawn/engage (engaged immediately in astral_flow.lua)
         local astralDelayMs = mob:getMobMod(xi.mobMod.AVATAR_ASTRAL_DELAY) > 0 and mob:getMobMod(xi.mobMod.AVATAR_ASTRAL_DELAY) or 0
+
         if abilityId > 0 then
             mob:timer(astralDelayMs, function(mobArg)
                 if mobArg:isAlive() then

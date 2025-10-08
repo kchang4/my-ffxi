@@ -292,7 +292,7 @@ local function handleEntryTime(player)
     local realDay = GetSystemTime()
 
     if xi.settings.main.DYNA_MIDNIGHT_RESET then
-        realDay = getMidnight() - 86400
+        realDay = JstMidnight() - 86400
     end
 
     local dynaWaitxDay = player:getCharVar('dynaWaitxDay')
