@@ -579,7 +579,7 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
             if effect and not player:hasKeyItem(te.ki) then
                 npcUtil.giveKeyItem(player, te.ki)
                 local oldDuration = effect:getDuration()
-                effect:setDuration((oldDuration + (te.minutes * 60)) * 1000)
+                effect:setDuration(oldDuration + te.minutes * 60 * 1000)
                 player:setLocalVar('dynamis_lasttimeupdate', effect:getTimeRemaining() / 1000)
                 player:messageSpecial(ID.text.DYNAMIS_TIME_EXTEND, te.minutes)
             end
