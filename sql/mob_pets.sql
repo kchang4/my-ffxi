@@ -34,41 +34,6 @@ LOCK TABLES `mob_pets` WRITE;
 /*!40000 ALTER TABLE `mob_pets` DISABLE KEYS */;
 
 -- ------------------------------------------------------------
--- Phanauet_Channel (Zone 1)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16781327,1,14,'Stubborn_Dredvodd','Orcs_Wyvern');
-
--- ------------------------------------------------------------
--- Carpenters_Landing (Zone 2)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16785713,1,15,'Cryptonberry_Assassin','Tonberrys_Elemental');
-
--- ------------------------------------------------------------
--- Bibiki_Bay (Zone 4)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16793746,1,9,'Goblin_Pathfinder','Goblins_Rarab');
-INSERT INTO `mob_pets` VALUES (16793751,1,9,'Hobgoblin_Animalier','Goblins_Rarab');
-INSERT INTO `mob_pets` VALUES (16793777,1,9,'Hobgoblin_Animalier','Goblins_Rarab');
-INSERT INTO `mob_pets` VALUES (16793797,1,9,'Hobgoblin_Animalier','Goblins_Rarab');
-
--- ------------------------------------------------------------
--- Uleguerand_Range (Zone 5)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16797840,1,15,'Stygian_Demon','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797845,1,15,'Stygian_Demon','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797876,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797883,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797891,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797917,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797925,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797959,1,15,'Kindred_Summoner','Demons_Elemental');
-INSERT INTO `mob_pets` VALUES (16797964,1,15,'Kindred_Summoner','Demons_Elemental');
-
--- ------------------------------------------------------------
 -- Attohwa_Chasm (Zone 7)
 -- ------------------------------------------------------------
 
@@ -153,18 +118,6 @@ INSERT INTO `mob_pets` VALUES (16875712,4,9,'Gigas_Warwolf','Gigass_Sheep');
 INSERT INTO `mob_pets` VALUES (16875727,4,9,'Gigas_Warwolf','Gigass_Sheep');
 INSERT INTO `mob_pets` VALUES (16875733,1,15,'Fomor_Summoner','Fomors_Elemental');
 INSERT INTO `mob_pets` VALUES (16875735,1,9,'Fomor_Beastmaster','Fomors_Bat');
-
--- ------------------------------------------------------------
--- Misareaux_Coast (Zone 25)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16879727,6,9,'Gigas_Warwolf','Gigass_Sheep');
-INSERT INTO `mob_pets` VALUES (16879740,5,9,'Gigas_Warwolf','Gigass_Sheep');
-INSERT INTO `mob_pets` VALUES (16879762,2,9,'Gigas_Warwolf','Gigass_Sheep');
-INSERT INTO `mob_pets` VALUES (16879770,6,9,'Gigas_Warwolf','Gigass_Sheep');
-INSERT INTO `mob_pets` VALUES (16879783,6,9,'Gigas_Warwolf','Gigass_Sheep');
-INSERT INTO `mob_pets` VALUES (16879818,2,15,'Fomor_Summoner','Fomors_Elemental');
-INSERT INTO `mob_pets` VALUES (16879886,1,14,'Fomor_Dragoon','Fomors_Wyvern');
 
 -- ------------------------------------------------------------
 -- Phomiuna_Aqueducts (Zone 27)
