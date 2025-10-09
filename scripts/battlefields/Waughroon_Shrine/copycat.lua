@@ -1,58 +1,34 @@
 -----------------------------------
--- Season's Greetings
--- Balga's Dais KSNM, Clotho Orb
+-- Copycat
+-- Waughroon Shrine KSNM30, Clotho Orb
 -- !additem 1175
 -----------------------------------
-local balgasID = zones[xi.zone.BALGAS_DAIS]
+local waughroonID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId           = xi.zone.BALGAS_DAIS,
-    battlefieldId    = xi.battlefield.id.SEASONS_GREETINGS,
+    zoneId           = xi.zone.WAUGHROON_SHRINE,
+    battlefieldId    = xi.battlefield.id.COPYCAT,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
-    index            = 15,
+    index            = 1,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
-    requiredItems    = { xi.item.CLOTHO_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
-    armouryCrates    =
-    {
-        balgasID.mob.GILAGOGE_TLUGVI + 4,
-        balgasID.mob.GILAGOGE_TLUGVI + 9,
-        balgasID.mob.GILAGOGE_TLUGVI + 14,
-    },
+    requiredItems    = { xi.item.CLOTHO_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
 
-    experimental     = true,
+    experimental = true,
 })
 
 content.groups =
 {
     {
-        mobIds =
-        {
-            {
-                balgasID.mob.GILAGOGE_TLUGVI,
-                balgasID.mob.GILAGOGE_TLUGVI + 1,
-                balgasID.mob.GILAGOGE_TLUGVI + 2,
-                balgasID.mob.GILAGOGE_TLUGVI + 3,
-            },
-
-            {
-                balgasID.mob.GILAGOGE_TLUGVI + 5,
-                balgasID.mob.GILAGOGE_TLUGVI + 6,
-                balgasID.mob.GILAGOGE_TLUGVI + 7,
-                balgasID.mob.GILAGOGE_TLUGVI + 8,
-            },
-
-            {
-                balgasID.mob.GILAGOGE_TLUGVI + 10,
-                balgasID.mob.GILAGOGE_TLUGVI + 11,
-                balgasID.mob.GILAGOGE_TLUGVI + 12,
-                balgasID.mob.GILAGOGE_TLUGVI + 13,
-            },
-        },
-        superlink = false,
+        mobs      = { 'Osschaart' },
         allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
+    },
+
+    {
+        mobs      = { 'Osschaarts_Bat', 'Osschaarts_Wyvern', 'Osschaarts_Avatar', 'Osschaarts_Automaton' },
+        spawned  = false,
     },
 }
 
@@ -63,25 +39,28 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.LACQUER_TREE_LOG,           weight = 350 },
-        { itemId = xi.item.DIVINE_LOG,                 weight = 350 },
+        { itemId = xi.item.ADAMAN_INGOT,               weight = 1000 },
+    },
+
+    {
+        { itemId = xi.item.COFFINMAKER,                weight = 250 },
+        { itemId = xi.item.DESTROYERS,                 weight = 250 },
+        { itemId = xi.item.EXPUNGER,                   weight = 250 },
+        { itemId = xi.item.RETRIBUTOR,                 weight = 250 },
+    },
+
+    {
+        { itemId = xi.item.AHRIMAN_LENS,               weight = 350 },
+        { itemId = xi.item.AHRIMAN_WING,               weight = 350 },
         { itemId = xi.item.SWORD_STRAP,                weight = 150 },
         { itemId = xi.item.POLE_GRIP,                  weight = 100 },
         { itemId = xi.item.SPEAR_STRAP,                weight = 150 },
     },
 
     {
-        { itemId = xi.item.SUBDUER,                    weight = 200 },
-        { itemId = xi.item.MORGENSTERN,                weight = 200 },
-        { itemId = xi.item.RAMPAGER,                   weight = 200 },
-        { itemId = xi.item.THYRSUSSTAB,                weight = 200 },
-        { itemId = xi.item.EXPUNGER,                   weight = 200 },
-    },
-
-    {
         { itemId = xi.item.ADAMAN_INGOT,               weight = 250 },
         { itemId = xi.item.ORICHALCUM_INGOT,           weight = 250 },
-        { itemId = xi.item.ROOT_SABOTS,                weight = 500 },
+        { itemId = xi.item.FUMA_SUNE_ATE,              weight = 500 },
     },
 
     {

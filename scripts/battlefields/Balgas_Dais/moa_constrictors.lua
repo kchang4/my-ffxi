@@ -1,60 +1,25 @@
 -----------------------------------
--- Season's Greetings
--- Balga's Dais KSNM, Clotho Orb
--- !additem 1175
+-- Moa Constrictors
+-- Balga's Dais KSNM, Atropos Orb
+-- !additem 1180
 -----------------------------------
 local balgasID = zones[xi.zone.BALGAS_DAIS]
 -----------------------------------
 
 local content = Battlefield:new({
     zoneId           = xi.zone.BALGAS_DAIS,
-    battlefieldId    = xi.battlefield.id.SEASONS_GREETINGS,
+    battlefieldId    = xi.battlefield.id.MOA_CONSTRICTORS,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
-    index            = 15,
+    index            = 17,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
-    requiredItems    = { xi.item.CLOTHO_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
-    armouryCrates    =
-    {
-        balgasID.mob.GILAGOGE_TLUGVI + 4,
-        balgasID.mob.GILAGOGE_TLUGVI + 9,
-        balgasID.mob.GILAGOGE_TLUGVI + 14,
-    },
+    requiredItems    = { xi.item.ATROPOS_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
 
     experimental     = true,
 })
 
-content.groups =
-{
-    {
-        mobIds =
-        {
-            {
-                balgasID.mob.GILAGOGE_TLUGVI,
-                balgasID.mob.GILAGOGE_TLUGVI + 1,
-                balgasID.mob.GILAGOGE_TLUGVI + 2,
-                balgasID.mob.GILAGOGE_TLUGVI + 3,
-            },
-
-            {
-                balgasID.mob.GILAGOGE_TLUGVI + 5,
-                balgasID.mob.GILAGOGE_TLUGVI + 6,
-                balgasID.mob.GILAGOGE_TLUGVI + 7,
-                balgasID.mob.GILAGOGE_TLUGVI + 8,
-            },
-
-            {
-                balgasID.mob.GILAGOGE_TLUGVI + 10,
-                balgasID.mob.GILAGOGE_TLUGVI + 11,
-                balgasID.mob.GILAGOGE_TLUGVI + 12,
-                balgasID.mob.GILAGOGE_TLUGVI + 13,
-            },
-        },
-        superlink = false,
-        allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
-    },
-}
+content:addEssentialMobs({ 'Giant_Moa' })
 
 content.loot =
 {
@@ -63,32 +28,36 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.LACQUER_TREE_LOG,           weight = 350 },
-        { itemId = xi.item.DIVINE_LOG,                 weight = 350 },
-        { itemId = xi.item.SWORD_STRAP,                weight = 150 },
-        { itemId = xi.item.POLE_GRIP,                  weight = 100 },
-        { itemId = xi.item.SPEAR_STRAP,                weight = 150 },
+        quantity = 2,
+        { itemId = xi.item.COCKATRICE_SKIN,            weight = 1000 },
     },
 
     {
-        { itemId = xi.item.SUBDUER,                    weight = 200 },
-        { itemId = xi.item.MORGENSTERN,                weight = 200 },
-        { itemId = xi.item.RAMPAGER,                   weight = 200 },
-        { itemId = xi.item.THYRSUSSTAB,                weight = 200 },
-        { itemId = xi.item.EXPUNGER,                   weight = 200 },
+        { itemId = xi.item.EXPUNGER,                   weight = 250 },
+        { itemId = xi.item.HEART_SNATCHER,             weight = 250 },
+        { itemId = xi.item.MORGENSTERN,                weight = 250 },
+        { itemId = xi.item.GRAVEDIGGER,                weight = 250 },
+    },
+
+    {
+        { itemId = xi.item.NONE,                       weight = 300 },
+        { itemId = xi.item.DODO_SKIN,                  weight = 300 },
+        { itemId = xi.item.CLAYMORE_GRIP,              weight = 100 },
+        { itemId = xi.item.POLE_GRIP,                  weight = 100 },
+        { itemId = xi.item.SPEAR_STRAP,                weight = 200 },
     },
 
     {
         { itemId = xi.item.ADAMAN_INGOT,               weight = 250 },
         { itemId = xi.item.ORICHALCUM_INGOT,           weight = 250 },
-        { itemId = xi.item.ROOT_SABOTS,                weight = 500 },
+        { itemId = xi.item.ABSORBING_SHIELD,           weight = 500 },
     },
 
     {
-        { itemId = xi.item.DURANDAL,                   weight = 250 },
-        { itemId = xi.item.HOPLITES_HARPE,             weight = 250 },
-        { itemId = xi.item.SORROWFUL_HARP,             weight = 250 },
-        { itemId = xi.item.ATTILAS_EARRING,            weight = 250 },
+        { itemId = xi.item.EVOKERS_BOOTS,              weight = 250 },
+        { itemId = xi.item.OSTREGER_MITTS,             weight = 250 },
+        { itemId = xi.item.PINEAL_HAT,                 weight = 250 },
+        { itemId = xi.item.TRACKERS_KECKS,             weight = 250 },
     },
 
     {

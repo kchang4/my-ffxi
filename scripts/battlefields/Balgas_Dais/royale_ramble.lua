@@ -1,25 +1,26 @@
 -----------------------------------
--- Season's Greetings
--- Balga's Dais KSNM, Clotho Orb
--- !additem 1175
+-- Royale Ramble
+-- Balga's Dais KSNM, Lachesis Orb
+-- !additem 1178
+-- TODO Code Queen of Cups / Batons spawning when any King engaged. Add mechanics & spell lists. (the other kings despawn) - Check functionality of Trump Crown. Fix spawn points.
 -----------------------------------
 local balgasID = zones[xi.zone.BALGAS_DAIS]
 -----------------------------------
 
 local content = Battlefield:new({
     zoneId           = xi.zone.BALGAS_DAIS,
-    battlefieldId    = xi.battlefield.id.SEASONS_GREETINGS,
+    battlefieldId    = xi.battlefield.id.ROYALE_RAMBLE,
     maxPlayers       = 6,
     timeLimit        = utils.minutes(30),
-    index            = 15,
+    index            = 16,
     entryNpc         = 'BC_Entrance',
     exitNpc          = 'Burning_Circle',
-    requiredItems    = { xi.item.CLOTHO_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
+    requiredItems    = { xi.item.LACHESIS_ORB, wearMessage = balgasID.text.A_CRACK_HAS_FORMED, wornMessage = balgasID.text.ORB_IS_CRACKED },
     armouryCrates    =
     {
-        balgasID.mob.GILAGOGE_TLUGVI + 4,
-        balgasID.mob.GILAGOGE_TLUGVI + 9,
-        balgasID.mob.GILAGOGE_TLUGVI + 14,
+        balgasID.mob.KING_OF_CUPS + 6,
+        balgasID.mob.KING_OF_CUPS + 13,
+        balgasID.mob.KING_OF_CUPS + 20,
     },
 
     experimental     = true,
@@ -28,31 +29,13 @@ local content = Battlefield:new({
 content.groups =
 {
     {
-        mobIds =
-        {
-            {
-                balgasID.mob.GILAGOGE_TLUGVI,
-                balgasID.mob.GILAGOGE_TLUGVI + 1,
-                balgasID.mob.GILAGOGE_TLUGVI + 2,
-                balgasID.mob.GILAGOGE_TLUGVI + 3,
-            },
-
-            {
-                balgasID.mob.GILAGOGE_TLUGVI + 5,
-                balgasID.mob.GILAGOGE_TLUGVI + 6,
-                balgasID.mob.GILAGOGE_TLUGVI + 7,
-                balgasID.mob.GILAGOGE_TLUGVI + 8,
-            },
-
-            {
-                balgasID.mob.GILAGOGE_TLUGVI + 10,
-                balgasID.mob.GILAGOGE_TLUGVI + 11,
-                balgasID.mob.GILAGOGE_TLUGVI + 12,
-                balgasID.mob.GILAGOGE_TLUGVI + 13,
-            },
-        },
-        superlink = false,
+        mobs      = { 'King_of_Cups', 'King_of_Batons', 'King_of_Swords', 'King_of_Coins' },
         allDeath  = utils.bind(content.handleAllMonstersDefeated, content),
+    },
+
+    {
+        mobs      = { 'Queens_of_Cups', 'Queen_of_Batons' },
+        spawned  = false,
     },
 }
 
@@ -63,32 +46,35 @@ content.loot =
     },
 
     {
-        { itemId = xi.item.LACQUER_TREE_LOG,           weight = 350 },
-        { itemId = xi.item.DIVINE_LOG,                 weight = 350 },
-        { itemId = xi.item.SWORD_STRAP,                weight = 150 },
+        { itemId = xi.item.KING_OF_CUPS_CARD,          weight = 250 },
+        { itemId = xi.item.KING_OF_BATONS_CARD,        weight = 250 },
+        { itemId = xi.item.KING_OF_SWORDS_CARD,        weight = 250 },
+        { itemId = xi.item.KING_OF_COINS_CARD,         weight = 250 },
+    },
+
+    {
+        { itemId = xi.item.ORICHALCUM_INGOT,           weight = 1000 },
+    },
+
+    {
+        { itemId = xi.item.COFFINMAKER,                weight = 250 },
+        { itemId = xi.item.DESTROYERS,                 weight = 250 },
+        { itemId = xi.item.DISSECTOR,                  weight = 250 },
+        { itemId = xi.item.GONDO_SHIZUNORI,            weight = 250 },
+    },
+
+    {
+        { itemId = xi.item.TRUMP_CROWN,                weight = 600 },
+        { itemId = xi.item.CLAYMORE_GRIP,              weight = 100 },
         { itemId = xi.item.POLE_GRIP,                  weight = 100 },
-        { itemId = xi.item.SPEAR_STRAP,                weight = 150 },
+        { itemId = xi.item.SWORD_STRAP,                weight = 200 },
     },
 
     {
-        { itemId = xi.item.SUBDUER,                    weight = 200 },
-        { itemId = xi.item.MORGENSTERN,                weight = 200 },
-        { itemId = xi.item.RAMPAGER,                   weight = 200 },
-        { itemId = xi.item.THYRSUSSTAB,                weight = 200 },
-        { itemId = xi.item.EXPUNGER,                   weight = 200 },
-    },
-
-    {
-        { itemId = xi.item.ADAMAN_INGOT,               weight = 250 },
-        { itemId = xi.item.ORICHALCUM_INGOT,           weight = 250 },
-        { itemId = xi.item.ROOT_SABOTS,                weight = 500 },
-    },
-
-    {
-        { itemId = xi.item.DURANDAL,                   weight = 250 },
-        { itemId = xi.item.HOPLITES_HARPE,             weight = 250 },
-        { itemId = xi.item.SORROWFUL_HARP,             weight = 250 },
-        { itemId = xi.item.ATTILAS_EARRING,            weight = 250 },
+        { itemId = xi.item.HIERARCH_BELT,              weight = 250 },
+        { itemId = xi.item.PALMERINS_SHIELD,           weight = 250 },
+        { itemId = xi.item.TRAINERS_GLOVES,            weight = 250 },
+        { itemId = xi.item.WARWOLF_BELT,               weight = 250 },
     },
 
     {
