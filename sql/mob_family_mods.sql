@@ -346,34 +346,6 @@ INSERT INTO `mob_family_mods` VALUES (126,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (126,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (126,54,180,1); -- GIL_BONUS: 180
 
--- Gigas
-INSERT INTO `mob_family_mods` VALUES (127,31,5,1);   -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (127,36,25,1);  -- ROAM_COOL: 25
-INSERT INTO `mob_family_mods` VALUES (127,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (127,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (127,54,180,1); -- GIL_BONUS: 180
-
--- Gigas
-INSERT INTO `mob_family_mods` VALUES (128,31,5,1);   -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (128,36,25,1);  -- ROAM_COOL: 25
-INSERT INTO `mob_family_mods` VALUES (128,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (128,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (128,54,180,1); -- GIL_BONUS: 180
-
--- Gigas
-INSERT INTO `mob_family_mods` VALUES (129,31,5,1);   -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (129,36,25,1);  -- ROAM_COOL: 25
-INSERT INTO `mob_family_mods` VALUES (129,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (129,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (129,54,180,1); -- GIL_BONUS: 180
-
--- Gigas
-INSERT INTO `mob_family_mods` VALUES (130,31,5,1);   -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (130,36,25,1);  -- ROAM_COOL: 25
-INSERT INTO `mob_family_mods` VALUES (130,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (130,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (130,54,180,1); -- GIL_BONUS: 180
-
 -- Goblin
 INSERT INTO `mob_family_mods` VALUES (133,10,5,1); -- SUBLINK: 5 (Bugbear, Goblin, Moblin)
 
@@ -771,13 +743,6 @@ INSERT INTO `mob_family_mods` VALUES (311,10,11,1); -- SUBLINK: 11 (Soulflayers)
 
 -- Troll-Gurfurlur
 INSERT INTO `mob_family_mods` VALUES (326,10,9,1); -- SUBLINK: 9 (Trolls)
-
--- Gigas
-INSERT INTO `mob_family_mods` VALUES (328,31,5,1);   -- ROAM_DISTANCE: 5
-INSERT INTO `mob_family_mods` VALUES (328,36,25,1);  -- ROAM_COOL: 25
-INSERT INTO `mob_family_mods` VALUES (328,51,2,1);   -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (328,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (328,54,180,1); -- GIL_BONUS: 180
 
 -- Antlion-Ambush
 INSERT INTO `mob_family_mods` VALUES (357,63,20,0); -- DEFP: 20
