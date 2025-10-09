@@ -22,7 +22,7 @@
 #include "0x00f_clstat.h"
 
 #include "entities/charentity.h"
-#include "packets/char_abilities.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "packets/char_mounts.h"
 #include "packets/char_spells.h"
 #include "packets/char_sync.h"
@@ -45,7 +45,7 @@ void GP_CLI_COMMAND_CLSTAT::process(MapSession* PSession, CCharEntity* PChar) co
 
     PChar->pushPacket<CCharSpellsPacket>(PChar);
     PChar->pushPacket<CCharMountsPacket>(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharSyncPacket>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_INSPECT_MESSAGE>(PChar);
     PChar->pushPacket<CMeritPointsCategoriesPacket>(PChar);

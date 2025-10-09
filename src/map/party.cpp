@@ -38,7 +38,7 @@
 #include <vector>
 
 #include "packets/c2s/0x077_group_change2.h"
-#include "packets/char_abilities.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/message_basic.h"
@@ -1320,7 +1320,7 @@ void CParty::RefreshSync()
             charutils::BuildingCharAbilityTable(member);
             charutils::BuildingCharWeaponSkills(member);
             charutils::CheckValidEquipment(member);
-            member->pushPacket<CCharAbilitiesPacket>(member);
+            member->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(member);
         }
         member->pushPacket<CMessageBasicPacket>(member, member, 0, syncLevel, MsgStd::LevelSyncActivated);
     }

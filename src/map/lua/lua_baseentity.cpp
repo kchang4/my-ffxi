@@ -98,7 +98,7 @@
 
 #include "packets/action.h"
 #include "packets/auction_house.h"
-#include "packets/char_abilities.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "packets/char_equip.h"
 #include "packets/char_health.h"
 #include "packets/char_job_extra.h"
@@ -6632,7 +6632,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PChar->pushPacket<CCharStatsPacket>(PChar);
         PChar->pushPacket<CCharSkillsPacket>(PChar);
         PChar->pushPacket<CCharRecastPacket>(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
@@ -6911,7 +6911,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         PChar->pushPacket<CCharStatsPacket>(PChar);
         PChar->pushPacket<CCharSkillsPacket>(PChar);
         PChar->pushPacket<CCharRecastPacket>(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
@@ -6968,7 +6968,7 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
     PChar->pushPacket<CCharStatsPacket>(PChar);
     PChar->pushPacket<CCharSkillsPacket>(PChar);
     PChar->pushPacket<CCharRecastPacket>(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
     PChar->pushPacket<CMenuMeritPacket>(PChar);
     PChar->pushPacket<CMonipulatorPacket1>(PChar);
@@ -7081,7 +7081,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                 PChar->pushPacket<CCharStatsPacket>(PChar);
                 PChar->pushPacket<CCharSkillsPacket>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CCharSpellsPacket>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<CCharSyncPacket>(PChar);
@@ -10622,7 +10622,7 @@ void CLuaBaseEntity::addLearnedWeaponskill(uint8 wsUnlockId)
     charutils::addLearnedWeaponskill(PChar, wsUnlockId);
     charutils::BuildingCharWeaponSkills(PChar);
     charutils::SaveLearnedAbilities(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 }
 
 /************************************************************************
@@ -10663,7 +10663,7 @@ void CLuaBaseEntity::delLearnedWeaponskill(uint8 wsUnlockId)
     charutils::delLearnedWeaponskill(PChar, wsUnlockId);
     charutils::BuildingCharWeaponSkills(PChar);
     charutils::SaveLearnedAbilities(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 }
 
 /************************************************************************
@@ -10730,7 +10730,7 @@ void CLuaBaseEntity::addLearnedAbility(uint16 abilityID)
     {
         charutils::addAbility(PChar, abilityID);
         charutils::SaveLearnedAbilities(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, 442);
     }
 }
@@ -10803,7 +10803,7 @@ void CLuaBaseEntity::delLearnedAbility(uint16 abilityID)
     if (charutils::delLearnedAbility(PChar, abilityID))
     {
         charutils::SaveLearnedAbilities(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     }
 }
 
@@ -10940,7 +10940,7 @@ void CLuaBaseEntity::recalculateSkillsTable()
 
     PChar->pushPacket<CCharSkillsPacket>(PChar);
     PChar->pushPacket<CCharRecastPacket>(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 }
 
 /************************************************************************
@@ -10971,7 +10971,7 @@ void CLuaBaseEntity::recalculateAbilitiesTable()
         charutils::BuildingCharPetAbilityTable(PChar, PPetEntity, PPetEntity->m_PetID);
     }
 
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 }
 
 /************************************************************************
@@ -12734,7 +12734,7 @@ void CLuaBaseEntity::recalculateStats()
         PChar->pushPacket<CCharStatsPacket>(PChar);
         PChar->pushPacket<CCharSkillsPacket>(PChar);
         PChar->pushPacket<CCharRecastPacket>(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);

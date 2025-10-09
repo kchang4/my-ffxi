@@ -26,7 +26,7 @@
 #include "job_points.h"
 #include "latent_effect_container.h"
 #include "lua/luautils.h"
-#include "packets/char_abilities.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
 #include "packets/char_recast.h"
@@ -172,7 +172,7 @@ void GP_CLI_COMMAND_MYROOM_JOB::process(MapSession* PSession, CCharEntity* PChar
     PChar->pushPacket<CCharStatsPacket>(PChar);
     PChar->pushPacket<CCharSkillsPacket>(PChar);
     PChar->pushPacket<CCharRecastPacket>(PChar);
-    PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
     PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
     PChar->pushPacket<CMenuMeritPacket>(PChar);

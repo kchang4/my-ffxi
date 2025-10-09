@@ -36,7 +36,7 @@
 #include "ai/states/item_state.h"
 #include "ai/states/range_state.h"
 
-#include "packets/char_abilities.h"
+#include "packets/s2c/0x0ac_command_data.h"
 #include "packets/char_equip.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
@@ -1499,7 +1499,7 @@ namespace charutils
         PChar->pushPacket<CCharStatsPacket>(PChar);
         PChar->pushPacket<CCharSkillsPacket>(PChar);
         PChar->pushPacket<CCharRecastPacket>(PChar);
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
@@ -2881,7 +2881,7 @@ namespace charutils
             }
 
             BuildingCharWeaponSkills(PChar);
-            PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         }
 
         charutils::BuildingCharSkillsTable(PChar);
@@ -3081,7 +3081,7 @@ namespace charutils
 
         if (PetID == 0)
         { // technically Fire Spirit but we're using this to null the abilities shown
-            PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             return;
         }
 
@@ -3145,7 +3145,7 @@ namespace charutils
                 addPetAbility(PChar, abilityid - ABILITY_HEALING_RUBY);
             }
         }
-        PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     }
 
     /************************************************************************
@@ -3772,7 +3772,7 @@ namespace charutils
             {
                 addWeaponSkill(PChar, PSkill->getID());
                 PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, PSkill->getID(), PSkill->getID(), 45);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             }
         }
     }
@@ -5058,7 +5058,7 @@ namespace charutils
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<CCharSkillsPacket>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CMenuMeritPacket>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
                 PChar->pushPacket<CMonipulatorPacket2>(PChar);
@@ -5294,7 +5294,7 @@ namespace charutils
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<CCharSkillsPacket>(PChar);
                 PChar->pushPacket<CCharRecastPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CMenuMeritPacket>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
                 PChar->pushPacket<CMonipulatorPacket2>(PChar);
@@ -6835,7 +6835,7 @@ namespace charutils
                 charutils::BuildingCharWeaponSkills(PChar);
                 PChar->PLatentEffectContainer->CheckLatentsWeaponBreak(slotid);
                 PChar->pushPacket<CCharStatsPacket>(PChar);
-                PChar->pushPacket<CCharAbilitiesPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
             }
 
             db::preparedStmt("UPDATE char_inventory SET extra = ? WHERE charid = ? AND location = ? AND slot = ? LIMIT 1",

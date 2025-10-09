@@ -13,8 +13,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/campaign_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_abilities.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.cpp
