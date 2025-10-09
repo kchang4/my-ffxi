@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2020 - Kreidos | github.com/kreidos
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,16 +19,14 @@
 ===========================================================================
 */
 
-#include "roe_questlog.h"
+#include "0x112_roe_log.h"
 
 #include "entities/charentity.h"
 
-CRoeQuestLogPacket::CRoeQuestLogPacket(CCharEntity* PChar, uint8 order)
+GP_SERV_COMMAND_ROE_LOG::GP_SERV_COMMAND_ROE_LOG(const CCharEntity* PChar, const uint8 order)
 {
-    this->setType(0x112);
-    this->setSize(0x88);
+    auto& packet = this->data();
 
-    ref<uint32>(0x84) = order;
-
-    std::memcpy(buffer_.data() + 0x04, &(PChar->m_eminenceLog.complete[order * 128]), 128);
+    packet.Offset = order;
+    std::memcpy(packet.Data, &(PChar->m_eminenceLog.complete[order * 128]), 128);
 }
