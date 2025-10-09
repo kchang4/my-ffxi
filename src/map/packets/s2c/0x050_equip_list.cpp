@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,14 +19,13 @@
 ===========================================================================
 */
 
-#include "char_equip.h"
+#include "0x050_equip_list.h"
 
-CEquipPacket::CEquipPacket(uint8 EquipSlot, uint8 SlotID, uint8 containerID)
+GP_SERV_COMMAND_EQUIP_LIST::GP_SERV_COMMAND_EQUIP_LIST(const uint8 slotId, const SLOTTYPE equipSlot, const CONTAINER_ID containerId)
 {
-    this->setType(0x50);
-    this->setSize(0x08);
+    auto& packet = this->data();
 
-    ref<uint8>(0x04) = EquipSlot;
-    ref<uint8>(0x05) = SlotID;
-    ref<uint8>(0x06) = containerID;
+    packet.PropertyItemIndex  = slotId;
+    packet.EquipKind          = equipSlot;
+    packet.Category           = containerId;
 }

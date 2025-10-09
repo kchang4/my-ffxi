@@ -37,7 +37,7 @@
 #include "ai/states/range_state.h"
 
 #include "packets/s2c/0x0ac_command_data.h"
-#include "packets/char_equip.h"
+#include "packets/s2c/0x050_equip_list.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
 #include "packets/char_recast.h"
@@ -1843,7 +1843,7 @@ namespace charutils
             PChar->delPetModifiers(&((CItemEquipment*)PItem)->petModList);
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Normal); // ???
-            PChar->pushPacket<CEquipPacket>(0, equipSlotID, LOC_INVENTORY);
+            PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, static_cast<SLOTTYPE>(equipSlotID), LOC_INVENTORY);
 
             switch (equipSlotID)
             {
@@ -2817,7 +2817,7 @@ namespace charutils
                 RemoveSub(PChar);
             }
 
-            PChar->pushPacket<CEquipPacket>(slotID, equipSlotID, containerID);
+            PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(slotID, static_cast<SLOTTYPE>(equipSlotID), static_cast<CONTAINER_ID>(containerID));
         }
         else
         {
@@ -2859,7 +2859,7 @@ namespace charutils
                     // Only call the lua onEquip if its a valid equip - e.g. has passed EquipArmor and other checks above
                     luautils::OnItemEquip(PChar, PItem);
 
-                    PChar->pushPacket<CEquipPacket>(slotID, equipSlotID, containerID);
+                    PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(slotID, static_cast<SLOTTYPE>(equipSlotID), static_cast<CONTAINER_ID>(containerID));
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::NoDrop);
                 }
             }

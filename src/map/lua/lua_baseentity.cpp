@@ -99,7 +99,7 @@
 #include "packets/action.h"
 #include "packets/auction_house.h"
 #include "packets/s2c/0x0ac_command_data.h"
-#include "packets/char_equip.h"
+#include "packets/s2c/0x050_equip_list.h"
 #include "packets/char_health.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_jobs.h"
@@ -5156,7 +5156,7 @@ void CLuaBaseEntity::lockEquipSlot(uint8 slot)
 
     PChar->m_EquipBlock |= 1 << slot;
     PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
-    PChar->pushPacket<CEquipPacket>(0, slot, LOC_INVENTORY);
+    PChar->pushPacket<GP_SERV_COMMAND_EQUIP_LIST>(0, static_cast<SLOTTYPE>(slot), LOC_INVENTORY);
     PChar->pushPacket<CCharJobsPacket>(PChar);
     PChar->updatemask |= UPDATE_LOOK;
 }

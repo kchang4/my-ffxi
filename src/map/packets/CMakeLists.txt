@@ -15,8 +15,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/caught_fish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_equip.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_health.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_health.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_job_extra.cpp
