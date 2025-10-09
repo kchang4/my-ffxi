@@ -51,7 +51,7 @@ entity.onMobFight = function(mob, target)
     -- ensure all spawned pets are doing stuff
     for i = ID.mob.KIRIN + 1, ID.mob.KIRIN + 4 do
         local god = GetMobByID(i)
-        if god and god:getCurrentAction() == xi.act.ROAMING then
+        if god and god:getCurrentAction() == xi.action.ROAMING then
             god:updateEnmity(target)
         end
     end
