@@ -637,12 +637,6 @@ INSERT INTO `mob_family_mods` VALUES (246,10,9,1); -- SUBLINK: 9 (Trolls)
 INSERT INTO `mob_family_mods` VALUES (251,36,40,1); -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (251,52,30,1); -- ROAM_RATE: 30
 
--- Vampyr
-INSERT INTO `mob_family_mods` VALUES (252,10,3,1);  -- SUBLINK: 3 (Single Bat, Bat Trio, Vampyr)
-INSERT INTO `mob_family_mods` VALUES (252,36,50,1); -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (252,51,2,1);  -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (252,52,30,1); -- ROAM_RATE: 30
-
 -- Wamoura
 INSERT INTO `mob_family_mods` VALUES (253,3,50,1); -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (253,10,6,1); -- SUBLINK: 6 (Wamoura, Wamouracampa)
@@ -724,6 +718,12 @@ INSERT INTO `mob_family_mods` VALUES (307,10,6,1); -- SUBLINK: 6 (Wamoura, Wamou
 
 -- Troll-Khromasoul
 INSERT INTO `mob_family_mods` VALUES (308,10,9,1); -- SUBLINK: 9 (Trolls)
+
+-- Vampyr
+INSERT INTO `mob_family_mods` VALUES (309,10,3,1);  -- SUBLINK: 3 (Single Bat, Bat Trio, Vampyr)
+INSERT INTO `mob_family_mods` VALUES (309,36,50,1); -- ROAM_COOL: 50
+INSERT INTO `mob_family_mods` VALUES (309,51,2,1);  -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (309,52,30,1); -- ROAM_RATE: 30
 
 -- Experimentalla
 INSERT INTO `mob_family_mods` VALUES (310,10,10,1); -- SUBLINK: 10 (Lamiae)
