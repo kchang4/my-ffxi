@@ -5327,13 +5327,14 @@ namespace battleutils
         if (effectScarDel && effectScarDel->GetPower() == 0)
         {
             // Damage to Max HP Ratio
-            int8 bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
-            int8 jpValue  = effectScarDel->GetSubPower();
-            auto duration = 90s + std::chrono::seconds(jpValue);
+            float  hppRatio = std::clamp<float>(static_cast<float>(damage) / static_cast<float>(PDefender->GetMaxHP()) / 2.0f, 0.0f, 0.5f);
+            uint16 power    = std::floor(hppRatio * 1000);
+            uint16 jpValue  = effectScarDel->GetSubPower();
+            auto   duration = 90s + std::chrono::seconds(jpValue);
 
             // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
             PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
-            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0s, duration), EffectNotice::Silent);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, power, 0s, duration), EffectNotice::Silent);
         }
     }
 
