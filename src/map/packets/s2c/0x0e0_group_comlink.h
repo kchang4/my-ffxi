@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,24 @@
 ===========================================================================
 */
 
-#include "linkshell_equip.h"
+#pragma once
 
-#include "entities/charentity.h"
-#include "linkshell.h"
+#include "base.h"
 
-CLinkshellEquipPacket::CLinkshellEquipPacket(CCharEntity* PChar, uint8 number)
+class CCharEntity;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x00E0
+// This packet is sent by the server to update the clients equipped linkshell information.
+class GP_SERV_COMMAND_GROUP_COMLINK final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_GROUP_COMLINK, GP_SERV_COMMAND_GROUP_COMLINK>
 {
-    this->setType(0xE0);
-    this->setSize(0x08);
+public:
+    struct PacketData
+    {
+        uint8_t LinkshellNum;
+        uint8_t ItemIndex;
+        uint8_t Category;
+        uint8_t padding00;
+    };
 
-    ref<uint8>(0x04) = number;
-    if (number == 1)
-    {
-        ref<uint8>(0x05) = PChar->equip[SLOT_LINK1];
-        ref<uint8>(0x06) = PChar->equipLoc[SLOT_LINK1];
-    }
-    else
-    {
-        ref<uint8>(0x05) = PChar->equip[SLOT_LINK2];
-        ref<uint8>(0x06) = PChar->equipLoc[SLOT_LINK2];
-    }
-}
+    GP_SERV_COMMAND_GROUP_COMLINK(const CCharEntity* PChar, uint8 linkshellNumber);
+};

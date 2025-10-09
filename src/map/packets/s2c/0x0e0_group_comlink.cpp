@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,23 @@
 ===========================================================================
 */
 
-#ifndef _CLINKSHELLEQUIPPACKET_H
-#define _CLINKSHELLEQUIPPACKET_H
+#include "0x0e0_group_comlink.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-/************************************************************************
- *                                                                       *
- *  We send Linkshellid to which the search is carried out.             *
- *                                                                       *
- ************************************************************************/
-
-class CCharEntity;
-
-class CLinkshellEquipPacket : public CBasicPacket
+GP_SERV_COMMAND_GROUP_COMLINK::GP_SERV_COMMAND_GROUP_COMLINK(const CCharEntity* PChar, const uint8 linkshellNumber)
 {
-public:
-    CLinkshellEquipPacket(CCharEntity* PChar, uint8 number);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.LinkshellNum = linkshellNumber;
+    if (linkshellNumber == 1)
+    {
+        packet.ItemIndex = PChar->equip[SLOT_LINK1];
+        packet.Category  = PChar->equipLoc[SLOT_LINK1];
+    }
+    else
+    {
+        packet.ItemIndex = PChar->equip[SLOT_LINK2];
+        packet.Category  = PChar->equipLoc[SLOT_LINK2];
+    }
+}

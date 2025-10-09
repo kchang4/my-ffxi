@@ -116,7 +116,7 @@
 #include "packets/entity_update.h"
 #include "packets/event.h"
 #include "packets/instance_entry.h"
-#include "packets/linkshell_equip.h"
+#include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
@@ -4791,7 +4791,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
                     PChar->equipLoc[SLOT_LINK2] = LOC_INVENTORY;
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItemLinkPearl, ItemLockFlg::Linkshell);
                     charutils::SaveCharEquip(PChar);
-                    PChar->pushPacket<CLinkshellEquipPacket>(PChar, PItemLinkPearl->GetLSID());
+                    PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, PItemLinkPearl->GetLSID());
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItemLinkPearl, LOC_INVENTORY, PItemLinkPearl->getSlotID());
                     PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>();
                     charutils::LoadInventory(PChar);

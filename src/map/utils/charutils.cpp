@@ -46,7 +46,7 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
-#include "packets/linkshell_equip.h"
+#include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
@@ -1317,7 +1317,7 @@ namespace charutils
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(PChar->equipLoc[SLOT_LINK1]), PChar->equip[SLOT_LINK1]);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
-            PChar->pushPacket<CLinkshellEquipPacket>(PChar, 1);
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 1);
         }
 
         PItem = PChar->getEquip(SLOT_LINK2);
@@ -1327,7 +1327,7 @@ namespace charutils
 
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_ATTR>(PItem, static_cast<CONTAINER_ID>(PChar->equipLoc[SLOT_LINK2]), PChar->equip[SLOT_LINK2]);
             PChar->pushPacket<GP_SERV_COMMAND_ITEM_LIST>(PItem, ItemLockFlg::Linkshell);
-            PChar->pushPacket<CLinkshellEquipPacket>(PChar, 2);
+            PChar->pushPacket<GP_SERV_COMMAND_GROUP_COMLINK>(PChar, 2);
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_ITEM_SAME>(); // "Finish" type

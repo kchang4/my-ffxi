@@ -102,6 +102,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d2_trophy_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d3_trophy_solution.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0d3_trophy_solution.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e0_group_comlink.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e0_group_comlink.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f6_tracking_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f6_tracking_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f9_res.h
