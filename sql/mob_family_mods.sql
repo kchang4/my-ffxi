@@ -522,16 +522,6 @@ INSERT INTO `mob_family_mods` VALUES (203,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (203,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (203,52,30,1);   -- ROAM_RATE: 30
 
--- Qutrub
-INSERT INTO `mob_family_mods` VALUES (204,36,50,1);   -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (204,51,3,1);    -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (204,52,30,1);   -- ROAM_RATE: 30
-
--- Qutrub
-INSERT INTO `mob_family_mods` VALUES (205,36,50,1);   -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (205,51,3,1);    -- ROAM_TURNS: 3
-INSERT INTO `mob_family_mods` VALUES (205,52,30,1);   -- ROAM_RATE: 30
-
 -- Rabbit
 INSERT INTO `mob_family_mods` VALUES (206,31,15,1); -- ROAM_DISTANCE: 15
 INSERT INTO `mob_family_mods` VALUES (206,36,35,1); -- ROAM_COOL: 35
