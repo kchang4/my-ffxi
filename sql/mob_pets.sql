@@ -33,35 +33,6 @@ CREATE TABLE `mob_pets` (
 LOCK TABLES `mob_pets` WRITE;
 /*!40000 ALTER TABLE `mob_pets` DISABLE KEYS */;
 
--- ------------------------------------------------------------
--- Temenos (Zone 37)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16928790,1,14,'Telchines_Dragoon','Telchiness_Wyvern');
-INSERT INTO `mob_pets` VALUES (16928799,1,15,'Kindred_Summoner','Kindreds_Elemental');
-INSERT INTO `mob_pets` VALUES (16928819,1,15,'Cryptonberry_Designator','Tonberrys_Elemental');
-INSERT INTO `mob_pets` VALUES (16928823,1,15,'Cryptonberry_Designator','Tonberrys_Elemental');
-INSERT INTO `mob_pets` VALUES (16928827,1,15,'Cryptonberry_Designator','Tonberrys_Elemental');
-INSERT INTO `mob_pets` VALUES (16928988,1,15,'Koo_Buzu_the_Theomanic','Yagudos_Elemental');
-INSERT INTO `mob_pets` VALUES (16929007,1,15,'Pee_Qoho_the_Python','Yagudos_Elemental');
-INSERT INTO `mob_pets` VALUES (16929015,1,14,'Grognard_Impaler','Orcs_Wyvern');
-INSERT INTO `mob_pets` VALUES (16929055,1,14,'Temenos_Aern','Aerns_Wynav');
-INSERT INTO `mob_pets` VALUES (16929058,1,9,'Temenos_Aern','Aerns_Euvhi');
-INSERT INTO `mob_pets` VALUES (16929066,1,15,'Temenos_Aern','Aerns_Elemental');
-INSERT INTO `mob_pets` VALUES (16929069,1,14,'Temenos_Aern','Aerns_Wynav');
-INSERT INTO `mob_pets` VALUES (16929073,1,9,'Temenos_Aern','Aerns_Euvhi');
-INSERT INTO `mob_pets` VALUES (16929079,1,15,'Temenos_Aern','Aerns_Elemental');
-INSERT INTO `mob_pets` VALUES (16929098,1,14,'Temenos_Aern','Aerns_Wynav');
-INSERT INTO `mob_pets` VALUES (16929101,1,14,'Temenos_Aern','Aerns_Wynav');
-INSERT INTO `mob_pets` VALUES (16929113,1,15,'Temenos_Aern','Aerns_Elemental');
-
--- ------------------------------------------------------------
--- Apollyon (Zone 38)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16933135,1,14,'Grognard_Impaler','Orcs_Wyvern');
-INSERT INTO `mob_pets` VALUES (16933144,1,15,'Dee_Wapa_the_Desolator','Yagudos_Elemental');
-
 /*!40000 ALTER TABLE `mob_pets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
