@@ -102,6 +102,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ae_mount_data.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0b4_config.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c8_group_tbl.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0c8_group_tbl.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.h
