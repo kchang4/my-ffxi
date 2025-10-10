@@ -13,17 +13,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    -- TODO is this necessary? pets automatically assist their master in roam ticks
-    local mobId = mob:getID()
-    local pet   = GetMobByID(mobId + 1)
-
-    if
-        pet and
-        pet:isSpawned() and
-        pet:getCurrentAction() == xi.action.ROAMING
-    then
-        pet:updateEnmity(target)
-    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
