@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,17 @@
 ===========================================================================
 */
 
-#ifndef _CPARTYSEARCHPACKET_H
-#define _CPARTYSEARCHPACKET_H
+#include "0x0e1_group_checkid.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
+#include "party.h"
 
-#include "basic.h"
-
-/************************************************************************
- *
- *  We send Partyid to search
- *
- ************************************************************************/
-
-class CCharEntity;
-
-class CPartySearchPacket : public CBasicPacket
+GP_SERV_COMMAND_GROUP_CHECKID::GP_SERV_COMMAND_GROUP_CHECKID(const CCharEntity* PChar)
 {
-public:
-    CPartySearchPacket(CCharEntity* PChar);
-};
+    auto& packet = this->data();
 
-#endif
+    if (PChar != nullptr && PChar->PParty != nullptr)
+    {
+        packet.GroupID = PChar->PParty->GetPartyID();
+    }
+}

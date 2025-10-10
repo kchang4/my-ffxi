@@ -110,6 +110,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0e1_group_checkid.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f4_tracking_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0f5_tracking_pos.h
