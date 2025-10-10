@@ -1711,6 +1711,8 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
         if (charge && PAbility->getID() != ABILITY_SIC)
         {
+            auto chargesUsed = timer::count_seconds(PAbility->getRecastTime()); // charge cost is stored in the recast...
+
             //  Can't assign merits via ability ID for Sic/Ready due to shenanigans
             if (PAbility->getRecastId() == 102) // Sic/Ready recast ID
             {
@@ -1723,7 +1725,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             baseChargeTime = charge->chargeTime - recastReduction;
 
-            action.recast = baseChargeTime;
+            action.recast = baseChargeTime * chargesUsed;
         }
         else
         {
