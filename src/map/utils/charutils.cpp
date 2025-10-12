@@ -905,6 +905,12 @@ namespace charutils
         PChar->health.mp = canRestore ? PChar->GetMaxMP() : MP;
         PChar->UpdateHealth();
 
+        // Lazy loading: ensure initial zone is loaded synchronously before OnZoneIn
+        if (zoneutils::IsLazyLoadingEnabled() && !zoneutils::GetZone(PChar->loc.destination))
+        {
+            zoneutils::LoadZones({ PChar->loc.destination });
+        }
+
         luautils::OnZoneIn(PChar);
         luautils::OnGameIn(PChar, zoning == 1);
 
