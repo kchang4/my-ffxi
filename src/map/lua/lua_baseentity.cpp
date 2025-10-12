@@ -110,7 +110,6 @@
 #include "packets/entity_enable_list.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/instance_entry.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
@@ -147,6 +146,7 @@
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0ae_mount_data.h"
+#include "packets/s2c/0x0bf_registration.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/s2c/0x0f9_res.h"
 #include "packets/server_ip.h"
@@ -11762,7 +11762,7 @@ void CLuaBaseEntity::instanceEntry(CLuaBaseEntity* PLuaBaseEntity, uint32 respon
 
     CBaseEntity* PTarget = PLuaBaseEntity->m_PBaseEntity;
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CInstanceEntryPacket>(PTarget, response);
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_REGISTRATION>(PTarget, response);
 }
 
 /************************************************************************

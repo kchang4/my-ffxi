@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,14 @@
 ===========================================================================
 */
 
-#ifndef _CINSTANCEENTRYPACKET_H
-#define _CINSTANCEENTRYPACKET_H
+#include "0x0bf_registration.h"
 
-#include "common/cbasetypes.h"
+#include "entities/baseentity.h"
 
-#include "basic.h"
-
-class CBaseEntity;
-
-class CInstanceEntryPacket : public CBasicPacket
+GP_SERV_COMMAND_REGISTRATION::GP_SERV_COMMAND_REGISTRATION(const CBaseEntity* PEntrance, const uint32_t response)
 {
-public:
-    CInstanceEntryPacket(CBaseEntity* PEntrance, uint32 response);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.Result   = response;
+    packet.ActIndex = PEntrance->targid;
+}
