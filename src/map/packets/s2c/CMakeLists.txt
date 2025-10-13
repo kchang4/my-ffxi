@@ -62,6 +62,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x051_grap_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x052_eventucoff.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x052_eventucoff.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x053_systemmes.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x053_systemmes.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x055_scenarioitem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x055_scenarioitem.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x057_weather.h

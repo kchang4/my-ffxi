@@ -26,7 +26,7 @@
 #include "packets/char_status.h"
 #include "packets/chat_message.h"
 #include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"

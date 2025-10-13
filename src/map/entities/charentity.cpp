@@ -36,7 +36,7 @@
 #include "packets/event.h"
 #include "packets/message_standard.h"
 #include "packets/s2c/0x02a_talknumwork.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/message_text.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x033_eventstr.h"
@@ -2625,9 +2625,9 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
         {
             // Target is blocking assistance
-            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
+            errMsg = std::make_unique<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+            static_cast<CCharEntity*>(PTarget)->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
         }
         else if (IsMobOwner(PTarget))
         {
@@ -3288,7 +3288,7 @@ void CCharEntity::skipEvent()
     TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
-        pushPacket<CMessageSystemPacket>(0, 0, MsgStd::EventSkipped);
+        pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::EventSkipped);
         pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(this, GP_SERV_COMMAND_EVENTUCOFF_MODE::CancelEvent);
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 

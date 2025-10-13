@@ -42,7 +42,7 @@
 #include "packets/chat_message.h"
 #include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "packets/server_ip.h"
 
@@ -450,7 +450,7 @@ void IPCClient::handleMessage_PartyInvite(const IPP& ipp, const ipc::PartyInvite
             });
 
             // Interaction was blocked
-            PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+            PInvitee->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
 
             // You cannot invite that person at this time.
             message::send(ipc::MessageStandard{

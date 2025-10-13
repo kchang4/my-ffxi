@@ -26,7 +26,7 @@
 #include "ipc_client.h"
 #include "packets/message_basic.h"
 #include "packets/message_standard.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
 #include "status_effect_container.h"
 #include "utils/blacklistutils.h"
@@ -101,11 +101,11 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     {
                         ShowDebug("%s is blocking party invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
                         // Interaction was blocked
-                        PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+                        PInvitee->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
                         // You cannot invite that person at this time.
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotInvite);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotInvite);
                         break;
                     }
 
@@ -178,11 +178,11 @@ void GP_CLI_COMMAND_GROUP_SOLICIT_REQ::process(MapSession* PSession, CCharEntity
                     {
                         ShowDebug("%s is blocking alliance invites", PInvitee->getName());
                         // Target is blocking assistance
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
                         // Interaction was blocked
-                        PInvitee->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::BlockedByBlockaid);
+                        PInvitee->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::BlockedByBlockaid);
                         // You cannot invite that person at this time.
-                        PInviter->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotInvite);
+                        PInviter->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotInvite);
                         break;
                     }
 

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,18 +19,13 @@
 ===========================================================================
 */
 
-#ifndef _CMESSAGESYSTEMPACKET_H
-#define _CMESSAGESYSTEMPACKET_H
+#include "0x053_systemmes.h"
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
-#include "message_standard.h"
-
-class CMessageSystemPacket : public CBasicPacket
+GP_SERV_COMMAND_SYSTEMMES::GP_SERV_COMMAND_SYSTEMMES(const uint32 param0, const uint32 param1, const MsgStd messageId)
 {
-public:
-    CMessageSystemPacket(uint32 param0, uint32 param1, MsgStd messageID);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.para   = param0;
+    packet.para2  = param1;
+    packet.Number = messageId;
+}

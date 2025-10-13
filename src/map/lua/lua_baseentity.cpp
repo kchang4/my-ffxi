@@ -115,7 +115,7 @@
 #include "packets/message_name.h"
 #include "packets/message_standard.h"
 #include "packets/s2c/0x02a_talknumwork.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/message_text.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
@@ -557,7 +557,7 @@ void CLuaBaseEntity::messageSystem(MsgStd messageID, sol::object const& p0, sol:
     uint32 param0 = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
     uint32 param1 = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CMessageSystemPacket>(param0, param1, messageID);
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(param0, param1, messageID);
 }
 
 /************************************************************************
@@ -1338,7 +1338,7 @@ void CLuaBaseEntity::release()
     {
         // Message: Event skipped
         releaseType = GP_SERV_COMMAND_EVENTUCOFF_MODE::CancelEvent;
-        PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::EventSkipped);
+        PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::EventSkipped);
     }
 
     PChar->inSequence = false;
@@ -3248,7 +3248,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             if (ipp == 0)
             {
                 ShowWarning(fmt::format("Char {} requested zone ({}) returned IPP of 0", PChar->name, zoneid));
-                PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CouldNotEnter); // You could not enter the next area.
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter); // You could not enter the next area.
                 return;
             }
 

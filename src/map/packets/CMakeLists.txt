@@ -55,8 +55,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/message_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_standard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/message_standard.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_system.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_text.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/message_text.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp

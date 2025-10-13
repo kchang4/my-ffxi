@@ -30,13 +30,13 @@
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
 #include "packets/message_standard.h"
-#include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x027_talknumwork2.h"
 #include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x043_talknumname.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x052_eventucoff.h"
 #include "packets/s2c/0x062_clistatus2.h"
 #include "packets/s2c/0x115_fish.h"
@@ -1986,7 +1986,7 @@ namespace fishingutils
             if (PChar->animation != ANIMATION_NONE)
             {
                 PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_CANNOTFISH_MOMENT);
-                PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
                 return;
@@ -2024,13 +2024,13 @@ namespace fishingutils
             }
             else
             {
-                PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+                PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
             }
         }
         else
         {
-            PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
+            PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CannotUseCommandAtTheMoment);
             PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
 
             return;

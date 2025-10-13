@@ -23,7 +23,7 @@
 
 #include "entities/charentity.h"
 #include "packets/s2c/0x065_wpos2.h"
-#include "packets/message_system.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
 
@@ -35,7 +35,7 @@ namespace
     {
         PChar->loc.p.rotation += 128;
 
-        PChar->pushPacket<CMessageSystemPacket>(0, 0, MsgStd::CouldNotEnter);
+        PChar->pushPacket<GP_SERV_COMMAND_SYSTEMMES>(0, 0, MsgStd::CouldNotEnter);
         PChar->pushPacket<GP_SERV_COMMAND_WPOS2>(PChar, PChar->loc.p, POSMODE::RESET);
 
         PChar->status = STATUS_TYPE::NORMAL;

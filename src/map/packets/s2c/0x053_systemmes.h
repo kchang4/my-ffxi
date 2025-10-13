@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,14 +19,24 @@
 ===========================================================================
 */
 
-#include "message_system.h"
+#pragma once
 
-CMessageSystemPacket::CMessageSystemPacket(uint32 param0, uint32 param1, MsgStd messageID)
+#include "base.h"
+
+enum class MsgStd : uint16_t;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0053
+// This packet is sent by the server to display a formatted message loaded from the DAT files. (via PutSystemMessage)
+class GP_SERV_COMMAND_SYSTEMMES final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_SYSTEMMES, GP_SERV_COMMAND_SYSTEMMES>
 {
-    this->setType(0x53);
-    this->setSize(0x10);
+public:
+    struct PacketData
+    {
+        uint32_t para;      // PS2: para
+        uint32_t para2;     // PS2: para2
+        MsgStd   Number;    // PS2: Number
+        uint16_t padding0E; // PS2: dummy
+    };
 
-    ref<uint32>(0x04) = param0;
-    ref<uint32>(0x08) = param1;
-    ref<uint16>(0x0C) = static_cast<uint16>(messageID);
-}
+    GP_SERV_COMMAND_SYSTEMMES(uint32 param0, uint32 param1, MsgStd messageId);
+};
