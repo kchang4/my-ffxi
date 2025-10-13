@@ -30,7 +30,6 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
-#include "packets/fishing.h"
 #include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
@@ -40,6 +39,7 @@
 #include "packets/s2c/0x043_talknumname.h"
 #include "packets/s2c/0x052_eventucoff.h"
 #include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x115_fish.h"
 
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
@@ -2735,7 +2735,7 @@ namespace fishingutils
                     PChar->updatemask |= UPDATE_HP;
                     // send the fishing packet
                     PChar->animation = ANIMATION_FISHING_FISH;
-                    PChar->pushPacket<CFishingPacket>(response->stamina, response->regen, response->response, response->attackdmg, response->delay, response->heal, response->timelimit, response->hooksense, response->special);
+                    PChar->pushPacket<GP_SERV_COMMAND_FISH>(response->stamina, response->regen, response->response, response->attackdmg, response->delay, response->heal, response->timelimit, response->hooksense, response->special);
                 }
                 else
                 {

@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,18 +19,21 @@
 ===========================================================================
 */
 
-#ifndef _CFISHINGPACKET_H
-#define _CFISHINGPACKET_H
+#include "0x115_fish.h"
 
-#include "common/cbasetypes.h"
-
-#include "basic.h"
-
-class CFishingPacket : public CBasicPacket
+GP_SERV_COMMAND_FISH::GP_SERV_COMMAND_FISH(const uint16 stamina, const uint16 regen, const uint16 response,
+                                           const uint16 hitDmg, const uint16 arrowDelay, const uint16 missRegen,
+                                           const uint16 gameTime, const uint8 sense, const uint32 special)
 {
-public:
-    CFishingPacket(uint16 stamina, uint16 regen, uint16 response, uint16 hitDmg, uint16 arrowDelay, uint16 missRegen, uint16 gameTime, uint8 sense,
-                   uint32 special);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.stamina        = stamina;
+    packet.arrow_delay    = arrowDelay;
+    packet.regen          = regen;
+    packet.move_frequency = response;
+    packet.arrow_damage   = hitDmg;
+    packet.arrow_regen    = missRegen;
+    packet.time           = gameTime;
+    packet.angler_sense   = sense;
+    packet.intuition      = special;
+}
