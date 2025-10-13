@@ -100,33 +100,30 @@
 #include "packets/auction_house.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_recast.h"
-#include "packets/s2c/0x061_clistatus.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
 #include "packets/conquest_map.h"
-#include "packets/s2c/0x077_entity_vis.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
-#include "packets/message_combat.h"
-#include "packets/s2c/0x027_talknumwork2.h"
-#include "packets/s2c/0x009_message.h"
-#include "packets/s2c/0x02a_talknumwork.h"
-#include "packets/s2c/0x053_systemmes.h"
-#include "packets/s2c/0x036_talknum.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x027_talknumwork2.h"
+#include "packets/s2c/0x02a_talknumwork.h"
+#include "packets/s2c/0x02d_battle_message2.h"
 #include "packets/s2c/0x02e_openmogmenu.h"
+#include "packets/s2c/0x036_talknum.h"
 #include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x039_mapschedulor.h"
 #include "packets/s2c/0x03a_magicschedulor.h"
@@ -135,13 +132,16 @@
 #include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/s2c/0x05a_motionmes.h"
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x05c_pendingnum.h"
 #include "packets/s2c/0x05d_pendingstr.h"
 #include "packets/s2c/0x05f_music.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x077_entity_vis.h"
 #include "packets/s2c/0x086_guild_open.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 #include "packets/s2c/0x0ac_command_data.h"
@@ -587,7 +587,7 @@ void CLuaBaseEntity::messageCombat(sol::object const& speaker, int32 p0, int32 p
         PSpeaker = m_PBaseEntity;
     }
 
-    PChar->pushPacket<CMessageCombatPacket>(PSpeaker, PChar, p0, p1, message);
+    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PSpeaker, PChar, p0, p1, message);
 }
 
 /************************************************************************
@@ -15634,7 +15634,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
         PMaster->ForParty([&](CBattleEntity* PMember)
         {
             auto* PCharMember = static_cast<CCharEntity*>(PMember);
-            PCharMember->pushPacket<CMessageCombatPacket>(PTrust, PMember, message_id, 0, 711);
+            PCharMember->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PTrust, PMember, message_id, 0, 711);
         });
         // clang-format on
     }

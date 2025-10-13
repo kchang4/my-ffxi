@@ -24,6 +24,7 @@
 #include "common/async.h"
 #include "common/settings.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "trade_container.h"

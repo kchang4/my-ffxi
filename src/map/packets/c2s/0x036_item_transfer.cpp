@@ -23,6 +23,7 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "lua/luautils.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "status_effect_container.h"

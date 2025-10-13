@@ -33,19 +33,19 @@ class GP_SERV_COMMAND_LINKSHELL_MESSAGE final : public GP_SERV_PACKET<PacketS2C:
 public:
     struct PacketData
     {
-        uint8_t     stat            : 4;    // PS2: stat
-        uint8_t     attr            : 4;    // PS2: attr
-        uint8_t     readLevel       : 2;    // PS2: readLevel
-        uint8_t     writeLevel      : 2;    // PS2: writeLevel
-        uint8_t     pubEditLevel    : 2;    // PS2: pubEditLevel
-        uint8_t     linkshell_index : 2;    // PS2: dummyBits
-        uint16_t    seqId;                  // PS2: seqId
-        uint8_t     sMessage[128];          // PS2: sMessage
-        uint32_t    updateTime;             // PS2: updateTime
-        uint8_t     modifier[16];           // PS2: modifier
-        uint16_t    opType;                 // PS2: opType
-        uint16_t    padding9E;              // PS2: padding
-        uint8_t     encodedLsName[16];      // PS2: encodedLsName
+        uint8_t  stat : 4;            // PS2: stat
+        uint8_t  attr : 4;            // PS2: attr
+        uint8_t  readLevel : 2;       // PS2: readLevel
+        uint8_t  writeLevel : 2;      // PS2: writeLevel
+        uint8_t  pubEditLevel : 2;    // PS2: pubEditLevel
+        uint8_t  linkshell_index : 2; // PS2: dummyBits
+        uint16_t seqId;               // PS2: seqId
+        uint8_t  sMessage[128];       // PS2: sMessage
+        uint32_t updateTime;          // PS2: updateTime
+        uint8_t  modifier[16];        // PS2: modifier
+        uint16_t opType;              // PS2: opType
+        uint16_t padding9E;           // PS2: padding
+        uint8_t  encodedLsName[16];   // PS2: encodedLsName
     };
 
     GP_SERV_COMMAND_LINKSHELL_MESSAGE(const std::string& poster, const std::string& message, const std::string& lsname, uint32_t posttime, LinkshellSlot slot);

@@ -22,6 +22,7 @@
 #include "0x096_combine_ask.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items.h"
 #include "packets/s2c/0x022_item_trade_res.h"
 #include "trade_container.h"

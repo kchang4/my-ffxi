@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,25 +19,19 @@
 ===========================================================================
 */
 
-#ifndef _CMESSAGECOMBATPACKET_H
-#define _CMESSAGECOMBATPACKET_H
+#include "0x02d_battle_message2.h"
 
-#include "common/cbasetypes.h"
+#include "entities/baseentity.h"
 
-#include "basic.h"
-
-enum MESSAGE_COMBAT : uint16
+GP_SERV_COMMAND_BATTLE_MESSAGE2::GP_SERV_COMMAND_BATTLE_MESSAGE2(CBaseEntity* PSender, CBaseEntity* PTarget, const int32 param0, const int32 param1, const uint16 messageID)
 {
-    USE_OBTAIN_ESCHA_SILT = 765, // <name> uses <item>. <name> obtains <n> escha silt.
-    USE_OBTAIN_ESCHA_BEAD = 766, // <name> uses <item>. <name> obtains <n> escha beads.
-};
+    auto& packet = this->data();
 
-class CBaseEntity;
-
-class CMessageCombatPacket : public CBasicPacket
-{
-public:
-    CMessageCombatPacket(CBaseEntity* PSender, CBaseEntity* PTarget, int32 param0, int32 param1, uint16 messageID);
-};
-
-#endif
+    packet.UniqueNoCas = PSender->id;
+    packet.UniqueNoTar = PTarget->id;
+    packet.ActIndexCas = PSender->targid;
+    packet.ActIndexTar = PTarget->targid;
+    packet.Data        = param0;
+    packet.Data2       = param1;
+    packet.MessageNum  = messageID;
+}

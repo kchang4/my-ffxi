@@ -26,10 +26,10 @@
 #include "packets/char_status.h"
 #include "packets/chat_message.h"
 #include "packets/s2c/0x009_message.h"
-#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
 
 #include "conquest_system.h"

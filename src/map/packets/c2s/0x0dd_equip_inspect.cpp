@@ -23,6 +23,7 @@
 
 #include "entities/charentity.h"
 #include "entities/mobentity.h"
+#include "enums/msg_std.h"
 #include "items/item_weapon.h"
 #include "mob_modifier.h"
 #include "packets/char_check.h"

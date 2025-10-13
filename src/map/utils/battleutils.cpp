@@ -50,6 +50,7 @@
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/msg_std.h"
 #include "enums/weather.h"
 #include "item_container.h"
 #include "items.h"

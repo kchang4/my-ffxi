@@ -23,6 +23,7 @@
 
 #include "common/async.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items/item_linkshell.h"
 #include "packets/s2c/0x023_item_trade_list.h"
 #include "packets/s2c/0x025_item_trade_mylist.h"

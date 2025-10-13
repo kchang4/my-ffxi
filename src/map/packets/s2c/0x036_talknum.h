@@ -32,12 +32,12 @@ class GP_SERV_COMMAND_TALKNUM final : public GP_SERV_PACKET<PacketS2C::GP_SERV_C
 public:
     struct PacketData
     {
-        uint32_t    UniqueNo;   // PS2: UniqueNo
-        uint16_t    ActIndex;   // PS2: ActIndex
-        uint16_t    MesNum;     // PS2: MesNum
-        uint8_t     Type;       // PS2: Type
-        uint8_t     padding0D;  // PS2: dummmy
-        uint16_t    padding0E;  // PS2: dummy2
+        uint32_t UniqueNo;  // PS2: UniqueNo
+        uint16_t ActIndex;  // PS2: ActIndex
+        uint16_t MesNum;    // PS2: MesNum
+        uint8_t  Type;      // PS2: Type
+        uint8_t  padding0D; // PS2: dummmy
+        uint16_t padding0E; // PS2: dummy2
     };
 
     GP_SERV_COMMAND_TALKNUM(CBaseEntity* PEntity, uint16 messageID, bool showName = true, uint8 mode = 0);

@@ -28,8 +28,8 @@
 #include "packets/char_job_extra.h"
 #include "packets/s2c/0x0aa_magic_data.h"
 
-#include "packets/s2c/0x061_clistatus.h"
 #include "packets/message_basic.h"
+#include "packets/s2c/0x061_clistatus.h"
 
 #include "battleutils.h"
 #include "blue_spell.h"

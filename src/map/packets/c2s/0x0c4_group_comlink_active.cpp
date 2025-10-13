@@ -23,6 +23,7 @@
 
 #include "entities/charentity.h"
 #include "enums/item_lockflg.h"
+#include "enums/msg_std.h"
 #include "item_container.h"
 #include "items.h"
 #include "items/item_linkshell.h"

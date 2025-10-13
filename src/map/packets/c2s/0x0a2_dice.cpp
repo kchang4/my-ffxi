@@ -22,6 +22,7 @@
 #include "0x0a2_dice.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "packets/s2c/0x009_message.h"
 
 auto GP_CLI_COMMAND_DICE::validate(MapSession* PSession, const CCharEntity* PChar) const -> PacketValidationResult

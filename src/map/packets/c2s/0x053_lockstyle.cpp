@@ -21,6 +21,7 @@
 
 #include "0x053_lockstyle.h"
 
+#include "enums/msg_std.h"
 #include "items/item_equipment.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x009_message.h"

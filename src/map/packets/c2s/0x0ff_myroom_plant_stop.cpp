@@ -22,6 +22,7 @@
 #include "0x0ff_myroom_plant_stop.h"
 
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "items/item_flowerpot.h"
 #include "packets/char_status.h"
 #include "packets/s2c/0x01d_item_same.h"

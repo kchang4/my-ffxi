@@ -23,11 +23,12 @@
 
 #include "aman.h"
 #include "entities/charentity.h"
+#include "enums/msg_std.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/s2c/0x009_message.h"
-#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x051_grap_list.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0b4_config.h"
 #include "utils/charutils.h"
 

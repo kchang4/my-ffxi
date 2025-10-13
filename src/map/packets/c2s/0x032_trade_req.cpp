@@ -22,9 +22,10 @@
 #include "0x032_trade_req.h"
 
 #include "entities/charentity.h"
-#include "packets/s2c/0x053_systemmes.h"
+#include "enums/msg_std.h"
 #include "packets/s2c/0x021_item_trade_req.h"
 #include "packets/s2c/0x022_item_trade_res.h"
+#include "packets/s2c/0x053_systemmes.h"
 #include "trade_container.h"
 #include "universal_container.h"
 #include "utils/charutils.h"

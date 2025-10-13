@@ -38,28 +38,28 @@
 
 #include "packets/char_job_extra.h"
 #include "packets/char_recast.h"
-#include "packets/s2c/0x061_clistatus.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
-#include "packets/message_combat.h"
-#include "packets/s2c/0x009_message.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
+#include "packets/s2c/0x009_message.h"
 #include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01e_item_num.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x026_item_subcontainer.h"
+#include "packets/s2c/0x02d_battle_message2.h"
 #include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x055_scenarioitem.h"
+#include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
@@ -4948,23 +4948,23 @@ namespace charutils
             {
                 if (PChar->capacityChain.chainNumber != 0)
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, PChar->capacityChain.chainNumber, 735);
                 }
                 else
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, capacityPoints, 0, 718);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, 718);
                 }
                 PChar->capacityChain.chainNumber++;
             }
             else
             {
-                PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, capacityPoints, 0, 718);
+                PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, capacityPoints, 0, 718);
             }
 
             // Add capacity points
             if (PChar->PJobPoints->AddCapacityPoints(capacityPoints))
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
             }
             PChar->pushPacket<CMenuJobPointsPacket>(PChar);
 
@@ -5080,7 +5080,7 @@ namespace charutils
                     PChar->PParty->ReloadParty();
                 }
 
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, PChar->jobs.job[PChar->GetMJob()], 0, 11));
                 luautils::OnPlayerLevelDown(PChar);
                 PChar->updatemask |= UPDATE_HP;
             }
@@ -5142,22 +5142,22 @@ namespace charutils
                 {
                     if (onLimitMode)
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, PChar->expChain.chainNumber, 372);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, 372);
                     }
                     else
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, PChar->expChain.chainNumber, 253);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, PChar->expChain.chainNumber, 253);
                     }
                 }
                 else
                 {
                     if (onLimitMode)
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 371);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 371);
                     }
                     else
                     {
-                        PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 8);
+                        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 8);
                     }
                 }
                 PChar->expChain.chainNumber++;
@@ -5166,11 +5166,11 @@ namespace charutils
             {
                 if (onLimitMode)
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 371);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 371);
                 }
                 else
                 {
-                    PChar->pushPacket<CMessageCombatPacket>(PChar, PChar, exp, 0, 8);
+                    PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PChar, exp, 0, 8);
                 }
             }
         }
@@ -5180,7 +5180,7 @@ namespace charutils
             // add limit points
             if (PChar->PMeritPoints->AddLimitPoints(exp))
             {
-                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, 50));
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PMeritPoints->GetMeritPoints(), 0, 50));
             }
         }
         else
@@ -5280,7 +5280,7 @@ namespace charutils
                 if (!expFromRaise)
                 {
                     // Level up animation and message
-                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CMessageCombatPacket>(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
                     // Set HP and MP to max range
                     PChar->health.hp = PChar->GetMaxHP();
                     PChar->health.mp = PChar->GetMaxMP();
