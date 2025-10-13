@@ -29,12 +29,12 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
-#include "packets/message_special.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x027_talknumwork2.h"
+#include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/s2c/0x038_schedulor.h"
 #include "packets/s2c/0x043_talknumname.h"
 #include "packets/s2c/0x052_eventucoff.h"
@@ -1696,7 +1696,7 @@ namespace fishingutils
                 PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_NOSKILL_POSITIVE_FEELING);
                 break;
             case FISHINGSENSETYPE_KEEN_ANGLERS_SENSE:
-                PChar->pushPacket<CMessageSpecialPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_KEEN_ANGLERS_SENSE, response->catchid, 3, 3, 3);
+                PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(PChar, MessageOffset + FISHMESSAGEOFFSET_KEEN_ANGLERS_SENSE, response->catchid, 3, 3, 3);
                 break;
             case FISHINGSENSETYPE_EPIC_CATCH:
                 PChar->pushPacket<CMessageTextPacket>(PChar, MessageOffset + FISHMESSAGEOFFSET_EPIC_CATCH);

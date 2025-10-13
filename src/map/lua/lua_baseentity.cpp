@@ -113,8 +113,8 @@
 #include "packets/message_basic.h"
 #include "packets/message_combat.h"
 #include "packets/message_name.h"
-#include "packets/message_special.h"
 #include "packets/message_standard.h"
+#include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/monipulator1.h"
@@ -208,7 +208,7 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::obj
     uint32 param1   = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
     uint32 param2   = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
     uint32 param3   = (p3 != sol::lua_nil) ? p3.as<uint32>() : 0;
-    bool   showName = (p4 != sol::lua_nil) ? p4.as<bool>() : false; // ShowName is false in CMessageSpecialPacket Constructor, so mimic the same default.
+    bool   showName = (p4 != sol::lua_nil) ? p4.as<bool>() : false; // ShowName is false in GP_SERV_COMMAND_TALKNUMWORK Constructor, so mimic the same default.
     bool   turn     = (p5 != sol::lua_nil) ? p5.as<bool>() : true;  // Turn to player, default behavior is true
 
     if (turn && PBaseEntity->objtype == TYPE_NPC)
@@ -221,11 +221,11 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* entity, uint16 messageID, sol::obj
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CMessageSpecialPacket>(PBaseEntity, messageID, param0, param1, param2, param3, showName);
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param2, param3, showName);
     }
     else
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<CMessageSpecialPacket>(PBaseEntity, messageID, param0, param1, param3, showName));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK>(PBaseEntity, messageID, param0, param1, param3, showName));
     }
 }
 
@@ -536,7 +536,7 @@ void CLuaBaseEntity::messageSpecial(uint16 messageID, sol::variadic_args va)
     uint32 param3   = va.get_type(3) == sol::type::number ? va.get<uint32>(3) : 0;
     bool   showName = va.get_type(4) == sol::type::boolean ? va.get<bool>(4) : false;
 
-    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CMessageSpecialPacket>(m_PBaseEntity, messageID, param0, param1, param2, param3, showName);
+    static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(m_PBaseEntity, messageID, param0, param1, param2, param3, showName);
 }
 
 /************************************************************************

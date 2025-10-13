@@ -25,7 +25,7 @@
 #include "entities/charentity.h"
 #include "ipc_client.h"
 #include "lua/luautils.h"
-#include "packets/message_special.h"
+#include "packets/s2c/0x02a_talknumwork.h"
 #include "roe.h"
 #include "utils/charutils.h"
 #include "utils/zoneutils.h"
@@ -180,7 +180,7 @@ void CAMANContainer::onZoneIn() const
     if (auto textId = luautils::GetTextIDVariable(m_player->getZone(), "ASSIST_CHANNEL"))
     {
         auto [expiry, current] = calculateAssistExpiry(m_player, m_assistChannelPlaytimeExpiry);
-        m_player->pushPacket<CMessageSpecialPacket>(m_player, textId, expiry, current, 1, 0, false);
+        m_player->pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(m_player, textId, expiry, current, 1, 0, false);
 
         // TODO: Capture the exact threshold
         if (const auto remaining = expiry - current; remaining < 24 * 3600)

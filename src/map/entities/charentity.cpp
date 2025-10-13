@@ -34,8 +34,8 @@
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
 #include "packets/event.h"
-#include "packets/message_special.h"
 #include "packets/message_standard.h"
+#include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/s2c/0x01d_item_same.h"
@@ -2873,7 +2873,7 @@ void CCharEntity::UpdateMoghancement()
     // Always show which moghancement the player has if they have one at all
     if (newMoghancementID != 0)
     {
-        pushPacket<CMessageSpecialPacket>(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, false);
+        pushPacket<GP_SERV_COMMAND_TALKNUMWORK>(this, luautils::GetTextIDVariable(getZone(), "KEYITEM_OBTAINED"), newMoghancementID, 0, 0, 0, false);
     }
 
     if (newMoghancementID != m_moghancementID)
