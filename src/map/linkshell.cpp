@@ -41,7 +41,7 @@
 #include "enums/item_lockflg.h"
 #include "items.h"
 #include "packets/c2s/0x0e2_set_lsmsg.h"
-#include "packets/linkshell_message.h"
+#include "packets/s2c/0x0cc_linkshell_message.h"
 #include "utils/charutils.h"
 #include "utils/itemutils.h"
 #include "utils/jailutils.h"
@@ -356,7 +356,7 @@ void CLinkshell::PushPacket(uint32 senderID, const std::unique_ptr<CBasicPacket>
                 {
                     newPacket->ref<uint8>(0x04) = MESSAGE_LINKSHELL2;
                 }
-                else if (newPacket->getType() == CLinkshellMessagePacket::id)
+                else if (newPacket->getType() == GP_SERV_COMMAND_LINKSHELL_MESSAGE::id)
                 {
                     newPacket->ref<uint8>(0x05) |= 0x40;
                 }
@@ -376,7 +376,7 @@ void CLinkshell::PushLinkshellMessage(CCharEntity* PChar, LinkshellSlot slot)
         const auto messageTime = rset->getOrDefault<uint32>("messagetime", 0);
         if (!message.empty())
         {
-            PChar->pushPacket<CLinkshellMessagePacket>(poster, message, m_name, messageTime, slot);
+            PChar->pushPacket<GP_SERV_COMMAND_LINKSHELL_MESSAGE>(poster, message, m_name, messageTime, slot);
         }
         // TODO: No message sends a 0xCC packet that prints "No linkshell message set."
     }

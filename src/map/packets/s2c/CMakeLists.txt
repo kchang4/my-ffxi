@@ -118,6 +118,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0fa_myroom_operation.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0ca_inspect_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0cc_linkshell_message.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x0cc_linkshell_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0dc_group_solicit_req.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x0dd_group_list.h

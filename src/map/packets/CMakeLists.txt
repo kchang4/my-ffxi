@@ -45,8 +45,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/fishing.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/linkshell_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.cpp

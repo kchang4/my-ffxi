@@ -40,7 +40,7 @@
 #include "lua/luautils.h"
 
 #include "packets/chat_message.h"
-#include "packets/linkshell_message.h"
+#include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
@@ -734,7 +734,7 @@ void IPCClient::handleMessage_LinkshellSetMessage(const IPP& ipp, const ipc::Lin
 
     if (CLinkshell* PLinkshell = linkshell::GetLinkshell(message.linkshellId))
     {
-        PLinkshell->PushPacket(0, std::make_unique<CLinkshellMessagePacket>(message.poster, message.message, message.linkshellName, message.postTime, LinkshellSlot::LS1));
+        PLinkshell->PushPacket(0, std::make_unique<GP_SERV_COMMAND_LINKSHELL_MESSAGE>(message.poster, message.message, message.linkshellName, message.postTime, LinkshellSlot::LS1));
     }
 }
 
