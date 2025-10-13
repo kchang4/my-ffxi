@@ -112,7 +112,7 @@
 #include "packets/menu_merit.h"
 #include "packets/message_basic.h"
 #include "packets/message_combat.h"
-#include "packets/message_name.h"
+#include "packets/s2c/0x027_talknumwork2.h"
 #include "packets/message_standard.h"
 #include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/s2c/0x053_systemmes.h"
@@ -489,11 +489,11 @@ void CLuaBaseEntity::messageName(uint16 messageID, sol::object const& entity, so
 
     if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket<CMessageNamePacket>(PChar, messageID, PNameEntity, param0, param1, param2, param3, chatType);
+        PChar->pushPacket<GP_SERV_COMMAND_TALKNUMWORK2>(PChar, messageID, PNameEntity, param0, param1, param2, param3, chatType);
     }
     else
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<CMessageNamePacket>(m_PBaseEntity, messageID, PNameEntity, param0, param1, param2, param3, chatType));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_TALKNUMWORK2>(m_PBaseEntity, messageID, PNameEntity, param0, param1, param2, param3, chatType));
     }
 }
 

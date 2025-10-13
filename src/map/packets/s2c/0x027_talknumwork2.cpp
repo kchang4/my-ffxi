@@ -21,6 +21,7 @@
 
 #include "0x027_talknumwork2.h"
 
+#include "entities/baseentity.h"
 #include "entities/charentity.h"
 
 #include <cstring>
@@ -37,4 +38,23 @@ GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(const CCharEntity* PC
     packet.Num1[1]  = count;
 
     std::memcpy(packet.String1, PChar->getName().c_str(), std::min<size_t>(PChar->getName().size(), sizeof(packet.String1)));
+}
+
+GP_SERV_COMMAND_TALKNUMWORK2::GP_SERV_COMMAND_TALKNUMWORK2(CBaseEntity* PActor, const uint16 messageID, CBaseEntity* PNameActor,
+                                                           const int32 param0, const int32 param1, const int32 param2, const int32 param3,
+                                                           const int32 chatType, const bool showSender)
+{
+    auto& packet = this->data();
+
+    packet.UniqueNo = PActor->id;
+    packet.ActIndex = PActor->targid;
+    packet.MesNum   = showSender ? messageID : (messageID | 0x8000);
+    packet.Type     = chatType;
+    packet.Num1[0]  = param0;
+    packet.Num1[1]  = param1;
+    packet.Num1[2]  = param2;
+    packet.Num1[3]  = param3;
+
+    CBaseEntity* PNameEntity = PNameActor ? PNameActor : PActor;
+    std::memcpy(packet.String1, PNameEntity->getName().c_str(), std::min<size_t>(PNameEntity->getName().size(), sizeof(packet.String1)));
 }

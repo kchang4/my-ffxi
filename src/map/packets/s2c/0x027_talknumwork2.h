@@ -24,6 +24,7 @@
 #include "base.h"
 
 class CCharEntity;
+class CBaseEntity;
 
 // https://github.com/atom0s/XiPackets/tree/main/world/server/0x0027
 // This packet is sent by the server to display a formatted message loaded from the DAT files.
@@ -44,5 +45,11 @@ public:
         uint32_t Num2[8];     // PS2: (New; did not exist.)
     };
 
+    // Fishing message constructor
     GP_SERV_COMMAND_TALKNUMWORK2(const CCharEntity* PChar, uint16 param0, uint16 messageID, uint8 count);
+
+    // Message with name constructor
+    GP_SERV_COMMAND_TALKNUMWORK2(CBaseEntity* PActor, uint16 messageID, CBaseEntity* PNameActor = nullptr,
+                                 int32 param0 = 0, int32 param1 = 0, int32 param2 = 0, int32 param3 = 0,
+                                 int32 chatType = 4, bool showSender = false);
 };

@@ -51,8 +51,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_combat.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/message_combat.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_name.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_standard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/message_standard.h
     ${CMAKE_CURRENT_SOURCE_DIR}/message_text.cpp
