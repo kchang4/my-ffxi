@@ -49,8 +49,8 @@ GP_SERV_COMMAND_EVENTNUM::GP_SERV_COMMAND_EVENTNUM(const CCharEntity* PChar, con
         }
     }
 
-    packet.EventNum  = eventInfo->eventId;
-    packet.EventPara = PChar->getZone();
+    packet.EventNum  = PChar->getZone();
+    packet.EventPara = eventInfo->eventId;
 
     if (eventInfo->textTable != -1)
     {

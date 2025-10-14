@@ -27,16 +27,15 @@
 
 #include "packets/action.h"
 #include "packets/basic.h"
-#include "packets/char_recast.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
-#include "packets/s2c/0x032_event.h"
-#include "packets/s2c/0x034_eventnum.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x02a_talknumwork.h"
+#include "packets/s2c/0x032_event.h"
 #include "packets/s2c/0x033_eventstr.h"
+#include "packets/s2c/0x034_eventnum.h"
 #include "packets/s2c/0x036_talknum.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
@@ -44,6 +43,7 @@
 #include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/s2c/0x058_assist.h"
 #include "packets/s2c/0x0df_group_attr.h"
+#include "packets/s2c/0x119_abil_recast.h"
 
 #include "ai/ai_container.h"
 #include "ai/controllers/player_controller.h"
@@ -2000,7 +2000,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             PRecastContainer->Add(RECAST_ABILITY, (recastID == 173 ? 174 : 173), action.recast);
         }
 
-        pushPacket<CCharRecastPacket>(this);
+        pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(this);
 
         // TODO: refactor
         //  if (this->getMijinGakure())

@@ -34,7 +34,7 @@
 
 #include "lua/luautils.h"
 
-#include "packets/char_recast.h"
+#include "packets/s2c/0x119_abil_recast.h"
 
 #include "status_effect.h"
 #include "status_effect_container.h"

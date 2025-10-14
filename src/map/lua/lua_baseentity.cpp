@@ -99,13 +99,11 @@
 #include "packets/action.h"
 #include "packets/auction_house.h"
 #include "packets/char_job_extra.h"
-#include "packets/char_recast.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/chat_message.h"
 #include "packets/conquest_map.h"
 #include "packets/entity_update.h"
-#include "packets/event.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
 #include "packets/monipulator1.h"
@@ -149,6 +147,7 @@
 #include "packets/s2c/0x0bf_registration.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/s2c/0x0f9_res.h"
+#include "packets/s2c/0x119_abil_recast.h"
 
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
@@ -6630,7 +6629,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-        PChar->pushPacket<CCharRecastPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
@@ -6909,7 +6908,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-        PChar->pushPacket<CCharRecastPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
@@ -6966,7 +6965,7 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
     PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-    PChar->pushPacket<CCharRecastPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
     PChar->pushPacket<CMenuMeritPacket>(PChar);
@@ -7079,7 +7078,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                 PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<CCharRecastPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MAGIC_DATA>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
@@ -10938,7 +10937,7 @@ void CLuaBaseEntity::recalculateSkillsTable()
     charutils::BuildingCharWeaponSkills(PChar);
 
     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-    PChar->pushPacket<CCharRecastPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
 }
 
@@ -12495,7 +12494,7 @@ void CLuaBaseEntity::addRecast(uint8 recastCont, uint16 recastID, uint32 duratio
         {
             CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
             PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-            PChar->pushPacket<CCharRecastPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         }
     }
 }
@@ -12546,7 +12545,7 @@ void CLuaBaseEntity::resetRecast(uint8 rType, uint16 recastID)
         }
 
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-        PChar->pushPacket<CCharRecastPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     }
 }
 
@@ -12567,7 +12566,7 @@ void CLuaBaseEntity::resetRecasts()
         PChar->PRecastContainer->Del(RECAST_MAGIC);
         PChar->PRecastContainer->Del(RECAST_ABILITY);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-        PChar->pushPacket<CCharRecastPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     }
 }
 
@@ -12732,7 +12731,7 @@ void CLuaBaseEntity::recalculateStats()
         PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-        PChar->pushPacket<CCharRecastPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);

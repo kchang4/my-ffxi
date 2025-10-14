@@ -190,6 +190,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x113_currencies_1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x118_currencies_2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x119_abil_recast.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x119_abil_recast.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11a_emote_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11a_emote_list.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.h

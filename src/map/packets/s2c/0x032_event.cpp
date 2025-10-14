@@ -39,8 +39,8 @@ GP_SERV_COMMAND_EVENT::GP_SERV_COMMAND_EVENT(const CCharEntity* PChar, const Eve
         packet.ActIndex = PChar->targid;
     }
 
-    packet.EventNum   = eventInfo->eventId;
-    packet.EventPara  = PChar->getZone();
+    packet.EventNum   = PChar->getZone();
+    packet.EventPara  = eventInfo->eventId;
     packet.Mode       = eventInfo->eventFlags & 0xFFFF;
     packet.EventNum2  = PChar->getZone();
     packet.EventPara2 = eventInfo->eventFlags >> 16;

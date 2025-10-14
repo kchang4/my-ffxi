@@ -37,7 +37,6 @@
 #include "ai/states/range_state.h"
 
 #include "packets/char_job_extra.h"
-#include "packets/char_recast.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
@@ -48,6 +47,7 @@
 #include "packets/objective_utility.h"
 #include "packets/quest_mission_log.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x00b_logout.h"
 #include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01e_item_num.h"
@@ -60,9 +60,9 @@
 #include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
-#include "packets/s2c/0x00b_logout.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
+#include "packets/s2c/0x119_abil_recast.h"
 
 #include "ability.h"
 #include "alliance.h"
@@ -1504,7 +1504,7 @@ namespace charutils
         PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-        PChar->pushPacket<CCharRecastPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
         PChar->pushPacket<CMenuMeritPacket>(PChar);
@@ -5063,7 +5063,7 @@ namespace charutils
                 PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<CCharRecastPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CMenuMeritPacket>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
@@ -5299,7 +5299,7 @@ namespace charutils
                 PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
                 PChar->pushPacket<CCharStatusPacket>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
-                PChar->pushPacket<CCharRecastPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
                 PChar->pushPacket<CMenuMeritPacket>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);

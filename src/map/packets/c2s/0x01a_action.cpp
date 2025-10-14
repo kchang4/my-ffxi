@@ -29,12 +29,12 @@
 #include "enums/msg_std.h"
 #include "items.h"
 #include "latent_effect_container.h"
-#include "packets/char_recast.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x02f_dig.h"
 #include "packets/s2c/0x052_eventucoff.h"
 #include "packets/s2c/0x053_systemmes.h"
+#include "packets/s2c/0x119_abil_recast.h"
 #include "recast_container.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
@@ -456,7 +456,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
                                                               EffectNotice::Silent);
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60s);
-                PChar->pushPacket<CCharRecastPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
 
                 luautils::OnPlayerMount(PChar);
             }

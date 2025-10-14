@@ -62,12 +62,12 @@
 #include "modifier.h"
 #include "navmesh.h"
 #include "notoriety_container.h"
-#include "packets/char_recast.h"
 #include "packets/pet_sync.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x058_assist.h"
 #include "packets/s2c/0x05b_wpos.h"
 #include "packets/s2c/0x0ac_command_data.h"
+#include "packets/s2c/0x119_abil_recast.h"
 #include "party.h"
 #include "petskill.h"
 #include "recast_container.h"
@@ -5868,7 +5868,7 @@ namespace battleutils
                     if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                     {
                         // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
-                        PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
+                        PCharTarget->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PCharTarget);
                     }
                 }
                 return true;
@@ -5899,7 +5899,7 @@ namespace battleutils
                 if (auto PCharTarget = dynamic_cast<CCharEntity*>(PTarget))
                 {
                     // Update target's recast state: caster's will be handled in CCharEntity::OnAbility.
-                    PCharTarget->pushPacket<CCharRecastPacket>(PCharTarget);
+                    PCharTarget->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PCharTarget);
                 }
             }
 
