@@ -149,7 +149,6 @@
 #include "packets/s2c/0x0bf_registration.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
 #include "packets/s2c/0x0f9_res.h"
-#include "packets/server_ip.h"
 
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"

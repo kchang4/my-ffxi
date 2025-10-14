@@ -60,9 +60,9 @@
 #include "packets/s2c/0x055_scenarioitem.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x00b_logout.h"
 #include "packets/s2c/0x0ac_command_data.h"
 #include "packets/s2c/0x0e0_group_comlink.h"
-#include "packets/server_ip.h"
 
 #include "ability.h"
 #include "alliance.h"
@@ -6762,7 +6762,7 @@ namespace charutils
         PChar->requestedWarp       = false; // a previous warp can get us here, which could infinitely loop. So un-request warp.
 
         PChar->PSession->zone_ipp = {};
-        PChar->pushPacket<CServerIPPacket>(PChar, 2, IPP(ipp));
+        PChar->pushPacket<GP_SERV_COMMAND_LOGOUT>(GP_GAME_LOGOUT_STATE::ZONECHANGE, IPP(ipp));
 
         PChar->status = STATUS_TYPE::DISAPPEAR;
     }
@@ -6778,7 +6778,7 @@ namespace charutils
         PChar->status              = STATUS_TYPE::SHUTDOWN;
         PChar->requestedZoneChange = true;
 
-        PChar->pushPacket<CServerIPPacket>(PChar, 1, IPP());
+        PChar->pushPacket<GP_SERV_COMMAND_LOGOUT>(GP_GAME_LOGOUT_STATE::LOGOUT, IPP());
     }
 
     // This is just an alias for SendDisconnect?

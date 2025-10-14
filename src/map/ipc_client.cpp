@@ -44,7 +44,6 @@
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"
-#include "packets/server_ip.h"
 
 #include "items/item_linkshell.h"
 #include "packets/c2s/0x0b7_assist_channel.h"
