@@ -27,9 +27,9 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/menu_merit.h"
-#include "packets/message_basic.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
 #include "packets/s2c/0x08c_merit.h"
@@ -73,11 +73,11 @@ void GP_CLI_COMMAND_MERITS::process(MapSession* PSession, CCharEntity* PChar) co
                     {
                         case GP_CLI_COMMAND_MERITS_PARAM1::Lower:
                             PChar->PMeritPoints->LowerMerit(merit);
-                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_DECREASE);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_DECREASE);
                             break;
                         case GP_CLI_COMMAND_MERITS_PARAM1::Raise:
                             PChar->PMeritPoints->RaiseMerit(merit);
-                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_INCREASE);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, Param2, PMerit->count, MSGBASIC_MERIT_INCREASE);
                             break;
                     }
 
