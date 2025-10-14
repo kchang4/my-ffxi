@@ -32,7 +32,8 @@
 #include "packets/char_sync.h"
 #include "packets/char_update.h"
 #include "packets/entity_update.h"
-#include "packets/event.h"
+#include "packets/s2c/0x032_event.h"
+#include "packets/s2c/0x034_eventnum.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/s2c/0x033_eventstr.h"
@@ -3274,7 +3275,14 @@ void CCharEntity::tryStartNextEvent()
 
     if (currentEvent->strings.empty())
     {
-        pushPacket<CEventPacket>(this, currentEvent);
+        if (currentEvent->params.size() > 0 || currentEvent->textTable != -1)
+        {
+            pushPacket<GP_SERV_COMMAND_EVENTNUM>(this, currentEvent);
+        }
+        else
+        {
+            pushPacket<GP_SERV_COMMAND_EVENT>(this, currentEvent);
+        }
     }
     else
     {

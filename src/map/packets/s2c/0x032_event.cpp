@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,22 +19,29 @@
 ===========================================================================
 */
 
-#ifndef _CEVENTPACKET_H
-#define _CEVENTPACKET_H
+#include "0x032_event.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 #include "event_info.h"
 
-#include <string>
-
-#include "basic.h"
-
-class CCharEntity;
-
-class CEventPacket : public CBasicPacket
+GP_SERV_COMMAND_EVENT::GP_SERV_COMMAND_EVENT(const CCharEntity* PChar, const EventInfo* eventInfo)
 {
-public:
-    CEventPacket(CCharEntity* PChar, EventInfo* eventInfo);
-};
+    auto& packet = this->data();
 
-#endif
+    if (const CBaseEntity* PNpc = eventInfo->targetEntity)
+    {
+        packet.UniqueNo = PNpc->id;
+        packet.ActIndex = PNpc->targid;
+    }
+    else
+    {
+        packet.UniqueNo = PChar->id;
+        packet.ActIndex = PChar->targid;
+    }
+
+    packet.EventNum   = eventInfo->eventId;
+    packet.EventPara  = PChar->getZone();
+    packet.Mode       = eventInfo->eventFlags & 0xFFFF;
+    packet.EventNum2  = PChar->getZone();
+    packet.EventPara2 = eventInfo->eventFlags >> 16;
+}
