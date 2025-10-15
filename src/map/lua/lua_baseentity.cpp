@@ -108,7 +108,6 @@
 #include "packets/event.h"
 #include "packets/menu_jobpoints.h"
 #include "packets/menu_merit.h"
-#include "packets/message_basic.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
@@ -120,6 +119,7 @@
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"
 #include "packets/s2c/0x027_talknumwork2.h"
+#include "packets/s2c/0x029_battle_message.h"
 #include "packets/s2c/0x02a_talknumwork.h"
 #include "packets/s2c/0x02d_battle_message2.h"
 #include "packets/s2c/0x02e_openmogmenu.h"
@@ -458,12 +458,12 @@ void CLuaBaseEntity::messageBasic(uint16 messageID, sol::object const& p0, sol::
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<CMessageBasicPacket>(m_PBaseEntity, PTarget, param0, param1, messageID);
+        static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<MSGBASIC_ID>(messageID));
     }
     else
     {
         // Broadcast in range
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<CMessageBasicPacket>(m_PBaseEntity, PTarget, param0, param1, messageID));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PTarget, param0, param1, static_cast<MSGBASIC_ID>(messageID)));
     }
 }
 
@@ -511,7 +511,7 @@ void CLuaBaseEntity::messagePublic(uint16 messageID, CLuaBaseEntity const* PEnti
 
     if (PEntity != nullptr)
     {
-        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<CMessageBasicPacket>(m_PBaseEntity, PEntity->GetBaseEntity(), param0, param1, messageID));
+        m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PBaseEntity, PEntity->GetBaseEntity(), param0, param1, static_cast<MSGBASIC_ID>(messageID)));
     }
 }
 
@@ -7131,7 +7131,7 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                                 resetRecast(RECAST_ABILITY, 205);
                             }
 
-                            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_AUTO_EXCEEDS_CAPACITY);
+                            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, MSGBASIC_AUTO_EXCEEDS_CAPACITY);
                             petutils::DespawnPet(PChar);
                             return PChar->m_LevelRestriction;
                         }
@@ -8362,8 +8362,8 @@ bool CLuaBaseEntity::setEminenceProgress(uint16 recordID, uint32 progress, sol::
 
     if (total && progressNotify)
     {
-        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, recordID, 0, MSGBASIC_ROE_RECORD);
-        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, progress, total, MSGBASIC_ROE_PROGRESS);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, recordID, 0, MSGBASIC_ROE_RECORD);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, progress, total, MSGBASIC_ROE_PROGRESS);
     }
 
     return result;
@@ -10731,7 +10731,7 @@ void CLuaBaseEntity::addLearnedAbility(uint16 abilityID)
         charutils::addAbility(PChar, abilityID);
         charutils::SaveLearnedAbilities(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-        PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, 442);
+        PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, static_cast<MSGBASIC_ID>(442));
     }
 }
 
@@ -10837,7 +10837,7 @@ void CLuaBaseEntity::addSpell(uint16 spellID, sol::variadic_args va)
 
         if (!silentLog)
         {
-            PChar->pushPacket<CMessageBasicPacket>(PChar, PChar, 0, 0, 23);
+            PChar->pushPacket<GP_SERV_COMMAND_BATTLE_MESSAGE>(PChar, PChar, 0, 0, static_cast<MSGBASIC_ID>(23));
         }
 
         if (save)

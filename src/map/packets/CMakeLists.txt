@@ -47,8 +47,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/message_basic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator2.cpp

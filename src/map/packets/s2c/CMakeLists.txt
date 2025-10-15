@@ -25,6 +25,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x025_item_trade_mylist.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x027_talknumwork2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x029_battle_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02a_talknumwork.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02a_talknumwork.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02d_battle_message2.h
