@@ -589,11 +589,11 @@ namespace synthutils
                 case 3: // 1 in 4
                     chanceHQ = 25.0f;
                     break;
-                case 2: // 1 in 20
-                    chanceHQ = 5.0f;
+                case 2: // 1 in 16
+                    chanceHQ = 6.25f;
                     break;
-                case 1: // 1 in 100
-                    chanceHQ = 1.0f;
+                case 1: // 1 in 64
+                    chanceHQ = 1.5625f;
                     break;
                 default: // No chance
                     chanceHQ = 0.0f;
