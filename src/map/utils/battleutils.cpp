@@ -6937,4 +6937,53 @@ namespace battleutils
         }
         return 1.0;
     }
+
+    void addEcosystemKillerEffects(CBattleEntity* PBattleEntity)
+    {
+        // Killer Effect
+        switch (PBattleEntity->m_EcoSystem)
+        {
+            case ECOSYSTEM::AMORPH:
+                PBattleEntity->addModifier(Mod::BIRD_KILLER, 5);
+                break;
+            case ECOSYSTEM::AQUAN:
+                PBattleEntity->addModifier(Mod::AMORPH_KILLER, 5);
+                break;
+            case ECOSYSTEM::ARCANA:
+                PBattleEntity->addModifier(Mod::UNDEAD_KILLER, 5);
+                break;
+            case ECOSYSTEM::BEAST:
+                PBattleEntity->addModifier(Mod::LIZARD_KILLER, 5);
+                break;
+            case ECOSYSTEM::BIRD:
+                PBattleEntity->addModifier(Mod::AQUAN_KILLER, 5);
+                break;
+            case ECOSYSTEM::DEMON:
+                PBattleEntity->addModifier(Mod::DRAGON_KILLER, 5);
+                break;
+            case ECOSYSTEM::DRAGON:
+                PBattleEntity->addModifier(Mod::DEMON_KILLER, 5);
+                break;
+            case ECOSYSTEM::LIZARD:
+                PBattleEntity->addModifier(Mod::VERMIN_KILLER, 5);
+                break;
+            case ECOSYSTEM::LUMINION:
+                PBattleEntity->addModifier(Mod::LUMINIAN_KILLER, 5);
+                break;
+            case ECOSYSTEM::LUMINIAN:
+                PBattleEntity->addModifier(Mod::LUMINION_KILLER, 5);
+                break;
+            case ECOSYSTEM::PLANTOID:
+                PBattleEntity->addModifier(Mod::BEAST_KILLER, 5);
+                break;
+            case ECOSYSTEM::UNDEAD:
+                PBattleEntity->addModifier(Mod::ARCANA_KILLER, 5);
+                break;
+            case ECOSYSTEM::VERMIN:
+                PBattleEntity->addModifier(Mod::PLANTOID_KILLER, 5);
+                break;
+            default:
+                break;
+        }
+    }
 }; // namespace battleutils
