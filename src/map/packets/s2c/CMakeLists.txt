@@ -6,6 +6,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_item_max.h

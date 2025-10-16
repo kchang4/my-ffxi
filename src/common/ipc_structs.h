@@ -24,10 +24,10 @@
 #include "cbasetypes.h"
 
 #include "common/regional_event.h"
+#include "enums/chat_message_type.h"
 
 #include "map/enums/msg_std.h"
 #include "map/enums/party_kind.h"
-#include "map/packets/chat_message.h"
 
 #include <string>
 #include <vector>

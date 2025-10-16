@@ -92,6 +92,7 @@
 #include "entities/npcentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
+#include "enums/chat_message_area.h"
 #include "enums/item_lockflg.h"
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
@@ -101,7 +102,7 @@
 #include "packets/char_job_extra.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/chat_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/conquest_map.h"
 #include "packets/entity_update.h"
 #include "packets/menu_jobpoints.h"
@@ -329,7 +330,7 @@ void CLuaBaseEntity::printToPlayer(std::string const& message, sol::object const
 
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        PChar->pushPacket<CChatMessagePacket>(PChar, messageType, message, name);
+        PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, messageType, message, name);
     }
 }
 
@@ -350,7 +351,7 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    // see scripts\globals\msg.lua or src\map\packets\chat_message.h for values
+    // see scripts\globals\msg.lua or src\map\packets\s2c\0x017_chat_std.h for values
     CHAT_MESSAGE_TYPE messageLook  = (arg1 == sol::lua_nil) ? MESSAGE_SYSTEM_1 : arg1.as<CHAT_MESSAGE_TYPE>();
     ChatMessageArea   messageRange = (arg2 == sol::lua_nil) ? ChatMessageArea::System : arg2.as<ChatMessageArea>();
     std::string       name         = (arg3 == sol::lua_nil) ? "" : arg3.as<std::string>();
@@ -368,12 +369,12 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
     }
     else if (messageRange == ChatMessageArea::Say)
     {
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, messageLook, message, name));
     }
     else if (messageRange == ChatMessageArea::Shout)
     {
-        PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
-        PChar->pushPacket(std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INSHOUT, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, messageLook, message, name));
+        PChar->pushPacket(std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, messageLook, message, name));
     }
     else if (messageRange == ChatMessageArea::Party)
     {
@@ -407,7 +408,7 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
             .messageType = messageLook,
         });
 
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, messageLook, message, name));
     }
     else if (messageRange == ChatMessageArea::Unity)
     {
@@ -419,7 +420,7 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
             .messageType   = messageLook,
         });
 
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, messageLook, message, name));
     }
     else if (messageRange == ChatMessageArea::Assist)
     {
@@ -432,11 +433,11 @@ void CLuaBaseEntity::printToArea(std::string const& message, sol::object const& 
             .messageType = messageLook,
         });
 
-        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<CChatMessagePacket>(PChar, messageLook, message, name));
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_CHAT_STD>(PChar, messageLook, message, name));
     }
     else
     {
-        ShowError("CLuaBaseEntity::printToArea : invalid message area/messageRange value %u given by script.", messageRange);
+        ShowError("CLuaBaseEntity::printToArea : invalid message area/messageRange value %u given by script.", static_cast<uint8_t>(messageRange));
     }
 }
 
@@ -609,7 +610,7 @@ void CLuaBaseEntity::customMenu(sol::object const& obj)
         PChar && obj.get_type() == sol::type::table)
     {
         auto menuString = luautils::SetCustomMenuContext(PChar, obj.as<sol::table>());
-        PChar->pushPacket<CChatMessagePacket>(PChar, MESSAGE_GMPROMPT, menuString.c_str(), "_CUSTOM_MENU");
+        PChar->pushPacket<GP_SERV_COMMAND_CHAT_STD>(PChar, MESSAGE_GMPROMPT, menuString.c_str(), "_CUSTOM_MENU");
     }
 }
 

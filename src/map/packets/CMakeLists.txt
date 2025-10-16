@@ -21,8 +21,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
