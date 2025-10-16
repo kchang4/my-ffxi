@@ -1981,7 +1981,7 @@ void CZoneEntities::ZoneServer(timer::time_point tick)
             }
 
             PChar->clearPacketList();
-            charutils::HomePoint(PChar, false);
+            charutils::HomePoint(PChar, PChar->isDead());
         }
         else if (PChar->loc.destination != 0xFFFF)
         {

@@ -2409,7 +2409,7 @@ void CCharEntity::OnDeathTimer()
     TracyZoneScoped;
 
     charutils::SetCharVar(this, "expLost", 0);
-    charutils::HomePoint(this, true);
+    requestedWarp = true; // zone entities will warp us on the next tick
 }
 
 void CCharEntity::OnRaise()
