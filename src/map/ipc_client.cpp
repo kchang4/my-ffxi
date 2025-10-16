@@ -897,7 +897,7 @@ void IPCClient::handleMessage_EntityInformationResponse(const IPP& ipp, const ip
 
             PChar->clearPacketList();
 
-            charutils::SendToZone(PChar, PChar->loc.destination);
+            PChar->requestedZoneChange = true;
         }
     }
 }
@@ -924,7 +924,7 @@ void IPCClient::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
 
         PChar->clearPacketList();
 
-        charutils::SendToZone(PChar, PChar->loc.destination);
+        PChar->requestedWarp = true;
     }
 }
 

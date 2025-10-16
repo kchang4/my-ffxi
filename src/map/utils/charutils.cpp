@@ -6795,7 +6795,7 @@ namespace charutils
 
         PChar->clearPacketList();
 
-        SendToZone(PChar, PChar->loc.destination);
+        PChar->requestedZoneChange = true;
     }
 
     void HomePoint(CCharEntity* PChar, bool resetHPMP)
