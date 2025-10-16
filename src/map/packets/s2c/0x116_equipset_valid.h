@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,23 @@
 ===========================================================================
 */
 
-#ifndef _CAddtoEquipSet_H
-#define _CAddtoEquipSet_H
+#pragma once
 
-#include "basic.h"
-#include "common/cbasetypes.h"
+#include "base.h"
+#include "packets/c2s/0x052_equipset_check.h"
 
 struct GP_CLI_COMMAND_EQUIPSET_CHECK;
 class CCharEntity;
 
-class CAddtoEquipSet : public CBasicPacket
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0116
+// This packet is sent by the server to confirm (or deny) a clients equipment set item change.
+class GP_SERV_COMMAND_EQUIPSET_VALID final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_EQUIPSET_VALID, GP_SERV_COMMAND_EQUIPSET_VALID>
 {
 public:
-    CAddtoEquipSet(const CCharEntity* PChar, const GP_CLI_COMMAND_EQUIPSET_CHECK& data);
-};
+    struct PacketData
+    {
+        equipsetrequestitem_t Items[17]; // PS2: (New; did not exist.)
+    };
 
-#endif
+    GP_SERV_COMMAND_EQUIPSET_VALID(const CCharEntity* PChar, const GP_CLI_COMMAND_EQUIPSET_CHECK& data);
+};

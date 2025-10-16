@@ -39,8 +39,8 @@
 
 #include "lua/luautils.h"
 
-#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x053_systemmes.h"
 #include "packets/s2c/0x0cc_linkshell_message.h"
 #include "packets/s2c/0x0dc_group_solicit_req.h"

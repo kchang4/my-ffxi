@@ -28,8 +28,8 @@
 
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
-#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x027_talknumwork2.h"
 #include "packets/s2c/0x02a_talknumwork.h"

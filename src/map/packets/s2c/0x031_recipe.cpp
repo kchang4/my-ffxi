@@ -123,9 +123,10 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
                     packet.Details.itemcount[idx] = itemCount;
                     idx++;
                 }
-
-                packet.Details.Type = GP_SERV_COMMAND_RECIPE_TYPE::RecipeDetail1;
             }
+
+            packet.Details.Type = GP_SERV_COMMAND_RECIPE_TYPE::RecipeDetail1;
+            break;
         }
         case GP_SERV_COMMAND_RECIPE_TYPE::RecipeList:
         {
@@ -147,7 +148,7 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
             const auto rset  = db::preparedStmt(query, minSkill, maxSkill, offset);
             FOR_DB_MULTIPLE_RESULTS(rset)
             {
-                if (idx == sizeof(packet.List.itemnum))
+                if (idx == 16)
                 {
                     // The 17th result of a query is not displayed in the menu, but instead is used to signal
                     // to the client that another page is available.  This item ID is stored at 0x32.
@@ -160,6 +161,7 @@ GP_SERV_COMMAND_RECIPE::GP_SERV_COMMAND_RECIPE(GP_SERV_COMMAND_RECIPE_TYPE type,
             }
 
             packet.List.Type = GP_SERV_COMMAND_RECIPE_TYPE::RecipeList;
+            break;
         }
         default:
             break;

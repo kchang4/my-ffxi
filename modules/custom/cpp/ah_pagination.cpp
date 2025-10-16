@@ -10,6 +10,7 @@
 
 #include "common/timer.h"
 
+#include "map/enums/chat_message_type.h"
 #include "map/packet_system.h"
 #include "map/packets/auction_house.h"
 #include "map/packets/basic.h"

@@ -31,8 +31,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.cpp

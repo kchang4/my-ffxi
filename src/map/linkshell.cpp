@@ -24,8 +24,8 @@
 #include <cstring>
 
 #include "packets/char_status.h"
-#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x009_message.h"
+#include "packets/s2c/0x017_chat_std.h"
 #include "packets/s2c/0x01d_item_same.h"
 #include "packets/s2c/0x01f_item_list.h"
 #include "packets/s2c/0x020_item_attr.h"

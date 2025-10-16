@@ -202,5 +202,7 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.cpp
     PARENT_SCOPE
 )
