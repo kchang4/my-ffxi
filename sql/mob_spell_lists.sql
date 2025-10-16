@@ -5721,7 +5721,39 @@ INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,108,1,255); -- Regen (
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,250,1,255); -- ice_spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',555,254,1,255); -- Blind (1~255)
 
--- Next Available: 556
+-- Ace of Batons (BLM) Windurst Mission 9-2 (556)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Batons',556,40,1,255);  -- Sleep (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Batons',556,162,1,255); -- Stone IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Batons',556,204,1,255); -- Flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Batons',556,240,1,255); -- Drown (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Batons',556,252,1,255); -- Stun (1~255)
+
+-- Ace of Coins (RDM) Windurst Mission 9-2 (557)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,34,1,255);  -- Diaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,53,1,255);  -- Blink (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,145,1,255); -- Fire II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,150,1,255); -- Blizzard II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,161,1,255); -- Stone III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,170,1,255); -- Water II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Coins',557,231,1,255); -- Bio II (1~255)
+
+-- Ace of Cups (WHM) Windurst Mission 9-2 (558)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,5,1,255);  -- Cure V (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,15,1,255); -- Paralyna (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,16,1,255); -- Blindna (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,17,1,255); -- Silena (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,21,1,255); -- Holy (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,24,1,255); -- Dia II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,34,1,255); -- Diaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,53,1,255); -- Blink (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Cups',558,54,1,255); -- Stoneskin (1~255)
+
+-- Ace of Cups (PLD) Windurst Mission 9-2 (559)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Swords',559,4,1,255);   -- Cure IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Swords',559,29,1,255);  -- Banish II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ace_of_Swords',559,112,1,255); -- Flash (1~255)
+
+-- Next Available: 560
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
