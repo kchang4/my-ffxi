@@ -106,8 +106,8 @@ GP_SERV_COMMAND_MISCDATA::HOMEPOINTS::HOMEPOINTS(CCharEntity* PChar)
     std::memcpy(packet.waypoint, PChar->teleport.waypoints.access, sizeof(packet.waypoint));
 
     // Everything below is untested/unimplemented
-    packet.atmos        = PChar->teleport.pastMaw;
-    packet.eschanPortal = PChar->teleport.eschanPortal;
+    // packet.atmos        = PChar->teleport.pastMaw;
+    // packet.eschanPortal = PChar->teleport.eschanPortal;
     // packet.telepoint = PChar->teleport.telepoint;
     // packet.unknown00 = PChar->teleport.unknown00;
 }
