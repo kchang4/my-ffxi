@@ -898,6 +898,12 @@ void IPCClient::handleMessage_EntityInformationResponse(const IPP& ipp, const ip
             PChar->clearPacketList();
 
             PChar->requestedZoneChange = true;
+
+            // Save pet if any
+            if (PChar->shouldPetPersistThroughZoning())
+            {
+                PChar->setPetZoningInfo();
+            }
         }
     }
 }
@@ -925,6 +931,12 @@ void IPCClient::handleMessage_SendPlayerToLocation(const IPP& ipp, const ipc::Se
         PChar->clearPacketList();
 
         PChar->requestedWarp = true;
+
+        // Save pet if any
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
     }
 }
 

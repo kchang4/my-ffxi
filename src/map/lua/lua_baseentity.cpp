@@ -3256,8 +3256,8 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             PChar->m_moghouseID        = 0;
             PChar->requestedZoneChange = true;
 
-            // Edge case for !zone and cutscenes teleporting you
-            if (PChar->PPet)
+            // Save pet if any
+            if (PChar->shouldPetPersistThroughZoning())
             {
                 PChar->setPetZoningInfo();
             }
@@ -3287,6 +3287,12 @@ void CLuaBaseEntity::warp()
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         PChar->requestedWarp = true;
+
+        // Save pet if any
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
     }
 }
 

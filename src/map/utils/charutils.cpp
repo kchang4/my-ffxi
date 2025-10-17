@@ -6765,6 +6765,12 @@ namespace charutils
         PChar->pushPacket<GP_SERV_COMMAND_LOGOUT>(GP_GAME_LOGOUT_STATE::ZONECHANGE, IPP(ipp));
 
         PChar->status = STATUS_TYPE::DISAPPEAR;
+
+        // Save pet if any
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
     }
 
     void SendDisconnect(CCharEntity* PChar)
@@ -6777,6 +6783,12 @@ namespace charutils
         PChar->loc.destination     = 0xFFFF;
         PChar->status              = STATUS_TYPE::SHUTDOWN;
         PChar->requestedZoneChange = true;
+
+        // Save pet if any
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
 
         PChar->pushPacket<GP_SERV_COMMAND_LOGOUT>(GP_GAME_LOGOUT_STATE::LOGOUT, IPP());
     }
@@ -6796,6 +6808,12 @@ namespace charutils
         PChar->clearPacketList();
 
         PChar->requestedZoneChange = true;
+
+        // Save pet if any
+        if (PChar->shouldPetPersistThroughZoning())
+        {
+            PChar->setPetZoningInfo();
+        }
     }
 
     void HomePoint(CCharEntity* PChar, bool resetHPMP)
