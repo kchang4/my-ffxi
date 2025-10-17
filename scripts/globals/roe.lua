@@ -213,7 +213,7 @@ local function completeRecord(player, record)
 
     -- NOTE: To preserve retail order, messaging is here, but item is given if able at the beginning of this
     -- function, since if it fails, it will need to bail out.
-    if rewards['item'] then
+    if not player:getEminenceCompleted(record) and rewards['item'] then
         local itemQty   = type(rewards['item'][1]) == 'table' and rewards['item'][1][2] or 1
         local itemId    = type(rewards['item'][1]) == 'table' and rewards['item'][1][1] or rewards['item'][1]
         local messageId = itemQty > 1 and xi.msg.basic.ROE_BONUS_ITEM_PLURAL or xi.msg.basic.ROE_BONUS_ITEM
