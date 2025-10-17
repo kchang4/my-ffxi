@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,15 @@
 ===========================================================================
 */
 
-#ifndef _CAddtoEquipSet_H
-#define _CAddtoEquipSet_H
+#pragma once
 
-#include "basic.h"
-#include "common/cbasetypes.h"
-
-struct GP_CLI_COMMAND_EQUIPSET_CHECK;
-class CCharEntity;
-
-class CAddtoEquipSet : public CBasicPacket
+enum class ChatMessageArea : uint8_t
 {
-public:
-    CAddtoEquipSet(const CCharEntity* PChar, const GP_CLI_COMMAND_EQUIPSET_CHECK& data);
+    System = 0, // All zones worldwide
+    Say    = 1, // Say range
+    Shout  = 2, // Shout
+    Party  = 3, // Party and Alliance
+    Yell   = 4, // Yell zones only
+    Unity  = 5, // Currently -all- unities
+    Assist = 6, // Assist zones
 };
-
-#endif

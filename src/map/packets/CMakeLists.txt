@@ -21,8 +21,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/chat_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/conquest_map.h
     ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
@@ -33,8 +31,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/macroequipset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.cpp
@@ -55,8 +51,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/server_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/status_effects.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/synth_suggestion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/objective_utility.h
     ${CMAKE_CURRENT_SOURCE_DIR}/zone_in.cpp

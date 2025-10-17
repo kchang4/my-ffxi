@@ -6,6 +6,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01b_job_info.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x01c_item_max.h
@@ -41,6 +43,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x02f_dig.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x030_effect.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x030_effect.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x031_recipe.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x031_recipe.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x032_event.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x032_event.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x033_eventstr.h
@@ -198,5 +202,7 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x11e_jump.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x115_fish.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x116_equipset_valid.cpp
     PARENT_SCOPE
 )
