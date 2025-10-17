@@ -41,7 +41,6 @@
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
 #include "packets/menu_jobpoints.h"
-#include "packets/menu_merit.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
@@ -106,6 +105,7 @@
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 #include "packets/s2c/0x029_battle_message.h"
+#include "packets/s2c/0x063_miscdata.h"
 #include "packets/s2c/0x110_unity.h"
 #include "packets/s2c/0x111_roe_activelog.h"
 #include "packets/s2c/0x112_roe_log.h"
@@ -1507,7 +1507,7 @@ namespace charutils
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
         PChar->pushPacket<CMonipulatorPacket2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
@@ -5065,7 +5065,7 @@ namespace charutils
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-                PChar->pushPacket<CMenuMeritPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
                 PChar->pushPacket<CMonipulatorPacket2>(PChar);
                 PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
@@ -5301,7 +5301,7 @@ namespace charutils
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
-                PChar->pushPacket<CMenuMeritPacket>(PChar);
+                PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
                 PChar->pushPacket<CMonipulatorPacket1>(PChar);
                 PChar->pushPacket<CMonipulatorPacket2>(PChar);
                 PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
@@ -5323,7 +5323,7 @@ namespace charutils
 
         if (onLimitMode)
         {
-            PChar->pushPacket<CMenuMeritPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
             PChar->pushPacket<CMonipulatorPacket1>(PChar);
             PChar->pushPacket<CMonipulatorPacket2>(PChar);
         }

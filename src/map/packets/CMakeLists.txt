@@ -35,8 +35,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/map_marker.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_merit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp

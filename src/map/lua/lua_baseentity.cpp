@@ -105,7 +105,6 @@
 #include "packets/conquest_map.h"
 #include "packets/entity_update.h"
 #include "packets/menu_jobpoints.h"
-#include "packets/menu_merit.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
@@ -140,6 +139,7 @@
 #include "packets/s2c/0x05f_music.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
+#include "packets/s2c/0x063_miscdata.h"
 #include "packets/s2c/0x077_entity_vis.h"
 #include "packets/s2c/0x086_guild_open.h"
 #include "packets/s2c/0x0aa_magic_data.h"
@@ -6633,7 +6633,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
         PChar->pushPacket<CMonipulatorPacket2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
@@ -6912,7 +6912,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
         PChar->pushPacket<CMonipulatorPacket2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
@@ -6969,7 +6969,7 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
     PChar->pushPacket<CCharStatusPacket>(PChar);
-    PChar->pushPacket<CMenuMeritPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
     PChar->pushPacket<CMonipulatorPacket1>(PChar);
     PChar->pushPacket<CMonipulatorPacket2>(PChar);
     PChar->pushPacket<CCharSyncPacket>(PChar);
@@ -9060,7 +9060,7 @@ void CLuaBaseEntity::setMerits(uint8 numPoints)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PMeritPoints->SetMeritPoints(numPoints);
-    PChar->pushPacket<CMenuMeritPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
     PChar->pushPacket<CMonipulatorPacket1>(PChar);
     PChar->pushPacket<CMonipulatorPacket2>(PChar);
 
@@ -12735,7 +12735,7 @@ void CLuaBaseEntity::recalculateStats()
         PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_COMMAND_DATA>(PChar);
         PChar->pushPacket<CCharStatusPacket>(PChar);
-        PChar->pushPacket<CMenuMeritPacket>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
         PChar->pushPacket<CMonipulatorPacket1>(PChar);
         PChar->pushPacket<CMonipulatorPacket2>(PChar);
         PChar->pushPacket<CCharSyncPacket>(PChar);
