@@ -26,6 +26,7 @@
 #include "enums/key_items.h"
 #include "job_points.h"
 #include "merit.h"
+#include "monstrosity.h"
 #include "status_effect_container.h"
 #include "utils/charutils.h"
 
@@ -73,6 +74,38 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY1::MONSTROSITY1(CCharEntity* PChar)
 
     packet.type      = pkt_type::monstrosity1;
     packet.unknown06 = sizeof(PacketData) - 8;
+
+    // NOTE: These packets have to be at least partially populated, or the
+    // player will lose their abilities and get a big selection of incorrect traits.
+
+    if (PChar->m_PMonstrosity == nullptr)
+    {
+        return;
+    }
+
+    packet.species = PChar->m_PMonstrosity->Species;
+    packet.flags   = PChar->m_PMonstrosity->Flags;
+
+    const int32 infamy = charutils::GetPoints(PChar, "infamy");
+
+    // Monstrosity Rank (0 = Mon, 1 = NM, 2 = HNM)
+    // The ranks are listed as:
+    // 0~10,000 Mon. (Monster)
+    // 10,001~20,000 NM (Notorious Monster)
+    // 20,001+ HNM (Highly Notorious Monster)
+    packet.rank = static_cast<uint8>(std::min(2, (infamy - 1) / 10000));
+
+    packet.unknown1[0] = 0xEC;
+    packet.unknown1[1] = 0x00;
+    packet.infamy      = infamy;
+    packet.unknown2    = 0x2C;
+
+    // Bitpacked 2-bit values. 0 = no instincts from that species,
+    // 1 == first instinct, 2 == first and second instinct, 3 == first, second, and third instinct.
+    std::memcpy(packet.instincts, PChar->m_PMonstrosity->instincts.data(), sizeof(packet.instincts));
+
+    // Mapped onto the item ID for these creatures. (00 doesn't exist, 01 is rabbit, 02 is behemoth, etc.)
+    std::memcpy(packet.levels, PChar->m_PMonstrosity->levels.data(), sizeof(packet.levels));
 }
 
 GP_SERV_COMMAND_MISCDATA::MONSTROSITY2::MONSTROSITY2(CCharEntity* PChar)

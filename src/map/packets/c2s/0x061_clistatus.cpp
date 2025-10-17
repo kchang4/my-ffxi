@@ -24,7 +24,6 @@
 #include "entities/charentity.h"
 #include "packets/char_job_extra.h"
 #include "packets/char_status.h"
-#include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
@@ -48,7 +47,7 @@ void GP_CLI_COMMAND_CLISTATUS::process(MapSession* PSession, CCharEntity* PChar)
     PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS2>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_ABIL_RECAST>(PChar);
     PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
-    PChar->pushPacket<CMonipulatorPacket1>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
     PChar->pushPacket<CMonipulatorPacket2>(PChar);
 
     if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
