@@ -19,16 +19,29 @@
 ===========================================================================
 */
 
-#pragma once
+#include "0x063_miscdata_job_points.h"
 
-enum class GP_SERV_COMMAND_MISCDATA_TYPE : uint16_t
+#include "entities/charentity.h"
+#include "enums/key_items.h"
+#include "job_points.h"
+#include "utils/charutils.h"
+
+GP_SERV_COMMAND_MISCDATA::JOB_POINTS::JOB_POINTS(const CCharEntity* PChar)
 {
-    Merits       = 0x02,
-    Monstrosity1 = 0x03,
-    Monstrosity2 = 0x04,
-    JobPoints    = 0x05,
-    Homepoints   = 0x06,
-    Unity        = 0x07,
-    StatusIcons  = 0x09,
-    Unknown      = 0x0A,
-};
+    auto& packet = this->data();
+
+    packet.type      = GP_SERV_COMMAND_MISCDATA_TYPE::JobPoints;
+    packet.unknown06 = sizeof(PacketData);
+
+    packet.access = charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER);
+
+    const JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
+
+    // Start at WAR (1) since NON (0) is unused
+    for (uint8 i = 1; i < MAX_JOBTYPE; i++)
+    {
+        packet.jobs[i].capacityPoints = PJobPoints[i].capacityPoints;
+        packet.jobs[i].currentJp      = PJobPoints[i].currentJp;
+        packet.jobs[i].totalJpSpent   = PJobPoints[i].totalJpSpent;
+    }
+}

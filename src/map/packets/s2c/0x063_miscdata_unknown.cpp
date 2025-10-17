@@ -1,7 +1,7 @@
-﻿/*
+/*
 ===========================================================================
 
-  Copyright (c) 2021 Topaz Dev Teams
+  Copyright (c) 2025 LandSandBoat Dev Teams
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,19 +19,17 @@
 ===========================================================================
 */
 
-#ifndef _CMENUUNITYPACKET_H
-#define _CMENUUNITYPACKET_H
+#include "0x063_miscdata_unknown.h"
 
-#include "common/cbasetypes.h"
+#include "entities/charentity.h"
 
-#include "basic.h"
-
-class CCharEntity;
-
-class CMenuUnityPacket : public CBasicPacket
+GP_SERV_COMMAND_MISCDATA::UNKNOWN::UNKNOWN(CCharEntity* PChar)
 {
-public:
-    CMenuUnityPacket(CCharEntity* PChar);
-};
+    auto& packet = this->data();
 
-#endif
+    packet.type      = GP_SERV_COMMAND_MISCDATA_TYPE::Unknown;
+    packet.unknown06 = sizeof(PacketData);
+
+    // Purpose of this packet is unknown
+    // Data field is left as zeros
+}

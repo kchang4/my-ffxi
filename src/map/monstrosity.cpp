@@ -35,7 +35,6 @@
 #include "lua/luautils.h"
 
 #include "packets/char_job_extra.h"
-#include "packets/s2c/0x063_miscdata.h"
 #include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x061_clistatus.h"
@@ -46,6 +45,7 @@
 
 #include "packets/c2s/0x01a_action.h"
 #include "packets/c2s/0x102_extended_job.h"
+#include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "status_effect.h"
 #include "status_effect_container.h"
 

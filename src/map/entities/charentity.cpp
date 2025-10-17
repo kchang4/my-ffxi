@@ -79,7 +79,7 @@
 #include "notoriety_container.h"
 #include "packets/char_job_extra.h"
 #include "packets/s2c/0x029_battle_message.h"
-#include "packets/s2c/0x063_miscdata.h"
+#include "packets/s2c/0x063_miscdata_status_icons.h"
 #include "petskill.h"
 #include "spell.h"
 #include "status_effect_container.h"

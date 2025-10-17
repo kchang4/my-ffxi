@@ -46,6 +46,7 @@
 #include "ipc_client.h"
 #include "item_container.h"
 #include "items.h"
+#include "job_points.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
 #include "mob_modifier.h"
@@ -136,7 +137,9 @@
 #include "packets/s2c/0x05f_music.h"
 #include "packets/s2c/0x061_clistatus.h"
 #include "packets/s2c/0x062_clistatus2.h"
-#include "packets/s2c/0x063_miscdata.h"
+#include "packets/s2c/0x063_miscdata_job_points.h"
+#include "packets/s2c/0x063_miscdata_merits.h"
+#include "packets/s2c/0x063_miscdata_monstrosity.h"
 #include "packets/s2c/0x077_entity_vis.h"
 #include "packets/s2c/0x086_guild_open.h"
 #include "packets/s2c/0x0aa_magic_data.h"
@@ -9121,7 +9124,7 @@ void CLuaBaseEntity::setCapacityPoints(uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetCapacityPoints(amount);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOBPOINTS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9142,7 +9145,7 @@ void CLuaBaseEntity::setJobPoints(uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->SetJobPoints(amount);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOBPOINTS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9162,7 +9165,7 @@ void CLuaBaseEntity::addJobPoints(uint8 jobID, uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->AddJobPoints(jobID, amount);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOBPOINTS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9182,7 +9185,7 @@ void CLuaBaseEntity::delJobPoints(uint8 jobID, uint16 amount)
     CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->PJobPoints->DelJobPoints(jobID, amount);
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOBPOINTS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
@@ -9233,7 +9236,7 @@ void CLuaBaseEntity::masterJob()
         }
     }
 
-    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOBPOINTS>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOB_POINTS>(PChar);
 }
 
 /************************************************************************
