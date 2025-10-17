@@ -13302,10 +13302,10 @@ INSERT INTO `mob_groups` VALUES (36,688,206,'Chahnameeds_Stomach',0,128,0,0,0,50
 INSERT INTO `mob_groups` VALUES (37,686,206,'Chahnameeds_Intestines',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (38,687,206,'Chahnameeds_Liver',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (39,685,206,'Chahnameed',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (40,160,206,'Annihilated_Anthony',0,128,0,7500,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (41,3612,206,'Shredded_Samson',0,128,0,7500,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (42,2588,206,'Mauled_Murdock',0,128,0,7500,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (43,3227,206,'Punctured_Percy',0,128,0,7500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (40,160,206,'Annihilated_Anthony',0,128,0,7500,7500,63,63,0);
+INSERT INTO `mob_groups` VALUES (41,3612,206,'Shredded_Samson',0,128,0,7500,7500,62,62,0);
+INSERT INTO `mob_groups` VALUES (42,2588,206,'Mauled_Murdock',0,128,0,7500,7500,62,62,0);
+INSERT INTO `mob_groups` VALUES (43,3227,206,'Punctured_Percy',0,128,0,7500,7500,62,62,0);
 INSERT INTO `mob_groups` VALUES (44,117,206,'Anansi',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (45,3701,206,'Son_of_Anansi',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (46,1343,206,'Fire_Pot',0,128,0,10000,10000,75,75,0);

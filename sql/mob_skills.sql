@@ -487,7 +487,7 @@ INSERT INTO `mob_skills` VALUES (469,213,'shadow_claw',0,0.0,7.0,2000,1500,4,0,0
 INSERT INTO `mob_skills` VALUES (470,214,'methane_breath',4,0.0,12.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (471,896,'mind_wall',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0); -- staff form only
 INSERT INTO `mob_skills` VALUES (472,216,'grave_reel',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (473,217,'ectosmash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (473,217,'ectosmash',0,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (474,218,'fear_touch',0,0.0,7.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (475,219,'terror_touch',0,0.0,7.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (476,220,'curse',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
@@ -1353,7 +1353,7 @@ INSERT INTO `mob_skills` VALUES (1332,63,'extremely_bad_breath',4,0.0,10.0,2000,
 INSERT INTO `mob_skills` VALUES (1336,289,'frenzied_rage',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1337,1081,'charm',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1338,234,'infernal_pestilence',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1339,1083,'bane',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1339,220,'bane',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1340,17,'crossthrash',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1341,1085,'knife_edge_circle',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1342,1086,'train_fall',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
