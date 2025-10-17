@@ -40,7 +40,6 @@
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
-#include "packets/menu_jobpoints.h"
 #include "packets/monipulator1.h"
 #include "packets/monipulator2.h"
 #include "packets/objective_utility.h"
@@ -4972,7 +4971,7 @@ namespace charutils
             {
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE2>(PChar, PMob, PChar->PJobPoints->GetJobPoints(), 0, 719));
             }
-            PChar->pushPacket<CMenuJobPointsPacket>(PChar);
+            PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::JOBPOINTS>(PChar);
 
             if (PMob != PChar) // Only mob kills count for gain EXP records
             {

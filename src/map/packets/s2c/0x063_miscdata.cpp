@@ -85,15 +85,27 @@ GP_SERV_COMMAND_MISCDATA::MONSTROSITY2::MONSTROSITY2(CCharEntity* PChar)
     // TODO: Populate data.Monstrosity2 fields
 }
 
-GP_SERV_COMMAND_MISCDATA::JOBPOINTS::JOBPOINTS(CCharEntity* PChar)
+GP_SERV_COMMAND_MISCDATA::JOBPOINTS::JOBPOINTS(const CCharEntity* PChar)
 {
     auto& packet = this->data();
 
     packet.type      = pkt_type::job_points;
     packet.unknown06 = sizeof(PacketData) - 8;
+
+    packet.access = charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER);
+
+    const JobPoints_t* PJobPoints = PChar->PJobPoints->GetAllJobPoints();
+
+    // Start at WAR (1) since NON (0) is unused
+    for (uint8 i = 1; i < MAX_JOBTYPE; i++)
+    {
+        packet.jobs[i].capacityPoints = PJobPoints[i].capacityPoints;
+        packet.jobs[i].currentJp      = PJobPoints[i].currentJp;
+        packet.jobs[i].totalJpSpent   = PJobPoints[i].totalJpSpent;
+    }
 }
 
-GP_SERV_COMMAND_MISCDATA::HOMEPOINTS::HOMEPOINTS(CCharEntity* PChar)
+GP_SERV_COMMAND_MISCDATA::HOMEPOINTS::HOMEPOINTS(const CCharEntity* PChar)
 {
     auto& packet = this->data();
 

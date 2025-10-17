@@ -31,8 +31,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.h
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/fish_ranking.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/menu_jobpoints.h
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/menu_unity.h
     ${CMAKE_CURRENT_SOURCE_DIR}/monipulator1.cpp

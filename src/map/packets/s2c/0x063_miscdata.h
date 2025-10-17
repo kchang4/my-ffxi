@@ -122,7 +122,7 @@ namespace GP_SERV_COMMAND_MISCDATA
             } jobs[24];                  // One entry per job (starting from index 1, job 0 unused)
         };
 
-        JOBPOINTS(CCharEntity* PChar);
+        JOBPOINTS(const CCharEntity* PChar);
     };
 
     // Type 0x06: Homepoint Masks (data: 64 bytes, total: 72 bytes)
@@ -142,7 +142,7 @@ namespace GP_SERV_COMMAND_MISCDATA
             uint32_t unknown00;          // Unknown mask (4 bytes)
         };
 
-        HOMEPOINTS(CCharEntity* PChar);
+        HOMEPOINTS(const CCharEntity* PChar);
     };
 
     // Type 0x07: Unity Info (data: 132 bytes, total: 140 bytes)
