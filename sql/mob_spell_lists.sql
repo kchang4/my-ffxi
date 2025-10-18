@@ -1638,10 +1638,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,186,1,255); -- aeroga_ii
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,216,1,255); -- gravity (1~255)
 
 -- Ajido_Marujido (134)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,166,1,255); -- thunder_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,167,1,255); -- thunder_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,171,1,255); -- water_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,172,1,255); -- water_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,212,1,255); -- burst (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ajido_Marujido',134,214,1,255); -- flood (1~255)
 
