@@ -8214,7 +8214,7 @@ INSERT INTO `mob_groups` VALUES (24,6835,113,'Zmey_Gorynych',3600,0,3289,0,0,78,
 INSERT INTO `mob_groups` VALUES (25,1806,113,'Greater_Manticore',330,0,1228,0,0,76,79,0);
 INSERT INTO `mob_groups` VALUES (26,1429,113,'Frostmane',0,32,912,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (27,2287,113,'Kreutzet',0,128,1466,11000,0,79,80,0);
-INSERT INTO `mob_groups` VALUES (28,302,113,'Axesarion_the_Wanderer',0,128,0,8200,0,68,70,0);
+INSERT INTO `mob_groups` VALUES (28,302,113,'Axesarion_the_Wanderer',0,128,0,7600,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (29,1983,113,'Hobgoblin_Warrior',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (30,1984,113,'Hobgoblin_White_Mage',0,128,0,0,0,75,80,0);
 INSERT INTO `mob_groups` VALUES (31,1972,113,'Hobgoblin_Black_Mage',0,128,0,0,0,75,80,0);
@@ -8767,7 +8767,7 @@ INSERT INTO `mob_groups` VALUES (3,1268,121,'Bigclaw_fished',0,128,273,0,0,42,45
 INSERT INTO `mob_groups` VALUES (4,204,121,'Apsaras',0,128,147,0,0,26,31,0);
 
 INSERT INTO `mob_groups` VALUES (5,1832,121,'Guardian_Treant',0,128,0,0,0,33,33,0);
-INSERT INTO `mob_groups` VALUES (6,1080,121,'Doomed_Pilgrims',0,128,0,17000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (6,1080,121,'Doomed_Pilgrims',0,128,0,17000,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (7,1690,121,'Goblin_Mugger',330,0,1117,0,0,25,29,0);
 INSERT INTO `mob_groups` VALUES (8,1666,121,'Goblin_Gambler',330,0,1081,0,0,25,29,0);
 INSERT INTO `mob_groups` VALUES (9,120,121,'Ancient_Bat',330,2,386,0,0,26,28,0);
@@ -8866,8 +8866,8 @@ INSERT INTO `mob_groups` VALUES (1,5865,123,'Ironshell_fished',0,128,93,0,0,35,3
 INSERT INTO `mob_groups` VALUES (2,1268,123,'Bigclaw_fished',0,128,2930,0,0,41,42,0);
 INSERT INTO `mob_groups` VALUES (3,6770,123,'Bloodsucker_fished',0,128,174,0,0,53,55,0);
 
-INSERT INTO `mob_groups` VALUES (4,3925,123,'Tipha',0,128,0,6000,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (5,657,123,'Carthi',0,128,0,6000,0,65,65,0);
+INSERT INTO `mob_groups` VALUES (4,3925,123,'Tipha',0,128,0,5500,0,65,65,0);
+INSERT INTO `mob_groups` VALUES (5,657,123,'Carthi',0,128,0,5500,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (6,4482,123,'Yuhtunga_Mandragora',330,0,2793,0,0,29,33,0);
 INSERT INTO `mob_groups` VALUES (7,1715,123,'Goblin_Smithy',330,0,1162,0,0,32,37,0);
 INSERT INTO `mob_groups` VALUES (8,2110,123,'Ivory_Lizard',330,0,1382,0,0,32,35,0);
@@ -11225,8 +11225,8 @@ INSERT INTO `mob_groups` VALUES (45,932,162,'Deadly_Iris',960,0,580,0,0,55,56,0)
 -- Sacrificial_Chamber (Zone 163)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1798,163,'Graviton',0,128,0,4700,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (2,2729,163,'Molybiton',0,128,0,4500,0,63,63,0);
+INSERT INTO `mob_groups` VALUES (1,1798,163,'Graviton',0,128,0,5200,0,65,65,0);
+INSERT INTO `mob_groups` VALUES (2,2729,163,'Molybiton',0,128,0,4700,0,63,63,0);
 INSERT INTO `mob_groups` VALUES (3,4052,163,'Tungsiton',0,128,0,4500,0,63,63,0);
 INSERT INTO `mob_groups` VALUES (4,4674,163,'Tonberrys_Elemental',0,128,0,2400,0,57,58,0);
 INSERT INTO `mob_groups` VALUES (5,3970,163,'Tonberrys_Avatar',0,128,0,2400,0,57,58,0);
