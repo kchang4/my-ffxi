@@ -22,14 +22,17 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         skill:getMsg() ~= xi.msg.basic.SHADOW_ABSORB and
         skill:getMsg() ~= xi.msg.basic.ANTICIPATE
     then
-        if dmg > 0 then
+        if info.hitslanded > 0 then
             if info.isCritical then
                 skill:setMsg(xi.msg.basic.RANGED_ATTACK_CRIT)
             else
                 skill:setMsg(xi.msg.basic.RANGED_ATTACK_HIT)
             end
-            target:addTP(20)
-            mob:addTP(80)
+
+            if dmg > 0 then
+                target:addTP(20)
+                mob:addTP(80)
+            end
         else
             skill:setMsg(xi.msg.basic.RANGED_ATTACK_MISS)
         end
