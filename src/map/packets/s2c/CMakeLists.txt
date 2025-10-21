@@ -73,6 +73,12 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x042_black_edit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x043_talknumname.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_blu.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_blu.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_mon.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_mon.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04f_equip_clear.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x050_equip_list.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x050_equip_list.cpp

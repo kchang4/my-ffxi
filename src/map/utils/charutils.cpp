@@ -36,7 +36,6 @@
 #include "ai/states/item_state.h"
 #include "ai/states/range_state.h"
 
-#include "packets/char_job_extra.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/conquest_map.h"
@@ -103,6 +102,9 @@
 #include "items/item_furnishing.h"
 #include "items/item_linkshell.h"
 #include "packets/s2c/0x029_battle_message.h"
+#include "packets/s2c/0x044_extended_job_blu.h"
+#include "packets/s2c/0x044_extended_job_mon.h"
+#include "packets/s2c/0x044_extended_job_pup.h"
 #include "packets/s2c/0x063_miscdata_job_points.h"
 #include "packets/s2c/0x063_miscdata_merits.h"
 #include "packets/s2c/0x063_miscdata_monstrosity.h"
@@ -1410,6 +1412,51 @@ namespace charutils
         PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::UNITY::DATA>(UNITY_RESULTSET::CurrentWeek, 0x1D, 0x0022);
         PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::UNITY::DATA>(UNITY_RESULTSET::CurrentWeek, 0x1E, 0x0004);
         PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::UNITY::DATA>(UNITY_RESULTSET::CurrentWeek, 0x1F, 0x2007);
+    }
+
+    // Send relevant 0x044 packets for extended job information (BLU spells, Automaton, Monstrosity)
+    void SendExtendedJobPackets(CCharEntity* PChar)
+    {
+        if (PChar->m_PMonstrosity)
+        {
+            PChar->pushPacket<GP_SERV_COMMAND_EXTENDED_JOB::MON>(PChar);
+        }
+        else
+        {
+            switch (PChar->GetMJob())
+            {
+                case JOB_PUP:
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_EXTENDED_JOB::PUP>(PChar, true);
+                    break;
+                }
+                case JOB_BLU:
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_EXTENDED_JOB::BLU>(PChar, true);
+                    break;
+                }
+                default:
+                    // TODO: Retail actually sends a packet in this case but content is unknown/unused
+                    break;
+            }
+
+            switch (PChar->GetSJob())
+            {
+                case JOB_PUP:
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_EXTENDED_JOB::PUP>(PChar, false);
+                    break;
+                }
+                case JOB_BLU:
+                {
+                    PChar->pushPacket<GP_SERV_COMMAND_EXTENDED_JOB::BLU>(PChar, false);
+                    break;
+                }
+                default:
+                    // TODO: Retail actually sends a packet in this case but content is unknown/unused
+                    break;
+            }
+        }
     }
 
     /************************************************************************
@@ -3590,7 +3637,7 @@ namespace charutils
         // Update skills menu
         if (automatonSkillUpdated)
         {
-            PChar->pushPacket<CCharJobExtraPacket>(PChar, PChar->GetMJob() == JOB_PUP);
+            charutils::SendExtendedJobPackets(PChar);
         }
     }
 
@@ -5142,8 +5189,7 @@ namespace charutils
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, false);
+                charutils::SendExtendedJobPackets(PChar);
                 PChar->pushPacket<CCharSyncPacket>(PChar);
 
                 PChar->UpdateHealth();
@@ -5378,8 +5424,7 @@ namespace charutils
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MERITS>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY1>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
-                PChar->pushPacket<CCharJobExtraPacket>(PChar, true);
+                charutils::SendExtendedJobPackets(PChar);
                 PChar->pushPacket<CCharSyncPacket>(PChar);
                 PChar->pushPacket<GP_SERV_COMMAND_CLISTATUS>(PChar);
 
