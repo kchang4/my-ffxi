@@ -843,7 +843,7 @@ INSERT INTO `mob_skills` VALUES (825,497,'wind_blade2',0,0.0,7.0,2000,0,1,0,0,0,
 INSERT INTO `mob_skills` VALUES (826,498,'earth_blade',0,0.0,7.0,2000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (827,499,'lightning_blade',0,0.0,7.0,2000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (828,500,'water_blade',0,0.0,7.0,2000,0,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (829,501,'great_wheel',1,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (829,501,'great_wheel',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (830,502,'light_blade',0,0.0,30.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (831,513,'moonlit_charge',0,0.0,10.0,512,3000,4,64,0,7,2,0,0); -- Compression (2)
 INSERT INTO `mob_skills` VALUES (832,514,'crescent_fang',0,0.0,10.0,513,3000,4,64,0,0,1,0,0); -- Transfixion (1)
@@ -947,8 +947,8 @@ INSERT INTO `mob_skills` VALUES (926,147,'stormwind',1,0.0,15.0,6000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (930,674,'entangle',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (931,633,'cross_reaver',4,0.0,7.0,2000,500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (932,634,'havoc_spiral',1,0.0,7.0,2000,500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (933,635,'dominion_slash',2,0.0,10.0,2000,500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (934,638,'shield_strike',4,0.0,7.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (933,635,'dominion_slash',2,0.0,15.0,2000,500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (934,638,'shield_strike',4,0.0,10.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (935,636,'amon_drive',2,0.0,15.0,2000,500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (936,639,'ark_guardian_tarutaru',0,0.0,22.0,500,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (937,637,'dragonfall',1,0.0,7.0,2000,500,4,0,0,0,0,0,0);

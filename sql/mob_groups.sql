@@ -11501,9 +11501,9 @@ INSERT INTO `mob_groups` VALUES (27,0,167,'Trion',0,128,0,0,0,0,0,0);
 -- Chamber_of_Oracles (Zone 168)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,673,168,'Centurio_V-III',0,128,8000,0,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (2,4000,168,'Triarius_V-VIII',0,128,0,7000,0,68,68,0);
-INSERT INTO `mob_groups` VALUES (3,3194,168,'Princeps_V-XI',0,128,0,6800,0,68,68,0);
+INSERT INTO `mob_groups` VALUES (1,673,168,'Centurio_V-III',0,128,12000,0,0,70,70,0);
+INSERT INTO `mob_groups` VALUES (2,4000,168,'Triarius_V-VIII',0,128,0,10000,0,68,68,0);
+INSERT INTO `mob_groups` VALUES (3,3194,168,'Princeps_V-XI',0,128,0,10000,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (4,5345,168,'Maat_sam',0,128,0,2300,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (5,5403,168,'Maat_nin',0,128,0,2300,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (6,5404,168,'Maat_drg',0,128,0,2300,0,70,70,0);
@@ -12160,13 +12160,13 @@ INSERT INTO `mob_groups` VALUES (21,6948,179,'Aldo',0,128,0,0,0,0,0,0);
 -- LaLoff_Amphitheater (Zone 180)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,237,180,'Ark_Angel_HM',0,128,0,10000,1000,75,75,0);
-INSERT INTO `mob_groups` VALUES (2,238,180,'Ark_Angel_MR',0,128,0,10000,1000,75,75,0);
+INSERT INTO `mob_groups` VALUES (1,237,180,'Ark_Angel_HM',0,128,0,11500,1000,75,75,0);
+INSERT INTO `mob_groups` VALUES (2,238,180,'Ark_Angel_MR',0,128,0,11000,1000,75,75,0);
 INSERT INTO `mob_groups` VALUES (3,240,180,'Ark_Angels_Tiger',0,128,0,2500,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (4,239,180,'Ark_Angels_Mandragora',0,128,0,2500,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (5,235,180,'Ark_Angel_EV',0,128,0,10000,1000,75,75,0);
-INSERT INTO `mob_groups` VALUES (6,242,180,'Ark_Angel_TT',0,128,0,10000,1000,75,75,0);
-INSERT INTO `mob_groups` VALUES (7,236,180,'Ark_Angel_GK',0,128,0,10000,1000,75,75,0);
+INSERT INTO `mob_groups` VALUES (6,242,180,'Ark_Angel_TT',0,128,0,8500,10000,75,75,0);
+INSERT INTO `mob_groups` VALUES (7,236,180,'Ark_Angel_GK',0,128,0,12000,1000,75,75,0);
 INSERT INTO `mob_groups` VALUES (8,241,180,'Ark_Angels_Wyvern',0,128,0,2500,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (9,237,180,'Ark_Angel_HM',0,128,0,0,0,99,99,0);
 INSERT INTO `mob_groups` VALUES (10,238,180,'Ark_Angel_MR',0,128,0,0,0,99,99,0);
