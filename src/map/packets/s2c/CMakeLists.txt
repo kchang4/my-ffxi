@@ -4,6 +4,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x008_enterzone.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x009_message.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00a_login.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x00a_login.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x00b_logout.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x017_chat_std.h
