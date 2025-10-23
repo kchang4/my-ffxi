@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2025 LandSandBoat Dev Teams
@@ -21,16 +21,27 @@
 
 #pragma once
 
-#include <cstdint>
+#include "base.h"
 
-enum class GP_SERV_COMMAND_MISCDATA_TYPE : uint16_t
+class CCharEntity;
+
+// https://github.com/atom0s/XiPackets/tree/main/world/server/0x0056
+// This packet is sent by the server to populate the clients mission and quest information.
+namespace GP_SERV_COMMAND_MISSION
 {
-    Merits       = 0x02,
-    Monstrosity1 = 0x03,
-    Monstrosity2 = 0x04,
-    JobPoints    = 0x05,
-    Homepoints   = 0x06,
-    Unity        = 0x07,
-    StatusIcons  = 0x09,
-    Unknown      = 0x0A,
-};
+    // Port 0xFFFE: The Voracious Resurgence Information
+    // Contains both in-progress and complete missions for TVR.
+    class TVR final : public GP_SERV_PACKET<PacketS2C::GP_SERV_COMMAND_MISSION, TVR>
+    {
+    public:
+        struct PacketData
+        {
+            uint32_t Expansion_TVR; // PS2: data
+            uint32_t padding08[7];  // PS2: (New; did not exist.)
+            uint16_t Port;          // PS2: Port
+            uint16_t padding26;     // PS2: (New; did not exist.)
+        };
+
+        TVR(CCharEntity* PChar);
+    };
+} // namespace GP_SERV_COMMAND_MISSION
