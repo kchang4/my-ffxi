@@ -9,8 +9,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/auction_house.h
     ${CMAKE_CURRENT_SOURCE_DIR}/basic.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_check.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/char_check.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_status.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.cpp
