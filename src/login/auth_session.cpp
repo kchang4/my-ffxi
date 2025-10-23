@@ -139,6 +139,10 @@ void auth_session::read_func()
 
             do_write(1);
         }
+
+        // close socket
+        socket_.lowest_layer().shutdown(asio::socket_base::shutdown_both);
+        socket_.lowest_layer().close();
         return;
     }
 

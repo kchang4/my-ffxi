@@ -117,7 +117,22 @@ namespace loginHelpers
             return std::nullopt;
         }
 
-        if constexpr (std::is_floating_point<T>::value)
+        // Check types first, boolean can match a number
+        if constexpr (std::is_same_v<T, std::string>)
+        {
+            if (!jsonInput[key].is_string())
+            {
+                return std::nullopt;
+            }
+        }
+        else if constexpr (std::is_same_v<T, bool>)
+        {
+            if (!jsonInput[key].is_boolean())
+            {
+                return std::nullopt;
+            }
+        }
+        else if constexpr (std::is_floating_point<T>::value)
         {
             if (!jsonInput[key].is_number_float())
             {
@@ -134,20 +149,6 @@ namespace loginHelpers
         else if constexpr (std::is_unsigned<T>::value)
         {
             if (!jsonInput[key].is_number_unsigned())
-            {
-                return std::nullopt;
-            }
-        }
-        else if constexpr (std::is_same_v<T, std::string>)
-        {
-            if (!jsonInput[key].is_string())
-            {
-                return std::nullopt;
-            }
-        }
-        else if constexpr (std::is_same_v<T, bool>)
-        {
-            if (!jsonInput[key].is_boolean())
             {
                 return std::nullopt;
             }
