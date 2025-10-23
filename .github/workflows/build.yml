@@ -76,7 +76,7 @@ jobs:
                 $changed_file == *.hxx || \
                 $changed_file == CMakeLists.txt || \
                 $changed_file == *.cmake ]]; then
-              cpp_changes=true
+              source_changes=true
               break
             fi
           done
