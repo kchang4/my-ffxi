@@ -5,8 +5,13 @@
 # luarocks install luacheck --local
 # luarocks install lanes --local
 
-targets=("$@")
 any_issues=false
+
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+else
+    mapfile -t targets < <(find scripts -name '*.lua')
+fi
 
 global_funcs=`python << EOF
 import re

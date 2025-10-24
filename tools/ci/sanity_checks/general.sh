@@ -1,28 +1,51 @@
 #!/bin/bash
 
-targets=("$@")
 any_issues=false
 
-for file in "${targets[@]}"; do
-    # Black formatter used for Python violates some of our general rules
-    [[ -f $file && $file != *.py ]] || continue
+license_headers_output=$(python tools/ci/sanity_checks/detect_license_headers.py 2>&1 || true)
+if [[ -n "$license_headers_output" ]]; then
+    if ! $any_issues; then
+        echo "## :x: General Checks Failed"
+        any_issues=true
+    fi
+    echo "### License Header Errors:"
+    echo '```'
+    echo "$license_headers_output"
+    echo '```'
+    echo
+fi
 
-    # Run tools and capture output
-    general_output=$(python tools/ci/sanity_checks/general.py "$file" 2>&1 || true)
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+    for file in "${targets[@]}"; do
+        # Black formatter used for Python violates some of our general rules
+        [[ -f $file && $file != *.py ]] || continue
 
-    # Check if there were issues
+        general_output=$(python tools/ci/sanity_checks/general.py "$file" 2>&1 || true)
+        if [[ -n "$general_output" ]]; then
+            if ! $any_issues; then
+                echo "## :x: General Checks Failed"
+                any_issues=true
+            fi
+            echo '```'
+            echo "$general_output"
+            echo '```'
+            echo
+        fi
+    done
+else
+    general_output=$(python tools/ci/sanity_checks/general.py . 2>&1 || true)
     if [[ -n "$general_output" ]]; then
         if ! $any_issues; then
             echo "## :x: General Checks Failed"
             any_issues=true
         fi
-
         echo '```'
         echo "$general_output"
         echo '```'
         echo
     fi
-done
+fi
 
 price_checker_output=$(python tools/price_checker.py 2>&1 || true)
 if [[ -n "$price_checker_output" ]]; then

@@ -39,7 +39,7 @@ jobs:
           python -m pip install --upgrade -r ./tools/requirements.txt
 
       - name: Run checks
-        run: ./tools/ci/sanity_checks.sh
+        run: ./tools/ci/sanity_checks.sh origin/base
 
       - name: Add sanity checks report to summary
         if: always()

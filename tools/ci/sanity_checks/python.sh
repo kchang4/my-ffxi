@@ -1,7 +1,12 @@
 #!/bin/bash
 
-targets=("$@")
 any_issues=false
+
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+else
+    mapfile -t targets < <(find tools -name '*.py')
+fi
 
 for file in "${targets[@]}"; do
     [[ -f $file && $file == *.py ]] || continue

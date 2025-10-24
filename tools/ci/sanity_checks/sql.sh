@@ -1,7 +1,12 @@
 #!/bin/bash
 
-targets=("$@")
 any_issues=false
+
+if [[ $# -gt 0 ]]; then
+    targets=("$@")
+else
+    mapfile -t targets < <(find sql -name '*.sql')
+fi
 
 for file in "${targets[@]}"; do
     [[ -f $file && $file == *.sql ]] || continue
