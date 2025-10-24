@@ -110,6 +110,8 @@ xi.mobSkill =
 
     CALL_WYVERN              =  732,
 
+    ASTRAL_FLOW_1            =  734,
+
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
     GREAT_WHIRLWIND_1        =  803,
