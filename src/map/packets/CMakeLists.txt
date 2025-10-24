@@ -15,8 +15,6 @@ set(PACKET_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/char_sync.h
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/char_update.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/delivery_box.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_set_name.h
     ${CMAKE_CURRENT_SOURCE_DIR}/entity_update.cpp
