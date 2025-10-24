@@ -13,4 +13,5 @@ return {
     ['qm_key1']       = { messageSpecial = ID.text.OFFERING },
     ['qm_key2']       = { messageSpecial = ID.text.OFFERING },
     ['qm_key3']       = { messageSpecial = ID.text.OFFERING },
+    ['Stone_Picture_Frame_QoT'] = { messageSpecial = ID.text.FRAME_FOR_A_PAINTING },
 }
