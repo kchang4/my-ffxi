@@ -12183,7 +12183,7 @@ INSERT INTO `mob_groups` VALUES (16,241,180,'Ark_Angels_Wyvern',0,128,0,0,0,99,9
 
 INSERT INTO `mob_groups` VALUES (1,1158,181,'Ealdnarche',0,128,0,2000,5000,78,78,0);
 INSERT INTO `mob_groups` VALUES (2,1270,181,'Exoplates',0,128,0,10000,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (3,4676,181,'Ealdnarche_2',0,128,0,2600,5000,78,78,0);
+INSERT INTO `mob_groups` VALUES (3,4676,181,'Ealdnarche_2',0,128,0,3000,5000,78,78,0);
 INSERT INTO `mob_groups` VALUES (4,2993,181,'Orbital',0,128,0,145,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (5,1158,181,'Ealdnarche',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6,1270,181,'Exoplates',0,128,0,0,0,0,0,0);
