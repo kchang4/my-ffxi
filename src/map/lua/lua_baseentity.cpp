@@ -99,7 +99,6 @@
 #include "items/item_linkshell.h"
 
 #include "packets/action.h"
-#include "packets/auction_house.h"
 #include "packets/char_status.h"
 #include "packets/char_sync.h"
 #include "packets/entity_update.h"
@@ -121,6 +120,7 @@
 #include "packets/s2c/0x03a_magicschedulor.h"
 #include "packets/s2c/0x03c_shop_list.h"
 #include "packets/s2c/0x03e_shop_open.h"
+#include "packets/s2c/0x04c_auc.h"
 #include "packets/s2c/0x050_equip_list.h"
 #include "packets/s2c/0x051_grap_list.h"
 #include "packets/s2c/0x052_eventucoff.h"
@@ -2494,7 +2494,7 @@ void CLuaBaseEntity::sendMenu(uint32 menu)
             PChar->pushPacket<GP_SERV_COMMAND_SHOP_LIST>(PChar);
             break;
         case 3:
-            PChar->pushPacket<CAuctionHousePacket>(GP_CLI_COMMAND_AUC_COMMAND::Open);
+            PChar->pushPacket<GP_SERV_COMMAND_AUC>(GP_CLI_COMMAND_AUC_COMMAND::Open);
             break;
         default:
             ShowDebug("Menu %i not implemented, yet.", menu);

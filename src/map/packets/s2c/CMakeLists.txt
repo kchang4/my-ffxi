@@ -83,6 +83,8 @@ set(PACKET_S2C_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/0x044_extended_job_pup.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04b_pbx_result.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04b_pbx_result.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04c_auc.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/0x04c_auc.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_fishranking.h
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_fishranking.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/0x04d_fragments_servmes.h
