@@ -22,14 +22,17 @@ for file in "${targets[@]}"; do
             any_issues=true
         fi
 
-        echo "### \`$file\`"
         if [[ -n "$pylint_output" ]]; then
+            echo "#### Pylint Errors:"
+            echo "> $file"
             echo '```'
             echo "$pylint_output"
             echo '```'
             echo
         fi
         if [[ -n "$black_output" ]]; then
+            echo "#### Formatting Errors:"
+            echo "> $file"
             echo '```diff'
             echo "$black_output"
             echo '```'

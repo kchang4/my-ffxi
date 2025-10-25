@@ -21,7 +21,8 @@ for file in "${targets[@]}"; do
             any_issues=true
         fi
 
-        echo "### Bogus comments: \`$file\`"
+        echo "#### Bogus comments:"
+        echo "> $file"
         echo '```'
         echo "$bogus_comments"
         echo '```'

@@ -129,10 +129,7 @@ if [[ -n "$binding_usage_output" ]]; then
     any_issues=true
     echo "## :x: Lua Checks Failed"
     echo "### Lua Binding Usage:"
-    echo '```'
     echo "$binding_usage_output"
-    echo '```'
-    echo
 fi
 
 for file in "${targets[@]}"; do
@@ -156,9 +153,9 @@ for file in "${targets[@]}"; do
             any_issues=true
         fi
 
-        echo "### \`$file\`"
         if [[ -n "$luacheck_output" ]]; then
-            echo "#### Luacheck:"
+            echo "#### Luacheck Errors:"
+            echo "> $file"
             echo '```'
             echo "$luacheck_output" | sed \
                 -e '/^Checking /d' \

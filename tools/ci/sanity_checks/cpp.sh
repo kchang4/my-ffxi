@@ -52,16 +52,15 @@ for file in "${targets[@]}"; do
                 any_issues=true
             fi
 
-            echo "### $file"
             if [[ -n "$cppcheck_output" ]]; then
+                echo "#### Cppcheck Errors:"
+                echo "> $file"
                 echo '```'
                 echo "$cppcheck_output"
                 echo '```'
             fi
             if [[ -n "$cpppy_output" ]]; then
-                echo '```'
                 echo "$cpppy_output"
-                echo '```'
             fi
             echo
         fi
@@ -76,13 +75,8 @@ if [[ -n "$git_diff_output" ]]; then
         echo "## :x: C++ Checks Failed"
         any_issues=true
     fi
-    echo "### :x: C++ Formatting Checks Failed"
+    echo "#### Formatting Errors:"
     echo "> $(clang-format -version)"
-    echo
-    echo "You have errors in your C++ code formatting."
-    echo "Please see below in red for the incorrect formatting, and in green for the correct formatting."
-    echo "You can either fix the formatting by hand or use clang-format."
-    echo
     echo '```diff'
     echo "$git_diff_output"
     echo '```'

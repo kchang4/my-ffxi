@@ -15,6 +15,19 @@ if [[ -n "$license_headers_output" ]]; then
     echo
 fi
 
+price_checker_output=$(python tools/price_checker.py 2>&1 || true)
+if [[ -n "$price_checker_output" ]]; then
+    if ! $any_issues; then
+        echo "## :x: General Checks Failed"
+        any_issues=true
+    fi
+    echo "### Price Checker Errors:"
+    echo '```'
+    echo "$price_checker_output"
+    echo '```'
+    echo
+fi
+
 if [[ $# -gt 0 ]]; then
     targets=("$@")
     for file in "${targets[@]}"; do
@@ -27,9 +40,7 @@ if [[ $# -gt 0 ]]; then
                 echo "## :x: General Checks Failed"
                 any_issues=true
             fi
-            echo '```'
             echo "$general_output"
-            echo '```'
             echo
         fi
     done
@@ -40,24 +51,9 @@ else
             echo "## :x: General Checks Failed"
             any_issues=true
         fi
-        echo '```'
         echo "$general_output"
-        echo '```'
         echo
     fi
-fi
-
-price_checker_output=$(python tools/price_checker.py 2>&1 || true)
-if [[ -n "$price_checker_output" ]]; then
-    if ! $any_issues; then
-        echo "## :x: General Checks Failed"
-        any_issues=true
-    fi
-    echo "### Price Checker Errors:"
-    echo '```'
-    echo "$price_checker_output"
-    echo '```'
-    echo
 fi
 
 # If no section was written, emit a success summary
