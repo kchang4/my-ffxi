@@ -349,10 +349,10 @@ INSERT INTO `mob_groups` VALUES (2,3600,8,'Shikaree_Y',0,128,0,1900,2000,50,53,0
 INSERT INTO `mob_groups` VALUES (3,3598,8,'Shikaree_X',0,128,0,2100,0,50,53,0);           -- Head Wind (CoP 5-3)
 INSERT INTO `mob_groups` VALUES (4,3602,8,'Shikaree_Zs_Wyvern',0,128,0,1000,100,48,50,0); -- Head Wind (CoP 5-3)
 INSERT INTO `mob_groups` VALUES (5,3599,8,'Shikaree_Xs_Rabbit',0,128,0,1000,0,48,50,0);   -- Head Wind (CoP 5-3)
-INSERT INTO `mob_groups` VALUES (6,4046,8,'Tuchulcha',0,128,0,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (7,3827,8,'Swift_Hunter',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (8,3613,8,'Shrewd_Hunter',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (9,247,8,'Armored_Hunter',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (6,4046,8,'Tuchulcha',0,128,0,9000,0,83,83,0);
+INSERT INTO `mob_groups` VALUES (7,3827,8,'Swift_Hunter',0,128,0,5000,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (8,3613,8,'Shrewd_Hunter',0,128,0,5000,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (9,247,8,'Armored_Hunter',0,128,0,5000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (10,3301,8,'Race_Runner',0,128,0,7000,2000,75,75,0);
 INSERT INTO `mob_groups` VALUES (11,3099,8,'Parata',0,128,0,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (12,444,8,'Bladmall',0,128,0,0,0,80,80,0);
