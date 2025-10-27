@@ -114,6 +114,13 @@ xi.mobSkill =
 
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
+    QUADRATIC_CONTINUUM_2    =  742,
+    SPIRIT_ABSOPTION_2       =  745,
+    VANITY_DRIVE_2           =  748,
+    STYGIAN_FLATUS_1         =  750,
+    PROMYVION_BARRIER_2      =  753,
+    FISSION                  =  755,
+
     GREAT_WHIRLWIND_1        =  803,
 
     DISPELLING_WIND          =  813,

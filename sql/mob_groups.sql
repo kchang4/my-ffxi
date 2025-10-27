@@ -726,11 +726,11 @@ INSERT INTO `mob_groups` VALUES (23,4527,18,'Livid_Seether',960,0,1350,0,0,83,84
 
 INSERT INTO `mob_groups` VALUES (1,3204,19,'Progenerator',0,128,0,3700,0,37,38,0);
 INSERT INTO `mob_groups` VALUES (2,2947,19,'Offspring',0,128,0,0,0,27,28,0);
-INSERT INTO `mob_groups` VALUES (3,2080,19,'Ingester',0,128,0,1000,0,30,30,0);
-INSERT INTO `mob_groups` VALUES (4,2825,19,'Neoingester',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (5,2824,19,'Neogorger',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (6,2827,19,'Neosatiator',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (7,4283,19,'Wanderer',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (3,2080,19,'Ingester',0,128,0,2000,0,37,37,0);
+INSERT INTO `mob_groups` VALUES (4,2825,19,'Neoingester',0,128,0,800,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (5,2824,19,'Neogorger',0,128,0,800,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (6,2827,19,'Neosatiator',0,128,800,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (7,4283,19,'Wanderer_enm',0,128,0,800,0,30,30,0);
 INSERT INTO `mob_groups` VALUES (8,0,19,'Recollector',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (9,0,19,'Insatiable_Gorger',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (10,0,19,'Insatiable_Offspring',0,128,0,0,0,0,0,0);
