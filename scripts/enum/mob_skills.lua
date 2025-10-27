@@ -215,6 +215,15 @@ xi.mobSkill =
     RANGED_ATTACK_13         = 1213,
     RANGED_ATTACK_14         = 1214,
 
+    NEGATIVE_WHIRL_1         = 1243,
+    STYGIAN_VAPOR            = 1244,
+    WINDS_OF_PROMYVION_1     = 1245,
+    SPIRIT_ABSORPTION        = 1246,
+    TRINARY_ABSORPTION       = 1248,
+    TRINARY_TAP              = 1251,
+    SHADOW_SPREAD            = 1252,
+    EMPTY_CUTTER             = 1271,
+
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
 
     MANTLE_PIERCE            = 1349,
