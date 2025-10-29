@@ -24,7 +24,9 @@
 
 #include "entities/charentity.h"
 #include "packets/s2c/0x008_enterzone.h"
+#include "packets/s2c/0x01c_item_max.h"
 #include "packets/s2c/0x04f_equip_clear.h"
+#include "packets/s2c/0x051_grap_list.h"
 #include "utils/charutils.h"
 #include "utils/gardenutils.h"
 #include "utils/zoneutils.h"
@@ -123,7 +125,8 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
     if (PChar->loc.zone != nullptr)
     {
         PChar->pushPacket<GP_SERV_COMMAND_EQUIP_CLEAR>();
+        PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar);
+        PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
         PChar->pushPacket<GP_SERV_COMMAND_LOGIN>(PChar, PChar->currentEvent);
-        PChar->pushPacket<GP_SERV_COMMAND_ENTERZONE>(PChar);
     }
 }

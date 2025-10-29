@@ -22,9 +22,14 @@
 #include "0x00c_gameok.h"
 
 #include "entities/charentity.h"
+#include "packets/char_status.h"
+#include "packets/s2c/0x008_enterzone.h"
 #include "packets/s2c/0x01b_job_info.h"
 #include "packets/s2c/0x01c_item_max.h"
-#include "packets/s2c/0x08d_job_points.h"
+#include "packets/s2c/0x051_grap_list.h"
+#include "packets/s2c/0x063_miscdata_homepoints.h"
+#include "packets/s2c/0x063_miscdata_monstrosity.h"
+#include "packets/s2c/0x063_miscdata_status_icons.h"
 #include "packets/s2c/0x0b4_config.h"
 #include "treasure_pool.h"
 #include "utils/charutils.h"
@@ -39,15 +44,17 @@ auto GP_CLI_COMMAND_GAMEOK::validate(MapSession* PSession, const CCharEntity* PC
 
 void GP_CLI_COMMAND_GAMEOK::process(MapSession* PSession, CCharEntity* PChar) const
 {
-    PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_ENTERZONE>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_ITEM_MAX>(PChar); // Already sent during LOGIN but retail sends it again
     PChar->pushPacket<GP_SERV_COMMAND_CONFIG>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_GRAP_LIST>(PChar); // Already sent during LOGIN but retail sends it again
     PChar->pushPacket<GP_SERV_COMMAND_JOB_INFO>(PChar);
-
-    if (charutils::hasKeyItem(PChar, KeyItem::JOB_BREAKER))
-    {
-        // Only send Job Points Packet if the player has unlocked them
-        PChar->pushPacket<GP_SERV_COMMAND_JOB_POINTS>(PChar);
-    }
+    PChar->pushPacket<CCharStatusPacket>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::MONSTROSITY2>(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::HOMEPOINTS>(PChar);
+    charutils::SendExtendedJobPackets(PChar);
+    charutils::SendUnityPackets(PChar);
+    PChar->pushPacket<GP_SERV_COMMAND_MISCDATA::STATUS_ICONS>(PChar);
 
     // TODO: While in mog house; treasure pool is not created.
     if (PChar->PTreasurePool != nullptr)
