@@ -2,7 +2,6 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 
 return {
     ['_6t2']            = { event = 64 }, -- Door:Merchant's House
-    ['_6tc']            = { messageSpecial = ID.text.ITS_LOCKED }, -- Door:"Neptune's Spire"
     ['_6td']            = { messageSpecial = ID.text.DO_NOT_DISTURB }, -- Door:"Neptune's Spire"
     ['Amhu_Sabaroleka'] = { event = 14 },
     ['Biora']           = { event = 205 },
