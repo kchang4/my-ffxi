@@ -222,6 +222,15 @@ xi.mobSkill =
     RANGED_ATTACK_13         = 1213,
     RANGED_ATTACK_14         = 1214,
 
+    MEMORY_OF_FIRE           = 1221,
+    MEMORY_OF_ICE            = 1222,
+    MEMORY_OF_WIND           = 1223,
+    MEMORY_OF_LIGHT          = 1224,
+    MEMORY_OF_EARTH          = 1225,
+    MEMORY_OF_LIGHTNING      = 1226,
+    MEMORY_OF_WATER          = 1227,
+    MEMORY_OF_DARK           = 1228,
+
     NEGATIVE_WHIRL_1         = 1243,
     STYGIAN_VAPOR            = 1244,
     WINDS_OF_PROMYVION_1     = 1245,
