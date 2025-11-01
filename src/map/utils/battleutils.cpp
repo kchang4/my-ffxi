@@ -2999,8 +2999,10 @@ namespace battleutils
             critHitRate -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
         }
 
+        // Check for Mighty Strikes since Ranged Attacks do not get the crit bonus
+        critHitRate += PAttacker->getMod(Mod::CRITHITRATE) - (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES) ? 100 : 0);
+
         critHitRate += GetAGICritBonus(PAttacker, PDefender);
-        critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
         critHitRate -= PDefender->getMod(Mod::CRITICAL_HIT_EVASION); // Similar to merits. However, it can be possitive or negative. When mod is negative, it raises crit-hit-rate.
         critHitRate = std::clamp(critHitRate, 0, 100);
 
