@@ -3253,8 +3253,27 @@ void CCharEntity::tryStartNextEvent()
 
     if (eventQueue.empty())
     {
-        updatemask |= UPDATE_POS;           // TODO: decouple from this. We want the 250ms post-tick processing.
-        animation         = ANIMATION_NONE; // sendServerStatus_ is somewhat like an update mask on its own
+        updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing
+
+        // Chocobo NPC (outside, gives you a mount) edge case
+        if (StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
+        {
+            switch (m_mountId)
+            {
+                case MOUNT_CHOCOBO:
+                case MOUNT_NOBLE_CHOCOBO:
+                    animation = ANIMATION_CHOCOBO;
+                    break;
+                default:
+                    animation = ANIMATION_MOUNT;
+                    break;
+            }
+        }
+        else
+        {
+            animation = ANIMATION_NONE;
+        }
+
         sendServerStatus_ = true;
         return;
     }
