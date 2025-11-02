@@ -822,7 +822,6 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     -- Ammo needs to be removed after xi.weaponskills.takeWeaponskillDamage for delay/tp return uses
     if calcParams.ammoUsed and calcParams.ammoUsed > 0 then
-        print(calcParams.ammoUsed)
         attacker:removeAmmo(calcParams.ammoUsed)
     end
 
