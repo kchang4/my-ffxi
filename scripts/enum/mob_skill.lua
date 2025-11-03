@@ -115,7 +115,7 @@ xi.mobSkill =
     FAMILIAR_1               =  740, -- "Tango with a Tracker" Shikaree X
 
     QUADRATIC_CONTINUUM_2    =  742,
-    SPIRIT_ABSOPTION_2       =  745,
+    SPIRIT_ABSORPTION_2      =  745,
     VANITY_DRIVE_2           =  748,
     STYGIAN_FLATUS_1         =  750,
     PROMYVION_BARRIER_2      =  753,
@@ -231,14 +231,23 @@ xi.mobSkill =
     MEMORY_OF_WATER          = 1227,
     MEMORY_OF_DARK           = 1228,
 
+    MURK                     = 1232,
+    MATERIAL_FEND            = 1233,
+    CAROUSEL_1               = 1234,
     NEGATIVE_WHIRL_1         = 1243,
     STYGIAN_VAPOR            = 1244,
     WINDS_OF_PROMYVION_1     = 1245,
     SPIRIT_ABSORPTION        = 1246,
+    BINARY_ABSORPTION        = 1246,
     TRINARY_ABSORPTION       = 1248,
+    SPIRIT_TAP               = 1251,
+    BINARY_TAP               = 1251,
     TRINARY_TAP              = 1251,
     SHADOW_SPREAD            = 1252,
     EMPTY_CUTTER             = 1271,
+    IMPALEMENT               = 1274,
+    EMPTY_THRASH             = 1275,
+    PROMYVION_BRUME_2        = 1276,
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
 

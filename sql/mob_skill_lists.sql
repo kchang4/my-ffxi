@@ -2340,12 +2340,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1234);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1274);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1275);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1276);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,741); -- Replaced with list 138
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,744);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,747);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,750);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,752);
--- INSERT INTO `mob_skill_lists` VALUES ('Propagator',708,755);
+-- 708: free
 INSERT INTO `mob_skill_lists` VALUES ('Jagil',709,449);
 INSERT INTO `mob_skill_lists` VALUES ('Jagil',709,450);
 INSERT INTO `mob_skill_lists` VALUES ('Jagil',709,451);
