@@ -3256,9 +3256,9 @@ void CCharEntity::tryStartNextEvent()
         updatemask |= UPDATE_POS; // TODO: decouple from this. We want the 250ms post-tick processing
 
         // Chocobo NPC (outside, gives you a mount) edge case
-        if (StatusEffectContainer->HasStatusEffect(EFFECT_MOUNTED))
+        if (auto PStatusEffect = StatusEffectContainer->GetStatusEffect(EFFECT_MOUNTED))
         {
-            switch (m_mountId)
+            switch (PStatusEffect->GetPower())
             {
                 case MOUNT_CHOCOBO:
                 case MOUNT_NOBLE_CHOCOBO:
