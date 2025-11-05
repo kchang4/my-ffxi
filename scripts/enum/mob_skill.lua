@@ -50,6 +50,9 @@ xi.mobSkill =
     FLYING_HIP_PRESS         =  360,
     EARTH_SHOCK              =  361,
 
+    SONIC_BOOM_1             =  393,
+    JET_STREAM_1             =  395,
+
     SMITE_OF_FURY            =  396,
     FLURRY_OF_RAGE           =  397,
     WHISPERS_OF_IRE          =  398,
@@ -73,6 +76,13 @@ xi.mobSkill =
     MIND_WALL                =  471, -- Mammet-800
 
     TRANSMOGRIFICATION       =  487, -- Mammet-800
+
+    TRICLIP_1                =  498,
+    BACK_SWISH_1             =  499,
+    MOW_1                    =  500,
+    FRIGHTFUL_ROAR_1         =  501,
+    MORTAL_RAY_1             =  502,
+    UNBLESSED_ARMOR          =  503,
 
     SELF_DESTRUCT            =  511,
     SMITE_OF_RAGE            =  513,
@@ -202,6 +212,9 @@ xi.mobSkill =
 
     RANGED_ATTACK_3          = 1154,
 
+    SLIPSTREAM_1             = 1157,
+    TURBULENCE_1             = 1158,
+
     INFERNO_3                = 1162, -- Confirmed usage: "Trial-Size Trial by Fire" bcnm. (Ifrit)
     EARTHEN_FURY_3           = 1163, -- Confirmed usage: "Trial-Size Trial by Earth" bcnm. (Titan)
     TIDAL_WAVE_3             = 1164, -- Confirmed usage: "Trial-Size Trial by Water" bcnm. (Leviathan)
@@ -241,6 +254,9 @@ xi.mobSkill =
     EMPTY_CUTTER             = 1271,
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
+
+    KNIFE_EDGE_CIRCLE        = 1341,
+    TRAIN_FALL               = 1342,
 
     MANTLE_PIERCE            = 1349,
 

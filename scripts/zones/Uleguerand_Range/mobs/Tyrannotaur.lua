@@ -1,19 +1,11 @@
 -----------------------------------
--- Area: Phomiuna Aqueducts
---  Mob: Stegotaur
+-- Area: Uleguerand Range
+--  Mob: Tyrannotaur
 -----------------------------------
-mixins =
-{
-    require('scripts/mixins/fomor_hate'),
-    require('scripts/mixins/families/tauri')
-}
+mixins = { require('scripts/mixins/families/tauri') }
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
-
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar('fomorHateAdj', 1)
-end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     local tpMoves =
@@ -30,9 +22,6 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     end
 
     return tpMoves[math.random(1, #tpMoves)]
-end
-
-entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

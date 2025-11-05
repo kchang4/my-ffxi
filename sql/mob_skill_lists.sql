@@ -3921,10 +3921,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,394); -- blood_drain
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,1155); -- subsonics
 INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',2014,1156); -- marrow_drain
 
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,395); -- jetstream
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,393); -- sonic_boom
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,1157); -- slipstream
-INSERT INTO `mob_skill_lists` VALUES ('Furies',2015,1158); -- turbulence
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,395); -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,393); -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('Bat_CoP',2015,1158); -- turbulence
 
 INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',2016,524); -- mind_drain
 
