@@ -47,471 +47,476 @@
 
 namespace xi
 {
-    class vanadiel_clock
+
+class vanadiel_clock
+{
+private:
+    using millisecond_ratio = std::ratio<1, 25000>; // (1Vms/25000ms) * 1000Vms * 60Vs = 1 Vmin
+    using second_ratio      = std::ratio_multiply<millisecond_ratio, std::ratio<1000>>;
+    using minute_ratio      = std::ratio_multiply<second_ratio, std::ratio<60>>; // 2.4 Earth seconds
+    using hour_ratio        = std::ratio_multiply<minute_ratio, std::ratio<60>>; //  60 Vana'diel minutes
+    using day_ratio         = std::ratio_multiply<hour_ratio, std::ratio<24>>;   //  24 Vana'diel hours
+    using week_ratio        = std::ratio_multiply<day_ratio, std::ratio<8>>;     //   8 Vana'diel days
+    using month_ratio       = std::ratio_multiply<day_ratio, std::ratio<30>>;    //  30 Vana'diel days
+    using year_ratio        = std::ratio_multiply<day_ratio, std::ratio<360>>;   // 360 Vana'diel days
+
+public:
+    using milliseconds = std::chrono::duration<long long, millisecond_ratio>;
+    using seconds      = std::chrono::duration<long long, second_ratio>;
+    using minutes      = std::chrono::duration<long long, minute_ratio>;
+    using hours        = std::chrono::duration<long long, hour_ratio>;
+    using days         = std::chrono::duration<long long, day_ratio>;
+    using weeks        = std::chrono::duration<long long, week_ratio>;
+    using months       = std::chrono::duration<long long, month_ratio>;
+    using years        = std::chrono::duration<long long, year_ratio>;
+
+    using duration              = milliseconds;
+    using rep                   = duration::rep;
+    using period                = duration::period;
+    using time_point            = std::chrono::time_point<vanadiel_clock>;
+    static const bool is_steady = false;
+
+    static time_point now() noexcept
     {
-    private:
-        using millisecond_ratio = std::ratio<1, 25000>; // (1Vms/25000ms) * 1000Vms * 60Vs = 1 Vmin
-        using second_ratio      = std::ratio_multiply<millisecond_ratio, std::ratio<1000>>;
-        using minute_ratio      = std::ratio_multiply<second_ratio, std::ratio<60>>; // 2.4 Earth seconds
-        using hour_ratio        = std::ratio_multiply<minute_ratio, std::ratio<60>>; //  60 Vana'diel minutes
-        using day_ratio         = std::ratio_multiply<hour_ratio, std::ratio<24>>;   //  24 Vana'diel hours
-        using week_ratio        = std::ratio_multiply<day_ratio, std::ratio<8>>;     //   8 Vana'diel days
-        using month_ratio       = std::ratio_multiply<day_ratio, std::ratio<30>>;    //  30 Vana'diel days
-        using year_ratio        = std::ratio_multiply<day_ratio, std::ratio<360>>;   // 360 Vana'diel days
+        return time_point{ std::chrono::duration_cast<duration>(earth_time::now() - earth_time::vanadiel_epoch) };
+    }
+};
 
-    public:
-        using milliseconds = std::chrono::duration<long long, millisecond_ratio>;
-        using seconds      = std::chrono::duration<long long, second_ratio>;
-        using minutes      = std::chrono::duration<long long, minute_ratio>;
-        using hours        = std::chrono::duration<long long, hour_ratio>;
-        using days         = std::chrono::duration<long long, day_ratio>;
-        using weeks        = std::chrono::duration<long long, week_ratio>;
-        using months       = std::chrono::duration<long long, month_ratio>;
-        using years        = std::chrono::duration<long long, year_ratio>;
+// A wrapper around std::optional to allow usage of object.apply([](auto& obj) { ... });
+// https://en.cppreference.com/w/cpp/utility/optional
+template <typename T>
+class optional
+{
+public:
+    constexpr optional() = default;
 
-        using duration              = milliseconds;
-        using rep                   = duration::rep;
-        using period                = duration::period;
-        using time_point            = std::chrono::time_point<vanadiel_clock>;
-        static const bool is_steady = false;
-
-        static time_point now() noexcept
-        {
-            return time_point{ std::chrono::duration_cast<duration>(earth_time::now() - earth_time::vanadiel_epoch) };
-        }
-    };
-
-    // A wrapper around std::optional to allow usage of object.apply([](auto& obj) { ... });
-    // https://en.cppreference.com/w/cpp/utility/optional
-    template <typename T>
-    class optional
+    constexpr optional(std::nullopt_t) noexcept
+    : m_value(std::nullopt)
     {
-    public:
-        constexpr optional() = default;
-
-        constexpr optional(std::nullopt_t) noexcept
-        : m_value(std::nullopt)
-        {
-        }
-
-        constexpr optional(T&& value)
-        : m_value(std::forward<T>(value))
-        {
-        }
-
-        constexpr optional(const T& value)
-        : m_value(value)
-        {
-        }
-
-        constexpr optional(const optional& other)                = default;
-        constexpr optional(optional&& other) noexcept            = default;
-        constexpr optional& operator=(const optional& other)     = default;
-        constexpr optional& operator=(optional&& other) noexcept = default;
-        ~optional()                                              = default;
-
-        constexpr optional& operator=(std::nullopt_t) noexcept
-        {
-            m_value = std::nullopt;
-            return *this;
-        }
-
-        constexpr optional& operator=(T&& value)
-        {
-            m_value = std::move(value);
-            return *this;
-        }
-
-        template <typename F>
-        constexpr bool apply(F&& f) &
-        {
-            if (m_value)
-            {
-                f(*m_value);
-            }
-            return m_value.has_value();
-        }
-
-        template <typename F>
-        constexpr bool apply(F&& f) const&
-        {
-            if (m_value)
-            {
-                f(*m_value);
-            }
-            return m_value.has_value();
-        }
-
-        constexpr explicit operator bool() const noexcept
-        {
-            return m_value.has_value();
-        }
-
-        constexpr T& operator*() &
-        {
-            return *m_value;
-        }
-
-        constexpr const T& operator*() const&
-        {
-            return *m_value;
-        }
-
-        constexpr T* operator->() noexcept
-        {
-            return m_value.operator->();
-        }
-
-        constexpr const T* operator->() const noexcept
-        {
-            return m_value.operator->();
-        }
-
-        constexpr void reset() noexcept
-        {
-            m_value.reset();
-        }
-
-        template <typename... Args>
-        constexpr T& emplace(Args&&... args)
-        {
-            return m_value.emplace(std::forward<Args>(args)...);
-        }
-
-        constexpr bool operator==(const optional& other) const
-        {
-            return m_value == other.m_value;
-        }
-
-        constexpr bool operator!=(const optional& other) const
-        {
-            return m_value != other.m_value;
-        }
-
-    private:
-        std::optional<T> m_value = std::nullopt;
-    };
-
-    // TODO: A wrapper around std::variant to allow usage of:
-    //     :   object.visit(overloaded{...});
-    //     :   object.get<T>() -> xi::optional<T>;
-
-    // https://github.com/microsoft/GSL/blob/main/include/gsl/util
-    // final_action allows you to ensure something gets run at the end of a scope
-    template <class F>
-    class final_action
-    {
-    public:
-        explicit final_action(const F& ff) noexcept
-        : f{ ff }
-        {
-        }
-
-        explicit final_action(F&& ff) noexcept
-        : f{ std::move(ff) }
-        {
-        }
-
-        ~final_action() noexcept
-        {
-            if (invoke)
-            {
-                f();
-            }
-        }
-
-        final_action(final_action&& other) noexcept
-        : f(std::move(other.f))
-        , invoke(std::exchange(other.invoke, false))
-        {
-        }
-
-        final_action(const final_action&)   = delete;
-        void operator=(const final_action&) = delete;
-        void operator=(final_action&&)      = delete;
-
-    private:
-        F    f;
-        bool invoke = true;
-    };
-
-    // finally() - convenience function to generate a final_action
-    template <class F>
-    [[nodiscard]] auto finally(F&& f) noexcept
-    {
-        return final_action<std::decay_t<F>>{ std::forward<F>(f) };
     }
 
-    class bit_reference
+    constexpr optional(T&& value)
+    : m_value(std::forward<T>(value))
     {
-    public:
-        bit_reference(uint8& byte, size_t bit)
-        : byte_(byte)
-        , bit_(bit)
-        {
-        }
+    }
 
-        operator bool() const
-        {
-            return (byte_ & (1 << bit_)) != 0;
-        }
-
-        bit_reference& operator=(bool value)
-        {
-            if (value)
-            {
-                byte_ |= (1 << bit_);
-            }
-            else
-            {
-                byte_ &= ~(1 << bit_);
-            }
-            return *this;
-        }
-
-        bit_reference& operator=(const bit_reference& other)
-        {
-            return *this = static_cast<bool>(other);
-        }
-
-    private:
-        uint8& byte_;
-        size_t bit_;
-    };
-
-    // std::bitset is not trivial, so we need to create our own bitset
-    // for use with the database
-    template <std::size_t N>
-    struct bitset
+    constexpr optional(const T& value)
+    : m_value(value)
     {
-        static constexpr std::size_t    storage_size = (N + 7) / 8;
-        std::array<uint8, storage_size> data;
+    }
 
-        void set(std::size_t pos, bool value)
+    constexpr optional(const optional& other)                = default;
+    constexpr optional(optional&& other) noexcept            = default;
+    constexpr optional& operator=(const optional& other)     = default;
+    constexpr optional& operator=(optional&& other) noexcept = default;
+    ~optional()                                              = default;
+
+    constexpr optional& operator=(std::nullopt_t) noexcept
+    {
+        m_value = std::nullopt;
+        return *this;
+    }
+
+    constexpr optional& operator=(T&& value)
+    {
+        m_value = std::move(value);
+        return *this;
+    }
+
+    template <typename F>
+    constexpr bool apply(F&& f) &
+    {
+        if (m_value)
         {
-            if (value)
+            f(*m_value);
+        }
+        return m_value.has_value();
+    }
+
+    template <typename F>
+    constexpr bool apply(F&& f) const&
+    {
+        if (m_value)
+        {
+            f(*m_value);
+        }
+        return m_value.has_value();
+    }
+
+    constexpr explicit operator bool() const noexcept
+    {
+        return m_value.has_value();
+    }
+
+    constexpr T& operator*() &
+    {
+        return *m_value;
+    }
+
+    constexpr const T& operator*() const&
+    {
+        return *m_value;
+    }
+
+    constexpr T* operator->() noexcept
+    {
+        return m_value.operator->();
+    }
+
+    constexpr const T* operator->() const noexcept
+    {
+        return m_value.operator->();
+    }
+
+    constexpr void reset() noexcept
+    {
+        m_value.reset();
+    }
+
+    template <typename... Args>
+    constexpr T& emplace(Args&&... args)
+    {
+        return m_value.emplace(std::forward<Args>(args)...);
+    }
+
+    constexpr bool operator==(const optional& other) const
+    {
+        return m_value == other.m_value;
+    }
+
+    constexpr bool operator!=(const optional& other) const
+    {
+        return m_value != other.m_value;
+    }
+
+private:
+    std::optional<T> m_value = std::nullopt;
+};
+
+// TODO: A wrapper around std::variant to allow usage of:
+//     :   object.visit(overloaded{...});
+//     :   object.get<T>() -> xi::optional<T>;
+
+// https://github.com/microsoft/GSL/blob/main/include/gsl/util
+// final_action allows you to ensure something gets run at the end of a scope
+template <class F>
+class final_action
+{
+public:
+    explicit final_action(const F& ff) noexcept
+    : f{ ff }
+    {
+    }
+
+    explicit final_action(F&& ff) noexcept
+    : f{ std::move(ff) }
+    {
+    }
+
+    ~final_action() noexcept
+    {
+        if (invoke)
+        {
+            f();
+        }
+    }
+
+    final_action(final_action&& other) noexcept
+    : f(std::move(other.f))
+    , invoke(std::exchange(other.invoke, false))
+    {
+    }
+
+    final_action(const final_action&)   = delete;
+    void operator=(const final_action&) = delete;
+    void operator=(final_action&&)      = delete;
+
+private:
+    F    f;
+    bool invoke = true;
+};
+
+// finally() - convenience function to generate a final_action
+template <class F>
+[[nodiscard]] auto finally(F&& f) noexcept
+{
+    return final_action<std::decay_t<F>>{ std::forward<F>(f) };
+}
+
+class bit_reference
+{
+public:
+    bit_reference(uint8& byte, size_t bit)
+    : byte_(byte)
+    , bit_(bit)
+    {
+    }
+
+    operator bool() const
+    {
+        return (byte_ & (1 << bit_)) != 0;
+    }
+
+    bit_reference& operator=(bool value)
+    {
+        if (value)
+        {
+            byte_ |= (1 << bit_);
+        }
+        else
+        {
+            byte_ &= ~(1 << bit_);
+        }
+        return *this;
+    }
+
+    bit_reference& operator=(const bit_reference& other)
+    {
+        return *this = static_cast<bool>(other);
+    }
+
+private:
+    uint8& byte_;
+    size_t bit_;
+};
+
+// std::bitset is not trivial, so we need to create our own bitset
+// for use with the database
+template <std::size_t N>
+struct bitset
+{
+    static constexpr std::size_t    storage_size = (N + 7) / 8;
+    std::array<uint8, storage_size> data;
+
+    void set(std::size_t pos, bool value)
+    {
+        if (value)
+        {
+            data[pos / 8] |= (1 << (pos % 8));
+        }
+        else
+        {
+            data[pos / 8] &= ~(1 << (pos % 8));
+        }
+    }
+
+    void set(std::size_t pos)
+    {
+        set(pos, true);
+    }
+
+    bool get(std::size_t pos) const
+    {
+        return (data[pos / 8] >> (pos % 8)) & 0x01;
+    }
+
+    bool test(std::size_t pos) const
+    {
+        return get(pos);
+    }
+
+    bool none() const
+    {
+        for (std::size_t i = 0; i < storage_size; ++i)
+        {
+            if (data[i] != 0)
             {
-                data[pos / 8] |= (1 << (pos % 8));
+                return false;
             }
-            else
-            {
-                data[pos / 8] &= ~(1 << (pos % 8));
-            }
+        }
+        return true;
+    }
+
+    void reset()
+    {
+        std::fill(data.begin(), data.end(), 0);
+    }
+
+    void reset(std::size_t pos)
+    {
+        set(pos, false);
+    }
+
+    void flip()
+    {
+        for (std::size_t i = 0; i < storage_size; ++i)
+        {
+            data[i] = ~data[i];
+        }
+    }
+
+    void flip(std::size_t pos)
+    {
+        data[pos / 8] ^= (1 << (pos % 8));
+    }
+
+    std::size_t size() const
+    {
+        return N;
+    }
+
+    xi::bitset<storage_size>& operator=(xi::bitset<storage_size>&& other)
+    {
+        data = std::move(other.data);
+        return *this;
+    }
+
+    bit_reference operator[](std::size_t pos)
+    {
+        return bit_reference(data[pos / 8], pos % 8);
+    }
+
+    bool operator[](std::size_t pos) const
+    {
+        return get(pos);
+    }
+
+    xi::bitset<N> operator&(const xi::bitset<N>& other) const
+    {
+        xi::bitset<N> result;
+        for (std::size_t i = 0; i < storage_size; ++i)
+        {
+            result.data[i] = data[i] & other.data[i];
+        }
+        return result;
+    }
+
+    xi::bitset<N> operator~() const
+    {
+        xi::bitset<N> result;
+        for (std::size_t i = 0; i < storage_size; ++i)
+        {
+            result.data[i] = ~data[i];
+        }
+        return result;
+    }
+
+    xi::bitset<N>& operator&=(const xi::bitset<N>& other)
+    {
+        for (std::size_t i = 0; i < storage_size; ++i)
+        {
+            data[i] &= other.data[i];
+        }
+        return *this;
+    }
+};
+
+// For easy lazy initialization of objects.
+// Most suitable for Parent->lazy<ChildType> relationships.
+// NOTE: We capture the constructor arguments in a lambda for use during initialization later on.
+//     : Therefore you need to ensure the child outlives the parent!
+template <typename T>
+class lazy
+{
+public:
+    lazy()
+    : constructFn_(
+          []
+          {
+              return T{};
+          })
+    {
+    }
+
+    DISALLOW_COPY_AND_MOVE(lazy);
+
+    //
+    // Factory function to create a lazy instance with captured arguments
+    //
+
+    template <typename... Args>
+    static auto with_args(Args&&... args) -> lazy<T>
+    {
+        auto args_tuple = std::make_tuple(std::forward<Args>(args)...);
+        return lazy(std::move(args_tuple));
+    }
+
+    auto get() -> T&
+    {
+        auto lock = std::unique_lock<LockableBase(std::mutex)>(mutex_);
+        LockMark(mutex_);
+
+        if (!instance_)
+        {
+            instance_.emplace(constructFn_());
         }
 
-        void set(std::size_t pos)
-        {
-            set(pos, true);
-        }
+        return *instance_;
+    }
 
-        bool get(std::size_t pos) const
-        {
-            return (data[pos / 8] >> (pos % 8)) & 0x01;
-        }
+    bool is_constructed() const noexcept
+    {
+        return instance_.has_value();
+    }
 
-        bool test(std::size_t pos) const
-        {
-            return get(pos);
-        }
+    void reset() noexcept
+    {
+        instance_.reset();
+    }
 
-        bool none() const
+    //
+    // Implicit conversion operators
+    //
+
+    operator T&()
+    {
+        return get();
+    }
+
+    auto operator->() -> T*
+    {
+        return &get();
+    }
+
+    auto operator*() -> T&
+    {
+        return get();
+    }
+
+private:
+    //
+    // Private constructor used by factory
+    //
+
+    template <typename Tuple>
+    explicit lazy(Tuple&& args_tuple)
+    {
+        constructFn_ = [args_tuple = std::forward<Tuple>(args_tuple)]() mutable -> T
         {
-            for (std::size_t i = 0; i < storage_size; ++i)
-            {
-                if (data[i] != 0)
+            return std::apply(
+                [](auto&&... unpacked)
                 {
-                    return false;
-                }
-            }
-            return true;
-        }
+                    return T(std::forward<decltype(unpacked)>(unpacked)...);
+                },
+                std::move(args_tuple));
+        };
+    }
 
-        void reset()
-        {
-            std::fill(data.begin(), data.end(), 0);
-        }
+    //
+    // Members
+    //
 
-        void reset(std::size_t pos)
-        {
-            set(pos, false);
-        }
+    mutable TracyLockable(std::mutex, mutex_);
 
-        void flip()
-        {
-            for (std::size_t i = 0; i < storage_size; ++i)
-            {
-                data[i] = ~data[i];
-            }
-        }
+    std::optional<T>   instance_;
+    std::function<T()> constructFn_;
+};
 
-        void flip(std::size_t pos)
-        {
-            data[pos / 8] ^= (1 << (pos % 8));
-        }
-
-        std::size_t size() const
-        {
-            return N;
-        }
-
-        xi::bitset<storage_size>& operator=(xi::bitset<storage_size>&& other)
-        {
-            data = std::move(other.data);
-            return *this;
-        }
-
-        bit_reference operator[](std::size_t pos)
-        {
-            return bit_reference(data[pos / 8], pos % 8);
-        }
-
-        bool operator[](std::size_t pos) const
-        {
-            return get(pos);
-        }
-
-        xi::bitset<N> operator&(const xi::bitset<N>& other) const
-        {
-            xi::bitset<N> result;
-            for (std::size_t i = 0; i < storage_size; ++i)
-            {
-                result.data[i] = data[i] & other.data[i];
-            }
-            return result;
-        }
-
-        xi::bitset<N> operator~() const
-        {
-            xi::bitset<N> result;
-            for (std::size_t i = 0; i < storage_size; ++i)
-            {
-                result.data[i] = ~data[i];
-            }
-            return result;
-        }
-
-        xi::bitset<N>& operator&=(const xi::bitset<N>& other)
-        {
-            for (std::size_t i = 0; i < storage_size; ++i)
-            {
-                data[i] &= other.data[i];
-            }
-            return *this;
-        }
-    };
-
-    // For easy lazy initialization of objects.
-    // Most suitable for Parent->lazy<ChildType> relationships.
-    // NOTE: We capture the constructor arguments in a lambda for use during initialization later on.
-    //     : Therefore you need to ensure the child outlives the parent!
-    template <typename T>
-    class lazy
+template <typename Container, typename Predicate>
+void eraseIf(Container& container, Predicate&& pred)
+{
+    auto it = container.begin();
+    while (it != container.end())
     {
-    public:
-        lazy()
-        : constructFn_([]
-                       { return T{}; })
+        if (pred(*it))
         {
+            it = container.erase(it); // erase returns the next valid iterator
         }
-
-        DISALLOW_COPY_AND_MOVE(lazy);
-
-        //
-        // Factory function to create a lazy instance with captured arguments
-        //
-
-        template <typename... Args>
-        static auto with_args(Args&&... args) -> lazy<T>
+        else
         {
-            auto args_tuple = std::make_tuple(std::forward<Args>(args)...);
-            return lazy(std::move(args_tuple));
-        }
-
-        auto get() -> T&
-        {
-            auto lock = std::unique_lock<LockableBase(std::mutex)>(mutex_);
-            LockMark(mutex_);
-
-            if (!instance_)
-            {
-                instance_.emplace(constructFn_());
-            }
-
-            return *instance_;
-        }
-
-        bool is_constructed() const noexcept
-        {
-            return instance_.has_value();
-        }
-
-        void reset() noexcept
-        {
-            instance_.reset();
-        }
-
-        //
-        // Implicit conversion operators
-        //
-
-        operator T&()
-        {
-            return get();
-        }
-
-        auto operator->() -> T*
-        {
-            return &get();
-        }
-
-        auto operator*() -> T&
-        {
-            return get();
-        }
-
-    private:
-        //
-        // Private constructor used by factory
-        //
-
-        template <typename Tuple>
-        explicit lazy(Tuple&& args_tuple)
-        {
-            constructFn_ = [args_tuple = std::forward<Tuple>(args_tuple)]() mutable -> T
-            {
-                return std::apply(
-                    [](auto&&... unpacked)
-                    {
-                        return T(std::forward<decltype(unpacked)>(unpacked)...);
-                    },
-                    std::move(args_tuple));
-            };
-        }
-
-        //
-        // Members
-        //
-
-        mutable TracyLockable(std::mutex, mutex_);
-
-        std::optional<T>   instance_;
-        std::function<T()> constructFn_;
-    };
-
-    template <typename Container, typename Predicate>
-    void eraseIf(Container& container, Predicate&& pred)
-    {
-        auto it = container.begin();
-        while (it != container.end())
-        {
-            if (pred(*it))
-            {
-                it = container.erase(it); // erase returns the next valid iterator
-            }
-            else
-            {
-                ++it;
-            }
+            ++it;
         }
     }
+}
+
 } // namespace xi

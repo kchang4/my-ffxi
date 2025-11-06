@@ -31,7 +31,9 @@
 
 namespace asio
 {
-    class thread_pool;
+
+class thread_pool;
+
 }
 
 class Async : public Singleton<Async>
