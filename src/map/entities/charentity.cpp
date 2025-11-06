@@ -97,7 +97,6 @@
 
 CCharEntity::CCharEntity()
 : m_PlayTime(0s)
-, m_AMAN(xi::lazy<CAMANContainer>::with_args(this))
 {
     TracyZoneScoped;
     objtype     = TYPE_PC;
@@ -768,7 +767,11 @@ auto CCharEntity::getStorage(const uint8 locationId) const -> CItemContainer*
 
 auto CCharEntity::aman() -> CAMANContainer&
 {
-    return m_AMAN;
+    if (!m_AMAN)
+    {
+        m_AMAN = CAMANContainer(this);
+    }
+    return *m_AMAN;
 }
 
 int8 CCharEntity::getShieldSize()

@@ -21,9 +21,9 @@
 
 #include "conquest_system.h"
 
-#include "common/lazy.h"
 #include "common/mmo.h"
 #include "common/vana_time.h"
+#include "common/xi.h"
 
 #include "entities/charentity.h"
 #include "ipc_client.h"
@@ -37,11 +37,17 @@
 namespace conquest
 {
 
-Lazy<ConquestData> conquestData;
+// Lazily initialized conquest data
+// TODO: This should be a member of _something_
+xi::optional<ConquestData> conquestData;
 
 ConquestData& GetConquestData()
 {
-    return conquestData();
+    if (!conquestData)
+    {
+        conquestData = ConquestData{};
+    }
+    return *conquestData;
 }
 
 void HandleMessage(ConquestMessage type, const std::span<const uint8> data)
