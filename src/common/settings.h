@@ -33,8 +33,8 @@
 namespace settings
 {
 
-using SettingsVariant_t = std::variant<bool, double, std::string>;
-extern std::unordered_map<std::string, SettingsVariant_t> settingsMap;
+using SettingsVariant = std::variant<bool, double, std::string>;
+extern std::unordered_map<std::string, SettingsVariant> settingsMap;
 
 void init();
 
@@ -154,9 +154,9 @@ T get(std::string name)
 void set(const auto& name, const auto& value)
 {
     const auto key   = to_upper(name);
-    settingsMap[key] = SettingsVariant_t(value);
+    settingsMap[key] = SettingsVariant(value);
 }
 
-void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor);
+void visit(const xi::Fn<void(std::string, SettingsVariant)>& visitor);
 
 } // namespace settings

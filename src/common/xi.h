@@ -39,6 +39,8 @@
 #include "helpers/eraseif.h"
 #include "helpers/overload.h"
 
+#include "types/fn.h"
+
 namespace xi
 {
 

@@ -34,7 +34,7 @@
 namespace settings
 {
 
-std::unordered_map<std::string, SettingsVariant_t> settingsMap;
+std::unordered_map<std::string, SettingsVariant> settingsMap;
 
 // We need this to figure out which environment variables are numbers
 // so we can pass them to the lua settings properly typed.
@@ -227,7 +227,7 @@ void init()
     // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
 }
 
-void visit(const std::function<void(std::string, SettingsVariant_t)>& visitor)
+void visit(const xi::Fn<void(std::string, SettingsVariant)>& visitor)
 {
     for (auto& [key, value] : settingsMap)
     {
