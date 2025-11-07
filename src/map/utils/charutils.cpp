@@ -3326,13 +3326,8 @@ void BuildingCharWeaponSkills(CCharEntity* PChar)
     CItemWeapon* PItem        = nullptr;
     int          main_ws      = 0;
     int          range_ws     = 0;
-    int          main_ws_dyn  = 0;
-    int          range_ws_dyn = 0;
 
-    bool isInDynamis = PChar->isInDynamis();
-
-    for (auto&& slot :
-         { std::make_tuple(SLOT_MAIN, std::ref(main_ws), std::ref(main_ws_dyn)), std::make_tuple(SLOT_RANGED, std::ref(range_ws), std::ref(range_ws_dyn)) })
+    for (auto&& slot : { std::make_tuple(SLOT_MAIN, std::ref(main_ws)), std::make_tuple(SLOT_RANGED, std::ref(range_ws)) })
     {
         if (PChar->m_Weapons[std::get<0>(slot)])
         {
@@ -3342,7 +3337,6 @@ void BuildingCharWeaponSkills(CCharEntity* PChar)
             if (PItem && (!PItem->isUnlockable() || PItem->isUnlocked()))
             {
                 std::get<1>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL);
-                std::get<2>(slot) = battleutils::GetScaledItemModifier(PChar, PItem, Mod::ADDS_WEAPONSKILL_DYN);
             }
         }
     }
@@ -3354,7 +3348,7 @@ void BuildingCharWeaponSkills(CCharEntity* PChar)
     const auto& MeleeWeaponSkillList = battleutils::GetWeaponSkills(skill);
     for (auto&& PSkill : MeleeWeaponSkillList)
     {
-        if (battleutils::CanUseWeaponskill(PChar, PSkill) || PSkill->getID() == main_ws || (isInDynamis && (PSkill->getID() == main_ws_dyn)))
+        if (battleutils::CanUseWeaponskill(PChar, PSkill) || PSkill->getID() == main_ws)
         {
             addWeaponSkill(PChar, PSkill->getID());
         }
@@ -3368,7 +3362,7 @@ void BuildingCharWeaponSkills(CCharEntity* PChar)
         const auto& RangedWeaponSkillList = battleutils::GetWeaponSkills(skill);
         for (auto&& PSkill : RangedWeaponSkillList)
         {
-            if ((battleutils::CanUseWeaponskill(PChar, PSkill)) || PSkill->getID() == range_ws || (isInDynamis && (PSkill->getID() == range_ws_dyn)))
+            if ((battleutils::CanUseWeaponskill(PChar, PSkill)) || PSkill->getID() == range_ws)
             {
                 addWeaponSkill(PChar, PSkill->getID());
             }

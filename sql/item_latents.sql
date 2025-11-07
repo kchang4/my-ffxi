@@ -2460,6 +2460,9 @@ INSERT INTO `item_latents` VALUES (18261,287,15,48,0);   -- DMG:+16 in Dynamis
 INSERT INTO `item_latents` VALUES (18262,20,9,48,0);     -- [Element: Water]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18262,287,2,48,0);    -- DMG:+18 in Dynamis
 
+-- Caestus
+INSERT INTO `item_latents` VALUES (18263,355,10,48,0);   -- ADDS_WEAPONSKILL: 10 in Dynamis
+
 -- Malefic Dagger
 INSERT INTO `item_latents` VALUES (18267,22,7,48,0);     -- [Element: Dark]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18267,287,22,48,0);   -- DMG:23 in Dynamis
@@ -2467,6 +2470,9 @@ INSERT INTO `item_latents` VALUES (18267,287,22,48,0);   -- DMG:23 in Dynamis
 -- Dynamis Dagger
 INSERT INTO `item_latents` VALUES (18268,22,9,48,0);     -- [Element: Dark]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18268,287,3,48,0);    -- DMG:26 in Dynamis
+
+-- Batardeau
+INSERT INTO `item_latents` VALUES (18269,355,26,48,0);   -- ADDS_WEAPONSKILL: 26 in Dynamis
 
 -- Glyptic Sword
 INSERT INTO `item_latents` VALUES (18273,19,7,48,0);     -- [Element: Thunder]+7 in Dynamis
@@ -2476,6 +2482,9 @@ INSERT INTO `item_latents` VALUES (18273,287,39,48,0);   -- DMG:40 in Dynamis
 INSERT INTO `item_latents` VALUES (18274,19,9,48,0);     -- [Element: Thunder]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18274,287,8,48,0);    -- DMG:48 in Dynamis
 
+-- Caliburn
+INSERT INTO `item_latents` VALUES (18275,355,43,48,0);   -- ADDS_WEAPONSKILL: 43 in Dynamis
+
 -- Gilded Blade
 INSERT INTO `item_latents` VALUES (18279,17,7,48,0);     -- [Element: Air]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18279,287,79,48,0);   -- DMG:80 in Dynamis
@@ -2483,6 +2492,9 @@ INSERT INTO `item_latents` VALUES (18279,287,79,48,0);   -- DMG:80 in Dynamis
 -- Dynamis Blade
 INSERT INTO `item_latents` VALUES (18280,17,9,48,0);     -- [Element: Air]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18280,287,5,48,0);    -- DMG:85 in Dynamis
+
+-- Valhalla
+INSERT INTO `item_latents` VALUES (18281,355,57,48,0);   -- ADDS_WEAPONSKILL: 57 in Dynamis
 
 -- Leonine Axe
 INSERT INTO `item_latents` VALUES (18285,21,7,48,0);     -- [Element: Light]+7 in Dynamis
@@ -2492,6 +2504,9 @@ INSERT INTO `item_latents` VALUES (18285,287,45,48,0);   -- DMG:46 in Dynamis
 INSERT INTO `item_latents` VALUES (18286,21,9,48,0);     -- [Element: Light]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18286,287,4,48,0);    -- DMG:50 in Dynamis
 
+-- Ogre Killer
+INSERT INTO `item_latents` VALUES (18287,355,73,48,0);   -- ADDS_WEAPONSKILL: 73 in Dynamis
+
 -- Agonal Bhuj
 INSERT INTO `item_latents` VALUES (18291,21,7,48,0);     -- [Element: Light]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18291,287,86,48,0);   -- DMG:87 in Dynamis
@@ -2499,6 +2514,9 @@ INSERT INTO `item_latents` VALUES (18291,287,86,48,0);   -- DMG:87 in Dynamis
 -- Dynamis Bhuj
 INSERT INTO `item_latents` VALUES (18292,21,9,48,0);     -- [Element: Light]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18292,287,4,48,0);    -- DMG:93 in Dynamis
+
+-- Abaddon Killer
+INSERT INTO `item_latents` VALUES (18293,355,89,48,0);   -- ADDS_WEAPONSKILL: 89 in Dynamis
 
 -- Hotspur Lance
 INSERT INTO `item_latents` VALUES (18297,18,7,48,0);     -- [Element: Earth]+7 in Dynamis
@@ -2508,6 +2526,9 @@ INSERT INTO `item_latents` VALUES (18297,287,81,48,0);   -- DMG:82 in Dynamis
 INSERT INTO `item_latents` VALUES (18298,18,9,48,0);     -- [Element: Earth]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18298,287,2,48,0);    -- DMG:84 in Dynamis
 
+-- Gae Assail
+INSERT INTO `item_latents` VALUES (18299,355,121,48,0);  -- ADDS_WEAPONSKILL: 121 in Dynamis
+
 -- Memento Scythe
 INSERT INTO `item_latents` VALUES (18303,16,7,48,0);     -- [Element: Ice]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18303,287,81,48,0);   -- DMG:82 in Dynamis
@@ -2515,6 +2536,9 @@ INSERT INTO `item_latents` VALUES (18303,287,81,48,0);   -- DMG:82 in Dynamis
 -- Dynamis Scythe
 INSERT INTO `item_latents` VALUES (18304,16,9,48,0);     -- [Element: Ice]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18304,287,3,48,0);    -- DMG:85 in Dynamis
+
+-- Bec De Faucon
+INSERT INTO `item_latents` VALUES (18305,355,105,48,0);  -- ADDS_WEAPONSKILL: 105 in Dynamis
 
 -- Mimizuku
 INSERT INTO `item_latents` VALUES (18309,22,7,48,0);     -- [Element: Dark]+7 in Dynamis
@@ -2524,6 +2548,9 @@ INSERT INTO `item_latents` VALUES (18309,287,32,48,0);   -- DMG:33 in Dynamis
 INSERT INTO `item_latents` VALUES (18310,22,9,48,0);     -- [Element: Air]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18310,287,7,48,0);    -- DMG:40 in Dynamis
 
+-- Yoshimitsu
+INSERT INTO `item_latents` VALUES (18311,355,137,48,0);  -- ADDS_WEAPONSKILL: 137 in Dynamis
+
 -- Hayatemaru
 INSERT INTO `item_latents` VALUES (18315,17,7,48,0);     -- [Element: Air]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18315,287,75,48,0);   -- DMG:76 in Dynamis
@@ -2531,6 +2558,9 @@ INSERT INTO `item_latents` VALUES (18315,287,75,48,0);   -- DMG:76 in Dynamis
 -- Oboromaru
 INSERT INTO `item_latents` VALUES (18316,17,9,48,0);     -- [Element: Air]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18316,287,3,48,0);    -- DMG:79 in Dynamis
+
+-- Totsukanotsurugi
+INSERT INTO `item_latents` VALUES (18317,355,153,48,0);  -- ADDS_WEAPONSKILL: 153 in Dynamis
 
 -- Battering Maul
 INSERT INTO `item_latents` VALUES (18321,19,7,48,0);     -- [Element: Thunder]+9 in Dynamis
@@ -2540,6 +2570,9 @@ INSERT INTO `item_latents` VALUES (18321,287,28,48,0);   -- DMG:29 in Dynamis
 INSERT INTO `item_latents` VALUES (18322,19,9,48,0);     -- [Element: Thunder]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18322,287,5,48,0);    -- DMG:35 in Dynamis
 
+-- Gullintani
+INSERT INTO `item_latents` VALUES (18323,355,170,48,0);  -- ADDS_WEAPONSKILL: 170 in Dynamis
+
 -- Sage's Staff
 INSERT INTO `item_latents` VALUES (18327,15,7,48,0);     -- [Element: Fire]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18327,287,54,48,0);   -- DMG:55 in Dynamis
@@ -2548,6 +2581,9 @@ INSERT INTO `item_latents` VALUES (18327,287,54,48,0);   -- DMG:55 in Dynamis
 INSERT INTO `item_latents` VALUES (18328,15,9,48,0);     -- [Element: Fire]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18328,287,3,48,0);    -- DMG:58 in Dynamis
 
+-- Thyrus
+INSERT INTO `item_latents` VALUES (18329,355,185,48,0);  -- ADDS_WEAPONSKILL: 185 in Dynamis
+
 -- Marksman Gun
 INSERT INTO `item_latents` VALUES (18333,15,7,48,0);     -- [Element: Fire]+7 in Dynamis
 INSERT INTO `item_latents` VALUES (18333,287,38,48,0);   -- DMG:39 in Dynamis
@@ -2555,6 +2591,9 @@ INSERT INTO `item_latents` VALUES (18333,287,38,48,0);   -- DMG:39 in Dynamis
 -- Dynamis Gun
 INSERT INTO `item_latents` VALUES (18334,15,9,48,0);     -- [Element: Fire]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18334,287,3,48,0);    -- DMG:42 in Dynamis
+
+-- Ferdinand
+INSERT INTO `item_latents` VALUES (18335,355,216,48,0);  -- ADDS_WEAPONSKILL: 216 in Dynamis
 
 -- Pyrrhic Horn
 INSERT INTO `item_latents` VALUES (18339,14,1,48,0);     -- CHR+1 in Dynamis
@@ -2576,8 +2615,12 @@ INSERT INTO `item_latents` VALUES (18345,287,67,48,0);   -- DMG:68 in Dynamis
 INSERT INTO `item_latents` VALUES (18346,20,9,48,0);     -- [Element: Water]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18346,287,3,48,0);    -- DMG:71 in Dynamis
 
-INSERT INTO `item_latents` VALUES (18352,15,15,28,0);    -- Mighty Patas [Element: Fire]+15
-INSERT INTO `item_latents` VALUES (18352,287,5,28,0);    -- Mighty Patas DMG+10 on Firesday
+-- Futatokoroto
+INSERT INTO `item_latents` VALUES (18347,355,200,48,0);  -- ADDS_WEAPONSKILL: 200 in Dynamis
+
+-- Mighty Patas
+INSERT INTO `item_latents` VALUES (18352,15,15,28,0);    -- [Element: Fire]+15
+INSERT INTO `item_latents` VALUES (18352,287,5,28,0);    -- DMG+10 on Firesday
 
 -- Wagh Baghnakhs
 INSERT INTO `item_latents` VALUES (18358,23,14,6,1000);  -- Attack+14 while TP <100%

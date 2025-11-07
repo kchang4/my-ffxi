@@ -596,7 +596,6 @@ xi.mod =
     AUGMENTS_SLEIGHT_OF_SWORD   = 277,  -- Enhances bonus "Subtle Blow" per merit.
 
     ADDS_WEAPONSKILL                = 355,
-    ADDS_WEAPONSKILL_DYN            = 356,
     BP_DELAY                        = 357,
     STEALTH                         = 358,
     RAPID_SHOT                      = 359,

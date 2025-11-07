@@ -836,8 +836,7 @@ enum class Mod
     DARK_AFFINITY_PERP    = 560,
 
     // Special Modifier+
-    ADDS_WEAPONSKILL     = 355, //
-    ADDS_WEAPONSKILL_DYN = 356, // In Dynamis
+    ADDS_WEAPONSKILL = 355, //
 
     STEALTH            = 358, //
     SNEAK_DURATION     = 946, // Additional duration in seconds
@@ -1117,7 +1116,9 @@ enum class Mod
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
     //
-    // SPARE IDs: 1170 and onward
+    // SPARE IDs:
+    //   356
+    //   1170 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
