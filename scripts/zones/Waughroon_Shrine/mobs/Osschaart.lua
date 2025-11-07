@@ -270,7 +270,7 @@ entity.onMobFight = function(mob, target)
             -- BST: Summons pet first, then uses Familiar after a 2 second delay
             local petData = pets[xi.job.BST]
             local petId = mob:getID() + petData.offset
-            xi.setMobPet(mob, petData.offset, petData.name)
+            xi.pet.setMobPet(mob, petData.offset, petData.name)
             xi.mob.callPets(mob, petId, petData.params)
             mob:timer(2000, function(mobArg)
                 mobArg:useMobAbility(copiedTwoHour)
@@ -279,7 +279,7 @@ entity.onMobFight = function(mob, target)
             -- PUP: Summons automaton first, then uses Overdrive after a 2 second delay
             local petData = pets[xi.job.PUP]
             local petId = mob:getID() + petData.offset
-            xi.setMobPet(mob, petData.offset, petData.name)
+            xi.pet.setMobPet(mob, petData.offset, petData.name)
             xi.mob.callPets(mob, petId, petData.params)
             mob:timer(2000, function(mobArg)
                 mobArg:useMobAbility(copiedTwoHour)
@@ -288,7 +288,7 @@ entity.onMobFight = function(mob, target)
             -- DRG: Uses Call Wyvern
             local petData = pets[xi.job.DRG]
             local petId = mob:getID() + petData.offset
-            xi.setMobPet(mob, petData.offset, petData.name)
+            xi.pet.setMobPet(mob, petData.offset, petData.name)
             xi.mob.callPets(mob, petId, petData.params)
         else
             -- All other jobs: Just use the two-hour ability
