@@ -267,6 +267,8 @@ xi.mobSkill =
     KNIFE_EDGE_CIRCLE        = 1341,
     TRAIN_FALL               = 1342,
 
+    CHARM_2                  = 1337,
+
     MANTLE_PIERCE            = 1349,
 
     AERIAL_COLLISION         = 1353,
