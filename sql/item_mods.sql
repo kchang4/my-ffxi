@@ -7721,6 +7721,7 @@ INSERT INTO `item_mods` VALUES (11544,5,10);  -- MP: 10
 INSERT INTO `item_mods` VALUES (11544,170,1); -- FASTCAST: 1
 
 -- Fourth Division Mantle
+INSERT INTO `item_mods` VALUES (11545,1,4);  -- DEF: 4
 INSERT INTO `item_mods` VALUES (11545,73,2); -- STORETP: 2
 
 -- Aesir Mantle
@@ -8133,7 +8134,7 @@ INSERT INTO `item_mods` VALUES (11635,25,-3); -- ACC: -3
 INSERT INTO `item_mods` VALUES (11635,68,6);  -- EVA: 6
 
 -- Royal Knight Sigil Ring
-INSERT INTO `item_mods` VALUES (11636,1,30); -- DEF: 30
+INSERT INTO `item_mods` VALUES (11636,2,30); -- HP: 30
 
 -- Meridian Ring
 INSERT INTO `item_mods` VALUES (11637,2,90);   -- HP: 90
@@ -25158,6 +25159,7 @@ INSERT INTO `item_mods` VALUES (15010,289,2); -- SUBTLE_BLOW: 2
 INSERT INTO `item_mods` VALUES (15011,1,13);  -- DEF: 13
 INSERT INTO `item_mods` VALUES (15011,25,4);  -- ACC: 4
 INSERT INTO `item_mods` VALUES (15011,27,-3); -- ENMITY: -3
+INSERT INTO `item_mods` VALUES (15011,73,3);  -- STORETP: 3
 
 -- Cobra Unit Gloves
 INSERT INTO `item_mods` VALUES (15012,1,12);  -- DEF: 12
@@ -30755,6 +30757,7 @@ INSERT INTO `item_mods` VALUES (16147,289,4); -- SUBTLE_BLOW: 4
 INSERT INTO `item_mods` VALUES (16148,1,22);  -- DEF: 22
 INSERT INTO `item_mods` VALUES (16148,25,4);  -- ACC: 4
 INSERT INTO `item_mods` VALUES (16148,27,-4); -- ENMITY: -4
+INSERT INTO `item_mods` VALUES (16148,73,2);  -- STORETP: 2
 
 -- Cobra Unit Cloche
 INSERT INTO `item_mods` VALUES (16149,1,12);  -- DEF: 12
