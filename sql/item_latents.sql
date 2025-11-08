@@ -1814,11 +1814,8 @@ INSERT INTO `item_latents` VALUES (16220,10,10,13,114);  -- VIT+10
 INSERT INTO `item_latents` VALUES (16238,369,1,13,3);
 
 -- Viator Cape
--- This item seems to break the pattern of the "Campaign:" latent text which normally overrides,
--- not adds, to the total. Otherwise, why would it say HP +15 both in and out of Campaign?
-INSERT INTO `item_latents` VALUES (16246,2,15,13,267); -- Allied Tags: HP +15
+-- These are confirmed retail-accurate as of Nov 2025.
 INSERT INTO `item_latents` VALUES (16246,3,5,13,267);  -- Allied Tags: HPP +5%
-INSERT INTO `item_latents` VALUES (16246,5,15,13,267); -- Allied Tags: MP +15
 INSERT INTO `item_latents` VALUES (16246,6,5,13,267);  -- Allied Tags: MPP +5%
 INSERT INTO `item_latents` VALUES (16246,71,2,13,267); -- Allied Tags: hMP +2
 INSERT INTO `item_latents` VALUES (16246,72,2,13,267); -- Allied Tags: hHP +2
