@@ -6725,6 +6725,14 @@ auto CheckAbilityAddtype(CCharEntity* PChar, const CAbility* PAbility) -> bool
     return true;
 }
 
+void RemoveInvisible(const CCharEntity* PChar)
+{
+    if (PChar && PChar->StatusEffectContainer)
+    {
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
+    }
+}
+
 void RemoveStratagems(CCharEntity* PChar, CSpell* PSpell)
 {
     if (PSpell->getSpellGroup() == SPELLGROUP_WHITE)
