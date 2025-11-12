@@ -403,7 +403,7 @@ xi.job_utils.dancer.useDesperateFlourishAbility = function(player, target, abili
         end
 
         action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
-        action:speceffect(target:getID(), 2)
+        action:speceffect(target:getID(), infoValue)
 
         return xi.effect.WEIGHT
     else
@@ -458,7 +458,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
 
         -- Animations.
         action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
-        action:speceffect(target:getID(), hitType)
+        action:speceffect(target:getID(), infoValue)
 
         return dmg
     else
@@ -493,7 +493,7 @@ xi.job_utils.dancer.useWildFlourishAbility = function(player, target, ability, a
     end
 
     action:setAnimation(target:getID(), getFlourishAnimation(player:getWeaponSkillType(xi.slot.MAIN)))
-    action:speceffect(target:getID(), 1)
+    action:speceffect(target:getID(), infoValue)
     setFinishingMoves(player, numMoves - 2)
 
     return 0
