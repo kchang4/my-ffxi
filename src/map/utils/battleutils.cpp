@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -271,7 +271,7 @@ void LoadPetSkillsList()
         PPetSkill->setMobSkillID(rset->get<uint16>("mob_skill_id"));
         g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
 
-        auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
+        auto filename = fmt::format("./scripts/actions/abilities/pets/{}.lua", PPetSkill->getName());
         luautils::CacheLuaObjectFromFile(filename);
     }
 }
@@ -1382,11 +1382,11 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTar
                 if (Action->addEffectParam < 0)
                 {
                     Action->addEffectParam   = -Action->addEffectParam;
-                    Action->addEffectMessage = 384;
+                    Action->addEffectMessage = MSGBASIC_ADD_EFFECT_RECOVERS_HP;
                 }
                 else
                 {
-                    Action->addEffectMessage = 229;
+                    Action->addEffectMessage = MSGBASIC_ADD_EFFECT_ADDITIONAL_DAMAGE;
                 }
 
                 PDefender->takeDamage(Action->addEffectParam, PAttacker, ATTACK_TYPE::MAGICAL, GetEnspellDamageType((ENSPELL)enspell));
