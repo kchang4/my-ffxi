@@ -10444,7 +10444,7 @@ INSERT INTO `mob_groups` VALUES (44,2261,146,'King_of_Swords',0,128,0,11000,1100
 INSERT INTO `mob_groups` VALUES (45,2259,146,'King_of_Coins',0,128,0,11000,11000,79,79,0);
 INSERT INTO `mob_groups` VALUES (46,3285,146,'Queen_of_Cups',0,128,2064,7000,7000,75,75,0);
 INSERT INTO `mob_groups` VALUES (47,3283,146,'Queen_of_Batons',0,128,2062,7000,7000,75,75,0);
-INSERT INTO `mob_groups` VALUES (48,1532,146,'Giant_Moa',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (48,1532,146,'Giant_Moa',0,128,0,8000,0,77,77,0);
 INSERT INTO `mob_groups` VALUES (49,6870,146,'Kutkha',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (50,6871,146,'Kutkhas_Get',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (51,6872,146,'Pha_Groxo_the_Aloof',0,128,0,0,0,0,0,0);

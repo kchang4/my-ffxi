@@ -58,6 +58,9 @@ xi.mobSkill =
     FLURRY_OF_RAGE           =  397,
     WHISPERS_OF_IRE          =  398,
 
+    HAMMER_BEAK              =  406,
+
+    BALEFUL_GAZE_COCKATRICE  =  411,
     RANGED_ATTACK_2          =  412,
 
     SCISSION_THRUST          =  419, -- Mammet-800
@@ -270,6 +273,10 @@ xi.mobSkill =
     PROMYVION_BRUME_2        = 1276,
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
+
+    CONTAGION_TRANSFER       = 1333,
+    CONTAMINATION            = 1334,
+    TOXIC_PICK               = 1335,
 
     KNIFE_EDGE_CIRCLE        = 1341,
     TRAIN_FALL               = 1342,
