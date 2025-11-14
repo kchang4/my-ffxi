@@ -134,9 +134,23 @@ bool CRangeState::Update(timer::time_point tick)
 {
     if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
-        auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
-        CanUseRangedAttack(PTarget, true);
+        // Use cached target from construction instead of re-validating
+        // This allows the attack to complete with a miss when target moves out of range
+        auto* PTarget = GetTarget();
+
+        // Only interrupt if target truly doesn't exist anymore
+        if (!PTarget)
+        {
+            m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_CANNOT_ATTACK_TARGET);
+        }
+        else
+        {
+            // Run CanUseRangedAttack but only for specific checks (ammo, animation state, etc)
+            // Don't let distance/LOS checks cause interrupts - those should produce misses
+            CanUseRangedAttack(static_cast<CBattleEntity*>(PTarget), true);
+        }
+
         if (HasMoved())
         {
             m_errorMsg = std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_MOVE_AND_INTERRUPT);
