@@ -27,6 +27,12 @@ xi.mobSkill =
     PIT_AMBUSH_1             =  278,
     MANDIBULAR_BITE_1        =  279,
 
+    STOMPING                 =  281,
+
+    WHISTLE                  =  285,
+    BERSERK_DHALMEL          =  286,
+    HEALING_BREEZE           =  287,
+
     SUBSTITUTE               =  307,
     FROGKICK_1               =  308,
     SPORE_1                  =  309,
