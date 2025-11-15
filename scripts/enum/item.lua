@@ -160,6 +160,7 @@ xi.item =
     BLOODY_ROBE                         = 540,
     CUP_OF_DHALMEL_SALIVA               = 541,
     WILD_RABBIT_TAIL                    = 542,
+    RUSTY_KEY                           = 543,
     PILE_OF_ANSWER_SHEETS               = 544,
     STARFALL_TEAR                       = 546,
     TOMB_GUARDS_WATERSKIN               = 547,
