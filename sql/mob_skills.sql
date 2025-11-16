@@ -2835,7 +2835,7 @@ INSERT INTO `mob_skills` VALUES (2790,1962,'oblivions_mantle',1,0.0,15.0,2000,10
 -- INSERT INTO `mob_skills` VALUES (2820,2564,'keratinous_crush',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2821,2565,'accurst_spear',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2822,2566,'eldritch_wind',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2823,1986,'rhinowrecker',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (2823,1986,'rhinowrecker',4,0.0,16.0,2000,1500,4,0,0,2,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2824,2568,'cloudscourge',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2825,2569,'louring_skies',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2826,1992,'exponential_burst',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
