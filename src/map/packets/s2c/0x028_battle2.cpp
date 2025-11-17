@@ -45,51 +45,55 @@ void GP_SERV_COMMAND_BATTLE2::pack(action_t& action)
     bitOffset = packBitsBE(packet, action.actionid, bitOffset, 32);                         // Command argument
     bitOffset = packBitsBE(packet, timer::count_seconds(action.recast), bitOffset, 32);     // Action info
 
-    // clang-format off
     // Pack targets
     action.ForEachTarget([&](const action_target_t& target)
-    {
-        // Pack target header
-        bitOffset                 = packBitsBE(packet, target.actorId, bitOffset, 32);
-        const uint8_t resultCount = std::min<uint8_t>(static_cast<uint8_t>(target.results.size()), 8);
-        bitOffset                 = packBitsBE(packet, resultCount, bitOffset, 4);
+                         {
+                             // Pack target header
+                             bitOffset                 = packBitsBE(packet, target.actorId, bitOffset, 32);
+                             const uint8_t resultCount = std::min<uint8_t>(static_cast<uint8_t>(target.results.size()), 8);
+                             bitOffset                 = packBitsBE(packet, resultCount, bitOffset, 4);
 
-        // Pack results for this target
-        for (const auto& result : target.results)
-        {
-            // Core result fields (85 bits)
-            bitOffset = packBitsBE(packet, static_cast<uint8_t>(result.resolution), bitOffset, 3);
-            bitOffset = packBitsBE(packet, result.kind, bitOffset, 2);
-            bitOffset = packBitsBE(packet, static_cast<uint64>(result.animation),  bitOffset, 12);
-            bitOffset = packBitsBE(packet, static_cast<uint64>(result.info), bitOffset, 5);
-            bitOffset = packBitsBE(packet, static_cast<uint64>(result.hitDistortion), bitOffset, 2);
-            bitOffset = packBitsBE(packet, static_cast<uint64>(result.knockback), bitOffset, 3);
-            bitOffset = packBitsBE(packet, result.param, bitOffset, 17);
-            bitOffset = packBitsBE(packet, result.messageID, bitOffset, 10);
-            bitOffset = packBitsBE(packet, static_cast<uint32_t>(result.modifier), bitOffset, 31);
+                             // Pack results for this target
+                             for (const auto& result : target.results)
+                             {
+                                 // Core result fields (85 bits)
+                                 bitOffset = packBitsBE(packet, static_cast<uint8_t>(result.resolution), bitOffset, 3);
+                                 bitOffset = packBitsBE(packet, result.kind, bitOffset, 2);
+                                 bitOffset = packBitsBE(packet, static_cast<uint64>(result.animation), bitOffset, 12);
+                                 bitOffset = packBitsBE(packet, static_cast<uint64>(result.info), bitOffset, 5);
+                                 bitOffset = packBitsBE(packet, static_cast<uint64>(result.hitDistortion), bitOffset, 2);
+                                 bitOffset = packBitsBE(packet, static_cast<uint64>(result.knockback), bitOffset, 3);
+                                 bitOffset = packBitsBE(packet, result.param, bitOffset, 17);
+                                 bitOffset = packBitsBE(packet, result.messageID, bitOffset, 10);
+                                 bitOffset = packBitsBE(packet, static_cast<uint32_t>(result.modifier), bitOffset, 31);
 
-            // Conditional proc block
-            bitOffset = packBitsBE(packet, result.additionalEffect != SUBEFFECT_NONE ? 1 : 0, bitOffset, 1);
-            if (result.additionalEffect != SUBEFFECT_NONE)
-            {
-                bitOffset = packBitsBE(packet, result.additionalEffect, bitOffset, 6);
-                bitOffset = packBitsBE(packet, result.addEffectInfo, bitOffset, 4);
-                bitOffset = packBitsBE(packet, result.addEffectParam, bitOffset, 17);
-                bitOffset = packBitsBE(packet, result.addEffectMessage, bitOffset, 10);
-            }
+                                 // Conditional proc block
+                                 bitOffset = packBitsBE(packet, result.hasAdditionalEffect() ? 1 : 0, bitOffset, 1);
+                                 if (result.hasAdditionalEffect())
+                                 {
+                                     const auto effectValue = std::visit([](auto&& value) -> uint8_t
+                                                                         {
+                                                                             return static_cast<uint8_t>(value);
+                                                                         },
+                                                                         result.additionalEffect);
 
-            // Conditional reaction block
-            bitOffset = packBitsBE(packet, result.spikesEffect != SUBEFFECT_NONE ? 1 : 0, bitOffset, 1);
-            if (result.spikesEffect != SUBEFFECT_NONE)
-            {
-                bitOffset  = packBitsBE(packet, result.spikesEffect, bitOffset, 6);
-                bitOffset  = packBitsBE(packet, result.spikesInfo, bitOffset, 4);
-                bitOffset  = packBitsBE(packet, result.spikesParam, bitOffset, 14);
-                bitOffset  = packBitsBE(packet, result.spikesMessage, bitOffset, 10);
-             }
-        }
-    });
-    // clang-format on
+                                     bitOffset = packBitsBE(packet, effectValue, bitOffset, 6);
+                                     bitOffset = packBitsBE(packet, result.addEffectInfo, bitOffset, 4);
+                                     bitOffset = packBitsBE(packet, result.addEffectParam, bitOffset, 17);
+                                     bitOffset = packBitsBE(packet, result.addEffectMessage, bitOffset, 10);
+                                 }
+
+                                 // Conditional reaction block
+                                 bitOffset = packBitsBE(packet, result.spikesEffect != ActionReactKind::None ? 1 : 0, bitOffset, 1);
+                                 if (result.spikesEffect != ActionReactKind::None)
+                                 {
+                                     bitOffset = packBitsBE(packet, static_cast<uint64>(result.spikesEffect), bitOffset, 6);
+                                     bitOffset = packBitsBE(packet, result.spikesInfo, bitOffset, 4);
+                                     bitOffset = packBitsBE(packet, result.spikesParam, bitOffset, 14);
+                                     bitOffset = packBitsBE(packet, result.spikesMessage, bitOffset, 10);
+                                 }
+                             }
+                         });
 
     // Client ignores it but we'll set it anyway.
     const uint8_t workSize = (bitOffset >> 3) + (bitOffset % 8 != 0);

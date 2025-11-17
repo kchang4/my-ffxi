@@ -2575,7 +2575,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 if (attack.IsCountered())
                 {
                     actionResult.resolution   = ActionResolution::Miss;
-                    actionResult.spikesEffect = SUBEFFECT_COUNTER;
+                    actionResult.spikesEffect = ActionReactKind::Counter;
                     if (battleutils::IsAbsorbByShadow(this, PTarget))
                     {
                         actionResult.spikesParam   = 1;
@@ -2783,11 +2783,11 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
 
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
-            bool missedOrCountered = actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == SUBEFFECT_COUNTER;
-            bool normalZanshinProc = missedOrCountered && xirand::GetRandomNumber(100) < zanshinChance;
+            const bool missedOrCountered = actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == ActionReactKind::Counter;
+            const bool normalZanshinProc = missedOrCountered && xirand::GetRandomNumber(100) < zanshinChance;
 
-            bool isSamWithHasso   = GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO);
-            bool hassoZanshinProc = isSamWithHasso && xirand::GetRandomNumber(100) < zanshinChance / 4;
+            const bool isSamWithHasso   = GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO);
+            const bool hassoZanshinProc = isSamWithHasso && xirand::GetRandomNumber(100) < zanshinChance / 4;
 
             if (normalZanshinProc || hassoZanshinProc)
             {

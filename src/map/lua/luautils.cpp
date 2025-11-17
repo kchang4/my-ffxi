@@ -2457,7 +2457,7 @@ void OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, action_r
         return;
     }
 
-    Action->spikesEffect  = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
+    Action->spikesEffect  = result.get_type(0) == sol::type::number ? result.get<ActionReactKind>(0) : ActionReactKind::None;
     Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
     Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
@@ -2513,9 +2513,9 @@ void additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, 
         return;
     }
 
-    Action->additionalEffect = (SUBEFFECT)(result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0);
-    Action->addEffectMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
-    Action->addEffectParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
+    Action->spikesEffect  = result.get_type(0) == sol::type::number ? result.get<ActionReactKind>(0) : ActionReactKind::None;
+    Action->spikesMessage = result.get_type(1) == sol::type::number ? result.get<MSGBASIC_ID>(1) : MSGBASIC_NONE;
+    Action->spikesParam   = result.get_type(2) == sol::type::number ? result.get<int32>(2) : 0;
 }
 
 void OnEffectGain(CBattleEntity* PEntity, CStatusEffect* PStatusEffect)

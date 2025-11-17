@@ -29,6 +29,7 @@
 
 #include "entities/battleentity.h"
 
+enum class ActionReactKind : uint8_t;
 enum class ActionProcSkillChain : uint8_t;
 enum class Weather : uint16_t;
 class CMobEntity;
@@ -168,8 +169,8 @@ float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, b
 int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, uint16 damageTaken);
 bool  HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);
 bool  HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, int32 damage);
-bool  HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, uint8 damage, SUBEFFECT spikesType, uint8 chance);
-void  HandleSpikesStatusEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action);
+bool  HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, uint8 damage, ActionReactKind spikesType, uint8 chance);
+void  HandleSpikesStatusEffect(const CBattleEntity* PAttacker, const CBattleEntity* PDefender, const action_result_t* Action);
 void  HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_result_t* Action, bool isFirstSwing, CItemWeapon* weapon, int32 damage, CAttack& attack);
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage);
 uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int16 accBonus);
@@ -263,7 +264,7 @@ bool            RemoveAmmo(CCharEntity*, int quantity = 1);
 int32           GetMeritValue(CBattleEntity*, MERIT_TYPE);
 
 int32       GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
-DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType);
+auto        GetSpikesDamageType(ActionReactKind spikesType) -> DAMAGE_TYPE;
 DAMAGE_TYPE GetEnspellDamageType(ENSPELL enspellType);
 DAMAGE_TYPE GetRuneEnhancementDamageType(EFFECT runeEffect);
 ELEMENT     GetRuneEnhancementElement(EFFECT runeEffect);

@@ -30,6 +30,7 @@
 #include "enums/action/knockback.h"
 #include "enums/action/modifier.h"
 #include "enums/action/proc_kind.h"
+#include "enums/action/react_kind.h"
 #include "enums/action/resolution.h"
 #include "enums/four_cc.h"
 #include "spell.h"
@@ -70,11 +71,12 @@ struct action_result_t
 
     inline auto hasAdditionalEffect() const -> bool
     {
-        return std::visit([]<typename T>(const T& value) {
-            return value != T{ 0 };
-        }, this->additionalEffect);
+        return std::visit([]<typename T>(const T& value)
+                          {
+                              return value != T{ 0 };
+                          },
+                          this->additionalEffect);
     }
-
 };
 
 struct action_target_t
