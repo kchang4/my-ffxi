@@ -661,14 +661,14 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
 
     if shadowsHit == numHits and cumulativeDamage == 0 then
         ability:setMsg(xi.msg.basic.SHADOW_ABSORB) -- set message to blinked hit(s)
-        action:resolution(target:getID(), xi.battle.resolution.MISS)
+        action:resolution(target:getID(), xi.action.resolution.MISS)
 
         return shadowsHit
     end
 
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 0)) -- set animation for currently equipped weapon
 
-    action:resolution(target:getID(), xi.battle.resolution.HIT)
+    action:resolution(target:getID(), xi.action.resolution.HIT)
 
     if cumulativeDamage < 0 or (cumulativeDamage == 0 and absorbed) then
         ability:setMsg(xi.msg.basic.JA_RECOVERS_HP)
