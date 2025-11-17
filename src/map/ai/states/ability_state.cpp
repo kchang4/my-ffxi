@@ -73,7 +73,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         actionTarget.animation = 121;
         actionTarget.messageID = 326;
         actionTarget.param     = PAbility->getID();
-        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
         m_PEntity->PAI->EventHandler.triggerListener("ABILITY_START", m_PEntity, PAbility);
 
         // face toward target
@@ -135,7 +135,7 @@ bool CAbilityState::Update(timer::time_point tick)
             action_t action;
             m_PEntity->OnAbility(*this, action);
             m_PEntity->PAI->EventHandler.triggerListener("ABILITY_USE", m_PEntity, GetTarget(), m_PAbility.get(), &action);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
             if (auto* target = GetTarget())
             {
                 target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
@@ -157,7 +157,6 @@ bool CAbilityState::Update(timer::time_point tick)
             actionTarget.animation       = 0x1FC;
             actionTarget.reaction        = REACTION::MISS;
 
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
         }
         Complete();
     }
@@ -288,7 +287,6 @@ bool CAbilityState::CanUseAbility()
                 actionTarget.param           = 0; // Observed as 639 on retail, but I'm not sure that it actually does anything.
                 actionTarget.messageID       = tooFarAway ? MSGBASIC_TOO_FAR_AWAY_RED : 0;
 
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
             }
             return false;
         }

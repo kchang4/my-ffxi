@@ -123,7 +123,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
         actionTarget.messageID = 0; // Client will not emit a message if messageID is 0
     }
 
-    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 }
 
 bool CMagicState::Update(timer::time_point tick)
@@ -161,7 +161,7 @@ bool CMagicState::Update(timer::time_point tick)
         {
             // guessed, but cancels correctly.
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
             Complete();
             return false;
@@ -314,7 +314,7 @@ bool CMagicState::Update(timer::time_point tick)
             }
         }
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
         Complete();
     }

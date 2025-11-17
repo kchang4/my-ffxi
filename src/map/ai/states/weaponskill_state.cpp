@@ -23,7 +23,7 @@
 
 #include "ai/ai_container.h"
 #include "entities/battleentity.h"
-#include "packets/action.h"
+#include "packets/s2c/0x028_battle2.h"
 #include "packets/s2c/0x029_battle_message.h"
 #include "roe.h"
 #include "status_effect_container.h"
@@ -76,7 +76,7 @@ CWeaponSkillState::CWeaponSkillState(CBattleEntity* PEntity, uint16 targid, uint
     actionTarget.animation  = 0;
     actionTarget.param      = m_PSkill->getID();
     actionTarget.messageID  = 43;
-    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 }
 
 CWeaponSkill* CWeaponSkillState::GetSkill()
@@ -126,7 +126,7 @@ bool CWeaponSkillState::Update(timer::time_point tick)
             SpendCost();
 
             m_PEntity->OnWeaponSkillFinished(*this, action);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
             // Reset Restraint bonus and trackers on weaponskill use
             if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))

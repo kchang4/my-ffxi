@@ -25,7 +25,7 @@
 #include "entities/battleentity.h"
 #include "entities/mobentity.h"
 #include "mobskill.h"
-#include "packets/action.h"
+#include "packets/s2c/0x028_battle2.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 
@@ -100,7 +100,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
             actionTarget.messageID = 0;
         }
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
         // face toward target // TODO : add force param to turnTowardsTarget on certain TP moves like Petro Eyes
         battleutils::turnTowardsTarget(m_PEntity, PTarget);
@@ -174,7 +174,7 @@ bool CMobSkillState::Update(timer::time_point tick)
             }
         }
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
 
         m_finishTime = tick + m_PSkill->getAnimationTime();
         Complete();
