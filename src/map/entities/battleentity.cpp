@@ -26,6 +26,7 @@
 #include "common/utils.h"
 
 #include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "ai/states/attack_state.h"
 #include "ai/states/death_state.h"
@@ -2134,31 +2135,12 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
 {
     TracyZoneScoped;
-    CSpell* PSpell = state.GetSpell();
-    if (PSpell)
+    if (CSpell* PSpell = state.GetSpell())
     {
-        action.id         = id;
-        action.spellgroup = PSpell->getSpellGroup();
-        action.recast     = 0s;
-        action.actiontype = ACTION_MAGIC_INTERRUPT;
+        ActionInterrupts::MagicInterrupt(this, PSpell);
 
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.messageID       = 0;
-        actionTarget.animation       = 0;
-        actionTarget.param           = static_cast<uint16>(PSpell->getID());
-
-        if (blockedCast)
+        if (!blockedCast)
         {
-            // In a cutscene or otherwise, it seems the target "evades" the cast, despite the ID being set to the caster?
-            // No message is sent in this case
-            actionTarget.reaction = REACTION::EVADE;
-        }
-        else
-        {
-            actionTarget.reaction = REACTION::HIT;
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
             loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE_MESSAGE>(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
         }
@@ -2241,6 +2223,8 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getValidTargets(), PSkill->getAoe());
         }
         else
+        ActionInterrupts::MobSkillOutOfRange(this, PTarget);
+        return;
         {
             if (this->objtype == TYPE_MOB && PTarget->objtype == TYPE_PC)
             {
@@ -2253,19 +2237,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
             PAI->TargetFind->findSingleTarget(PTarget, findFlags, PSkill->getValidTargets());
         }
-    }
-    else // Out of range
-    {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid           = 0;
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
 
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
-        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
-        actionTarget.speceffect      = SPECEFFECT::BLOOD;
-        return;
     }
 
     uint16 targets  = static_cast<uint16>(PAI->TargetFind->m_targets.size());
@@ -2304,10 +2276,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
         else
         {
-            action.actiontype      = ACTION_MOBABILITY_INTERRUPT;
-            action.actionid        = 28787; // Some hardcoded magic for interrupts
-            actionTarget.animation = 0x1FC; // Hardcoded magic sent from the server
-            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
+            ActionInterrupts::MobSkillNoTargetInRange(this);
         }
 
         return;
@@ -2485,23 +2454,6 @@ void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
 }
 
-void CBattleEntity::setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID)
-{
-    if (PTarget)
-    {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
-        action.id                 = this->id;
-        action.actiontype         = ACTION_MAGIC_FINISH; // all "is paralyzed" messages are cat 4
-        action.actionid           = actionID;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF (0x1FC = 1 1111 1100)
-        actionTarget.messageID       = messageID;
-        actionTarget.param           = 0;
-    }
-}
-
 CBattleEntity* CBattleEntity::GetBattleTarget()
 {
     return static_cast<CBattleEntity*>(GetEntity(GetBattleTargetID()));
@@ -2524,13 +2476,13 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     if (battleutils::IsParalyzed(this))
     {
-        setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, 0);
+        ActionInterrupts::AttackParalyzed(this, PTarget);
         return true;
     }
 
     if (battleutils::IsIntimidated(this, PTarget))
     {
-        setActionInterrupted(action, PTarget, MSGBASIC_IS_INTIMIDATED, 0);
+        ActionInterrupts::AttackIntimidated(this, PTarget);
         return true;
     }
 

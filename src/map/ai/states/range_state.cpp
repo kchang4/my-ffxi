@@ -22,6 +22,7 @@
 #include "range_state.h"
 
 #include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "entities/charentity.h"
 #include "entities/trustentity.h"
@@ -167,29 +168,20 @@ bool CRangeState::Update(timer::time_point tick)
         auto*    cast_errorMsg = dynamic_cast<GP_SERV_COMMAND_BATTLE_MESSAGE*>(m_errorMsg.get());
         if (m_errorMsg && (!cast_errorMsg || cast_errorMsg->getMessageId() != MSGBASIC_CANNOT_SEE))
         {
-            action.id         = m_PEntity->id;
-            action.actiontype = ACTION_RANGED_INTERRUPT;
-
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.animation       = ANIMATION_RANGED;
-
             if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
             {
                 PChar->pushPacket(m_errorMsg->copy());
             }
             // reset aim time so interrupted players only have to wait the correct 2.7s until next shot
             m_aimTime = 0s;
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            ActionInterrupts::RangedInterrupt(m_PEntity);
             m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, nullptr, &action);
         }
         else
         {
             m_errorMsg.reset();
 
-            if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+            if (!PTarget || distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
             {
                 m_isOutOfRange = true;
             }

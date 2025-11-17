@@ -156,32 +156,9 @@ bool CWeaponSkillState::Update(timer::time_point tick)
                 }
             }
         }
-        else // Mob is dead before we could finish WS, generate interrupt for WS
+        else
         {
-            // Could not reproduce on retail due to server tick rate, this entire block is assumed.
-            // Ideally, you would ready a WS then have the mob die to either a DoT or a JA like Quick Draw/Jump and dump the packet.
-            // To the best of our knowledge this would produce a similar-enough effect to cancel the WS animation
-            // Essentially, very similar to "too far away" and casting out of range spell cancellation, with no message.
-            action.actiontype        = ACTION_MAGIC_FINISH;
-            action.actionid          = 28787; // Some hardcoded magic for interrupts
-            actionList_t& actionList = action.getNewActionList();
-
-            if (PTarget)
-            {
-                actionList.ActionTargetID = PTarget->id;
-            }
-            else // Dead code? PTarget should probably never be nullptr.
-            {
-                actionList.ActionTargetID = 0;
-            }
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-            actionTarget.animation = 0x1FC;
-            actionTarget.messageID = 0;
-            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
-
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
+            // There used to be specific handling here for the Weaponskill interrupt, but it was assumed and should not be reintroduced without a test and a proper capture.
         }
 
         auto delay   = m_PSkill->getAnimationTime(); // TODO: Is delay time a fixed number if the weaponskill is used out of range?

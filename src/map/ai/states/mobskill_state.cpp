@@ -199,39 +199,29 @@ bool CMobSkillState::Update(timer::time_point tick)
 
 void CMobSkillState::Cleanup(timer::time_point tick)
 {
-    if (m_PEntity && m_PEntity->isAlive() && !IsCompleted())
+    if (m_PEntity && !IsCompleted())
     {
-        action_t action;
-        action.id         = m_PEntity->id;
-        action.actiontype = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid   = 28787;
-
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = m_PEntity->id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
-        actionTarget.reaction        = REACTION::HIT;
-
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-
-        // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
-        // But lose 25% at < 2900 TP.
-        // Testing was done via charm on a steelshell, methodology was the following on BST/DRK with a scythe
-        // charm -> build tp -> leave -> stun -> interrupt TP move with weapon bash -> charm and check TP. Note that weapon bash incurs damage and thus adds TP.
-        // Note: this is very incomplete. Further testing shows that other statuses also reduce TP but in addition it seems that specific mobskills may reduce TP more or less than these numbers
-        // Thus while incomplete, is better than nothing.
-        if (m_PEntity->StatusEffectContainer &&
-            m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT::EFFECT_STUN, EFFECT::EFFECT_TERROR, EFFECT::EFFECT_PETRIFICATION, EFFECT::EFFECT_SLEEP, EFFECT::EFFECT_SLEEP_II, EFFECT::EFFECT_LULLABY }))
+        ActionInterrupts::AbilityInterrupt(m_PEntity);
+        if (m_PEntity->isAlive())
         {
-            int16 tp = m_spentTP;
-            if (tp >= 2900)
+            // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
+            // But lose 25% at < 2900 TP.
+            // Testing was done via charm on a steelshell, methodology was the following on BST/DRK with a scythe
+            // charm -> build tp -> leave -> stun -> interrupt TP move with weapon bash -> charm and check TP. Note that weapon bash incurs damage and thus adds TP.
+            // Note: this is very incomplete. Further testing shows that other statuses also reduce TP but in addition it seems that specific mobskills may reduce TP more or less than these numbers
+            // Thus while incomplete, is better than nothing.
+            if (m_PEntity->StatusEffectContainer &&
+                m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT::EFFECT_STUN, EFFECT::EFFECT_TERROR, EFFECT::EFFECT_PETRIFICATION, EFFECT::EFFECT_SLEEP, EFFECT::EFFECT_SLEEP_II, EFFECT::EFFECT_LULLABY }))
             {
-                m_PEntity->health.tp = std::floor(std::round(0.333333f * tp));
-            }
-            else
-            {
-                m_PEntity->health.tp = std::floor(0.25f * tp);
+                int16 tp = m_spentTP;
+                if (tp >= 2900)
+                {
+                    m_PEntity->health.tp = std::floor(std::round(0.333333f * tp));
+                }
+                else
+                {
+                    m_PEntity->health.tp = std::floor(0.25f * tp);
+                }
             }
         }
     }

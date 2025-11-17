@@ -23,6 +23,7 @@
 
 #include "ability.h"
 #include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "common/utils.h"
 #include "enmity_container.h"
@@ -149,23 +150,7 @@ bool CAbilityState::Update(timer::time_point tick)
                 target->PAI->EventHandler.triggerListener("ABILITY_TAKE", target, m_PEntity, m_PAbility.get(), &action);
             }
         }
-        else if (m_castTime > 0s) // Instant abilities do not need to be interrupted
-        {
-            CBaseEntity* PTarget = GetTarget();
 
-            action_t action;
-            action.id         = m_PEntity->id;
-            action.actiontype = ACTION_JOBABILITY_INTERRUPT;
-            action.actionid   = 28787;
-
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.animation       = 0x1FC;
-            actionTarget.reaction        = REACTION::MISS;
-
-        }
         Complete();
     }
 
@@ -261,28 +246,6 @@ bool CAbilityState::CanUseAbility()
 
         if (cancelAbility)
         {
-            // Only create a packet if the ability isn't instant
-            if (m_castTime > 0s)
-            {
-                // Create this action packet that also sort of looks like an animation cancel packet to emit a red "Target is too far away" message.
-                // Captured from a red "<target> is too far away" message from healing breath IV
-                action_t action;
-
-                action.id         = m_PEntity->id;
-                action.actiontype = ACTION_MAGIC_FINISH;
-                action.actionid   = 0;
-
-                actionList_t& actionList  = action.getNewActionList();
-                actionList.ActionTargetID = PTarget ? PTarget->id : m_PEntity->id;
-
-                actionTarget_t& actionTarget = actionList.getNewActionTarget();
-                actionTarget.animation       = 0x1FC;
-                actionTarget.reaction        = REACTION::MISS;
-                actionTarget.speceffect      = static_cast<SPECEFFECT>(0x24);
-                actionTarget.param           = 0; // Observed as 639 on retail, but I'm not sure that it actually does anything.
-                actionTarget.messageID       = tooFarAway ? MSGBASIC_TOO_FAR_AWAY_RED : 0;
-
-            }
             return false;
         }
 

@@ -22,6 +22,7 @@
 #include "magic_state.h"
 
 #include "action/action.h"
+#include "action/interrupts.h"
 #include "ai/ai_container.h"
 #include "ai/controllers/pet_controller.h"
 #include "ai/states/inactive_state.h"
@@ -175,7 +176,6 @@ bool CMagicState::Update(timer::time_point tick)
         if (!isTargetValid() || !CanCastSpell(PTarget, true) || HasMoved())
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
             Complete();
             return false;
@@ -186,7 +186,6 @@ bool CMagicState::Update(timer::time_point tick)
             if (PChar->m_Locked)
             {
                 m_PEntity->OnCastInterrupted(*this, action, msg, true);
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
                 Complete();
                 return false;
@@ -198,7 +197,6 @@ bool CMagicState::Update(timer::time_point tick)
                 {
                     m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_TRUST_NO_CAST_TRUST, true);
                     action.recast = 2s; // seems hardcoded to 2
-                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
                     Complete();
                     return false;
@@ -218,7 +216,6 @@ bool CMagicState::Update(timer::time_point tick)
             if (PChar->m_Locked)
             {
                 m_PEntity->OnCastInterrupted(*this, action, msg, true);
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
                 Complete();
                 return false;
@@ -229,7 +226,6 @@ bool CMagicState::Update(timer::time_point tick)
         if (PTarget->PAI->IsUntargetable())
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, true);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
 
             Complete();
             return false;
@@ -237,56 +233,14 @@ bool CMagicState::Update(timer::time_point tick)
 
         if (battleutils::IsParalyzed(m_PEntity))
         {
-            action_t interruptedAction;
-            m_PEntity->setActionInterrupted(interruptedAction, PTarget, MSGBASIC_IS_PARALYZED_2, static_cast<uint16>(m_PSpell->getID()));
-            interruptedAction.recast   = 2s; // seems hardcoded to 2
-            interruptedAction.actionid = static_cast<uint16>(m_PSpell->getID());
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(interruptedAction));
-
-            // Yes, you're seeing this correctly.
-            // A paralyze/interrupt proc on *spells* actually sends two actions. One that contains the para/intimidate message
-            // And a second action to send the fourcc "stop casting" command.
-            // Spell interrupts when you're moving send a message + stop casting fourcc command and not two actions.
-            action.id         = m_PEntity->id;
-            action.spellgroup = m_PSpell->getSpellGroup();
-            action.recast     = 2s;
-            action.actiontype = ACTION_MAGIC_INTERRUPT;
-
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = m_PEntity->id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.messageID       = 0;
-            actionTarget.animation       = 0;
-            actionTarget.param           = 0; // sometimes 1?
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-
+            ActionInterrupts::MagicParalyzed(m_PEntity, m_PSpell.get(), PTarget);
             Complete();
             return false;
         }
-        else if (battleutils::IsIntimidated(m_PEntity, PTarget))
+
+        if (battleutils::IsIntimidated(m_PEntity, PTarget))
         {
-            action_t interruptedAction;
-            m_PEntity->setActionInterrupted(interruptedAction, PTarget, MSGBASIC_IS_INTIMIDATED, static_cast<uint16>(m_PSpell->getID()));
-            interruptedAction.recast   = 2s; // seems hardcoded to 2
-            interruptedAction.actionid = static_cast<uint16>(m_PSpell->getID());
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(interruptedAction));
-
-            // See comment in above block for paralyze
-            action.id         = m_PEntity->id;
-            action.spellgroup = m_PSpell->getSpellGroup();
-            action.recast     = 2s;
-            action.actiontype = ACTION_MAGIC_INTERRUPT;
-
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = m_PEntity->id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-            actionTarget.messageID       = 0;
-            actionTarget.animation       = 0;
-            actionTarget.param           = 0; // sometimes 1?
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
-
+            ActionInterrupts::MagicIntimidated(m_PEntity, m_PSpell.get(), PTarget);
             Complete();
             return false;
         }
@@ -335,7 +289,6 @@ void CMagicState::Cleanup(timer::time_point tick)
     {
         action_t action{};
         m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_IS_INTERRUPTED, false);
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(action));
     }
 }
 

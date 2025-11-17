@@ -621,9 +621,6 @@ public:
     virtual void OnMobSkillFinished(CMobSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
-    // Used to set an action to an "interrupted" state
-    void setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID);
-
     virtual void OnAbility(CAbilityState&, action_t&)
     {
     }

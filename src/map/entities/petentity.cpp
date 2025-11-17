@@ -42,6 +42,7 @@
 #include "petentity.h"
 
 #include "action/action.h"
+#include "action/interrupts.h"
 #include "packets/s2c/0x029_battle_message.h"
 
 CPetEntity::CPetEntity(PET_TYPE petType)
@@ -312,7 +313,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         // Abilities are not subject to paralyze if they have non-zero cast time due to this corner case.
         if (state.GetAbility()->getCastTime() == 0s && battleutils::IsParalyzed(this))
         {
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, 0);
+            ActionInterrupts::AbilityParalyzed(this, PTarget);
             return;
         }
 
@@ -347,15 +348,7 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
     }
     else // Can't target anything, just cancel the animation.
     {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid           = 28787; // Some hardcoded magic for interrupts
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC;
-        actionTarget.messageID       = 0;
-        actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
+        ActionInterrupts::AbilityInterrupt(this);
     }
 }
 
@@ -479,14 +472,15 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     }
     else // Out of range
     {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
+        if (this->getPetType() == PET_TYPE::AVATAR)
+        {
+            ActionInterrupts::AvatarOutOfRange(this, PSkill, PTarget);
+        }
+        else if (this->getPetType() == PET_TYPE::WYVERN)
+        {
+            ActionInterrupts::WyvernOutOfRange(this, PSkill, PTarget);
+        }
 
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
-        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
-        actionTarget.speceffect      = SPECEFFECT::BLOOD;
         return;
     }
 
@@ -495,16 +489,8 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
     {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid           = 28787; // Some hardcoded magic for interrupts
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC;
-        actionTarget.messageID       = 0;
-        actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
-
+        // There used to be a specific interrupt here, but it's not clear in what conditions it should occur
+        // Add a test and retail capture before reintroducing.
         return;
     }
 

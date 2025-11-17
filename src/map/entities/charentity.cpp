@@ -62,6 +62,7 @@
 #include "charentity.h"
 
 #include "action/action.h"
+#include "action/interrupts.h"
 #include "blue_spell.h"
 #include "conquest_system.h"
 #include "enums/key_items.h"
@@ -1516,22 +1517,10 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
             PAI->TargetFind->findSingleTarget(PBattleTarget, FINDFLAGS_NONE, TARGET_NONE);
         }
 
-        // Assumed, it's very difficult to produce this due to WS being nearly instant
-        // TODO: attempt to verify.
         if (PAI->TargetFind->m_targets.size() == 0)
         {
-            // No targets, perhaps something like Super Jump or otherwise untargetable
-            action.actiontype         = ACTION_MAGIC_FINISH;
-            action.actionid           = 28787; // Some hardcoded magic for interrupts
-            actionList_t& actionList  = action.getNewActionList();
-            actionList.ActionTargetID = id;
-
-            actionTarget_t& actionTarget = actionList.getNewActionTarget();
-
-            actionTarget.animation = 0x1FC; // Assumed, but not verified.
-            actionTarget.messageID = 0;
-            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
-
+            // There used to be an assumed interrupt handler here.
+            // Add a test and capture before reintroducing.
             return;
         }
 
@@ -1571,6 +1560,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 // On retail, weaponskills will contain 0x08, 0x10 (HIT, ABILITY) on hit and may include the following:
                 // 0x01, 0x02, 0x04 (MISS, GUARDED, BLOCK)
                 // TODO: refactor this so lua returns the number of hits so we don't have to check the reaction bits.
+                if (actionResult.resolution != ActionResolution::Miss)
                 {
                     int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
 
@@ -1631,23 +1621,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     }
     else
     {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PBattleTarget->id;
-        action.actiontype         = ACTION_MAGIC_FINISH; // all "Too Far" messages use cat 4
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
-        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
-
-        // While it doesn't seem that speceffect is actually used at all in this "do nothing" animation, this is here for accuracy.
-        if (isRangedWS) // Ranged WS seem to stay 0 on Reaction
-        {
-            actionTarget.speceffect = SPECEFFECT::NONE;
-        }
-        else // Always 2 observed on various melee weapons
-        {
-            actionTarget.speceffect = SPECEFFECT::BLOOD;
-        }
+        ActionInterrupts::WeaponSkillOutOfRange(this, PBattleTarget);
     }
 
     PLatentEffectContainer->CheckLatentsWS(false);
@@ -1690,7 +1664,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     {
         if (this != PTarget && distance(this->loc.p, PTarget->loc.p) > PAbility->getRange())
         {
-            setActionInterrupted(action, PTarget, MSGBASIC_TOO_FAR_AWAY, 0);
+            // TODO: Is this relevant? Out of range is a BATTLE_MESSAGE, not an interrupt...
             return;
         }
 
@@ -1769,7 +1743,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
             }
 
-            setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED, 0);
+            ActionInterrupts::AbilityParalyzed(this, PTarget);
             return;
         }
 
@@ -1876,20 +1850,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 // OnAbilityCheck succeeded and petskill is found, tell pet to perform it
                 // TODO: This ends up sending the pet action packet before PC...
                 PPetEntity->PAI->PetSkill(PPetTarget, PPetSkill->getID());
-            }
-            // next two checks are to ensure misconfigurations don't consume cooldowns for unimplemented petskills
-            // properly-implemented skills will not get to this OnAbility function by nature of returning non-zero in OnAbilityCheck
-            else if (PPet)
-            {
-                // possible if a player triggers a pet skill that isn't implemented
-                setActionInterrupted(action, PTarget, MSGBASIC_UNABLE_TO_USE_JA, 0);
-                return;
-            }
-            else
-            {
-                // possible if a player triggers a pet skill that isn't implemented
-                setActionInterrupted(action, PTarget, MSGBASIC_REQUIRES_A_PET, 0);
-                return;
             }
         }
         // TODO: make this generic enough to not require an if
@@ -2009,23 +1969,8 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
     if (battleutils::IsParalyzed(this))
     {
-        // setup new action packet to send paralyze message
-        action_t paralyze_action = {};
-        setActionInterrupted(paralyze_action, PTarget, MSGBASIC_IS_PARALYZED, 0);
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, std::make_unique<CActionPacket>(paralyze_action));
-
-        // Set up /ra action to be interrupted
-        action.actiontype = ACTION_RANGED_INTERRUPT; // This handles some magic numbers in CActionPacket to cancel actions
-        action.id         = id;
-
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = id;
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF (0x1FC = 1 1111 1100)
-        actionTarget.speceffect      = SPECEFFECT::RECOIL;
-        actionTarget.reaction        = REACTION::NONE;
-
+        ActionInterrupts::RangedParalyzed(this);
+        // TODO: The caller sends a useless empty packet
         return;
     }
 
