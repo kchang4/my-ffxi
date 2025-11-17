@@ -299,8 +299,8 @@ bool CLuaAction::addAdditionalTarget(uint32 actionTargetID)
         }
     }
 
-    auto& newAction = m_PLuaAction->getNewTarget(actionTargetID);
-    newAction.getNewResult();
+    auto& newAction = m_PLuaAction->addTarget(actionTargetID);
+    newAction.addResult();
 
     return true;
 }

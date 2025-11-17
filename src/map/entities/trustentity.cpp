@@ -161,8 +161,8 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
             uint16 prevMsg = 0;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
-                action_target_t& actionTarget = action.getNewTarget(PTargetFound->id);
-                action_result_t& actionResult = actionTarget.getNewResult();
+                action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+                action_result_t& actionResult = actionTarget.addResult();
                 actionResult.resolution       = ActionResolution::Hit;
                 actionResult.animation        = PAbility->getAnimationID();
                 actionResult.messageID        = PAbility->getMessage();
@@ -194,8 +194,8 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
         }
         else
         {
-            action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-            action_result_t& actionResult = actionTarget.getNewResult();
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
             actionResult.resolution       = ActionResolution::Hit;
             actionResult.animation        = PAbility->getAnimationID();
             auto prevMsg                  = actionResult.messageID;
@@ -240,8 +240,8 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     action.actorId                = id;
     action.actiontype             = ActionCategory::RangedFinish;
     action.actionid               = static_cast<uint32_t>(FourCC::RangedFinish);
-    action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-    action_result_t& actionResult = actionTarget.getNewResult();
+    action_target_t& actionTarget = action.addTarget(PTarget->id);
+    action_result_t& actionResult = actionTarget.addResult();
     actionResult.messageID        = MSGBASIC_RANGED_ATTACK_HIT;
 
     /*
@@ -518,8 +518,8 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
         for (auto&& PTarget : PAI->TargetFind->m_targets)
         {
             bool             primary      = PTarget == PBattleTarget;
-            action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-            action_result_t& actionResult = actionTarget.getNewResult();
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
 
             uint16         tpHitsLanded    = 0;
             uint16         extraHitsLanded = 0;

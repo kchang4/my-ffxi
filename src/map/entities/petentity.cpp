@@ -320,8 +320,8 @@ void CPetEntity::OnAbility(CAbilityState& state, action_t& action)
         action.actorId                = this->id;
         action.actiontype             = PAbility->getActionType();
         action.actionid               = PAbility->getID();
-        action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-        action_result_t& actionResult = actionTarget.getNewResult();
+        action_target_t& actionTarget = action.addTarget(PTarget->id);
+        action_result_t& actionResult = actionTarget.addResult();
         actionResult.resolution       = ActionResolution::Hit;
         actionResult.animation        = PAbility->getAnimationID();
         actionResult.param            = 0;
@@ -506,8 +506,8 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
     bool first{ true };
     for (auto&& PTargetFound : PAI->TargetFind->m_targets)
     {
-        action_target_t& actionTarget = action.getNewTarget(PTargetFound->id);
-        action_result_t& actionResult = actionTarget.getNewResult();
+        action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+        action_result_t& actionResult = actionTarget.addResult();
         actionTarget.actorId          = PTargetFound->id;
         actionResult.resolution       = ActionResolution::Hit;
         actionResult.animation        = PSkill->getAnimationID();

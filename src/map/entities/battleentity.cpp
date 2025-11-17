@@ -1981,8 +1981,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
     for (auto* PTarget : PAI->TargetFind->m_targets)
     {
-        action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-        action_result_t& actionResult = actionTarget.getNewResult();
+        action_target_t& actionTarget = action.addTarget(PTarget->id);
+        action_result_t& actionResult = actionTarget.addResult();
 
         actionResult.resolution = ActionResolution::Hit;
         actionResult.animation  = PSpell->getAnimationID();
@@ -2263,8 +2263,8 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
     {
-        action_target_t& actionTarget = action.getNewTarget(id);
-        action_result_t& actionResult = actionTarget.getNewResult();
+        action_target_t& actionTarget = action.addTarget(id);
+        action_result_t& actionResult = actionTarget.addResult();
         actionResult.messageID        = MSGBASIC_NONE;
 
         if (skipSelf)
@@ -2320,8 +2320,8 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             return;
         }
 
-        action_target_t& target = action.getNewTarget(PTargetFound->id);
-        action_result_t& result = target.getNewResult();
+        action_target_t& target = action.addTarget(PTargetFound->id);
+        action_result_t& result = target.addResult();
 
         target.actorId    = PTargetFound->id;
         result.resolution = ActionResolution::Hit;
@@ -2523,7 +2523,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     action.actiontype                = ActionCategory::BasicAttack;
     action.actorId                   = this->id;
-    action_target_t& list            = action.getNewTarget(PTarget->id);
+    action_target_t& list            = action.addTarget(PTarget->id);
     CBattleEntity*   POriginalTarget = PTarget;
 
     /////////////////////////////////////////////////////////////////////////
@@ -2533,7 +2533,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     /////////////////////////////////////////////////////////////////////////
     while (attackRound.GetAttackSwingCount() && PTarget->isAlive() && this->isAlive())
     {
-        action_result_t& actionResult = list.getNewResult();
+        action_result_t& actionResult = list.addResult();
         // Reference to the current swing.
         CAttack& attack = attackRound.GetCurrentAttack();
 

@@ -73,7 +73,7 @@ struct action_target_t
     uint32                       actorId; // 32 bits
     std::vector<action_result_t> results;
 
-    auto getNewResult() -> action_result_t&
+    auto addResult() -> action_result_t&
     {
         return *results.emplace(results.end());
     }
@@ -88,7 +88,7 @@ struct action_t
     SPELLGROUP                   spellgroup{ SPELLGROUP_NONE };
     std::vector<action_target_t> targets{};
 
-    auto getNewTarget(const uint32 targetId) -> action_target_t&
+    auto addTarget(const uint32 targetId) -> action_target_t&
     {
         return targets.emplace_back(action_target_t{ .actorId = targetId });
     }

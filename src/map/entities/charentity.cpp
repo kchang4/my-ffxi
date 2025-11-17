@@ -1527,8 +1527,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
         for (auto&& PTarget : PAI->TargetFind->m_targets)
         {
             bool             primary      = PTarget == PBattleTarget;
-            action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-            action_result_t& actionResult = actionTarget.getNewResult();
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
 
             uint16         tpHitsLanded    = 0;
             uint16         extraHitsLanded = 0;
@@ -1827,8 +1827,8 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             if (PPetEntity && PPetSkill) // don't display msg and notify pet
             {
                 // For jug pet abilities, the JobAbility FINISH packet targets the player, not the pet
-                action_target_t& actionTarget = action.getNewTarget((PPetEntity->getPetType() == PET_TYPE::JUG_PET) ? this->id : PTarget->id);
-                action_result_t& actionResult = actionTarget.getNewResult();
+                action_target_t& actionTarget = action.addTarget((PPetEntity->getPetType() == PET_TYPE::JUG_PET) ? this->id : PTarget->id);
+                action_result_t& actionResult = actionTarget.addResult();
                 actionResult.animation        = ActionAnimation::PetSkillStart;
                 actionResult.resolution       = ActionResolution::Hit;
 
@@ -1864,8 +1864,8 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             uint16 prevMsg = 0;
             for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
-                action_target_t& actionTarget = action.getNewTarget(PTargetFound->id);
-                action_result_t& actionResult = actionTarget.getNewResult();
+                action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+                action_result_t& actionResult = actionTarget.addResult();
                 actionResult.resolution       = ActionResolution::Hit;
                 actionResult.animation        = PAbility->getAnimationID();
                 actionResult.messageID        = PAbility->getMessage();
@@ -1896,8 +1896,8 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
         else
         {
-            action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-            action_result_t& actionResult = actionTarget.getNewResult();
+            action_target_t& actionTarget = action.addTarget(PTarget->id);
+            action_result_t& actionResult = actionTarget.addResult();
             actionResult.resolution       = ActionResolution::Hit;
             actionResult.animation        = PAbility->getAnimationID();
             uint16 prevMsg                = actionResult.messageID;
@@ -1980,8 +1980,8 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     action.actorId                = id;
     action.actiontype             = ActionCategory::RangedFinish;
     action.actionid               = static_cast<uint32_t>(FourCC::RangedFinish);
-    action_target_t& actionTarget = action.getNewTarget(PTarget->id);
-    action_result_t& actionResult = actionTarget.getNewResult();
+    action_target_t& actionTarget = action.addTarget(PTarget->id);
+    action_result_t& actionResult = actionTarget.addResult();
     actionResult.messageID        = MSGBASIC_RANGED_ATTACK_HIT;
 
     CItemWeapon* PItem = (CItemWeapon*)this->getEquip(SLOT_RANGED);
@@ -2377,8 +2377,8 @@ void CCharEntity::OnRaise()
             .actiontype = ActionCategory::MagicFinish,
         };
 
-        auto& actionTarget = action.getNewTarget(id);
-        auto& actionResult = actionTarget.getNewResult();
+        auto& actionTarget = action.addTarget(id);
+        auto& actionResult = actionTarget.addResult();
 
         // Mijin Gakure used with MIJIN_RERAISE MOD
         if (GetLocalVar("MijinGakure") != 0 && getMod(Mod::MIJIN_RERAISE) != 0)
@@ -2479,8 +2479,8 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
     auto processAction = [&](CBaseEntity* PTargetFound) -> void
     {
-        action_target_t& actionTarget = action.getNewTarget(PTargetFound->id);
-        action_result_t& actionResult = actionTarget.getNewResult();
+        action_target_t& actionTarget = action.addTarget(PTargetFound->id);
+        action_result_t& actionResult = actionTarget.addResult();
         actionResult.resolution       = ActionResolution::Hit;
         actionResult.animation        = PItem->getAnimationID();
 
