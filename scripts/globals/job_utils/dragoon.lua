@@ -68,7 +68,7 @@ local function performWSJump(player, target, action, params, abilityID)
 
         -- TODO: process additional effects such as Delphinius, Pteroslaver Mail +2/3, Hebo's Spear, enspells, other weapon built-in add effects
 
-        action:physicalDamage(target, damage, criticalHit)
+        action:recordDamage(target, xi.attackType.PHYSICAL, damage, criticalHit)
         action:messageID(target:getID(), xi.msg.basic.USES_JA_TAKE_DAMAGE)
     else
         action:messageID(target:getID(), xi.msg.basic.JA_MISS_2)
@@ -700,7 +700,7 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
 
     if damage >= 0 then
         damage = xi.ability.adjustDamage(damage, wyvern, skill, target, xi.attackType.BREATH, damageType, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-        action:damage(target, damage)
+        action:recordDamage(target, xi.attackType.BREATH, damage)
         action:messageID(target:getID(), xi.msg.basic.USES_JA_TAKE_DAMAGE)
 
         if magicBurst > 1 then

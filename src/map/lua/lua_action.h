@@ -19,8 +19,7 @@
 ===========================================================================
 */
 
-#ifndef _LUAACTION_H
-#define _LUAACTION_H
+#pragma once
 
 #include "ability.h"
 #include "common/cbasetypes.h"
@@ -39,37 +38,36 @@ class CLuaAction
 public:
     CLuaAction(action_t*);
 
-    action_t* GetAction() const
+    auto GetAction() const -> action_t*
     {
         return m_PLuaAction;
     }
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaAction& action);
 
-    void   ID(uint32 actionTargetID, uint32 newActionTargetID);
-    uint32 getPrimaryTargetID();
-    void   setRecast(uint16 recast);
-    uint16 getRecast();
-    void   actionID(uint16 actionid);
-    uint16 getParam(uint32 actionTargetID);
-    void   param(uint32 actionTargetID, int32 param);
-    void   messageID(uint32 actionTargetID, MSGBASIC_ID messageID);
-    auto   getMsg(uint32 actionTargetID) const -> std::optional<uint16>;
-    auto   getAnimation(uint32 actionTargetID) -> std::optional<ActionAnimation>;
-    void   setAnimation(uint32 actionTargetID, ActionAnimation animation);
-    auto   getCategory() const -> ActionCategory;
-    void   setCategory(uint8 category);
-    void   resolution(uint32 actionTargetID, ActionResolution resolution) const;
-    void   info(uint32 actionTargetID, ActionInfo info) const;
-    void   hitDistortion(uint32 actionTargetID, HitDistortion distortion) const;
-    void   knockback(uint32 actionTargetID, Knockback knockback) const;
-    void   damage(CLuaBaseEntity* PLuaTarget, int32 damage) const;
-    void   physicalDamage(CLuaBaseEntity* PLuaTarget, int32 damage, bool isCritical) const;
-    void   modifier(uint32 actionTargetID, uint8 modifier);
-    void   additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
-    void   addEffectParam(uint32 actionTargetID, int32 addEffectParam);
-    void   addEffectMessage(uint32 actionTargetID, MSGBASIC_ID addEffectMessage);
-    bool   addAdditionalTarget(uint32 actionTargetID);
+    void ID(uint32 actionTargetId, uint32 newactionTargetId) const;
+    auto getPrimaryTargetID() const -> uint32;
+    void setRecast(uint16 recast) const;
+    auto getRecast() const -> uint16;
+    void actionID(uint16 actionid) const;
+    auto getParam(uint32 actionTargetId) const -> uint16;
+    void param(uint32 actionTargetId, int32 param) const;
+    void messageId(uint32 actionTargetId, MSGBASIC_ID messageId) const;
+    auto getMsg(uint32 actionTargetId) const -> std::optional<uint16>;
+    auto getAnimation(uint32 actionTargetId) const -> std::optional<ActionAnimation>;
+    void setAnimation(uint32 actionTargetId, ActionAnimation animation) const;
+    auto getCategory() const -> ActionCategory;
+    void setCategory(uint8 category) const;
+    void resolution(uint32 actionTargetId, ActionResolution resolution) const;
+    void info(uint32 actionTargetId, ActionInfo info) const;
+    void hitDistortion(uint32 actionTargetId, HitDistortion distortion) const;
+    void knockback(uint32 actionTargetId, Knockback knockback) const;
+    void recordDamage(const CLuaBaseEntity* PLuaTarget, ATTACK_TYPE atkType, int32 damage, std::optional<bool> isCritical = false) const;
+    void modifier(uint32 actionTargetId, uint8 modifier) const;
+    void additionalEffect(uint32 actionTargetId, uint16 additionalEffect) const;
+    void addEffectParam(uint32 actionTargetId, int32 addEffectParam) const;
+    void addEffectMessage(uint32 actionTargetId, MSGBASIC_ID addEffectMessage) const;
+    auto addAdditionalTarget(uint32 actionTargetId) const -> bool;
 
     bool operator==(const CLuaAction& other) const
     {
@@ -78,5 +76,3 @@ public:
 
     static void Register();
 };
-
-#endif

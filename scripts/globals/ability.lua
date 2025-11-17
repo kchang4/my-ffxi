@@ -105,7 +105,7 @@ xi.ability.takeDamage = function(defender, attacker, params, primary, finaldmg, 
             -- action:messageID(defender:getID(), xi.msg.basic.WHATEVER)
         end
 
-        action:physicalDamage(defender, finaldmg, false)
+        action:recordDamage(defender, xi.attackType.PHYSICAL, finaldmg)
     elseif shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), shadowsAbsorbed)

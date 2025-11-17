@@ -954,7 +954,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
             end
         end
 
-        action:param(defender:getID(), math.abs(finaldmg))
+        action:recordDamage(defender, attack.type, math.abs(finaldmg)) -- TODO: Critical bit?
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -980,12 +980,6 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
     end
 
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
-
-    if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
-        if finaldmg >= 0 then
-            action:param(defender:getID(), math.abs(finaldmg))
-        end
-    end
 
     local enmityEntity = wsResults.taChar or attacker
 

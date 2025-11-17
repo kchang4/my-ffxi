@@ -442,7 +442,7 @@ xi.job_utils.dancer.useViolentFlourishAbility = function(player, target, ability
         dmg = utils.stoneskin(target, dmg)
         target:takeDamage(dmg, player, xi.attackType.PHYSICAL, player:getWeaponDamageType(xi.slot.MAIN))
         target:updateEnmityFromDamage(player, dmg)
-        action:physicalDamage(target, dmg, false)
+        action:recordDamage(target, xi.attackType.PHYSICAL, dmg)
 
         -- Effect
         local resistRate = xi.combat.magicHitRate.calculateResistRate(player, target, 0, 0, xi.skillRank.A_PLUS, xi.element.THUNDER, xi.mod.INT, xi.effect.STUN, 0)
