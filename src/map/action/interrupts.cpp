@@ -411,7 +411,6 @@ void AttackIntimidated(CBattleEntity* PEntity, const CBattleEntity* PTarget)
     PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(magicFinishAction));
 }
 
-// Verified
 void AbilityParalyzed(CBattleEntity* PEntity, const CBattleEntity* PTarget)
 {
     // 1. Generic MagicFinish with Paralyzed message
