@@ -2788,15 +2788,19 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
 
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
-        // if zanshin procs, add a new zanshin based attack.
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
             uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
+
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
-            if ((actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == SUBEFFECT_COUNTER) &&
-                    xirand::GetRandomNumber(100) < zanshinChance ||
-                (GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO) && xirand::GetRandomNumber(100) < zanshinChance / 4))
+            bool missedOrCountered = actionResult.resolution != ActionResolution::Hit || actionResult.spikesEffect == SUBEFFECT_COUNTER;
+            bool normalZanshinProc = missedOrCountered && xirand::GetRandomNumber(100) < zanshinChance;
+
+            bool isSamWithHasso   = GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO);
+            bool hassoZanshinProc = isSamWithHasso && xirand::GetRandomNumber(100) < zanshinChance / 4;
+
+            if (normalZanshinProc || hassoZanshinProc)
             {
                 attackRound.AddAttackSwing(PHYSICAL_ATTACK_TYPE::ZANSHIN, PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK, 1);
             }
