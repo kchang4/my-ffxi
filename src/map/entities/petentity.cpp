@@ -551,25 +551,17 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         }
         else if (damage > 0 && PSkill->isDamageMsg())
         {
-            // Check if Lua already set the damage via action:damage()
-            // If target.param is still 0, Lua didn't set it, so this is physical damage
-            // that needs scale/crit info set via withPhysicalDamage().
-            //
-            // TEMPORARY: This check exists because not all pet ability scripts have been
-            // migrated to use the correct Lua action binding:
-            //   - Physical attacks should call: action:physicalDamage(target, dmg, isCrit)
-            //   - Magical attacks should call: action:damage(target, dmg)
-            //
-            // Once all scripts are migrated, this entire block can be removed since Lua
-            // will handle setting damage with the appropriate scale/crit info.
-            if (actionResult.param == 0)
-            {
-                actionResult.recordDamage(attack_outcome_t{
-                    .atkType = ATTACK_TYPE::PHYSICAL,
-                    .damage  = damage,
-                    .target  = PTargetFound,
-                });
-            }
+            // We use the skill to carry the critical flag and the attack type
+            // This should be deprecated in favor of onPetAbility returning a table...
+            actionResult.recordDamage(attack_outcome_t{
+                .atkType    = PSkill->getAttackType(),
+                .damage     = damage,
+                .target     = PTargetFound,
+                .isCritical = PSkill->isCritical(),
+            });
+
+            // Reset the flag
+            PSkill->setCritical(false);
         }
         else
         {

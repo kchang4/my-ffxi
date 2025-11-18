@@ -400,3 +400,23 @@ void CPetSkill::setTertiarySkillchain(uint8 skillchain)
 {
     m_tertiarySkillchain = skillchain;
 }
+
+auto CPetSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_attackType;
+}
+
+void CPetSkill::setAttackType(const ATTACK_TYPE attackType)
+{
+    m_attackType = attackType;
+}
+
+auto CPetSkill::isCritical() const -> bool
+{
+    return m_isCritical;
+}
+
+void CPetSkill::setCritical(const bool isCritical)
+{
+    m_isCritical = isCritical;
+}

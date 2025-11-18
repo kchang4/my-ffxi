@@ -410,3 +410,23 @@ void CMobSkill::setTertiarySkillchain(uint8 skillchain)
 {
     m_tertiarySkillchain = skillchain;
 }
+
+auto CMobSkill::getAttackType() const -> ATTACK_TYPE
+{
+    return m_attackType;
+}
+
+void CMobSkill::setAttackType(const ATTACK_TYPE attackType)
+{
+    m_attackType = attackType;
+}
+
+auto CMobSkill::isCritical() const -> bool
+{
+    return m_isCritical;
+}
+
+void CMobSkill::setCritical(const bool isCritical)
+{
+    m_isCritical = isCritical;
+}

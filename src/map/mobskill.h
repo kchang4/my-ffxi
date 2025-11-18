@@ -92,6 +92,8 @@ public:
     uint8           getPrimarySkillchain() const;
     uint8           getSecondarySkillchain() const;
     uint8           getTertiarySkillchain() const;
+    auto            getAttackType() const -> ATTACK_TYPE;
+    auto            isCritical() const -> bool;
 
     bool isDamageMsg() const;
 
@@ -117,6 +119,8 @@ public:
     void setPrimarySkillchain(uint8 skillchain);
     void setSecondarySkillchain(uint8 skillchain);
     void setTertiarySkillchain(uint8 skillchain);
+    void setAttackType(ATTACK_TYPE attackType);
+    void setCritical(bool isCritical);
 
     const std::string& getName();
     void               setName(const std::string& name);
@@ -142,6 +146,8 @@ private:
     uint8           m_primarySkillchain;
     uint8           m_secondarySkillchain;
     uint8           m_tertiarySkillchain;
+    ATTACK_TYPE     m_attackType{ ATTACK_TYPE::NONE };
+    bool            m_isCritical{ false };
 
     std::optional<uint8> m_FinalAnimationSub; // If non-null, entity will get this new animation sub after state exits
 

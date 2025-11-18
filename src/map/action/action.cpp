@@ -20,9 +20,6 @@
 */
 
 #include "action.h"
-
-#include "interrupts.h"
-#include "packets/s2c/0x028_battle2.h"
 #include "utils/battleutils.h"
 
 void action_result_t::recordSkillchain(const ActionProcSkillChain effect, const int16_t dmg)
@@ -58,7 +55,7 @@ auto action_result_t::recordDamage(const attack_outcome_t& outcome) -> action_re
         case ATTACK_TYPE::PHYSICAL: // Confirmed
         case ATTACK_TYPE::RANGED:   // Confirmed
         {
-            if (outcome.isCritical) // TODO: Double check magic crits
+            if (outcome.isCritical)
             {
                 this->info |= ActionInfo::CriticalHit;
             }

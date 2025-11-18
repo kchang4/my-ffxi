@@ -2367,7 +2367,17 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
         else
         {
-            result.param = damage;
+            // We use the skill to carry the critical flag and the attack type
+            // This should be deprecated in favor of onMobWeaponSkill returning a table...
+            result.recordDamage(attack_outcome_t{
+                .atkType    = PSkill->getAttackType(),
+                .damage     = damage,
+                .target     = PTargetFound,
+                .isCritical = PSkill->isCritical(),
+            });
+
+            // Reset the flag
+            PSkill->setCritical(false);
         }
 
         result.messageID = msg;
