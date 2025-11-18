@@ -174,7 +174,11 @@ bool CRangeState::Update(timer::time_point tick)
             }
 
             m_PEntity->OnRangedAttack(*this, action);
-            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+            // Only send packet if action was populated (e.g. interrupts return early)
+            if (!action.targets.empty())
+            {
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, std::make_unique<GP_SERV_COMMAND_BATTLE2>(action));
+            }
             m_PEntity->PAI->EventHandler.triggerListener("RANGE_STATE_EXIT", m_PEntity, PTarget, &action);
         }
 

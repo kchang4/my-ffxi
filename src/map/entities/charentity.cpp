@@ -1943,7 +1943,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     if (battleutils::IsParalyzed(this))
     {
         ActionInterrupts::RangedParalyzed(this);
-        // TODO: The caller sends a useless empty packet
         return;
     }
 
