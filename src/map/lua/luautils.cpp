@@ -287,8 +287,6 @@ void init(IPP mapIPP, bool isRunningInCI)
     lua.set_function("VanadielRSERace", &luautils::VanadielRSERace);
     lua.set_function("VanadielRSELocation", &luautils::VanadielRSELocation);
     lua.set_function("SetTimeOffset", &luautils::SetTimeOffset);
-    lua.set_function("IsMoonNew", &luautils::IsMoonNew);
-    lua.set_function("IsMoonFull", &luautils::IsMoonFull);
     lua.set_function("RunElevator", &luautils::StartElevator);
     lua.set_function("GetElevatorState", &luautils::GetElevatorState);
     lua.set_function("GetServerVariable", &luautils::GetServerVariable);
@@ -1667,79 +1665,8 @@ uint8 VanadielRSELocation()
 void SetTimeOffset(const int32 offset)
 {
     TracyZoneScoped;
-
     earth_time::reset_offset();
     earth_time::add_offset(std::chrono::seconds(offset));
-}
-
-bool IsMoonNew()
-{
-    TracyZoneScoped;
-    // New moon occurs when:
-    // Waning (decreasing) from 10% to 0%,
-    // Waxing (increasing) from 0% to 5%.
-
-    vanadiel_time::time_point currentVanaTime = vanadiel_time::now();
-    auto                      phase           = vanadiel_time::moon::get_phase(currentVanaTime);
-
-    switch (vanadiel_time::moon::get_direction(currentVanaTime))
-    {
-        case 0: // None
-            if (phase == 0)
-            {
-                return true;
-            }
-            break;
-        case 1: // Waning (decending)
-            if (phase <= 10)
-            {
-                return true;
-            }
-            break;
-        case 2: // Waxing (increasing)
-            if (phase <= 5)
-            {
-                return true;
-            }
-            break;
-    }
-
-    return false;
-}
-
-bool IsMoonFull()
-{
-    TracyZoneScoped;
-    // Full moon occurs when:
-    // Waxing (increasing) from 90% to 100%,
-    // Waning (decending) from 100% to 95%.
-
-    vanadiel_time::time_point currentVanaTime = vanadiel_time::now();
-    auto                      phase           = vanadiel_time::moon::get_phase(currentVanaTime);
-
-    switch (vanadiel_time::moon::get_direction(currentVanaTime))
-    {
-        case 0: // None
-            if (phase == 100)
-            {
-                return true;
-            }
-            break;
-        case 1: // Waning (decending)
-            if (phase >= 95 && phase <= 100)
-            {
-                return true;
-            }
-            break;
-        case 2: // Waxing (increasing)
-            if (phase >= 90 && phase <= 100)
-            {
-                return true;
-            }
-            break;
-    }
-
-    return false;
 }
 
 /************************************************************************
