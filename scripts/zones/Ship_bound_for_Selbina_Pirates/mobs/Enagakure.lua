@@ -17,7 +17,6 @@ entity.onMobDeath = function(mob, player, optParams)
     then
         player:setCharVar('Enagakure_Killed', 1)
     end
-
 end
 
 entity.onMobDespawn = function(mob)
