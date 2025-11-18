@@ -92,6 +92,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     damage = xi.weaponskills.takeWeaponskillDamage(target, player, params, primary, attack, calcParams, action)
 
+    if damage == 0 then
+        -- The logic above sets the action as a miss if CE/VE are 0 on the target
+        -- because the landed hits are (correctly) set to 0
+        -- Atonement is not known to miss and should always report as a hit.
+        -- It is fairly unique in that regard, which is why it is handled as a special case here.
+        action:resolution(target:getID(), xi.action.resolution.HIT)
+        action:messageID(target:getID(), xi.msg.basic.DAMAGE)
+    end
+
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage
 end
 
