@@ -63,7 +63,7 @@ local function performWSJump(player, target, action, params, abilityID)
             abilityID == xi.jobAbility.SOUL_JUMP or
             abilityID == xi.jobAbility.SPIRIT_JUMP
         then
-            action:info(target, 4) -- Special info flag for these abilities.
+            action:info(target:getID(), 4) -- Special info flag for these abilities.
         end
 
         -- TODO: process additional effects such as Delphinius, Pteroslaver Mail +2/3, Hebo's Spear, enspells, other weapon built-in add effects
