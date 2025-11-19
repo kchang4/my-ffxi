@@ -1611,7 +1611,7 @@ uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool 
 
         if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
         {
-            acc = PChar->RACC(PItem->getSkillType());
+            acc = PChar->RACC();
         }
 
         // Check For Ambush Merit - Ranged
@@ -1622,15 +1622,11 @@ uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool 
     }
     else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
     {
-        acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
+        acc = PAttacker->RACC();
     }
     else if (PAttacker->objtype == TYPE_TRUST)
     {
-        auto archery_acc      = PAttacker->RACC(SKILL_ARCHERY);
-        auto marksmanship_acc = PAttacker->RACC(SKILL_MARKSMANSHIP);
-        auto throwing_acc     = PAttacker->RACC(SKILL_THROWING);
-
-        acc = std::max({ archery_acc, marksmanship_acc, throwing_acc });
+        acc = PAttacker->RACC();
     }
     // Check for Yonin evasion bonus while in front of target
     if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_YONIN) && infront(PDefender->loc.p, PAttacker->loc.p, 64))
@@ -5896,7 +5892,7 @@ int32 GetRangedAttackBonuses(CBattleEntity* battleEntity)
 
     int32 bonus = 0;
 
-    // Reduction from velocity shot mod
+    // bonus from velocity shot mod
     if (battleEntity->StatusEffectContainer->HasStatusEffect(EFFECT_VELOCITY_SHOT))
     {
         bonus += battleEntity->getMod(Mod::VELOCITY_RATT_BONUS);
