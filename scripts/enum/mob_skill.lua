@@ -3,6 +3,8 @@ xi = xi or {}
 ---@enum xi.mobSkill
 xi.mobSkill =
 {
+    BARBED_CRESCENT_1        =  245,
+
     FOOT_KICK_1              =  257,
     DUST_CLOUD_1             =  258,
     WHIRL_CLAWS_1            =  259,
