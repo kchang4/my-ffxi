@@ -2105,9 +2105,35 @@ int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHY
 
         damage = damage * formlessMod / 100;
 
-        // TODO: chance to 'resist'
-        // breath damage, not magic damage
-        damage = BreathDmgTaken(PDefender, damage);
+        float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.0f;
+        resist       = std::max(resist, 0.0f);
+        damage       = (int32)(damage * resist);
+
+        resist = 1.0f + PDefender->getMod(Mod::DMGBREATH) / 10000.0f + PDefender->getMod(Mod::DMG) / 10000.0f;
+        resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
+        damage = (int32)(damage * resist);
+
+        // TODO: Breaths can have elements. Where are those handled for absorption and nullification.
+
+        // Handle damage absorption.
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE)) // All damage.
+        {
+            damage = -damage;
+        }
+
+        // Handle damage nullification.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||      // All damage.
+                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
+        {
+            damage = 0;
+        }
+
+        else
+        {
+            damage = HandleSevereDamage(PDefender, damage, false);
+        }
+
+        damage = CheckAndApplyDamageCap(damage, PDefender);
     }
     else
     {
@@ -4869,41 +4895,6 @@ int32 CheckAndApplyDamageCap(int32 damage, CBattleEntity* PDefender)
     damage -= xirand::GetRandomNumber<int32>(0, damageVariant + 1);
 
     return std::clamp(damage, damageCap - damageVariant, damageCap);
-}
-
-int32 BreathDmgTaken(CBattleEntity* PDefender, int32 damage)
-{
-    float resist = 1.0f + PDefender->getMod(Mod::UDMGBREATH) / 10000.0f;
-    resist       = std::max(resist, 0.0f);
-    damage       = (int32)(damage * resist);
-
-    resist = 1.0f + PDefender->getMod(Mod::DMGBREATH) / 10000.0f + PDefender->getMod(Mod::DMG) / 10000.0f;
-    resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
-    damage = (int32)(damage * resist);
-
-    // TODO: Breaths can have elements. Where are those handled for absorption and nullification.
-
-    // Handle damage absorption.
-    if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE)) // All damage.
-    {
-        damage = -damage;
-    }
-
-    // Handle damage nullification.
-    else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||      // All damage.
-             xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
-    {
-        damage = 0;
-    }
-
-    else
-    {
-        damage = HandleSevereDamage(PDefender, damage, false);
-    }
-
-    damage = CheckAndApplyDamageCap(damage, PDefender);
-
-    return damage;
 }
 
 // TODO: Study using lua functions.

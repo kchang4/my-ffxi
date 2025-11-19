@@ -15022,24 +15022,6 @@ int32 CLuaBaseEntity::rangedDmgTaken(double damage, sol::variadic_args va)
 }
 
 /************************************************************************
- *  Function: breathDmgTaken()
- *  Purpose : Returns the value of Breath Damage taken after calculation
- *  Example : local dmg = target:breathDmgTaken(dmg)
- *  Notes   : Passes argument to BreathDmgTaken member of battleutils
- ************************************************************************/
-
-int32 CLuaBaseEntity::breathDmgTaken(double damage)
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    return battleutils::BreathDmgTaken(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<int32>(damage));
-}
-
-/************************************************************************
  *  Function: handleAfflatusMiseryDamage()
  *  Purpose : Passes an argument to the HandleAfflatusMiseryDamage member of battleutils
  *  Example : target:handleAfflatusMiseryDamage(dmg)
@@ -20125,7 +20107,6 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("physicalDmgTaken", CLuaBaseEntity::physicalDmgTaken);
     SOL_REGISTER("rangedDmgTaken", CLuaBaseEntity::rangedDmgTaken);
-    SOL_REGISTER("breathDmgTaken", CLuaBaseEntity::breathDmgTaken);
     SOL_REGISTER("handleAfflatusMiseryDamage", CLuaBaseEntity::handleAfflatusMiseryDamage);
 
     SOL_REGISTER("isWeaponTwoHanded", CLuaBaseEntity::isWeaponTwoHanded);
