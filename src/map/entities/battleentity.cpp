@@ -450,10 +450,10 @@ bool CBattleEntity::Rest(float rate)
     return didRest;
 }
 
-uint16 CBattleEntity::GetWeaponDelay(bool tp)
+uint32 CBattleEntity::GetWeaponDelay(bool tp)
 {
     TracyZoneScoped;
-    uint16 finalDelay = 8000; // 480 (base) * 1000 / 60 (milisecond conversion)
+    uint32 finalDelay = 8000; // 480 (base) * 1000 / 60 (milisecond conversion)
 
     if (auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]))
     {
@@ -524,7 +524,7 @@ uint16 CBattleEntity::GetWeaponDelay(bool tp)
 
         // Store upper and lower values.
         uint16 minDelay = weaponDelay * 0.2;
-        uint16 maxDelay = weaponDelay * 2;
+        uint32 maxDelay = weaponDelay * 2;
 
         // Apply delay modifications.
         finalDelay = weaponDelay - martialArts;
@@ -533,7 +533,7 @@ uint16 CBattleEntity::GetWeaponDelay(bool tp)
         finalDelay = finalDelay * delayModMultiplier;
 
         // Clamp
-        finalDelay = std::clamp<uint16>(finalDelay, minDelay, maxDelay);
+        finalDelay = std::clamp<uint32>(finalDelay, minDelay, maxDelay);
     }
 
     return finalDelay;
