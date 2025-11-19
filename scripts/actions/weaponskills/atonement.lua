@@ -71,7 +71,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.enmityMult = params.enmityMult + (tp + xi.combat.physical.calculateFTPBonus(player) * 1000 - 1000) / 2000
     params.enmityMult = utils.clamp(params.enmityMult, 1, 2) -- necessary because of Gorget/Belt bonus
 
-    damage = target:breathDmgTaken(dmg)
+    damage = dmg
+    damage = math.floor(damage * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+    damage = math.floor(damage * xi.spells.damage.calculateAbsorption(target, xi.element.NONE, false))
+    damage = math.floor(damage * xi.spells.damage.calculateNullification(target, xi.element.NONE, false, true))
+    damage = math.floor(target:handleSevereDamage(damage, false))
+
     if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
         damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
     end

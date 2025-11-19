@@ -535,9 +535,6 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
         dmg          = math.floor(dmg * nukeWallFactor)
     end
 
-    -- Apply damage
-    dmg = target:breathDmgTaken(dmg)
-
     -- Handle Magic Absorb message and HP recovery.
     if dmg < 0 then
         dmg = target:addHP(-dmg)
@@ -545,6 +542,8 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
 
         return dmg
     end
+
+    dmg = math.floor(target:handleSevereDamage(dmg, false))
 
     -- Final adjustments.
     if dmg > 0 then

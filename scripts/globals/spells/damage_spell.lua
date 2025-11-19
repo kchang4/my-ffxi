@@ -928,12 +928,18 @@ xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
     end
 
     -- Absorb: Magic damage.
-    if isMagic and math.random(1, 100) <= target:getMod(xi.mod.MAGIC_ABSORB) then
+    if
+        isMagic and
+        math.random(1, 100) <= target:getMod(xi.mod.MAGIC_ABSORB)
+    then
         return -1
     end
 
     -- Absorb: Element damage.
-    if element > 0 and math.random(1, 100) <= target:getMod(xi.data.element.getElementalAbsorptionModifier(element)) then
+    if
+        element > 0 and
+        math.random(1, 100) <= target:getMod(xi.data.element.getElementalAbsorptionModifier(element))
+    then
         return-1
     end
 
@@ -941,24 +947,33 @@ xi.spells.damage.calculateAbsorption = function(target, element, isMagic)
     return 1
 end
 
-xi.spells.damage.calculateNullification = function(target, element, isMagic, isbreath)
+xi.spells.damage.calculateNullification = function(target, element, isMagic, isBreath)
     -- Nullify: All damage.
     if math.random(1, 100) <= target:getMod(xi.mod.NULL_DAMAGE) then
         return 0
     end
 
     -- Nullify: Magic damage.
-    if isMagic and math.random(1, 100) <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE) then
+    if
+        isMagic and
+        math.random(1, 100) <= target:getMod(xi.mod.NULL_MAGICAL_DAMAGE)
+    then
         return 0
     end
 
     -- Nullify: Breath damage.
-    if isBreath and math.random(1, 100) <= target:getMod(xi.mod.NULL_BREATH_DAMAGE) then
+    if
+        isBreath and
+        math.random(1, 100) <= target:getMod(xi.mod.NULL_BREATH_DAMAGE)
+    then
         return 0
     end
 
     -- Nullify: Element damage.
-    if element > 0 and math.random(1, 100) <= target:getMod(xi.data.element.getElementalNullificationModifier(element)) then
+    if
+        element > 0 and
+        math.random(1, 100) <= target:getMod(xi.data.element.getElementalNullificationModifier(element))
+    then
         return 0
     end
 

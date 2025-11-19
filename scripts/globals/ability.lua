@@ -71,7 +71,10 @@ xi.ability.adjustDamage = function(dmg, attacker, skill, target, skilltype, skil
         dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, true, false))
         dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.BREATH then
-        dmg = target:breathDmgTaken(dmg)
+        dmg = math.floor(dmg * xi.spells.damage.calculateDamageAdjustment(target, false, false, false, true))
+        dmg = math.floor(dmg * xi.spells.damage.calculateAbsorption(target, element, false))
+        dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, element, false, true))
+        dmg = math.floor(target:handleSevereDamage(dmg, false))
     elseif skilltype == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
     end
