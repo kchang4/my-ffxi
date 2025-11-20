@@ -1901,21 +1901,21 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             if (value < 0)
             {
-                actionResult.messageID = ability::GetAbsorbMessage(static_cast<MSGBASIC_ID>(actionResult.messageID));
+                actionResult.messageID = ability::GetAbsorbMessage(actionResult.messageID);
                 actionResult.param     = -value;
             }
 
             state.ApplyEnmity();
+        }
 
-            // Some mobs respond to abilities (ex. Absolute Virtue / Ob)
-            for (CBattleEntity* PBattleEntity : *PNotorietyContainer)
+        // Some mobs respond to abilities (ex. Absolute Virtue / Ob)
+        for (CBattleEntity* PBattleEntity : *PNotorietyContainer)
+        {
+            if (auto* PMob = dynamic_cast<CMobEntity*>(PBattleEntity))
             {
-                if (CMobEntity* PMob = dynamic_cast<CMobEntity*>(PBattleEntity))
+                if (PMob->getMobMod(MOBMOD_ABILITY_RESPONSE) && PMob->getZone() == this->getZone())
                 {
-                    if (PMob->getMobMod(MOBMOD_ABILITY_RESPONSE) && PMob->getZone() == this->getZone())
-                    {
-                        luautils::OnPlayerAbilityUse(PMob, this, PAbility);
-                    }
+                    luautils::OnPlayerAbilityUse(PMob, this, PAbility);
                 }
             }
         }
@@ -1924,13 +1924,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         StatusEffectContainer->DelStatusEffect(PAbility->getPostActionEffectCleanup());
 
         charutils::ApplyAbilityRecast(this, PAbility, charge, baseChargeTime, action.recast);
-
-        // TODO: refactor
-        //  if (this->getMijinGakure())
-        //{
-        //     m_ActionType = ACTION_FALL;
-        //     ActionFall();
-        // }
     }
     else if (errMsg)
     {
