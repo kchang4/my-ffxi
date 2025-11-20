@@ -1308,6 +1308,9 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
         taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
     }
 
+    auto* controller{ static_cast<CPlayerController*>(PAI->GetController()) };
+    controller->setLastSpellFinishedTime(timer::now());
+
     CBattleEntity::OnCastFinished(state, action);
 
     for (auto&& actionTarget : action.targets)
