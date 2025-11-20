@@ -2341,6 +2341,13 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         return;
     }
 
+    // Forced interrupt via status effect
+    if (StatusEffectContainer->HasPreventActionEffect(false))
+    {
+        ActionInterrupts::AbilityInterrupt(this);
+        return;
+    }
+
     if (auto* PMob = dynamic_cast<CMobEntity*>(this))
     {
         // store the skill used
