@@ -1660,7 +1660,7 @@ INSERT INTO `mob_skills` VALUES (1636,1132,'trebuchet',1,0.0,7.0,2000,1500,4,0,0
 -- INSERT INTO `mob_skills` VALUES (1643,1387,'smite_of_rage',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1644,878,'hypothermal_combustion',1,0.0,20.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1645,876,'freeze_rush',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1646,877,'cold_wave',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1646,877,'cold_wave',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1647,1598,'berserk',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1648,418,'crystal_shield',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1649,419,'heavy_strike',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
