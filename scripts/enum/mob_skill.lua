@@ -79,7 +79,10 @@ xi.mobSkill =
     AWFUL_EYE                =  386,
     HEAVY_BELLOW             =  387,
 
+    ULTRASONICS_1            =  392,
+
     SONIC_BOOM_1             =  393,
+    BLOOD_DRAIN_1            =  394,
     JET_STREAM_1             =  395,
 
     SMITE_OF_FURY            =  396,
@@ -96,6 +99,8 @@ xi.mobSkill =
     SONIC_BLADE              =  422, -- Mammet-800
 
     SANDSPIN                 =  426,
+
+    GLOEOSUCCUS              =  436,
 
     MICROQUAKE               =  441, -- Mammet-800
 
@@ -219,6 +224,9 @@ xi.mobSkill =
     JUDGMENT_BOLT_2          =  918, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin) (Ramuh model avatar)
     SEARING_LIGHT_2          =  919, -- Confirmed usage: Untargetable avatar astral flow. (Ex. Kirin, Crimson-toothed Pawberry) (Carbuncle model avatar)
 
+    GIGA_SCREAM_1            =  923,
+    DREAD_DIVE_1             =  924,
+
     DRILL_BRANCH_NM          =  927,
     PINECONE_BOMB_NM         =  928,
     LEAFSTORM_DISPEL         =  929,
@@ -260,6 +268,9 @@ xi.mobSkill =
     HOWL                     = 1062,
 
     RANGED_ATTACK_3          = 1154,
+
+    SUBSONICS_1              = 1155,
+    MARROW_DRAIN_1           = 1156,
 
     SLIPSTREAM_1             = 1157,
     TURBULENCE_1             = 1158,
@@ -353,6 +364,8 @@ xi.mobSkill =
     RANGED_ATTACK_TENZEN_1   = 1398, -- Tenzen Bow High
     RICEBALL_TENZEN          = 1399,
     RANGED_ATTACK_TENZEN_2   = 1400, -- Tenzen Bow Low
+
+    SOUL_ACCRETION           = 1401,
 
     HOWLING_MOON_3           = 1520, -- Unknown usage.
 
