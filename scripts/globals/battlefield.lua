@@ -1319,7 +1319,7 @@ end
 
 function xi.battlefield.rejectLevelSyncedParty(player, npc)
     for _, member in pairs(player:getAlliance()) do
-        if member:isLevelSync() then
+        if member:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
             local zoneId = player:getZoneID()
             local ID     = zones[zoneId]
 

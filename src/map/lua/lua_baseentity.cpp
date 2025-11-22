@@ -11628,31 +11628,6 @@ void CLuaBaseEntity::disableLevelSync()
 }
 
 /************************************************************************
- *  Function: isLevelSync()
- *  Purpose :
- *  Example : player:isLevelSync()
- *  Notes   :
- ************************************************************************/
-
-bool CLuaBaseEntity::isLevelSync()
-{
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-        return false;
-    }
-
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (PChar->PParty)
-    {
-        return PChar->PParty->GetSyncTarget() && PChar->PParty->GetSyncTarget() != PChar;
-    }
-
-    return false;
-}
-
-/************************************************************************
  *  Function: checkSoloPartyAlliance()
  *  Purpose : Checks if Entity is solo, in a party, or in an alliance
  *  Example : local popularityCheck = player:checkSoloPartyAlliance()
@@ -19894,7 +19869,6 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("reloadParty", CLuaBaseEntity::reloadParty);
     SOL_REGISTER("disableLevelSync", CLuaBaseEntity::disableLevelSync);
-    SOL_REGISTER("isLevelSync", CLuaBaseEntity::isLevelSync);
 
     SOL_REGISTER("checkSoloPartyAlliance", CLuaBaseEntity::checkSoloPartyAlliance);
 

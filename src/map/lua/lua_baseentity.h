@@ -577,7 +577,6 @@ public:
 
     void reloadParty();
     void disableLevelSync();
-    bool isLevelSync();
 
     uint8 checkSoloPartyAlliance(); // Check if Player is in Party or Alliance (0=Solo 1=Party 2=Alliance)
 

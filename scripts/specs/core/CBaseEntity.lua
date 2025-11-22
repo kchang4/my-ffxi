@@ -2441,11 +2441,6 @@ function CBaseEntity:disableLevelSync()
 end
 
 ---@nodiscard
----@return boolean
-function CBaseEntity:isLevelSync()
-end
-
----@nodiscard
 ---@return integer
 function CBaseEntity:checkSoloPartyAlliance()
 end
