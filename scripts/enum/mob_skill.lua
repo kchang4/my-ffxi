@@ -134,6 +134,16 @@ xi.mobSkill =
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
 
+    SLING_BOMB_1             =  567,
+    FORMATION_ATTACK_1       =  568,
+    REFUELING_1              =  569,
+    CIRCLE_OF_FLAMES_1       =  570,
+    SELF_DESTRUCT_3          =  571,
+    SELF_DESTRUCT_3_DEATH    =  572,
+    SELF_DESTRUCT_2          =  573,
+    SELF_DESTRUCT_2_DEATH    =  574,
+    SELF_DESTRUCT_1_DEATH    =  575,
+
     BLOW                     =  581,
     BLANK_GAZE               =  586,
 
