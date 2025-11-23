@@ -80,12 +80,11 @@ void CTrustEntity::PostTick()
 
         if (PMaster && PMaster->PParty && updatemask & UPDATE_HP)
         {
-            // clang-format off
-            PMaster->ForParty([this](auto PMember)
-            {
-                static_cast<CCharEntity*>(PMember)->pushPacket<GP_SERV_COMMAND_GROUP_ATTR>(this);
-            });
-            // clang-format on
+            PMaster->ForParty(
+                [this](auto PMember)
+                {
+                    static_cast<CCharEntity*>(PMember)->pushPacket<GP_SERV_COMMAND_GROUP_ATTR>(this);
+                });
         }
 
         updatemask = 0;
