@@ -223,7 +223,7 @@ void LoadMobSkillsList()
         PMobSkill->setValidTargets(rset->get<uint16>("mob_valid_targets"));
         PMobSkill->setFlag(rset->get<uint8>("mob_skill_flag"));
         PMobSkill->setParam(rset->get<int16>("mob_skill_param"));
-        PMobSkill->setKnockback(rset->get<uint8>("knockback"));
+        PMobSkill->setKnockback(rset->get<Knockback>("knockback"));
         PMobSkill->setPrimarySkillchain(rset->get<uint8>("primary_sc"));
         PMobSkill->setSecondarySkillchain(rset->get<uint8>("secondary_sc"));
         PMobSkill->setTertiarySkillchain(rset->get<uint8>("tertiary_sc"));
