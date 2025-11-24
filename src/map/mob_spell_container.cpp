@@ -19,8 +19,10 @@
 ===========================================================================
 */
 
-#include "mob_spell_container.h"
+#include <algorithm>
+
 #include "mob_modifier.h"
+#include "mob_spell_container.h"
 #include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
@@ -123,6 +125,7 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
 }
 
 // Used in Gambits to see if the Trust can cast the spell
+// Used in mob/automaton AI to see if the spell is castable
 std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
 {
     auto* spell    = spell::GetSpell(spellId);
@@ -131,7 +134,9 @@ std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
                     spell->getSkillType() == SKILL_SINGING ||
                     spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
                     spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_GEOMANCY;
+                    spell->getSkillType() == SKILL_GEOMANCY ||
+                    m_PMob->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT);
+
     bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
 
     return (isNotInRecast && enoughMP) ? std::optional<SpellID>(spellId) : std::nullopt;
@@ -802,6 +807,29 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
 
     // Got no spells to use
     return {};
+}
+
+bool CMobSpellContainer::IsAnySpellAvailable()
+{
+    // clang-format off
+    const auto pred = [&](auto& spell) {
+        return GetAvailable(spell).has_value();
+    };
+
+    const auto check = [pred](auto&& list) {
+        return std::ranges::any_of(list, pred);
+    };
+
+    // short-circuit
+    return check(m_gaList)
+        || check(m_damageList)
+        || check(m_buffList)
+        || check(m_debuffList)
+        || check(m_healList)
+        || check(m_naList)
+        || check(m_raiseList)
+        || check(m_severeList);
+    // clang-format on
 }
 
 std::optional<SpellID> CMobSpellContainer::GetGaSpell()
