@@ -831,16 +831,13 @@ void CMobController::Move()
                                 {
                                     auto angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
 
-                                    // clang-format off
-                                position_t new_pos
-                                {
-                                    PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
-                                    PTarget->loc.p.y,
-                                    PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
-                                    0,
-                                    0
-                                };
-                                    // clang-format on
+                                    position_t new_pos{
+                                        PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
+                                        PTarget->loc.p.y,
+                                        PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
+                                        0,
+                                        0,
+                                    };
 
                                     if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                     {
