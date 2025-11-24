@@ -43,6 +43,8 @@ xi.mobSkill =
     SILENCE_GAS_1            =  314,
     DARK_SPORE_1             =  315,
 
+    SOMERSAULT_1             =  318,
+
     DRILL_BRANCH             =  328,
     PINECONE_BOMB            =  329,
 
@@ -125,6 +127,9 @@ xi.mobSkill =
     VULTURE_3                =  626,
 
     FINAL_METEOR             =  634, -- Final Meteor Chlevnik
+
+    CURSED_SPHERE_1          =  659,
+    VENOM_1                  =  660,
 
     CRYSTAL_RAIN             =  678,
     CRYSTAL_WEAPON_FIRE      =  679, -- Zipacna Weapon Start

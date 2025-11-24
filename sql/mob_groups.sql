@@ -10117,8 +10117,8 @@ INSERT INTO `mob_groups` VALUES (12,3681,139,'Sniper_Pugil',0,128,0,750,0,21,21,
 INSERT INTO `mob_groups` VALUES (13,222,139,'Archer_Pugil',0,128,0,500,0,19,19,0);
 INSERT INTO `mob_groups` VALUES (14,3136,139,'Pilwiz',0,128,0,1450,3000,32,32,0);
 INSERT INTO `mob_groups` VALUES (15,422,139,'Bisan',0,128,0,1350,0,31,31,0);
-INSERT INTO `mob_groups` VALUES (16,2011,139,'Huntfly',0,128,0,1800,1500,35,35,0);
-INSERT INTO `mob_groups` VALUES (17,1993,139,'Houndfly',0,128,0,900,0,33,33,0);
+INSERT INTO `mob_groups` VALUES (16,2011,139,'Huntfly',0,128,0,1750,1500,34,34,0);
+INSERT INTO `mob_groups` VALUES (17,1993,139,'Houndfly',0,128,0,800,0,25,26,0);
 INSERT INTO `mob_groups` VALUES (18,1923,139,'Helltail_Harry',0,128,0,0,0,45,45,0);
 INSERT INTO `mob_groups` VALUES (19,804,139,'Cottontail',0,128,0,2400,0,38,39,0);
 INSERT INTO `mob_groups` VALUES (20,3693,139,'Sobbing_Eyes',0,128,0,2300,0,45,45,0);
