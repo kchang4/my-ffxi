@@ -571,7 +571,7 @@ auto CMobController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndCosts) 
         return false;
     }
 
-    if (ignoreRecastsAndCosts == IgnoreRecastsAndCosts::No && !PMob->SpellContainer->IsAnySpellAvailable())
+    if (!ignoreRecastsAndCosts && !PMob->SpellContainer->IsAnySpellAvailable())
     {
         return false;
     }

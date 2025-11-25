@@ -1620,10 +1620,11 @@ bool CAutomatonController::CanCastSpells(IgnoreRecastsAndCosts ignoreRecastsAndC
         return false;
     }
 
-    if (ignoreRecastsAndCosts == IgnoreRecastsAndCosts::No && !PAutomaton->SpellContainer->IsAnySpellAvailable())
+    if (!ignoreRecastsAndCosts && !PAutomaton->SpellContainer->IsAnySpellAvailable())
     {
         return false;
     }
+
     // Check if we can change states!
     return PAutomaton->PAI->CanChangeState();
 }
