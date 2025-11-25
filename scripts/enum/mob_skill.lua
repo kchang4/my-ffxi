@@ -134,6 +134,11 @@ xi.mobSkill =
 
     TREMOROUS_TREAD          =  540, -- Mammet-800
 
+    CAMISADO_1               =  544,
+    NOCTOSHIELD_1            =  546,
+    ULTIMATE_TERROR_1        =  547,
+    NIGHTMARE_1              =  558,
+
     SLING_BOMB_1             =  567,
     FORMATION_ATTACK_1       =  568,
     REFUELING_1              =  569,

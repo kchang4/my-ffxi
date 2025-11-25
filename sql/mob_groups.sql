@@ -444,8 +444,8 @@ INSERT INTO `mob_groups` VALUES (65,1750,9,'Golden-Tongued_Culberry',0,128,0,200
 -- The_Shrouded_Maw (Zone 10)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1027,10,'Diabolos_DN',0,128,0,5200,5000,45,45,0);
-INSERT INTO `mob_groups` VALUES (2,5156,10,'Diremite_DN',0,128,0,0,0,38,40,0);
+INSERT INTO `mob_groups` VALUES (1,1027,10,'Diabolos_DN',0,128,0,5900,5900,45,45,0);
+INSERT INTO `mob_groups` VALUES (2,5156,10,'Diremite_DN',0,128,0,950,0,38,40,0);
 INSERT INTO `mob_groups` VALUES (3,3104,10,'Pasuk',0,128,0,5000,0,45,45,0);
 INSERT INTO `mob_groups` VALUES (4,5186,10,'Diabolos_WD',0,128,0,11000,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (5,5157,10,'Diremite_Dominator',0,128,0,0,0,78,78,0);
