@@ -811,25 +811,28 @@ std::optional<SpellID> CMobSpellContainer::GetSpell()
 
 bool CMobSpellContainer::IsAnySpellAvailable()
 {
-    // clang-format off
-    const auto pred = [&](auto& spell) {
+    const auto isSpellAvailable = [&](auto spell) -> bool
+    {
         return GetAvailable(spell).has_value();
     };
 
-    const auto check = [pred](auto&& list) {
-        return std::ranges::any_of(list, pred);
+    const auto hasAvailableSpell = [&](const std::vector<SpellID>& list) -> bool
+    {
+        return std::ranges::any_of(list, isSpellAvailable);
     };
 
-    // short-circuit
-    return check(m_gaList)
-        || check(m_damageList)
-        || check(m_buffList)
-        || check(m_debuffList)
-        || check(m_healList)
-        || check(m_naList)
-        || check(m_raiseList)
-        || check(m_severeList);
-    // clang-format on
+    const auto allLists = {
+        std::cref(m_gaList),
+        std::cref(m_damageList),
+        std::cref(m_buffList),
+        std::cref(m_debuffList),
+        std::cref(m_healList),
+        std::cref(m_naList),
+        std::cref(m_raiseList),
+        std::cref(m_severeList),
+    };
+
+    return std::ranges::any_of(allLists, hasAvailableSpell);
 }
 
 std::optional<SpellID> CMobSpellContainer::GetGaSpell()
