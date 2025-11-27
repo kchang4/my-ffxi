@@ -49,6 +49,8 @@ xi.mobSkill =
 
     SOMERSAULT_1             =  318,
 
+    BAD_BREATH_1             =  319,
+
     DRILL_BRANCH             =  328,
     PINECONE_BOMB            =  329,
 
