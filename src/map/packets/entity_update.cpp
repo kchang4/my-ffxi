@@ -589,7 +589,8 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
     if (packet->SendFlg.General)
     {
+        packet->Flags1.GraphSize = PEntity->modelSize;
         // For some reason, SE reused a player struct where this "g" value is the hitbox size.
-        packet->Flags2.g = static_cast<uint8_t>(PEntity->modelHitboxSize);
+        packet->Flags2.g = static_cast<uint8_t>(PEntity->modelHitboxSize * 10);
     }
 }
