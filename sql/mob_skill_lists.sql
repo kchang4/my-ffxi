@@ -4157,7 +4157,6 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,583);
 INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,584);
 INSERT INTO `mob_skill_lists` VALUES ('The_Waughoon_Kid',2063,586);
 
-INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,400); -- Triple Attack
 INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,402); -- Feather Barrier
 INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,403); -- Stormwind
 INSERT INTO `mob_skill_lists` VALUES ('Prehistoric_Pigeons',2064,922); -- Blind Vortex

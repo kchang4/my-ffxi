@@ -414,8 +414,8 @@ INSERT INTO `mob_skills` VALUES (396,275,'smite_of_fury',0,0.0,7.0,2000,1500,4,0
 INSERT INTO `mob_skills` VALUES (397,276,'flurry_of_rage',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (398,277,'whispers_of_ire',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (399,143,'scratch',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (400,144,'triple_attack',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (401,145,'gliding_spike',0,0.0,7.0,2000,1500,4,0,0,1,0,0,0);
+INSERT INTO `mob_skills` VALUES (400,144,'giga_scream',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (401,145,'dread_dive',0,0.0,7.0,2000,1500,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (402,146,'feather_barrier',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (403,147,'stormwind',1,0.0,15.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (404,435,'smite_of_rage',0,0.0,7.0,0,0,1,0,0,0,0,0,0); -- Tuchulcha Dust Cloud
