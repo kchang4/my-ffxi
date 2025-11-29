@@ -34,7 +34,6 @@
 #include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/mobskill_state.h"
-#include "ai/states/raise_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "attack.h"
 #include "attackround.h"
@@ -3086,8 +3085,7 @@ void CBattleEntity::Tick(timer::time_point /*unused*/)
 void CBattleEntity::PostTick()
 {
     TracyZoneScoped;
-    if (health.hp == 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CRaiseState>() &&
-        !PAI->IsCurrentState<CDespawnState>())
+    if (health.hp <= 0 && PAI->IsSpawned() && !PAI->IsCurrentState<CDeathState>() && !PAI->IsCurrentState<CDespawnState>())
     {
         Die();
     }

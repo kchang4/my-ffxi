@@ -2643,7 +2643,9 @@ void CCharEntity::Raise()
 {
     TracyZoneScoped;
 
-    PAI->Internal_Raise();
+    OnRaise();
+    PAI->Accept_Raise();
+
     SetDeathTime(timer::time_point::min());
 }
 

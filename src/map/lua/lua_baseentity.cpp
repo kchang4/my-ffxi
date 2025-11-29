@@ -77,7 +77,6 @@
 #include "ai/states/magic_state.h"
 #include "ai/states/mobskill_state.h"
 #include "ai/states/petskill_state.h"
-#include "ai/states/raise_state.h"
 #include "ai/states/range_state.h"
 #include "ai/states/respawn_state.h"
 #include "ai/states/weaponskill_state.h"
@@ -1726,7 +1725,7 @@ uint8 CLuaBaseEntity::getCurrentAction()
     {
         action = 24;
     }
-    else if (m_PBaseEntity->PAI->IsCurrentState<CRaiseState>())
+    else if (m_PBaseEntity->PAI->IsCurrentState<CDeathState>() && m_PBaseEntity->objtype == TYPE_PC && static_cast<CCharEntity*>(m_PBaseEntity)->m_hasRaise)
     {
         action = 37;
     }
