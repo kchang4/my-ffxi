@@ -155,6 +155,12 @@ xi.mobSkill =
     SELF_DESTRUCT_2_DEATH    =  574,
     SELF_DESTRUCT_1_DEATH    =  575,
 
+    BACK_HEEL_1              =  576,
+    JETTATURA_1              =  577,
+    NIHILITY_SONG_1          =  578,
+    CHOKE_BREATH_1           =  579,
+    FANTOD_1                 =  580,
+
     BLOW                     =  581,
     BLANK_GAZE               =  586,
 
@@ -359,6 +365,8 @@ xi.mobSkill =
     IMPALEMENT               = 1274,
     EMPTY_THRASH             = 1275,
     PROMYVION_BRUME_2        = 1276,
+
+    HOOF_VOLLEY              = 1330,
 
     COUNTERSTANCE            = 1331, -- The Waughroon Kid
 
