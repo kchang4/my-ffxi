@@ -168,6 +168,10 @@ end
 
 -- Bloodpact Delay is handled in charentity.cpp
 xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility)
+    -- The distance checks are performed in core but should be returned here when possible.
+    -- To activate a Blood Pact, the following conditions must be met:
+    -- 1 - The summoner is within "Blood Pact: Rage/Ward" range (20y + hitboxes)
+    -- 2 - The avatar is within actual Blood Pact range (varies + hitboxes)
     if pet ~= nil then
         local petAction = pet:getCurrentAction()
 
