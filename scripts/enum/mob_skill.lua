@@ -134,13 +134,18 @@ xi.mobSkill =
     WHIRL_OF_RAGE                 =  514,
 
     DANSE_MACABRE                 =  533,
-
+    KARTSTRAHL                    =  534,
+    BLITZSTRAHL                   =  535,
     PANZERFAUST                   =  536,
+    BERSERK_DOLL                  =  537,
 
     TYPHOON                       =  539,
+
     TREMOROUS_TREAD               =  540, -- Mammet-800
+    GRAVITY_FIELD                 =  541,
 
     CAMISADO_1                    =  544,
+
     NOCTOSHIELD_1                 =  546,
     ULTIMATE_TERROR_1             =  547,
 
