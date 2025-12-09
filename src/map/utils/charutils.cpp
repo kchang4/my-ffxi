@@ -7095,7 +7095,7 @@ void SendToZone(CCharEntity* PChar, uint16 zoneId)
                      "moghouse = ?, boundary = ? "
                      "WHERE charid = ?",
                      PChar->loc.destination,
-                     (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(),
+                     (PChar->isInMogHouse() || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(),
                      PChar->loc.p.rotation,
                      PChar->loc.p.x,
                      PChar->loc.p.y,

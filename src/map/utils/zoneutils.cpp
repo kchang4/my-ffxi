@@ -1361,7 +1361,7 @@ auto GetZoneIPP(uint16 zoneId) -> uint64
 
 auto IsResidentialArea(const CCharEntity* PChar) -> bool
 {
-    return PChar->m_moghouseID != 0;
+    return PChar->isInMogHouse();
 }
 
 void AfterZoneIn(CBaseEntity* PEntity)

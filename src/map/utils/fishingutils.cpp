@@ -1286,7 +1286,7 @@ bool isInsideCylinder(areavector_t center, areavector_t p, uint16 radius, uint8 
 
 fishingarea_t* GetFishingArea(CCharEntity* PChar)
 {
-    if (PChar->m_moghouseID > 0)
+    if (PChar->isInMogHouse())
     {
         ShowWarning("fishingutils::GetFishingArea() - Player %s is attempting to fish from Mog House", PChar->name);
         return nullptr;

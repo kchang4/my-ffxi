@@ -534,6 +534,9 @@ public:
     uint32 m_moghouseID;
     uint16 m_moghancementID;
 
+    // The character is in ANY Mog House (their own or someone else's)
+    auto isInMogHouse() const -> bool;
+
     CharHistory_t m_charHistory{};
 
     int8  getShieldSize();

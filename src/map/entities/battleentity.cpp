@@ -176,7 +176,7 @@ bool CBattleEntity::isInMogHouse()
 {
     if (this->objtype == TYPE_PC)
     {
-        return static_cast<CCharEntity*>(this)->m_moghouseID;
+        return static_cast<CCharEntity*>(this)->isInMogHouse();
     }
 
     return false;

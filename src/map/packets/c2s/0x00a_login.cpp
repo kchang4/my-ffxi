@@ -113,12 +113,12 @@ void GP_CLI_COMMAND_LOGIN::process(MapSession* PSession, CCharEntity* PChar) con
         charutils::SaveZonesVisited(PChar);
         charutils::SavePlayTime(PChar);
 
-        if (PChar->m_moghouseID != 0)
+        if (PChar->isInMogHouse())
         {
             PChar->m_charHistory.mhEntrances++;
+
             // TODO: Does this even work with Mog House sharing?
             charutils::updateMannequins(PChar);
-            
             gardenutils::UpdateGardening(PChar, SendPacket::No);
         }
     }

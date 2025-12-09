@@ -48,7 +48,7 @@ auto GP_CLI_COMMAND_ITEM_USE::validate(MapSession* PSession, const CCharEntity* 
 {
     return PacketValidator()
         .isNotMonstrosity(PChar)
-        .mustEqual(PChar->m_moghouseID, 0, "Player is in moghouse")
+        .mustEqual(PChar->isInMogHouse(), false, "Player is in moghouse")
         .mustEqual(ItemNum, 0, "ItemNum not 0")
         .oneOf("Category", static_cast<CONTAINER_ID>(Category), validContainers);
 }

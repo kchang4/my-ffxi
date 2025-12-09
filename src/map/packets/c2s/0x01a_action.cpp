@@ -131,7 +131,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
             }
 
             // NOTE: Moogles inside of mog houses are the exception for not requiring Spawned or Status checks.
-            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 6.0f && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->m_moghouseID != 0))
+            if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 6.0f && ((PNpc->PAI->IsSpawned() && PNpc->status == STATUS_TYPE::NORMAL) || PChar->isInMogHouse()))
             {
                 PNpc->PAI->Trigger(PChar);
                 PChar->m_charHistory.npcInteractions++;
@@ -300,7 +300,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::Fish:
         {
-            if (PChar->m_moghouseID != 0)
+            if (PChar->isInMogHouse())
             {
                 ShowWarningFmt("GP_CLI_COMMAND_ACTION: Player {} trying to fish in Mog House", PChar->getName());
                 PChar->pushPacket<GP_SERV_COMMAND_EVENTUCOFF>(PChar, GP_SERV_COMMAND_EVENTUCOFF_MODE::Fishing);
@@ -386,7 +386,7 @@ void GP_CLI_COMMAND_ACTION::process(MapSession* PSession, CCharEntity* PChar) co
         break;
         case GP_CLI_COMMAND_ACTION_ACTIONID::SendResRdy:
         {
-            if (PChar->m_moghouseID != 0) // TODO: For now this is only in the moghouse
+            if (PChar->isInMogHouse()) // TODO: For now this is only in the moghouse
             {
                 PChar->loc.zone->SpawnConditionalNPCs(PChar);
             }
