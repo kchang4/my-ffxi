@@ -24,6 +24,7 @@
 #include "entities/charentity.h"
 #include "enums/key_items.h"
 #include "job_points.h"
+#include "map_engine.h"
 #include "merit.h"
 #include "utils/charutils.h"
 
@@ -48,7 +49,8 @@ GP_SERV_COMMAND_MISCDATA::MERITS::MERITS(CCharEntity* PChar)
             bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
         }
 
-        if (PChar->GetMLevel() >= 99)
+        const uint8 jpLevelReq = settings::get<uint8>("map.JOB_POINTS_PLAYER_LEVEL");
+        if (PChar->GetMLevel() >= jpLevelReq)
         {
             bluePointBonus += PChar->PJobPoints->GetJobPointValue(JP_BLUE_MAGIC_POINT_BONUS);
         }

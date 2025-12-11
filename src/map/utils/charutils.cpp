@@ -5142,8 +5142,12 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
     ZONEID zone     = PChar->loc.zone->GetID();
     uint8  mobLevel = PMob->GetMLevel();
 
+    // Configurable level requirements for job points
+    const uint8 playerLevelReq = settings::get<uint8>("map.JOB_POINTS_PLAYER_LEVEL");
+    const uint8 mobLevelReq    = settings::get<uint8>("map.JOB_POINTS_MOB_LEVEL");
+
     PChar->ForAlliance(
-        [&PMob, &zone, &mobLevel](CBattleEntity* PPartyMember)
+        [&PMob, &zone, &mobLevel, &playerLevelReq, &mobLevelReq](CBattleEntity* PPartyMember)
         {
             CCharEntity* PMember = dynamic_cast<CCharEntity*>(PPartyMember);
 
@@ -5153,20 +5157,20 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
                 return;
             }
 
-            if (!hasKeyItem(PMember, KeyItem::JOB_BREAKER) || PMember->GetMLevel() < 99)
+            if (!hasKeyItem(PMember, KeyItem::JOB_BREAKER) || PMember->GetMLevel() < playerLevelReq)
             {
-                // Do not grant Capacity points without Job Breaker or Level 99
+                // Do not grant Capacity points without Job Breaker or required level
                 return;
             }
 
             bool  chainActive = false;
-            int16 levelDiff   = mobLevel - 99; // Passed previous 99 check, no need to calculate
+            int16 levelDiff   = mobLevel - playerLevelReq; // Use configurable level
 
-            // Capacity Chains are only granted for Mobs level 100+
+            // Capacity Chains are only granted for Mobs above the mob level threshold
             // Ref: https://www.bg-wiki.com/ffxi/Job_Points
             float capacityPoints = 0;
 
-            if (mobLevel > 99)
+            if (mobLevel >= mobLevelReq)
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points

@@ -14,6 +14,7 @@
 ===========================================================================
 */
 
+#include <cmath>
 #include <string.h>
 
 #include "entities/battleentity.h"
@@ -251,7 +252,8 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
 
 uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
 {
-    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
+    const uint8 levelReq = settings::get<uint8>("map.JOB_POINTS_PLAYER_LEVEL");
+    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= levelReq && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
     {
         return GetJobPointType(jpType)->value;
     }
@@ -287,6 +289,9 @@ void RefreshGiftMods(CCharEntity* PChar)
     uint16 totalJpSpent = PChar->PJobPoints->GetJobPointsSpent();
     uint8  jobId        = static_cast<uint8>(PChar->GetMJob());
 
+    const uint8 levelReq       = settings::get<uint8>("map.JOB_POINTS_PLAYER_LEVEL");
+    const float giftMultiplier = settings::get<float>("map.JOB_POINTS_GIFT_MULTIPLIER");
+
     auto* currentGifts = &PChar->PJobPoints->current_gifts;
     if (!currentGifts->empty())
     {
@@ -296,12 +301,15 @@ void RefreshGiftMods(CCharEntity* PChar)
 
     for (auto&& gift : jpGifts[jobId])
     {
-        if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < 99)
+        if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < levelReq)
         {
             break;
         }
 
-        currentGifts->emplace_back(static_cast<Mod>(gift.modId), gift.value);
+        // Apply gift multiplier for scaling on era servers (e.g., 0.5 for 75-era)
+        // Minimum value of 1 to ensure gifts always provide some benefit
+        int16 scaledValue = static_cast<int16>(std::max(1.0f, std::floor(gift.value * giftMultiplier)));
+        currentGifts->emplace_back(static_cast<Mod>(gift.modId), scaledValue);
     }
 
     PChar->addModifiers(currentGifts);
