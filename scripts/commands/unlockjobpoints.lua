@@ -71,24 +71,17 @@ local jobIdToName =
 }
 
 local function unlockJobForPlayer(player, targ, jobId)
-    -- Insert/update job_points_spent to 1 for this job
-    -- This makes the client show the job as "enabled" in the Job Points menu
-    local query = string.format(
-        'INSERT INTO char_job_points (charid, jobid, job_points_spent) VALUES (%d, %d, 1) ' ..
-        'ON DUPLICATE KEY UPDATE job_points_spent = GREATEST(job_points_spent, 1)',
-        targ:getID(), jobId
-    )
-
-    -- Execute the query
-    local success = sql:query(query)
-
-    if success then
-        player:printToPlayer(string.format('Unlocked Job Points for %s on %s', targ:getName(), jobIdToName[jobId] or jobId))
-        return true
+    -- Add 1 job point to this job
+    -- This will create/update the char_job_points entry and make the job appear "enabled"
+    -- in the client's Job Points menu (because job_points > 0)
+    local currentJP = targ:getJobPoints(jobId)
+    if currentJP == 0 then
+        targ:addJobPoints(jobId, 1)
+        player:printToPlayer(string.format('Unlocked Job Points for %s on %s (added 1 JP)', targ:getName(), jobIdToName[jobId] or jobId))
     else
-        player:printToPlayer(string.format('Failed to unlock Job Points for %s on %s', targ:getName(), jobIdToName[jobId] or jobId))
-        return false
+        player:printToPlayer(string.format('%s already has %d JP on %s', targ:getName(), currentJP, jobIdToName[jobId] or jobId))
     end
+    return true
 end
 
 commandObj.onTrigger = function(player, jobArg, target)
