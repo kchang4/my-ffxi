@@ -18,11 +18,6 @@
 -- See: documentation/job_points_level_75_plan.md for full design document
 -----------------------------------
 require('modules/module_utils')
-require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/interaction_global')
-require('scripts/enum/job')
 -----------------------------------
 
 local m = Module:new('75_era_job_points')
