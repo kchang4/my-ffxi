@@ -1061,11 +1061,8 @@ uint16 CBattleEntity::RATT(uint16 bonusAtt)
 
         skillLevel = std::max({ archery_acc, marksmanship_acc, throwing_acc });
     }
-    else // pets, mobs
-    {
-        skillLevel = m_modStat[Mod::RATT];
-    }
-    
+    // mobs and pets don't have "skill level" -- it's baked into m_modStat[Mod::RATT]
+
     int32 RATT = 8 + skillLevel + bonusAtt + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + std::floor(STR() * strMultiplier);
     // use max to prevent any underflow
     return std::max<int16>(1, RATT + (RATT * m_modStat[Mod::RATTP] / 100.f) + std::min<int16>((RATT * m_modStat[Mod::FOOD_RATTP] / 100.f), m_modStat[Mod::FOOD_RATT_CAP]));
