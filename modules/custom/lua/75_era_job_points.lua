@@ -37,6 +37,7 @@ local settings =
     MOB_LEVEL_THRESHOLD = 75, -- Mob level threshold for capacity point gain
     REQUIRE_KEY_ITEM = true,  -- Require JOB_BREAKER key item
     GIFT_MULTIPLIER = 0.5,    -- Gift value multiplier (0.5 = 50%)
+    REQUIRE_MERITS = false,   -- Require maxed job-specific merits (disabled pending debugging)
 }
 
 -- Apply any user-defined overrides
@@ -125,41 +126,29 @@ local function hasMaxedJobMerits(player, jobId)
         return false
     end
 
-    -- Check Group 1 merits (each merit can have up to 5 levels)
+    -- Check Group 1 merits
+    -- getMerit() returns the merit VALUE (effect), which is only non-zero when:
+    -- 1. The merit has points invested
+    -- 2. The player's main or sub job matches the merit's job requirement
+    -- Since we're checking main job merits while on that main job, this should work.
     local group1Total = 0
     for i = 0, meritCounts[1] - 1 do
         local meritId = categories[1] + (i * 0x02)
         local meritValue = player:getMerit(meritId)
+        printf('[75_era_job_points] DEBUG: Job %d Merit 0x%04X = %d', jobId, meritId, meritValue)
         if meritValue > 0 then
-            -- Merit value varies per merit type, but having any value means levels were spent
             group1Total = group1Total + 1
         end
     end
 
-    -- Check Group 2 merits (each merit can have up to 5 levels)
-    local group2Total = 0
-    for i = 0, meritCounts[2] - 1 do
-        local meritId = categories[2] + (i * 0x02)
-        local meritValue = player:getMerit(meritId)
-        if meritValue > 0 then
-            group2Total = group2Total + 1
-        end
-    end
+    printf('[75_era_job_points] Job %d Group 1 merits invested: %d/%d', jobId, group1Total, meritCounts[1])
 
-    -- For 75-era "maxed merits", we require:
-    -- - At least some merits in Group 1 (standard 75-era merits)
-    -- Note: Group 2 merits were added later (2010+) and may not be required for 75-era
-    -- For strict requirement: Both groups should have 10 points each = 20 total merit points spent
-    -- For lenient requirement: Just check Group 1 has investments
-
-    -- Using lenient check for now: Player must have invested in at least 2 Group 1 merits
-    -- This represents meaningful investment without requiring full 10 points
+    -- For 75-era "maxed merits", we require at least 2 Group 1 merits invested
+    -- This is a lenient check - adjust as needed
     local hasGroup1Investment = group1Total >= 2
 
-    -- Debug output
     if not hasGroup1Investment then
-        printf('[75_era_job_points] Job %d merit check: Group1=%d/%d, Group2=%d/%d - FAILED',
-            jobId, group1Total, meritCounts[1], group2Total, meritCounts[2])
+        printf('[75_era_job_points] Job %d merit check FAILED: only %d group 1 merits', jobId, group1Total)
     end
 
     return hasGroup1Investment
@@ -181,10 +170,13 @@ local function canUseJobPointsForJob(player)
         return false
     end
 
-    -- Must have maxed job-specific merits for current job
-    local jobId = player:getMainJob()
-    if not hasMaxedJobMerits(player, jobId) then
-        return false
+    -- Merit check (disabled by default pending debugging)
+    if settings.REQUIRE_MERITS then
+        -- Must have maxed job-specific merits for current job
+        local jobId = player:getMainJob()
+        if not hasMaxedJobMerits(player, jobId) then
+            return false
+        end
     end
 
     return true
@@ -226,11 +218,9 @@ xi.job_points_75era =
 
 -----------------------------------
 -- Nomad Moogle Override for JOB_BREAKER
--- Modify the Beyond Infinity quest to grant JOB_BREAKER
--- when player has LIMIT_BREAKER (at level 75) instead of
--- requiring level 99 + Beyond Infinity completion
+-- Add a new interaction section for players with LIMIT_BREAKER at level 75
+-- This grants JOB_BREAKER without requiring Beyond Infinity completion
 -----------------------------------
-local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 
 m:addOverride('xi.server.onServerStart', function()
     -- Call super first!
@@ -244,63 +234,53 @@ m:addOverride('xi.server.onServerStart', function()
 
     printf('[75_era_job_points] Applying quest modifications for 75-era job points')
 
-    -- Modify the Beyond Infinity quest to grant JOB_BREAKER at level 75 with LIMIT_BREAKER
+    -- Modify the Beyond Infinity quest to add a new section for 75-era JOB_BREAKER
     xi.module.modifyInteractionEntry('scripts/quests/jeuno/LB10_Beyond_Infinity', function(quest)
-        -- The last section (index 5 in Lua, "Quest completed") handles JOB_BREAKER
-        -- We need to modify it to check for level 75 instead of level 99
-        --
-        -- Section structure:
-        --   quest.sections[5] = {
-        --       check = function(player, status, vars) return status == QUEST_COMPLETED end,
-        --       [xi.zone.RULUDE_GARDENS] = { ['Nomad_Moogle'] = {...}, onEventFinish = {...} }
-        --   }
+        -- Insert a NEW section at the beginning of the quest that handles 75-era JOB_BREAKER
+        -- This section will be checked first and catch players who have LIMIT_BREAKER but
+        -- haven't done the full Beyond Infinity quest
+        local newSection =
+        {
+            -- This check runs BEFORE the quest status checks
+            check = function(player, status, vars)
+                -- 75-era: Grant JOB_BREAKER if player has LIMIT_BREAKER + level 75 + no JOB_BREAKER yet
+                return player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
+                    player:getMainLvl() >= settings.LEVEL_REQUIREMENT and
+                    not player:hasKeyItem(xi.ki.JOB_BREAKER)
+            end,
 
-        local completedSection = quest.sections[5]
-        if completedSection and completedSection[xi.zone.RULUDE_GARDENS] then
-            local nomadMoogle = completedSection[xi.zone.RULUDE_GARDENS]['Nomad_Moogle']
+            [xi.zone.RULUDE_GARDENS] =
+            {
+                ['Nomad_Moogle'] =
+                {
+                    onTrigger = function(player, npc)
+                        local playerLevel  = player:getMainLvl()
+                        local limitBreaker = 1 -- They have it (checked above)
 
-            if nomadMoogle then
-                -- Override the check function to also allow players with LIMIT_BREAKER at level 75
-                local originalCheck = completedSection.check
-                completedSection.check = function(player, status, vars)
-                    -- 75-era: Allow access if player has LIMIT_BREAKER + level 75 + no JOB_BREAKER yet
-                    if
-                        player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
-                        player:getMainLvl() >= settings.LEVEL_REQUIREMENT and
-                        not player:hasKeyItem(xi.ki.JOB_BREAKER)
-                    then
-                        return true
-                    end
-
-                    -- Fall back to original check (quest completed status)
-                    return originalCheck(player, status, vars)
-                end
-
-                -- Override the onTrigger to grant JOB_BREAKER at level 75
-                local originalOnTrigger = nomadMoogle.onTrigger
-                nomadMoogle.onTrigger = function(player, npc)
-                    local playerLevel  = player:getMainLvl()
-                    local limitBreaker = player:hasKeyItem(xi.ki.LIMIT_BREAKER) and 1 or 2
-
-                    -- 75-era: Grant JOB_BREAKER at level 75 with LIMIT_BREAKER
-                    if
-                        playerLevel >= settings.LEVEL_REQUIREMENT and
-                        player:hasKeyItem(xi.ki.LIMIT_BREAKER) and
-                        not player:hasKeyItem(xi.ki.JOB_BREAKER)
-                    then
                         -- Use event 10240 which is the retail JOB_BREAKER granting event
                         return quest:progressEvent(10240, playerLevel, limitBreaker)
-                    end
+                    end,
+                },
 
-                    -- Fall back to original behavior
-                    return originalOnTrigger(player, npc)
-                end
+                onEventFinish =
+                {
+                    [10240] = function(player, csid, option, npc)
+                        -- Option 28 = "Without a doubt!" confirmation
+                        if option == 28 then
+                            npcUtil.giveKeyItem(player, xi.ki.JOB_BREAKER)
+                            printf('[75_era_job_points] Granted JOB_BREAKER to %s at level %d',
+                                player:getName(), player:getMainLvl())
+                        end
+                    end,
+                },
+            },
+        }
 
-                printf('[75_era_job_points] Nomad Moogle onTrigger modified for 75-era (level %d)', settings.LEVEL_REQUIREMENT)
-            end
-        end
+        -- Insert our new section at the beginning so it's checked first
+        table.insert(quest.sections, 1, newSection)
 
-        printf('[75_era_job_points] Beyond Infinity quest modified for 75-era')
+        printf('[75_era_job_points] Added 75-era JOB_BREAKER section to Beyond Infinity quest (level %d)',
+            settings.LEVEL_REQUIREMENT)
     end)
 end)
 
