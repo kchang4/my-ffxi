@@ -119,7 +119,6 @@ xi.job_utils.white_mage.useDevotion = function(player, target, ability)
     local healMP = player:getHP() * mpPercent
     healMP = utils.clamp(healMP, 0, target:getMaxMP() - target:getMP())
 
-    damageHP = xi.combat.utilities.handleStoneskin(player, damageHP)
     player:delHP(damageHP)
     target:addMP(healMP)
 
