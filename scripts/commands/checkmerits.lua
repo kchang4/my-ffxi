@@ -3,14 +3,16 @@
 -- desc: Checks merit values for a specific job's Group 1 merits
 -- auth: GM command for debugging 75-era job points module
 -----------------------------------
+---@type TCommand
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 'si',
 }
 
-function error(player, msg)
+local function showError(player, msg)
     player:printToPlayer(msg)
     player:printToPlayer('!checkmerits <jobid or jobname> (player)')
 end
@@ -96,13 +98,13 @@ local jobNames =
     run = 22,
 }
 
-function onTrigger(player, jobArg, target)
+commandObj.onTrigger = function(player, jobArg, target)
     -- Parse target
     local targ = player
     if target then
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player %s not found!', target))
+            showError(player, string.format('Player %s not found!', target))
             return
         end
     end
@@ -126,7 +128,7 @@ function onTrigger(player, jobArg, target)
     end
 
     if not jobMeritCategories[jobId] then
-        error(player, string.format('Invalid job ID: %d', jobId or -1))
+        showError(player, string.format('Invalid job ID: %d', jobId or -1))
         return
     end
 
@@ -168,3 +170,5 @@ function onTrigger(player, jobArg, target)
         player:printToPlayer('JOB_BREAKER: NO')
     end
 end
+
+return commandObj
