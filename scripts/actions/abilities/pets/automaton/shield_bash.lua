@@ -51,7 +51,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
 
     -- TODO: Affected by Phalanx, Physical Damage % modifiers?
 
-    damage = xi.combat.utilities.handleStoneskin(target, damage)
+    damage = utils.handleStoneskin(target, damage)
     target:takeDamage(damage, automaton, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(automaton, damage)
     target:addEnmity(automaton, 450, 900)

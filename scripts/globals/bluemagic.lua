@@ -449,9 +449,9 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, damageCap
     end
 
     -- Handle Phalanx, One for All, Stoneskin and target HP (Cant be higher than current HP)
-    finalDamage = utils.clamp(xi.combat.utilities.handlePhalanx(target, finalDamage), 0, 99999)
-    finalDamage = utils.clamp(xi.combat.utilities.handleOneForAll(target, finalDamage), 0, 99999)
-    finalDamage = utils.clamp(xi.combat.utilities.handleStoneskin(target, finalDamage), -99999, 99999)
+    finalDamage = utils.clamp(utils.handlePhalanx(target, finalDamage), 0, 99999)
+    finalDamage = utils.clamp(utils.handleOneForAll(target, finalDamage), 0, 99999)
+    finalDamage = utils.clamp(utils.handleStoneskin(target, finalDamage), -99999, 99999)
     finalDamage = utils.clamp(finalDamage, 0, target:getHP())
 
     -- Check if the mob has a damage cap
@@ -547,9 +547,9 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params)
 
     -- Final adjustments.
     if dmg > 0 then
-        dmg = utils.clamp(xi.combat.utilities.handlePhalanx(target, dmg), 0, 99999)
-        dmg = utils.clamp(xi.combat.utilities.handleOneForAll(target, dmg), 0, 99999)
-        dmg = utils.clamp(xi.combat.utilities.stoneskin(target, dmg), -99999, 99999)
+        dmg = utils.clamp(utils.handlePhalanx(target, dmg), 0, 99999)
+        dmg = utils.clamp(utils.handleOneForAll(target, dmg), 0, 99999)
+        dmg = utils.clamp(utils.handleStoneskin(target, dmg), -99999, 99999)
         dmg = utils.clamp(dmg, 0, target:getHP())
         dmg = target:checkDamageCap(dmg)
     end
@@ -591,11 +591,11 @@ xi.spells.blue.applySpellDamage = function(caster, target, spell, dmg, params, t
             return dmg
         end
 
-        dmg = xi.combat.utilities.handleOneForAll(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
     end
 
-    dmg = xi.combat.utilities.handlePhalanx(target, dmg)
-    dmg = xi.combat.utilities.handleStoneskin(target, dmg)
+    dmg = utils.handlePhalanx(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     -- Check if the mob has a damage cap
     dmg = target:checkDamageCap(dmg)

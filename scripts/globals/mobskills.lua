@@ -526,11 +526,11 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
             skill:isAoE() or
             skill:isConal()
         then
-            shadowsToRemove = xi.combat.utilities.attemptShadowMitigation(target, shadowsToRemove)
+            shadowsToRemove = utils.attemptShadowMitigation(target, shadowsToRemove)
         end
 
         -- Remove shadows
-        damage = xi.combat.utilities.takeShadows(target, damage, shadowsToRemove)
+        damage = utils.takeShadows(target, damage, shadowsToRemove)
 
         -- Dealt zero damage, so shadows took all hits.
         if damage == 0 then
@@ -561,7 +561,7 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
     end
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks
-    xi.combat.utilities.handleAutomatonAutoAnalyzer(target, skill, damage)
+    utils.handleAutomatonAutoAnalyzer(target, skill, damage)
 
     if attackType == xi.attackType.PHYSICAL then
         damage = target:physicalDmgTaken(damage, damageType)
@@ -591,13 +591,13 @@ xi.mobskills.mobFinalAdjustments = function(damage, mob, skill, target, attackTy
         return damage
     end
 
-    damage = xi.combat.utilities.handlePhalanx(target, damage)
+    damage = utils.handlePhalanx(target, damage)
 
     if attackType == xi.attackType.MAGICAL then
-        damage = xi.combat.utilities.handleOneForAll(target, damage)
+        damage = utils.handleOneForAll(target, damage)
     end
 
-    damage = xi.combat.utilities.handleStoneskin(target, damage)
+    damage = utils.handleStoneskin(target, damage)
 
     if damage > 0 then
         target:updateEnmityFromDamage(mob, damage)

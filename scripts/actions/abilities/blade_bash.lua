@@ -28,7 +28,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 
     -- TODO: Affected by Phalanx/Physical Damage % modifiers?
     -- Calculating and applying Blade Bash damage
-    damage = xi.combat.utilities.handleStoneskin(target, damage)
+    damage = utils.handleStoneskin(target, damage)
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     target:updateEnmityFromDamage(player, damage)
 

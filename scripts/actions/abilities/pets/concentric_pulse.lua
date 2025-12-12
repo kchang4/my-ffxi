@@ -25,7 +25,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, master, action)
     end
 
     -- TODO: Affected by Phalanx, MDT, Magic Damage % modifiers, OneForAll?
-    dmg = xi.combat.utilities.handleStoneskin(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.NONE)
 

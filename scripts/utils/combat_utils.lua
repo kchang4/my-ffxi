@@ -1,16 +1,12 @@
------------------------------------
--- Global file for globaly/commonly used functions that are shared by different combat related calculations/mechanics.
------------------------------------
-xi = xi or {}
-xi.combat = xi.combat or {}
-xi.combat.utilities = xi.combat.utilities or {}
+---@class utils
+utils = utils or {}
 
 -- A mechanic that will occasionaly reduce shadows consumed by 1 when hit by an AOE skill.
 ---@nodiscard
 ---@param actor CBaseEntity
 ---@param shadowsToRemove integer
 ---@return integer
-xi.combat.utilities.attemptShadowMitigation = function(actor, shadowsToRemove)
+function utils.attemptShadowMitigation(actor, shadowsToRemove)
     -- TODO: Currently unknown what conditions/skills/stats might affect proc rate. Ninjutsu, AGI, EVA skills might come to mind.
     -- TODO: Does this work with Blink or only Copy Images?
     -- TODO: Do mobs utilize this mechanic for their shadows?
@@ -33,7 +29,7 @@ end
 ---@param damage integer
 ---@param shadowsToRemove integer?
 ---@return integer
-xi.combat.utilities.takeShadows = function(actor, damage, shadowsToRemove)
+function utils.takeShadows(actor, damage, shadowsToRemove)
     shadowsToRemove = shadowsToRemove or 1
 
     -- Check for Utsusemi first, then Blink.
@@ -110,7 +106,7 @@ end
 ---@param actor CBaseEntity
 ---@param damage integer
 ---@return integer
-xi.combat.utilities.handlePhalanx = function(actor, damage)
+function utils.handlePhalanx(actor, damage)
     if damage > 0 then
         damage = utils.clamp(damage - actor:getMod(xi.mod.PHALANX), 0, 99999)
     end
@@ -123,7 +119,7 @@ end
 ---@param actor CBaseEntity
 ---@param damage integer
 ---@return integer
-xi.combat.utilities.handleOneForAll = function(actor, damage)
+function utils.handleOneForAll(actor, damage)
     if damage > 0 then
         local oneForAllEffect = actor:getStatusEffect(xi.effect.ONE_FOR_ALL)
 
@@ -142,7 +138,7 @@ end
 ---@param actor CBaseEntity
 ---@param damage integer
 ---@return integer
-xi.combat.utilities.handleStoneskin = function(actor, damage)
+function utils.handleStoneskin(actor, damage)
     if damage > 0 then
         local stoneskinRemaining = actor:getMod(xi.mod.STONESKIN)
 
@@ -164,7 +160,7 @@ xi.combat.utilities.handleStoneskin = function(actor, damage)
 end
 
 -- Handles Automaton attachment "Analyzer" which decreases damage from successive special attacks.
-xi.combat.utilities.handleAutomatonAutoAnalyzer = function(actor, skill, damage)
+function utils.handleAutomatonAutoAnalyzer(actor, skill, damage)
     local analyzerMod = actor:getMod(xi.mod.AUTO_ANALYZER)
 
     if analyzerMod > 0 then

@@ -88,9 +88,9 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
     dmg = math.floor(dmg * xi.spells.damage.calculateNullification(target, ele, true, false))
     dmg = math.floor(target:handleSevereDamage(dmg, false))
 
-    dmg = xi.combat.utilities.handlePhalanx(target, dmg)
-    dmg = xi.combat.utilities.handleOneForAll(target, dmg)
-    dmg = xi.combat.utilities.handleStoneskin(target, dmg)
+    dmg = utils.handlePhalanx(target, dmg)
+    dmg = utils.handleOneForAll(target, dmg)
+    dmg = utils.handleStoneskin(target, dmg)
 
     dmg = utils.clamp(dmg, -99999, 99999)
 

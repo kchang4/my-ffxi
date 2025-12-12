@@ -224,8 +224,8 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     -- Souleater
     adjustedDamage = adjustedDamage + xi.combat.damage.souleaterAddition(attacker)
 
-    adjustedDamage = xi.combat.utilities.handlePhalanx(target, adjustedDamage)
-    adjustedDamage = xi.combat.utilities.handleStoneskin(target, adjustedDamage)
+    adjustedDamage = utils.handlePhalanx(target, adjustedDamage)
+    adjustedDamage = utils.handleStoneskin(target, adjustedDamage)
 
     return adjustedDamage
 end
@@ -256,9 +256,9 @@ local function calculateHybridMagicDamage(tp, physicaldmg, attacker, target, wsP
     end
 
     if magicdmg > 0 then -- handle nonzero damage if previous function does not absorb or nullify
-        magicdmg = xi.combat.utilities.handlePhalanx(target, magicdmg)
-        magicdmg = xi.combat.utilities.handleOneForAll(target, magicdmg)
-        magicdmg = xi.combat.utilities.handleStoneskin(target, magicdmg)
+        magicdmg = utils.handlePhalanx(target, magicdmg)
+        magicdmg = utils.handleOneForAll(target, magicdmg)
+        magicdmg = utils.handleStoneskin(target, magicdmg)
     end
 
     return math.floor(magicdmg)
@@ -870,9 +870,9 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         dmg = dmg * xi.spells.damage.calculateAbsorption(target, wsParams.ele, true)
         dmg = dmg * xi.spells.damage.calculateNullification(target, wsParams.ele, true, false)
 
-        dmg = xi.combat.utilities.handlePhalanx(target, dmg)
-        dmg = xi.combat.utilities.handleOneForAll(target, dmg)
-        dmg = xi.combat.utilities.handleStoneskin(target, dmg)
+        dmg = utils.handlePhalanx(target, dmg)
+        dmg = utils.handleOneForAll(target, dmg)
+        dmg = utils.handleStoneskin(target, dmg)
 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else
