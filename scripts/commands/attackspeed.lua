@@ -33,6 +33,10 @@ commandObj.onTrigger = function(player)
     local hasteMagic = target:getMod(xi.mod.HASTE_MAGIC) / 10000
     local hasteAbility = target:getMod(xi.mod.HASTE_ABILITY) / 10000
 
+    -- Check for two-handed haste (Hasso uses this)
+    local twohandHaste = target:getMod(xi.mod.TWOHAND_HASTE_ABILITY) / 10000
+    hasteAbility = hasteAbility + twohandHaste
+
     -- Apply caps
     local hasteGearCapped = math.max(-0.25, math.min(hasteGear, 0.25))       -- 25% cap
     local hasteMagicCapped = math.max(-1.0, math.min(hasteMagic, 0.4375))    -- 43.75% cap
