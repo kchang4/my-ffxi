@@ -71,8 +71,8 @@ commandObj.onTrigger = function(player)
     -- Convert to seconds (delay is in 60ths of a second)
     local delaySeconds = finalDelay / 60
 
-    -- Attacks per minute
-    local attacksPerMinute = 60 / delaySeconds
+    -- Attacks per second
+    local attacksPerSecond = 1 / delaySeconds
 
     -- Print header
     player:printToPlayer('=== Attack Speed for ' .. name .. ' ===', xi.msg.channel.SYSTEM_3)
@@ -102,7 +102,7 @@ commandObj.onTrigger = function(player)
     -- Final results
     player:printToPlayer('--- Results ---', xi.msg.channel.SYSTEM_3)
     player:printToPlayer(string.format('Final Delay:   %.0f (%.2f seconds)', finalDelay, delaySeconds), xi.msg.channel.SYSTEM_3)
-    player:printToPlayer(string.format('Attacks/Min:   %.1f', attacksPerMinute), xi.msg.channel.SYSTEM_3)
+    player:printToPlayer(string.format('Attacks/Sec:   %.2f', attacksPerSecond), xi.msg.channel.SYSTEM_3)
 
     -- Check for Hundred Fists
     if target:hasStatusEffect(xi.effect.HUNDRED_FISTS) then
