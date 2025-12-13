@@ -461,7 +461,7 @@ INSERT INTO `mob_skills` VALUES (443,187,'bubble_curtain',0,0.0,7.0,2000,1500,1,
 INSERT INTO `mob_skills` VALUES (444,188,'big_scissors',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (445,189,'scissor_guard',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (446,190,'intimidate',0,0.0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (447,893,'percussive_foin',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0); -- polearm form only
+INSERT INTO `mob_skills` VALUES (447,893,'percussive_foin',4,0.0,10.0,2000,1500,4,0,0,1,0,0,0); -- polearm form only
 INSERT INTO `mob_skills` VALUES (448,192,'metallic_body',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (449,193,'intimidate',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (450,194,'aqua_ball',2,0.0,12.0,2000,1500,4,0,0,0,0,0,0);
@@ -1250,7 +1250,7 @@ INSERT INTO `mob_skills` VALUES (1232,922,'murk',1,0.0,10.0,2000,1500,4,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (1233,923,'material_fend',0,0.0,10.0,2000,1500,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1234,924,'carousel',1,0.0,10.0,2000,1500,4,0,0,4,0,0,0);
 INSERT INTO `mob_skills` VALUES (1235,925,'pile_pitch',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1236,926,'guided_missile',2,0.0,5.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1236,926,'guided_missile',2,0.0,17.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1237,927,'hyper_pulse',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1238,928,'target_analysis',1,0.0,20.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1239,929,'discharger',0,0.0,7.0,2000,1500,1,0,0,0,0,0,0);
@@ -1275,7 +1275,7 @@ INSERT INTO `mob_skills` VALUES (1256,959,'empty_crush',0,0.0,7.0,2000,1500,4,0,
 INSERT INTO `mob_skills` VALUES (1258,961,'lamentation',1,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1259,944,'wire_cutter',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1260,945,'antimatter',0,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1261,946,'equalizer',2,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1261,946,'equalizer',1,0.0,10.0,2000,1500,4,0,0,4,0,0,0);
 INSERT INTO `mob_skills` VALUES (1262,947,'flame_thrower',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1263,948,'cryo_jet',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1264,949,'turbofan',4,0.0,10.0,2000,1500,4,0,0,0,0,0,0);
