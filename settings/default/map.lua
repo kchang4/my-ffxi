@@ -76,11 +76,11 @@ xi.settings.map =
 
     -- Minimum player level to earn capacity points and use job points
     -- Retail requires level 99, set to 75 for classic 75-era servers
-    JOB_POINTS_PLAYER_LEVEL              = 75,
+    JOB_POINTS_PLAYER_LEVEL              = 99,
 
     -- Minimum mob level to award capacity points
     -- Retail requires mob level 100+, set to 75 for classic servers
-    JOB_POINTS_MOB_LEVEL                 = 75,
+    JOB_POINTS_MOB_LEVEL                 = 100,
 
     -- Multiplier for Job Point gift values (1.0 = full retail values)
     -- Set to 0.5 for 75-era to reduce power creep
