@@ -5146,6 +5146,8 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
     const uint8 playerLevelReq = settings::get<uint8>("map.JOB_POINTS_PLAYER_LEVEL");
     const uint8 mobLevelReq    = settings::get<uint8>("map.JOB_POINTS_MOB_LEVEL");
 
+    ShowDebug("[CP] DistributeCapacityPoints called - MobLevel: %d, PlayerLevelReq: %d, MobLevelReq: %d", mobLevel, playerLevelReq, mobLevelReq);
+
     PChar->ForAlliance(
         [&PMob, &zone, &mobLevel, &playerLevelReq, &mobLevelReq](CBattleEntity* PPartyMember)
         {
@@ -5154,12 +5156,22 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
             if (!PMember || PMember->isDead() || (PMember->loc.zone->GetID() != zone))
             {
                 // Do not grant Capacity points if null, Dead, or in a different area
+                ShowDebug("[CP] Skipping member - null/dead/wrong zone");
                 return;
             }
 
-            if (!hasKeyItem(PMember, KeyItem::JOB_BREAKER) || PMember->GetMLevel() < playerLevelReq)
+            bool hasJobBreaker = hasKeyItem(PMember, KeyItem::JOB_BREAKER);
+            uint8 memberLevel = PMember->GetMLevel();
+            ShowDebug("[CP] Checking member: %s, Level: %d, HasJobBreaker: %s", PMember->name.c_str(), memberLevel, hasJobBreaker ? "YES" : "NO");
+
+            if (!hasJobBreaker || memberLevel < playerLevelReq)
             {
                 // Do not grant Capacity points without Job Breaker or required level
+                ShowDebug("[CP] Member failed requirements - JobBreaker: %s, Level %d < %d: %s",
+                    hasJobBreaker ? "YES" : "NO",
+                    memberLevel,
+                    playerLevelReq,
+                    memberLevel < playerLevelReq ? "YES" : "NO");
                 return;
             }
 
@@ -5170,11 +5182,15 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
             // Ref: https://www.bg-wiki.com/ffxi/Job_Points
             float capacityPoints = 0;
 
+            ShowDebug("[CP] MobLevel %d >= MobLevelReq %d: %s", mobLevel, mobLevelReq, mobLevel >= mobLevelReq ? "YES" : "NO");
+
             if (mobLevel >= mobLevelReq)
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
                 capacityPoints = 0.0089 * std::pow(levelDiff, 3) + 0.0533 * std::pow(levelDiff, 2) + 3.7439 * levelDiff + 89.7;
+
+                ShowDebug("[CP] Base CP calculated: %.2f (levelDiff: %d)", capacityPoints, levelDiff);
 
                 if (PMember->capacityChain.chainTime > timer::now() || PMember->capacityChain.chainTime == timer::time_point::min())
                 {
@@ -5184,12 +5200,15 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
                     // Assumption: Chain0 is no bonus, Chains 10+ capped at 1.5 value, f(chain) = 1 + 0.05 * chain
                     float chainModifier = std::min(1 + 0.05 * PMember->capacityChain.chainNumber, 1.5);
                     capacityPoints *= chainModifier;
+                    ShowDebug("[CP] Chain active - chainNumber: %d, modifier: %.2f, CP after chain: %.2f",
+                        PMember->capacityChain.chainNumber, chainModifier, capacityPoints);
                 }
                 else
                 {
                     // TODO: Capacity Chain Timer is reduced after Chain 30
                     PMember->capacityChain.chainTime   = timer::now() + 30s;
                     PMember->capacityChain.chainNumber = 1;
+                    ShowDebug("[CP] Chain reset to 1");
                 }
 
                 if (chainActive)
@@ -5198,7 +5217,12 @@ void DistributeCapacityPoints(CCharEntity* PChar, CMobEntity* PMob)
                 }
 
                 capacityPoints = AddCapacityBonus(PMember, capacityPoints);
+                ShowDebug("[CP] Final CP after bonuses: %.2f - calling AddCapacityPoints", capacityPoints);
                 AddCapacityPoints(PMember, PMob, capacityPoints, levelDiff, chainActive);
+            }
+            else
+            {
+                ShowDebug("[CP] Mob level too low - no CP awarded");
             }
         });
 }
