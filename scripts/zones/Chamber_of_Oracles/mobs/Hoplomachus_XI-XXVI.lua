@@ -39,8 +39,10 @@ entity.onMobSpellChoose = function(mob, target, spellId)
 
     local baseMobId = mob:getID()
 
-     -- Check for missing buffs on self and allies
+    -- Check for missing buffs on self and allies
     for i = 1, #buffTable do
+        local buffTargets = {}
+
         for j = 1, #groupTable do
             local allyEntity = GetMobByID(baseMobId + groupTable[j])
             if
@@ -48,8 +50,17 @@ entity.onMobSpellChoose = function(mob, target, spellId)
                 allyEntity:isAlive() and
                 not allyEntity:hasStatusEffect(buffTable[i][2])
             then
-                table.insert(spellList, { buffTable[i][1], allyEntity })
+                table.insert(buffTargets, allyEntity)
             end
+        end
+
+        -- Adds each missing buff to the spell list one time with a random target that is missing it
+        if #buffTargets > 0 then
+            table.insert(spellList,
+            {
+                buffTable[i][1],
+                buffTargets[math.random(#buffTargets)],
+            })
         end
     end
 
