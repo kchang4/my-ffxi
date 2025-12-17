@@ -103,9 +103,15 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
     // get master to properly handle loops
     m_PMasterTarget = findMaster(PTarget);
 
-    // no not include pets if this AoE is a buff spell
-    // this is a buff because i'm targetting my self
+    // do not include pets if this AoE is a buff spell
+    // this is a buff because i'm targetting myself
     bool withPet = PETS_CAN_AOE_BUFF || (m_findFlags & FINDFLAGS_PET) || (m_PMasterTarget->objtype != m_PBattleEntity->objtype);
+
+    // Pets/trusts don't buff other pets with self-centered AoEs
+    if (radiusType == AOE_RADIUS::ATTACKER && m_PBattleEntity->PMaster != nullptr)
+    {
+        withPet = false;
+    }
 
     // add original target first except for self-centered moves
     if (radiusType != AOE_RADIUS::ATTACKER || m_conal)
@@ -124,6 +130,12 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             // players will never need to add whole alliance
             m_findType = FIND_TYPE::PLAYER_PLAYER;
 
+            // For self-centered AoEs, add caster first
+            if (m_selfCenteredAoE)
+            {
+                addEntity(m_PBattleEntity, false);
+            }
+
             if (m_PMasterTarget->PParty != nullptr)
             {
                 // player -ra spells should never hit whole alliance
@@ -139,18 +151,7 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
             }
             else
             {
-                // For self-centered pet AoEs, add pet first then master (pet is primary target)
-                // For player/master AoEs, add master first then pet (master is primary target)
-                if (m_selfCenteredAoE && m_PBattleEntity->objtype == TYPE_PET)
-                {
-                    addEntity(m_PBattleEntity, false); // Add pet as primary target
-                    addEntity(m_PMasterTarget, false); // Add master as secondary target
-                }
-                else
-                {
-                    // just add myself
-                    addEntity(m_PMasterTarget, withPet);
-                }
+                addEntity(m_PMasterTarget, withPet);
             }
         }
         else
@@ -186,6 +187,12 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
         if (m_findType == FIND_TYPE::MONSTER_MONSTER && m_PTarget && m_PTarget->PMaster == nullptr)
         {
             withPet = PETS_CAN_AOE_BUFF;
+        }
+
+        // For self-centered AoEs, add caster first
+        if (m_selfCenteredAoE)
+        {
+            addEntity(m_PBattleEntity, false);
         }
 
         if (m_findType == FIND_TYPE::MONSTER_PLAYER &&
