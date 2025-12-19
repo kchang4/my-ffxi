@@ -440,6 +440,8 @@ xi.mobSkill =
     EMPTY_THRASH                  = 1275,
     PROMYVION_BRUME_2             = 1276,
 
+    GERJIS_GRIP                   = 1322,
+
     HOOF_VOLLEY                   = 1330,
 
     COUNTERSTANCE                 = 1331, -- The Waughroon Kid
@@ -447,10 +449,10 @@ xi.mobSkill =
     CONTAGION_TRANSFER            = 1333,
     CONTAMINATION                 = 1334,
     TOXIC_PICK                    = 1335,
-
     FRENZIED_RAGE_1               = 1336,
     CHARM_2                       = 1337,
 
+    CROSSTHRASH_1                 = 1340,
     KNIFE_EDGE_CIRCLE             = 1341,
     TRAIN_FALL                    = 1342,
 
