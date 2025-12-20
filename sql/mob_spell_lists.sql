@@ -1168,10 +1168,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Opo-opo_Monarch',68,358,1,255); -- hasteg
 
 -- Free (69)
 
--- Helltail_Harry (70)
-INSERT INTO `mob_spell_lists` VALUES ('Helltail_Harry',70,150,1,255); -- blizzard_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Helltail_Harry',70,357,1,255); -- slowga (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Helltail_Harry',70,358,1,255); -- hastega (1~255)
+-- Free (70)
 
 -- Orcish_Onager (71)
 INSERT INTO `mob_spell_lists` VALUES ('Orcish_Onager',71,362,1,255); -- bindga (1~255)
