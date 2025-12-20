@@ -1933,8 +1933,8 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
     -- Gil
     if itemId == xi.item.NONE then
         -- Distribute gil.
+        player:tradeComplete()
         player:timer(2000, function(playerEntity)
-            playerEntity:tradeComplete()
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
             handleGilDistribution(playerEntity, treasureLevel)
             openAndMoveTreasure(npc, respawnType.REGULAR)
@@ -1946,8 +1946,8 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
 
     -- Items (Gems or others)
     else
+        player:tradeComplete()
         player:timer(2000, function(playerEntity)
-            playerEntity:tradeComplete()
             playerEntity:addTreasure(itemId, npc)
             playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED)
             openAndMoveTreasure(npc, respawnType.REGULAR)
