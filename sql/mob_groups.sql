@@ -908,7 +908,7 @@ INSERT INTO `mob_groups` VALUES (11,2801,24,'Nakki',0,128,0,0,0,38,38,0);
 INSERT INTO `mob_groups` VALUES (12,2672,24,'Miner_Bee',330,0,584,0,0,31,34,0);
 INSERT INTO `mob_groups` VALUES (13,3854,24,'Tavnazian_Sheep',330,0,2382,0,0,33,37,0);
 INSERT INTO `mob_groups` VALUES (14,557,24,'Bugard',330,0,371,0,0,34,37,0);
-INSERT INTO `mob_groups` VALUES (15,749,24,'Cluster',330,0,490,0,0,38,40,0);
+INSERT INTO `mob_groups` VALUES (15,749,24,'Cluster',330,8,490,0,0,38,40,0);
 INSERT INTO `mob_groups` VALUES (16,6271,24,'Orcish_Brawler',330,0,3257,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (17,6269,24,'Orcish_Beastrider',330,0,3257,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (18,6270,24,'Orcish_Nightraider',330,0,3257,0,0,35,38,0);
@@ -946,7 +946,7 @@ INSERT INTO `mob_groups` VALUES (49,6517,24,'Fomor_Beastmaster',330,1,858,0,0,41
 INSERT INTO `mob_groups` VALUES (50,1393,24,'Fomors_Bat',0,128,0,0,0,34,35,0);
 INSERT INTO `mob_groups` VALUES (51,940,24,'Death_Jacket',330,0,584,0,0,37,40,0);
 INSERT INTO `mob_groups` VALUES (52,1549,24,'Gigantobugard',330,0,371,0,0,40,43,0);
-INSERT INTO `mob_groups` VALUES (53,277,24,'Atomic_Cluster',330,0,187,0,0,44,46,0);
+INSERT INTO `mob_groups` VALUES (53,277,24,'Atomic_Cluster',330,8,187,0,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (54,1553,24,'Gigas_Braver',330,0,981,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (55,1573,24,'Gigas_Martialist',330,0,981,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (56,1555,24,'Gigas_Catapulter',330,0,981,0,0,41,44,0);
@@ -1016,7 +1016,7 @@ INSERT INTO `mob_groups` VALUES (29,3034,25,'Orcish_Stonelauncher',330,0,1942,0,
 INSERT INTO `mob_groups` VALUES (30,6283,25,'Orcish_Trooper',330,0,3255,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (31,6277,25,'Orcish_Bowshooter',330,0,3256,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (32,940,25,'Death_Jacket',330,0,584,0,0,37,40,0);
-INSERT INTO `mob_groups` VALUES (33,277,25,'Atomic_Cluster',330,0,187,0,0,44,46,0);
+INSERT INTO `mob_groups` VALUES (33,277,25,'Atomic_Cluster',330,8,187,0,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (34,1599,25,'Gigas_Warwolf',330,0,982,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (35,1555,25,'Gigas_Catapulter',330,0,983,0,0,41,44,0);
 INSERT INTO `mob_groups` VALUES (36,6279,25,'Orcish_Footsoldier',330,0,283,0,0,41,44,0);
