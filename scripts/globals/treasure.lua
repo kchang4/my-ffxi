@@ -1807,7 +1807,11 @@ xi.treasure.onTrade = function(player, npc, trade, bypassType, bypassReward)
             -- It's a trap!
             elseif outcome == 2 then
                 player:timer(2000, function(playerEntity)
-                    playerEntity:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
+                    local weaknessDuration = 5 + player:getMainLvl() - treasureLevel
+                    weaknessDuration       = math.floor(weaknessDuration / 5)
+                    weaknessDuration       = utils.clamp(weaknessDuration, 5, 60)
+                    
+                    playerEntity:addStatusEffect(xi.effect.WEAKNESS, 1, 0, weaknessDuration)
                     playerEntity:messageSpecial(ID.text.CHEST_UNLOCKED + 2)
                     trapAndMoveTreasure(npc, respawnType.REGULAR)
                 end)
