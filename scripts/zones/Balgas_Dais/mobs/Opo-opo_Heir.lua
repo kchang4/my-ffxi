@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
--- Doesn't fight until Monarch is defeated, only casts spells
+-- Doesn't fight until Monarch is defeated.
 entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
     mob:setMobAbilityEnabled(false)

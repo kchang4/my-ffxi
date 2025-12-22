@@ -138,7 +138,12 @@ xi.mobSkill =
 
     CHARGED_WHISKER               =  483,
 
+    WHIP_TONGUE                   =  486,
     TRANSMOGRIFICATION            =  487, -- Mammet-800
+
+    STINKING_GAS                  =  489,
+
+    ABYSS_BLAST                   =  492,
 
     TRICLIP_1                     =  498,
     BACK_SWISH_1                  =  499,
@@ -451,6 +456,7 @@ xi.mobSkill =
     TOXIC_PICK                    = 1335,
     FRENZIED_RAGE_1               = 1336,
     CHARM_2                       = 1337,
+    INFERNAL_PESTILENCE           = 1338,
 
     CROSSTHRASH_1                 = 1340,
     KNIFE_EDGE_CIRCLE             = 1341,
