@@ -502,6 +502,14 @@ xi.mobSkill =
     DAMNATION_DIVE_GHRAH          = 1445,
     SICKLE_SLASH                  = 1446,
 
+    REACTOR_COOL                  = 1463,
+    OPTIC_INDURATION_CHARGE       = 1464,
+    OPTIC_INDURATION              = 1465,
+    STATIC_FILAMENT               = 1466,
+    DECAYED_FILAMENT              = 1467,
+    REACTOR_OVERHEAT              = 1468,
+    REACTOR_OVERLOAD              = 1469,
+
     DEADALUS_WING_COP_PRISHE      = 1487, -- Dwing COP 8-4 Dawn
 
     HOWLING_MOON_3                = 1520, -- Unknown usage.
