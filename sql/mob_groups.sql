@@ -13697,8 +13697,8 @@ INSERT INTO `mob_groups` VALUES (18,3390,206,'Rongeur_Dos',0,128,0,1300,0,31,31,
 INSERT INTO `mob_groups` VALUES (19,1854,206,'Guytrash',0,128,0,1350,0,32,32,0);
 INSERT INTO `mob_groups` VALUES (20,1076,206,'Doll_Factory',0,128,0,500,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (21,1497,206,'Generic_Doll',0,128,0,2200,2200,40,40,0);
-INSERT INTO `mob_groups` VALUES (22,1519,206,'Ghul-I-Beaban_DRK',0,128,0,0,0,40,40,0);
-INSERT INTO `mob_groups` VALUES (23,6069,206,'Ghul-I-Beaban_BLM',0,128,0,0,0,40,40,0);
+INSERT INTO `mob_groups` VALUES (22,1519,206,'Ghul-I-Beaban_DRK',0,128,0,2000,2000,40,40,0);
+INSERT INTO `mob_groups` VALUES (23,6069,206,'Ghul-I-Beaban_BLM',0,128,0,2000,2000,40,40,0);
 INSERT INTO `mob_groups` VALUES (24,1342,206,'Fire_Golem',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (25,4310,206,'Water_Golem',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (26,4350,206,'Wind_Golem',0,128,0,0,0,50,50,0);
