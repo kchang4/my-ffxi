@@ -43,15 +43,60 @@ content.groups =
             { qubiaID.mob.GHUL_I_BEABAN + 7 },
         },
 
-        death = function(battlefield, mob)
-            if mob:getLocalVar('numReraises') == 4 then
-                content:handleAllMonstersDefeated(battlefield, mob)
-            end
-        end,
-
         spawned = false,
     },
 }
+
+function content:onBattlefieldTick(battlefield, tick)
+    Battlefield.onBattlefieldTick(self, battlefield, tick)
+
+    -- If we have won, stop everything.
+    if battlefield:getLocalVar('battlefieldWon') ~= 0 then
+        return
+    end
+
+    local baseId = qubiaID.mob.GHUL_I_BEABAN + (battlefield:getArea() - 1) * 3
+
+    local darkKnight = GetMobByID(baseId)
+    if not darkKnight then
+        return
+    end
+
+    local blackMage = GetMobByID(baseId + 1)
+    if not blackMage then
+        return
+    end
+
+    if
+        darkKnight:isSpawned() or
+        blackMage:isSpawned()
+    then
+        return
+    end
+
+    -- If we reach here, Ghul-I-Beaban is dead, get the position before he despawns
+    local xPos = battlefield:getLocalVar('xPos') / 100 * (1 - 2 * battlefield:getLocalVar('xPosSign'))
+    local yPos = battlefield:getLocalVar('yPos') / 100 * (1 - 2 * battlefield:getLocalVar('yPosSign'))
+    local zPos = battlefield:getLocalVar('zPos') / 100 * (1 - 2 * battlefield:getLocalVar('zPosSign'))
+    local rPos = battlefield:getLocalVar('rPos')
+
+    -- Check how many times we've defeated Ghul-I-Beaban and spawn the appropriate job
+    local deaths = battlefield:getLocalVar('deaths')
+
+    if deaths < 3 then
+        darkKnight:spawn()
+        darkKnight:setPos(xPos, yPos, zPos, rPos)
+        return
+    elseif deaths < 5 then
+        blackMage:spawn()
+        blackMage:setPos(xPos, yPos, zPos, rPos)
+        return
+    end
+
+    -- If we make it all the way here, we win
+    battlefield:setLocalVar('battlefieldWon', 1)
+    content:handleAllMonstersDefeated(battlefield)
+end
 
 content.loot =
 {
