@@ -3027,7 +3027,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, const s
 // Sends an arbitrary entity update to a specific player only
 void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask)
 {
-    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate->GetBaseEntity())
+    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate && entityToUpdate->GetBaseEntity())
     {
         CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -3038,7 +3038,7 @@ void CLuaBaseEntity::sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, ui
 // Seems to be needed for Chocobo Racing
 void CLuaBaseEntity::sendEmptyEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate)
 {
-    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate->GetBaseEntity())
+    if (m_PBaseEntity->objtype == TYPE_PC && entityToUpdate && entityToUpdate->GetBaseEntity())
     {
         auto packet = std::make_unique<CBasicPacket>();
         packet->setType(0x0E);
