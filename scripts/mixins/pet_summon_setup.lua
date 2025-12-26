@@ -10,9 +10,9 @@ g_mixins.pet_summon_setup = function(mob)
         -- Fetches the possible elements for this mob
         local summonBitmask = mobArg:getLocalVar('[Summon]mask')
         local summonTable = {}
-        for i = 1, #xi.pets.summon.type do
-            if utils.mask.getBit(summonBitmask, i) then
-                table.insert(summonTable, i)
+        for _, id in pairs(xi.pets.summon.type) do
+            if utils.mask.getBit(summonBitmask, id) then
+                table.insert(summonTable, id)
             end
         end
 
