@@ -2940,7 +2940,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 // Guarded. TODO: Stuff guards that shouldn't.
-                if (attack.IsGuarded())
+                if (attack.CheckGuarded())
                 {
                     actionResult.resolution = ActionResolution::Guard;
                     battleutils::HandleTacticalGuard(PTarget);
@@ -2988,14 +2988,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
             if (PTarget->objtype == TYPE_PC)
             {
-                if (attack.IsGuarded() || !settings::get<bool>("map.GUARD_OLD_SKILLUP_STYLE"))
-                {
-                    if (battleutils::GetGuardRate(this, PTarget) > 0)
-                    {
-                        charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_GUARD, GetMLevel());
-                    }
-                }
-
                 if (attack.IsBlocked() || !settings::get<bool>("map.BLOCK_OLD_SKILLUP_STYLE"))
                 {
                     if (battleutils::GetBlockRate(this, PTarget) > 0)
