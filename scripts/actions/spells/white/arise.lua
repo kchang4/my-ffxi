@@ -19,12 +19,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     if target:isPC() then
         target:sendRaise(4)
     else
-        if target:getName() == 'Prishe' then
-            -- CoP 8-4 Prishe
-            target:setLocalVar('Raise', 1)
-            target:entityAnimationPacket(xi.animationString.SPECIAL_00)
+        -- CoP 8-4 Prishe
+        if target:getPool() == xi.mobPools.PRISHE then
             target:addHP(target:getMaxHP())
             target:addMP(target:getMaxMP())
+            target:setLocalVar('raise', 1)
         end
     end
 

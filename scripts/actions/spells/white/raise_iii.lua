@@ -30,10 +30,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     if target:isPC() then
         target:sendRaise(3)
     else
-        -- NPC ally "raise" behavior (instant revive style)
-        target:addHP(target:getMaxHP())
-        target:addMP(target:getMaxMP())
-        target:entityAnimationPacket(xi.animationString.SPECIAL_00)
+        -- CoP 8-4 Prishe
+        if target:getPool() == xi.mobPools.PRISHE then
+            target:addHP(target:getMaxHP())
+            target:addMP(target:getMaxMP())
+            target:setLocalVar('raise', 1)
+        end
     end
 
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)

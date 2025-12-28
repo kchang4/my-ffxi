@@ -4,81 +4,274 @@
 -- Chains of Promathia 8-4 BCNM Fight
 -----------------------------------
 local ID = zones[xi.zone.EMPYREAL_PARADOX]
+mixins =
+{
+    require('scripts/mixins/helper_npc'),
+    require('scripts/mixins/job_special'),
+}
 -----------------------------------
 ---@type TMobEntity
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGAIN, 30)
-end
+-- Helper NPC configuration
+local helperConfig =
+{
+    engageWaitTime = 180, -- 3 minutes
+    isAggroable    = true,
+    targetMobs     = function(mob)
+        local battlefieldArea = mob:getBattlefield():getArea()
+        local areaOffset = (battlefieldArea - 1) * 2
+        return
+        {
+            ID.mob.PROMATHIA + areaOffset,     -- Promathia
+            ID.mob.PROMATHIA + areaOffset + 1, -- Promathia v2
+        }
+    end,
+}
 
-entity.onMobRoam = function(mob)
-    local promathia = ID.mob.PROMATHIA + (mob:getBattlefield():getArea() - 1) * 2
-    local wait = mob:getLocalVar('wait')
-    local ready = mob:getLocalVar('ready')
+-- Prishe Item Usage
+-- Uses item on engage and on a 2 1/2 minute timer
+local itemActions =
+{
+    -- 1. Daedulus Wing: Usable at any time
+    {
+        condition = function(mob, phase)
+            return true
+        end,
 
-    if ready == 0 and wait > 240 then
-        local promathiaMob = GetMobByID(promathia)
-        if
-            promathiaMob and
-            promathiaMob:getCurrentAction() ~= xi.action.category.NONE
-        then
-            mob:entityAnimationPacket('prov')
-            mob:messageText(mob, ID.text.PRISHE_TEXT)
-        else
-            mob:entityAnimationPacket('prov')
-            mob:messageText(mob, ID.text.PRISHE_TEXT + 1)
-            promathia = promathia + 1
+        action = function(mob)
+            mob:messageText(mob, ID.text.PRISHE_TEXT + 9, false)
+            mob:useMobAbility(xi.mobSkill.ITEM_1_PRISHE)
+            mob:setLocalVar('daedulus', 1)
+        end,
+    },
+
+    -- 2. Bowl of Ambrosia: Usable in Phase 1
+    {
+        condition = function(mob, phase)
+            return phase == 0
+        end,
+
+        action = function(mob)
+            mob:addStatusEffect(xi.effect.FOOD, 0, 0, 150, 0, 0, 0, xi.effectSourceType.FOOD, 4511, mob:getID())
+            mob:messageText(mob, ID.text.PRISHE_TEXT + 8, false)
+            mob:useMobAbility(xi.mobSkill.ITEM_1_PRISHE)
+        end,
+    },
+
+    -- 3. Carnal Incense (Physical Immunity): Only usable in phase 2
+    {
+        condition = function(mob, phase)
+            return phase == 1
+        end,
+
+        action = function(mob)
+            mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 1, 0, 30)
+            mob:messageText(mob, ID.text.PRISHE_TEXT + 10, false)
+            mob:useMobAbility(xi.mobSkill.ITEM_2_PRISHE)
+        end,
+    },
+
+    -- 4. Spiritual Incense (Magical Immunity): Only usable in phase 2
+    {
+        condition = function(mob, phase)
+            return phase == 1
+        end,
+
+        action = function(mob)
+            mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 30)
+            mob:messageText(mob, ID.text.PRISHE_TEXT + 11, false)
+            mob:useMobAbility(xi.mobSkill.ITEM_2_PRISHE)
+        end,
+    },
+
+    -- 5. Remedy: Only usable in phase 2 if she has a status effect to be removed
+    {
+        condition = function(mob, phase)
+            return phase == 1 and
+                (mob:hasStatusEffect(xi.effect.PLAGUE) or
+                    mob:hasStatusEffect(xi.effect.CURSE_I) or
+                    mob:hasStatusEffect(xi.effect.SILENCE))
+        end,
+
+        action = function(mob)
+            mob:messageText(mob, ID.text.PRISHE_TEXT + 12, false)
+            mob:delStatusEffect(xi.effect.PLAGUE)
+            mob:delStatusEffect(xi.effect.CURSE_I)
+            mob:delStatusEffect(xi.effect.SILENCE)
+            mob:useMobAbility(xi.mobSkill.ITEM_2_PRISHE)
+        end,
+    },
+}
+
+local useItem = function(mob, phase)
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        battlefield:setLocalVar('prisheItemTimer', GetSystemTime() + 150)
+    end
+
+    local validItems = {}
+    for _, item in ipairs(itemActions) do
+        if item.condition(mob, phase) then
+            table.insert(validItems, item)
         end
+    end
 
-        mob:setLocalVar('ready', promathia)
-        mob:setLocalVar('wait', 0)
-    elseif ready > 0 then
-        local readyMob = GetMobByID(ready)
-        if readyMob then
-            mob:addEnmity(readyMob, 0, 1)
-            mob:updateEnmity(readyMob)
-        end
-    else
-        mob:setLocalVar('wait', wait + 3)
+    if #validItems > 0 then
+        local choice = validItems[math.random(1, #validItems)]
+        choice.action(mob)
     end
 end
 
+entity.onMobSpawn = function(mob)
+    xi.mix.helperNpc.config(mob, helperConfig)
+
+    mob:setMobMod(xi.mobMod.NO_REST, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_DELAY, 5)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+
+    xi.mix.jobSpecial.config(mob,
+        {
+            specials =
+            {
+                { id = xi.jsa.HUNDRED_FISTS, hpp = 50 },
+                { id = xi.jsa.BENEDICTION,   hpp = 10 },
+            },
+        })
+
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'PRISHE_SKILL_MSG', function(mobArg, skillID)
+        local message =
+        {
+            [xi.mobSkill.AURORAL_UPPERCUT_1   ] = ID.text.PRISHE_TEXT + 4,
+            [xi.mobSkill.NULLIFYING_DROPKICK_1] = ID.text.PRISHE_TEXT + 5,
+            [xi.jsa.HUNDRED_FISTS             ] = ID.text.PRISHE_TEXT + 6,
+            [xi.jsa.BENEDICTION               ] = ID.text.PRISHE_TEXT + 7,
+        }
+
+        if message[skillID] then
+            mobArg:messageText(mobArg, message[skillID])
+        end
+    end)
+
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'PRISHE_DAEDALUS', function(mobArg, skillID)
+        -- Handle Daedulus Wing TP restoration
+        if
+            skillID == xi.mobSkill.ITEM_1_PRISHE and
+            mobArg:getLocalVar('daedulus') == 1
+        then
+            mobArg:setTP(3000)
+            mobArg:setLocalVar('daedulus', 0)
+        end
+
+        -- Reset animation sub after Nullifying Dropkick completes
+        if skillID == xi.mobSkill.NULLIFYING_DROPKICK_1 then
+            local target = mobArg:getTarget()
+            if target then
+                target:setAnimationSub(0)
+            end
+        end
+    end)
+end
+
 entity.onMobEngage = function(mob, target)
-    -- Logic to only allow Daedalus Wing to be cast once
+    mob:setMod(xi.mod.REGAIN, 50)
+end
+
+entity.onMobFight = function(mob, target)
     local battlefield = mob:getBattlefield()
     if not battlefield then
         return
     end
 
-    if battlefield:getLocalVar('usedWing') ~= 1 then
-        battlefield:setLocalVar('usedWing', 1)
-        mob:useMobAbility(xi.mobSkill.DEADALUS_WING_COP_PRISHE)
+    -- Handle post-raise behavior
+    if mob:getLocalVar('raise') == 1 then
+        mob:setLocalVar('raise', 0)
+        mob:entityAnimationPacket(xi.animationString.SPECIAL_00)
+        mob:stun(2000)
+        mob:timer(2000, function(prishe)
+            prishe:messageText(prishe, ID.text.PRISHE_TEXT + 3)
+            prishe:setLocalVar('deathProcessed', 0)
+        end)
     end
 
-    mob:addStatusEffectEx(xi.effect.SILENCE, 0, 0, 0, 5)
-end
+    -- React to Promathia taking first damage
+    local reactPhase = battlefield:getLocalVar('prisheReact')
+    if reactPhase > 0 then
+        local messageOffset = reactPhase - 1  -- Phase 1 uses +0, Phase 2 uses +1
+        battlefield:setLocalVar('prisheReact', 0)
+        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+        mob:setAutoAttackEnabled(false)
+        mob:entityAnimationPacket('prov')
+        mob:showText(mob, ID.text.PRISHE_TEXT + messageOffset)
 
-entity.onMobFight = function(mob, target)
-    if mob:getLocalVar('Raise') == 1 then
-        mob:messageText(mob, ID.text.PRISHE_TEXT + 3)
-        mob:setLocalVar('Raise', 0)
-        mob:stun(3000)
-    elseif mob:getHPP() < 70 and mob:getLocalVar('HF') == 0 then
-        mob:useMobAbility(xi.jsa.HUNDRED_FISTS_PRISHE)
-        mob:messageText(mob, ID.text.PRISHE_TEXT + 6)
-        mob:setLocalVar('HF', 1)
-    elseif mob:getHPP() < 30 and mob:getLocalVar('Bene') == 0 then
-        mob:useMobAbility(xi.jsa.BENEDICTION_PRISHE)
-        mob:messageText(mob, ID.text.PRISHE_TEXT + 7)
-        mob:setLocalVar('Bene', 1)
+        mob:timer(3000, function(prishe)
+            prishe:setMobMod(xi.mobMod.NO_MOVE, 0)
+            prishe:setAutoAttackEnabled(true)
+            prishe:setLocalVar('useItem', 1)
+        end)
     end
 
-    -- mob:setStatus(0)
+    -- Enough time has passed to use next item
+    local itemTimer = battlefield:getLocalVar('prisheItemTimer')
+    local phase = battlefield:getLocalVar('phase')
+    if
+        (itemTimer > 0 or mob:getLocalVar('useItem') == 1) and
+        GetSystemTime() >= itemTimer
+    then
+        useItem(mob, phase)
+    end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    mob:messageText(mob, ID.text.PRISHE_TEXT + 2)
+entity.onMobMobskillChoose = function(mob, target)
+    if
+        target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or
+        target:hasStatusEffect(xi.effect.MAGIC_SHIELD)
+    then
+        return xi.mobSkill.NULLIFYING_DROPKICK_1
+    else
+        return xi.mobSkill.AURORAL_UPPERCUT_1
+    end
+end
+
+entity.onMobSpellChoose = function(mob, target, spellId)
+    local battlefield = mob:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    local spellList =
+    {
+        [1] = { xi.magic.spell.BANISH_III,   target, false, xi.action.type.DAMAGE_TARGET,  nil, 100 },
+        [2] = { xi.magic.spell.BANISHGA_III, target, false, xi.action.type.DAMAGE_TARGET,  nil, 100 },
+        [3] = { xi.magic.spell.HOLY,         target, false, xi.action.type.DAMAGE_TARGET,  nil, 100 },
+        [4] = { xi.magic.spell.CURE_IV,      mob,    true,  xi.action.type.HEALING_TARGET, 33,  100 },
+    }
+
+    local groupTable = battlefield:getPlayers()
+    table.insert(groupTable, mob) -- Include self for Cure IV
+
+    return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
+end
+
+entity.onMobDisengage = function(mob)
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        battlefield:setLocalVar('prisheItemTimer', 0)
+    end
+end
+
+entity.onMobDeath = function(mob, target, optParams)
+    -- Prevents repeated messages if Prishe stays dead for some time
+    if mob:getLocalVar('deathProcessed') == 0 then
+        mob:messageText(mob, ID.text.PRISHE_TEXT + 2)
+
+        mob:setLocalVar('deathProcessed', 1)
+    end
+end
+
+entity.onMobDespawn = function(mob)
+    mob:removeListener('PRISHE_SKILL_MSG')
+    mob:removeListener('PRISHE_DAEDALUS')
 end
 
 return entity

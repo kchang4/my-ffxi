@@ -253,12 +253,6 @@ INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- IMMUNITY: 23
 -- Polar Hare
 INSERT INTO `mob_pool_mods` VALUES (3168,28,10,1); -- EXP_BONUS: 10
 
--- Promathia
-INSERT INTO `mob_pool_mods` VALUES (3205,1,250,0);  -- DEF: 250
-INSERT INTO `mob_pool_mods` VALUES (3205,29,30,0);  -- MDEF: 30
-INSERT INTO `mob_pool_mods` VALUES (3205,288,25,0); -- DOUBLE_ATTACK: 25
-INSERT INTO `mob_pool_mods` VALUES (3205,366,25,0); -- MAIN_DMG_RATING: 25
-
 -- Proto-Omega
 INSERT INTO `mob_pool_mods` VALUES (3208,370,20,0); -- REGEN: 20
 
@@ -512,12 +506,6 @@ INSERT INTO `mob_pool_mods` VALUES (4837,62,1,1); -- NO_STANDBACK: 1
 -- Maat Bst
 INSERT INTO `mob_pool_mods` VALUES (4932,30,1017,1); -- SPECIAL_SKILL: 1017
 INSERT INTO `mob_pool_mods` VALUES (4932,33,50,1);   -- SPECIAL_COOL: 50
-
--- Promathia
-INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);  -- DEF: 250
-INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);  -- MDEF: 30
-INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0); -- DOUBLE_ATTACK: 25
-INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0); -- MAIN_DMG_RATING: 10
 
 -- Maat Nin
 INSERT INTO `mob_pool_mods` VALUES (5403,62,1,1); -- NO_STANDBACK: 1
