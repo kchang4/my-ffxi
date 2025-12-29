@@ -1188,15 +1188,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Beelzebub',74,359,1,255); -- silencega (1
 -- Sabotender_Campeon (75)
 INSERT INTO `mob_spell_lists` VALUES ('Sabotender_Campeon',75,5,1,255); -- cure_v (1~255)
 
--- Dragonian_Minstrel (76)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,373,1,255); -- foe_requiem_vi (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,376,1,255); -- horde_lullaby (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,382,1,255); -- armys_paeon_v (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,387,1,255); -- mages_ballad_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,392,1,255); -- knights_minne_iv (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,421,1,255); -- battlefield_elegy (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,432,1,255); -- uncanny_etude (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Dragonian_Minstrel',76,434,1,255); -- swift_etude (1~255)
+-- Free (76)
 
 -- Tartaruga_Gigante (77)
 INSERT INTO `mob_spell_lists` VALUES ('Tartaruga_Gigante',77,202,1,255); -- waterga_iv (1~255)
