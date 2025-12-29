@@ -171,6 +171,24 @@ entity.onMobSpawn = function(mob)
             end
         end
     end)
+
+    mob:addListener('MAGIC_TAKE', 'PRISHE_RAISE', function(prishe, caster, spell, action)
+        if spell:getSpellFamily() ~= xi.magic.spellFamily.RAISE then
+            return
+        end
+
+        -- Prishe waits a few seconds before getting up
+        prishe:timer(5000, function(prisheArg)
+            prisheArg:entityAnimationPacket(xi.animationString.SPECIAL_00)
+            -- Give a few seconds for the special raise animation to play
+            prisheArg:timer(4000, function(prisheArg2)
+                prisheArg2:setHP(prisheArg2:getMaxHP())
+                prisheArg2:resetAI() -- Exit the DEATH state
+                prisheArg2:setAnimation(xi.animation.NONE)
+                prisheArg2:messageText(prisheArg2, ID.text.PRISHE_TEXT + 3)
+            end)
+        end)
+    end)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -181,17 +199,6 @@ entity.onMobFight = function(mob, target)
     local battlefield = mob:getBattlefield()
     if not battlefield then
         return
-    end
-
-    -- Handle post-raise behavior
-    if mob:getLocalVar('raise') == 1 then
-        mob:setLocalVar('raise', 0)
-        mob:entityAnimationPacket(xi.animationString.SPECIAL_00)
-        mob:stun(2000)
-        mob:timer(2000, function(prishe)
-            prishe:messageText(prishe, ID.text.PRISHE_TEXT + 3)
-            prishe:setLocalVar('deathProcessed', 0)
-        end)
     end
 
     -- React to Promathia taking first damage
@@ -261,17 +268,13 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, target, optParams)
-    -- Prevents repeated messages if Prishe stays dead for some time
-    if mob:getLocalVar('deathProcessed') == 0 then
-        mob:messageText(mob, ID.text.PRISHE_TEXT + 2)
-
-        mob:setLocalVar('deathProcessed', 1)
-    end
+    mob:messageText(mob, ID.text.PRISHE_TEXT + 2)
 end
 
 entity.onMobDespawn = function(mob)
     mob:removeListener('PRISHE_SKILL_MSG')
     mob:removeListener('PRISHE_DAEDALUS')
+    mob:removeListener('PRISHE_RAISE')
 end
 
 return entity
