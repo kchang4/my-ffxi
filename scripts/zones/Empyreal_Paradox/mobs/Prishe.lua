@@ -104,7 +104,7 @@ local itemActions =
     },
 }
 
-local useItem = function(mob, phase)
+local function useItem(mob, phase)
     local battlefield = mob:getBattlefield()
     if battlefield then
         battlefield:setLocalVar('prisheItemTimer', GetSystemTime() + 150)
@@ -248,14 +248,13 @@ entity.onMobSpellChoose = function(mob, target, spellId)
 
     local spellList =
     {
-        [1] = { xi.magic.spell.BANISH_III,   target, false, xi.action.type.DAMAGE_TARGET,  nil, 100 },
-        [2] = { xi.magic.spell.BANISHGA_III, target, false, xi.action.type.DAMAGE_TARGET,  nil, 100 },
-        [3] = { xi.magic.spell.HOLY,         target, false, xi.action.type.DAMAGE_TARGET,  nil, 100 },
-        [4] = { xi.magic.spell.CURE_IV,      mob,    true,  xi.action.type.HEALING_TARGET, 33,  100 },
+        [1] = { xi.magic.spell.BANISH_III,   target, false, xi.action.type.DAMAGE_TARGET,  nil, 0, 100 },
+        [2] = { xi.magic.spell.BANISHGA_III, target, false, xi.action.type.DAMAGE_TARGET,  nil, 0, 100 },
+        [3] = { xi.magic.spell.HOLY,         target, false, xi.action.type.DAMAGE_TARGET,  nil, 0, 100 },
+        [4] = { xi.magic.spell.CURE_IV,      mob,    true,  xi.action.type.HEALING_TARGET,  33, 0, 100 },
     }
 
     local groupTable = battlefield:getPlayers()
-    table.insert(groupTable, mob) -- Include self for Cure IV
 
     return xi.combat.behavior.chooseAction(mob, target, groupTable, spellList)
 end

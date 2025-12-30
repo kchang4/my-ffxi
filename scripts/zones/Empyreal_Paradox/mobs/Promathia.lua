@@ -28,20 +28,20 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.BIND)
     mob:addImmunity(xi.immunity.BLIND)
     mob:addImmunity(xi.immunity.STUN)
-    mob:addMod(xi.mod.REGAIN, 75)
-    mob:addMod(xi.mod.UFASTCAST, 50)
-    mob:setMod(xi.mod.DEF, 250)
-    mob:setMod(xi.mod.MDEF, 30)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
+    mob:setMod(xi.mod.REGAIN, 75)
+    mob:setMod(xi.mod.UFASTCAST, 50)
     mob:setMod(xi.mod.DESPAWN_TIME_REDUCTION, 10)
-    mob:addMobMod(xi.mobMod.SIGHT_RANGE, 15)
-    mob:addMobMod(xi.mobMod.SOUND_RANGE, 15)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 15)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('nextBreakpoint', 90)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 250)
+    mob:setMod(xi.mod.DEF, 250)
+    mob:setMod(xi.mod.MDEF, 30)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
 end
 
 entity.onMobFight = function(mob, target)
@@ -128,11 +128,12 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local battlefield = mob:getBattlefield()
-    if
-        battlefield and
-        (optParams.isKiller or optParams.noKiller)
-    then
+    if optParams.isKiller or optParams.noKiller then
+        local battlefield = mob:getBattlefield()
+        if not battlefield then
+            return
+        end
+
         battlefield:setLocalVar('phase', 1)
     end
 end

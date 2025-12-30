@@ -18,17 +18,17 @@ entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.STUN)
     mob:setMod(xi.mod.REGAIN, 75)
     mob:setMod(xi.mod.UFASTCAST, 50)
-    mob:setMod(xi.mod.DEF, 250)
-    mob:setMod(xi.mod.MDEF, 30)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
-    mob:addMobMod(xi.mobMod.SIGHT_RANGE, 15)
-    mob:addMobMod(xi.mobMod.SOUND_RANGE, 15)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 15)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 15)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('nextBreakpoint', 90)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 350)
+    mob:setMod(xi.mod.DEF, 250)
+    mob:setMod(xi.mod.MDEF, 30)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
 
     mob:addListener('WEAPONSKILL_STATE_ENTER', 'PROMY_SKILL_MSG', function(mobArg, skillID)
         if

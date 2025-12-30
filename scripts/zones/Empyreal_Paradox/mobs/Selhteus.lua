@@ -203,7 +203,7 @@ local findClosestNode = function(mob, target, area)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NOHELP)) -- Disallow spells cast on Selhteus
+    mob:setBehavior(bit.bor(mob:getBehavior(), xi.behavior.NO_ASSIST)) -- Disallow spells cast on Selhteus
     mob:addMod(xi.mod.CURE_POTENCY_RCVD, -100)
     mob:setMobMod(xi.mobMod.NO_REST, 1)
     mob:setAutoAttackEnabled(false)
