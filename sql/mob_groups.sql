@@ -11874,8 +11874,8 @@ INSERT INTO `mob_groups` VALUES (8,3527,168,'Secutor_XI-XXXII',0,128,0,3800,0,64
 INSERT INTO `mob_groups` VALUES (9,3357,168,'Retiarius_XI-XIX',0,128,0,4100,4100,64,64,0);
 INSERT INTO `mob_groups` VALUES (10,1989,168,'Hoplomachus_XI-XXVI',0,128,0,3800,3800,63,63,0);
 INSERT INTO `mob_groups` VALUES (11,675,168,'Centurio_XI-I',0,128,0,3500,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (12,3429,168,'Sabotender_Campeon',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (13,3427,168,'Sabotender_Amante',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (12,3429,168,'Sabotender_Campeon',0,128,0,6250,6250,77,77,0);
+INSERT INTO `mob_groups` VALUES (13,3427,168,'Sabotender_Amante',0,128,0,13500,0,73,74,0);
 INSERT INTO `mob_groups` VALUES (14,3303,168,'Radiant_Wyvern',0,128,0,0,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (15,454,168,'Blizzard_Wyvern',0,128,0,0,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (16,2411,168,'Lightning_Wyvern',0,128,0,0,0,75,76,0);
