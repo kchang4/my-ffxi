@@ -600,6 +600,9 @@ xi.mobSkill =
 
     ROAR_3                        = 2406,
 
+    REAVING_WIND                  = 2431,
+    REAVING_WIND_KNOCKBACK        = 2434,
+
     AQUA_BLAST                    = 2437,
 
     HYDRO_WAVE                    = 2439,
