@@ -1278,6 +1278,53 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
         }
     }
 
+    auto checkWeaponAdditionalEffect = [&]() -> bool
+    {
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            bool hasGlobalAdditionalEffect     = battleutils::GetScaledItemModifier(PAttacker, weapon, Mod::ITEM_ADDEFFECT_TYPE) > 0;     // additional_effect.lua
+            bool hasItemScriptAdditionalEffect = battleutils::GetScaledItemModifier(PAttacker, weapon, Mod::ITEM_ADDEFFECT_SCRIPTED) > 0; // scripts/items/{}.lua
+
+            if (hasGlobalAdditionalEffect && hasItemScriptAdditionalEffect)
+            {
+                ShowErrorFmt("Item '{}' has misconfigured additional effect data with both item script and add effect global configured", weapon->getName());
+            }
+
+            if (hasGlobalAdditionalEffect && luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->hasAdditionalEffect())
+            {
+                if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
+                {
+                   Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                }
+                return true;
+            }
+
+            if (hasItemScriptAdditionalEffect && luautils::OnItemAdditionalEffect(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->hasAdditionalEffect())
+            {
+                if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
+                {
+                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                }
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    bool checkedPriorityWeaponAddEffect = false;
+
+    // TODO: grip priority too?
+    if (PAttacker->objtype == TYPE_PC && battleutils::GetScaledItemModifier(PAttacker, weapon, Mod::ITEM_ADDEFFECT_PRIORITY) > 0)
+    {
+        if (checkWeaponAdditionalEffect())
+        {
+            return; // Lambda handled the function
+        }
+
+        checkedPriorityWeaponAddEffect = true;
+    }
+
     if ((PAttacker->getMod(Mod::ENSPELL) > 0 && // Enspell overwrites weapon effects
          (PAttacker->getMod(Mod::ENSPELL_CHANCE) == 0 || PAttacker->getMod(Mod::ENSPELL_CHANCE) > xirand::GetRandomNumber(100))) ||
         PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement means we deal enspell damage
@@ -1402,14 +1449,10 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             }
         }
     }
-    // check weapon for additional effects
-    else if (PAttacker->objtype == TYPE_PC && battleutils::GetScaledItemModifier(PAttacker, weapon, Mod::ITEM_ADDEFFECT_TYPE) > 0 &&
-             luautils::additionalEffectAttack(PAttacker, PDefender, weapon, Action, finaldamage) == 0 && Action->hasAdditionalEffect())
+    // check weapon for additional effects only if priority hasn't been checked already
+    else if (!checkedPriorityWeaponAddEffect && checkWeaponAdditionalEffect())
     {
-        if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
-        {
-            Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
-        }
+        return; // Lambda handled the function
     }
     // check script for grip if main failed
     else if (PAttacker->objtype == TYPE_PC && static_cast<CCharEntity*>(PAttacker)->getEquip(SLOT_SUB) && weapon == PAttacker->m_Weapons[SLOT_MAIN] &&
