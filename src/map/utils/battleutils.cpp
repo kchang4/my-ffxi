@@ -1294,7 +1294,7 @@ void HandleEnspell(CBattleEntity* PAttacker, CBattleEntity* PDefender, action_re
             {
                 if (Action->addEffectMessage == MsgBasic::ADD_EFFECT_DAMAGE && Action->addEffectParam < 0)
                 {
-                   Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
+                    Action->addEffectMessage = MsgBasic::ADD_EFFECT_RECOVERS_HP;
                 }
                 return true;
             }

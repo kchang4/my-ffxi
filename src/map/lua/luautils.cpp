@@ -2442,7 +2442,6 @@ int32 OnItemAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender,
     return 0;
 }
 
-
 // NOTE: This is currently unused
 // future use: migrating items to scripts\globals\additional_effects.lua
 void additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, action_result_t* Action, int32 baseAttackDamage)
