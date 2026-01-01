@@ -25,6 +25,7 @@ local column =
 }
 
 local pTable =
+{
     -- Black Magic
     [xi.magic.spell.BIND          ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,       60,      2,   0, false,       0 },
     [xi.magic.spell.BINDGA        ] = { xi.effect.BIND,               1, xi.mod.INT,    0,   0,       60,      2,   0, false,       0 },

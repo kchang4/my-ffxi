@@ -206,20 +206,34 @@ xi.combat.behavior.chooseAction = function(actor, mainTarget, optionalTargets, a
             [xi.action.type.ENFEEBLING_TARGET] = function()
                 if
                     not actionTarget:hasStatusEffect(actionCondition) and
-                    not xi.data.statusEffect.isEffectNullified(actor, actionCondition, effectTier)
+                    not xi.data.statusEffect.isEffectNullified(actionTarget, actionCondition, effectTier)
                 then
-                    -- Silence
+                    -- Special condition: Silence
                     if actionCondition == xi.effect.SILENCE then
                         if xi.data.job.isInnateCaster(actionTarget) then
                             table.insert(actionList, { actionId, actionTarget, actionWeight })
                         end
 
-                    -- --
-                    -- elseif actionCondition == xi.effect. then
-                    -- 
-                    -- else
-                    --     table.insert(actionList, { actionId, actionTarget, actionWeight })
-                    -- end
+                    -- Special condition: Elemental DoT incompatibilities. This will ensure we only cast stackable effects.
+                    elseif
+                        actionCondition == xi.effect.BURN or
+                        actionCondition == xi.effect.CHOKE or
+                        actionCondition == xi.effect.DROWN or
+                        actionCondition == xi.effect.FROST or
+                        actionCondition == xi.effect.RASP or
+                        actionCondition == xi.effect.SHOCK
+                    then
+                        if
+                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getEffectToRemove(actionCondition)) and
+                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getNullificatingEffect(actionCondition))
+                        then
+                            table.insert(actionList, { actionId, actionTarget, actionWeight })
+                        end
+
+                    -- No special conditions.
+                    else
+                        table.insert(actionList, { actionId, actionTarget, actionWeight })
+                    end
                 end
             end,
 
@@ -229,10 +243,30 @@ xi.combat.behavior.chooseAction = function(actor, mainTarget, optionalTargets, a
                     not actionTarget:hasStatusEffect(actionCondition) and
                     not xi.data.statusEffect.isEffectNullified(actionTarget, actionCondition, effectTier)
                 then
-                    if
-                        (actionCondition == xi.effect.SILENCE and xi.data.job.isInnateCaster(actionTarget)) or
-                        actionCondition ~= xi.effect.SILENCE
+                    -- Special condition: Silence
+                    if actionCondition == xi.effect.SILENCE then
+                        if xi.data.job.isInnateCaster(actionTarget) then
+                            table.insert(actionList, { actionId, actor, actionWeight })
+                        end
+
+                    -- Special condition: Elemental DoT incompatibilities. This will ensure we only cast stackable effects.
+                    elseif
+                        actionCondition == xi.effect.BURN or
+                        actionCondition == xi.effect.CHOKE or
+                        actionCondition == xi.effect.DROWN or
+                        actionCondition == xi.effect.FROST or
+                        actionCondition == xi.effect.RASP or
+                        actionCondition == xi.effect.SHOCK
                     then
+                        if
+                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getEffectToRemove(actionCondition)) and
+                            not actionTarget:hasStatusEffect(xi.data.statusEffect.getNullificatingEffect(actionCondition))
+                        then
+                            table.insert(actionList, { actionId, actor, actionWeight })
+                        end
+
+                    -- No special conditions.
+                    else
                         table.insert(actionList, { actionId, actor, actionWeight })
                     end
                 end

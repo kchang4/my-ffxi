@@ -40,8 +40,9 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     -- Apply sleep and bio
     if target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, duration, 0, 2, 4) then
         petskill:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+        target:delStatusEffectSilent(xi.effect.DIA)
         target:delStatusEffectSilent(xi.effect.BIO)
-        target:addStatusEffect(xi.effect.BIO, 2, 3, duration, 0, 10, 5)
+        target:addStatusEffect(xi.effect.BIO, 2, 3, duration, 0, 10, 11)
 
     -- Miss
     else
