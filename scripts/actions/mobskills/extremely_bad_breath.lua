@@ -14,10 +14,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
--- TODO: Death resistance check
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.msg.basic.FALL_TO_GROUND)
-    target:setHP(0)
+    if math.random(1, 100) <= target:getMod(xi.mod.DEATHRES) then
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
+    else
+        skill:setMsg(xi.msg.basic.FALL_TO_GROUND)
+        target:setHP(0)
+    end
+
     return 0
 end
 

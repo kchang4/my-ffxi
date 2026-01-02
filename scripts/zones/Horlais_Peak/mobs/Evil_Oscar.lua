@@ -22,46 +22,37 @@ local breathTimers =
     [9] = { 100, 26, 20 },
 }
 
-local function sendInhaleMessage(players)
-    for _, player in pairs(players) do
-        player:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
+local function calculatePhase(mob)
+    local mobHPP = mob:getHPP()
+    for phase = 1, 9 do
+        if mobHPP <= breathTimers[phase][1] then
+            return phase
+        end
     end
 end
 
-local function setupPhase(mob, phase)
-    mob:setLocalVar('currentPhase', phase)
-    mob:setLocalVar('firstDelay', breathTimers[phase][2])
-    mob:setLocalVar('intervalDelay', breathTimers[phase][3])
-end
-
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.PARALYZE)
     mob:addImmunity(xi.immunity.PETRIFY)
     mob:addImmunity(xi.immunity.STUN)
     mob:addImmunity(xi.immunity.TERROR)
-    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
+
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 65)
-    mob:addListener('WEAPONSKILL_STATE_EXIT', 'EXTREMELY_BAD_BREATH_ATTEMPTED', function(mobArg, skillId)
-        if skillId == xi.mobSkill.EXTREMELY_BAD_BREATH_1 then
-        -- If we have readied Extremely Bad Breath, kick off the next cycle
-        local firstDelay = mobArg:getLocalVar('firstDelay')
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 
-        mobArg:setLocalVar('inhaleCount', 0)
-        mobArg:setLocalVar('nextInhaleTime', GetSystemTime() + firstDelay)
-        end
-    end)
+    mob:setLocalVar('inhaleCount', 0)
 end
 
 entity.onMobEngage = function(mob, target)
-    setupPhase(mob, 9) -- Start at phase 9 (100% HP)
-    mob:setLocalVar('inhaleCount', 0)
-    mob:setLocalVar('nextInhaleTime', GetSystemTime() + 15) -- First inhale is 15 seconds after engaging
+    if mob:getLocalVar('nextInhaleTime') == 0 then
+        mob:setLocalVar('nextInhaleTime', GetSystemTime() + 15) -- First inhale is 15 seconds after engaging.
+    end
 end
 
 entity.onMobFight = function(mob, target)
@@ -69,56 +60,34 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    local currentPhase = mob:getLocalVar('currentPhase')
-
-    -- Check for phase transition based off of HP Percent, if so, call setPhase to update intervals - if were in the last phase, skip this
-    if currentPhase > 1 then
-        local mobHPP   = mob:getHPP()
-        local phaseHPP = breathTimers[currentPhase][1]
-
-        -- If we dropped below the next HP threshold, go to the next phase and update timers
-        if mobHPP < phaseHPP then
-            currentPhase = currentPhase - 1
-            setupPhase(mob, currentPhase)
-        end
-    end
-
+    -- If we've inhaled 3 times, use Extremely Bad Breath when the target is in range.
     local inhaleCount = mob:getLocalVar('inhaleCount')
-
-    -- If inhale count is less than 3, check to see if it's time to inhale again
-    if inhaleCount < 3 then
-        local currentTime = GetSystemTime()
-        local nextInhaleTime = mob:getLocalVar('nextInhaleTime')
-
-        -- If its not time yet, return
-        if currentTime < nextInhaleTime then
-            return
-        end
-
-        -- It's time to inhale, send message to players in battlefield regardless of distance and increment inhale count
-        local battlefield = mob:getBattlefield()
-        if battlefield then
-            sendInhaleMessage(battlefield:getPlayers())
-        end
-
-        inhaleCount = inhaleCount + 1
-        mob:setLocalVar('inhaleCount', inhaleCount)
-
-        if inhaleCount < 3 then
-            local intervalDelay = mob:getLocalVar('intervalDelay')
-            mob:setLocalVar('nextInhaleTime', currentTime + intervalDelay)
-        else
-            mob:setLocalVar('nextInhaleTime', 0)
-        end
-    end
-
-    -- If we've inhaled 3 times, use Extremely Bad Breath when the target is in range and not busy
     if
         inhaleCount >= 3 and
         mob:checkDistance(target) <= 10
     then
         mob:useMobAbility(xi.mobSkill.EXTREMELY_BAD_BREATH_1)
+        mob:setLocalVar('inhaleCount', 0)
+        mob:setLocalVar('nextInhaleTime', GetSystemTime() + breathTimers[calculatePhase(mob)][2])
+        return
     end
+
+    -- Inhale: Timer check.
+    if GetSystemTime() < mob:getLocalVar('nextInhaleTime') then
+        return
+    end
+
+    -- Inhale: Message handling.
+    local battlefield = mob:getBattlefield()
+    if battlefield then
+        for _, player in pairs(battlefield:getPlayers()) do
+            player:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
+        end
+    end
+
+    -- Inhale: Timer and count handling.
+    mob:setLocalVar('inhaleCount', inhaleCount + 1)
+    mob:setLocalVar('nextInhaleTime', GetSystemTime() + breathTimers[calculatePhase(mob)][3])
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
