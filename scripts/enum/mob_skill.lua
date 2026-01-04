@@ -283,7 +283,13 @@ xi.mobSkill =
     THUNDER_BREATH                =  820,
     RADIANT_BREATH                =  821,
     CHAOS_BREATH                  =  822,
-
+    FIRE_BLADE_1                  =  823,
+    FROST_BLADE_1                 =  824,
+    WIND_BLADE_1                  =  825,
+    EARTH_BLADE_1                 =  826,
+    LIGHTNING_BLADE_1             =  827,
+    WATER_BLADE_1                 =  828,
+    GREAT_WHEEL_1                 =  829,
     LIGHT_BLADE_1                 =  830,
 
     HOWLING_MOON_1                =  838, -- Unknown usage.
@@ -350,6 +356,9 @@ xi.mobSkill =
     AJIDO_WARP_OUT                =  977, -- Windurst 9-2 Ajido teleport
     AJIDO_WARP_IN                 =  978, -- Windurst 9-2 Ajido teleport
 
+    STELLAR_BURST_1               =  986,
+    VORTEX_1                      =  987,
+
     PHASE_SHIFT_1_EXOPLATES       =  993,
 
     PHASE_SHIFT_2_EXOPLATES       =  997,
@@ -357,6 +366,7 @@ xi.mobSkill =
     PHASE_SHIFT_3_EXOPLATES       = 1001,
     ZEID_SUMMON_SHADOWS_1         = 1002, -- TODO: Investigate why was this in sql, where it came from and why wasnt it actually used in an scripted way.
 
+    OMEGA_JAVELIN_1               = 1006,
     ZEID_SUMMON_SHADOWS_2         = 1007, -- Captured. Bastok mission 9-2 BCNM, phase 2. No actual name in log.
 
     CALL_BEAST                    = 1017, -- "Tango with a Tracker" Shikaree X
