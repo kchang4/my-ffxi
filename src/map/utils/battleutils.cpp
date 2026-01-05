@@ -2461,7 +2461,7 @@ uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 att
     bool hasValidSneakAttack = hasSneakAttack && isBehind;
     bool hasValidTrickAttack = hasTrickAttack && hasAssassin;
 
-    if ((hasValidSneakAttack || hasValidTrickAttack) && getAvailableTrickAttackChar(PAttacker, PDefender))
+    if (hasValidSneakAttack || (hasValidTrickAttack && getAvailableTrickAttackChar(PAttacker, PDefender)))
     {
         hitrate = 100; // Attack with SA active or TA/Assassin cannot miss
     }
