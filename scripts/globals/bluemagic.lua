@@ -636,7 +636,7 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params)
     -- Early return: Out of cone.
     if
         params.isConal and
-        not target:isInfront(caster, 64)
+        not target:isInfront(caster, 32)
     then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return effect
