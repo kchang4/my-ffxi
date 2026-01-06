@@ -13406,7 +13406,14 @@ bool CLuaBaseEntity::hasClaim(CLuaBaseEntity* PTarget)
         return false;
     }
 
-    return battleutils::HasClaim(dynamic_cast<CBattleEntity*>(m_PBaseEntity), PBattleEntity);
+    auto* PTargetBattleEntity = dynamic_cast<CBattleEntity*>(PTarget->GetBaseEntity());
+    if (!PTargetBattleEntity)
+    {
+        ShowWarning("Attempting to check claim against invalid target entity type (%s).", PTarget->GetBaseEntity()->getName());
+        return false;
+    }
+
+    return battleutils::HasClaim(PBattleEntity, PTargetBattleEntity);
 }
 
 /************************************************************************
