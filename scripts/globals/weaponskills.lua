@@ -685,9 +685,8 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     end
 
     if wsParams.accVaries then
-        -- applied to all hits (This is a penalty!)
-        local accLost       = calcParams.accStat * (1 - xi.weaponskills.fTP(tp, wsParams.accVaries))
-        calcParams.bonusAcc = calcParams.bonusAcc - accLost
+        local accMod        = xi.weaponskills.fTP(tp, wsParams.accVaries)
+        calcParams.bonusAcc = calcParams.bonusAcc + accMod
     end
 
     calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100, xi.attackAnimation.RIGHT_ATTACK)

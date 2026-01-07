@@ -83,7 +83,7 @@ m:addOverride('xi.actions.weaponskills.penta_thrust.onUseWeaponSkill', function(
     params.ftpMod    = { 1.00, 1.00, 1.00 }
     params.str_wsc   = 0.2
     params.dex_wsc   = 0.2
-    params.accVaries = { 0.80, 0.90, 1.00 }
+    params.accVaries = { 0, 30, 50 } -- TODO: Unknown what 3k used to be, 50 is guessed. This was updated in 2013. 1k may also have been a penalty but that is unverifiable. JP patch notes indicate 1k and 3k anchor points were changed but not 3k
     params.atkVaries = { 0.875, 0.875, 0.875 }
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
