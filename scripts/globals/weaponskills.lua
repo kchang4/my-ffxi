@@ -754,10 +754,10 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         bonusWSmods             = wsParams.bonusWSmods or 0,
         attackType              = xi.attackType.RANGED,
     }
+
     if wsParams.accVaries then
-        -- applied to all hits (This is a penalty!)
-        local accLost       = calcParams.accStat * (1 - xi.weaponskills.fTP(tp, wsParams.accVaries))
-        calcParams.bonusAcc = calcParams.bonusAcc - accLost
+        local accMod        = xi.weaponskills.fTP(tp, wsParams.accVaries)
+        calcParams.bonusAcc = calcParams.bonusAcc + accMod
     end
 
     -- Split Shot/Piercing Arrow and Empyreal Arrow/Detonator are confirmed for this. Theoretically Last Stand could have a bonus too, and if so it would likely be first hit only.
