@@ -216,9 +216,6 @@ INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- SLEEPRES: 90
 -- Minotaur
 INSERT INTO `mob_pool_mods` VALUES (2675,4,25,1); -- SIGHT_RANGE: 25
 
--- Mischievous Micholas
-INSERT INTO `mob_pool_mods` VALUES (2677,288,55,0); -- DOUBLE_ATTACK: 55
-
 -- Morbolger
 INSERT INTO `mob_pool_mods` VALUES (2742,37,1,1); -- ALWAYS_AGGRO: 1
 

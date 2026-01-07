@@ -132,6 +132,10 @@ xi.mobSkill =
 
     GRAVITY_WHEEL                 =  457, -- Mammet-800
 
+    CROSS_ATTACK_1                =  460,
+
+    MAELSTROM_1                   =  462,
+
     PSYCHOMANCY                   =  464, -- Mammet-800
 
     MIND_WALL                     =  471, -- Mammet-800
