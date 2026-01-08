@@ -1,10 +1,10 @@
 -----------------------------------
-require('modules/module_utils')
------------------------------------
 -- Date : 2007-11-19 (One day prior to WoTG release)
 -----------------------------------
-local m = Module:new('toau_great_katana')
+require('modules/module_utils')
 -----------------------------------
+
+local m = Module:new('toau_great_katana')
 
 -----------------------------------
 -- Tachi: Enpi
