@@ -1,6 +1,6 @@
 
-DROP TABLE IF EXISTS `mob_spawn_sets`;
-CREATE TABLE IF NOT EXISTS `mob_spawn_sets` (
+DROP TABLE IF EXISTS `mob_spawn_slots`;
+CREATE TABLE IF NOT EXISTS `mob_spawn_slots` (
     `zoneid`        SMALLINT(3) NOT NULL DEFAULT 0,
     `spawnsetid`    TINYINT(3)  NOT NULL DEFAULT 0,
     `chance`        TINYINT(4)  DEFAULT '0',
@@ -182,6 +182,6 @@ LOCK TABLES `mob_spawn_slots` WRITE;
 -- INSERT INTO `mob_spawn_sets` VALUES (150, 41, 1);
 
 -- Korroloka Tunnel
-INSERT INTO `mob_spawn_sets` VALUES (173, 1, 100);
+INSERT INTO `mob_spawn_slots` VALUES (173, 1, 100);
 
 UNLOCK TABLES;

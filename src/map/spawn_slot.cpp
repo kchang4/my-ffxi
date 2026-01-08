@@ -1,143 +1,146 @@
 /*
 ===========================================================================
-
-  Copyright (c) 2025 LandSandBoat Dev Team
-
+  Copyright (c) 2021-2023 Eden Dev Teams
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
-
 ===========================================================================
 */
+
 #include "spawn_slot.h"
 
-#include "navmesh.h"
+#include "entities/mobentity.h"
 
-#include "common/xirand.h"
-#include "entities/baseentity.h"
-#include "utils/zoneutils.h"
-
-#include <cstdlib>
-
-spawnGroup::spawnGroup(uint32_t _maxSpawns, uint16_t _zoneId, uint32_t _groupId)
-: maxSpawns(_maxSpawns)
-, zoneId(_zoneId)
-, groupId(_groupId)
+void SpawnSlot::AddMob(CMobEntity* mob, uint8 spawnChance)
 {
-    members.reserve(_maxSpawns);
-    mobsInPoolAllowedToSpawn.reserve(_maxSpawns);
+    entries.push_back({ mob, spawnChance });
+    mob->SetSpawnSlot(this);
 }
 
-// Add member, used on db load
-void spawnGroup::addMember(uint16_t targid)
+void SpawnSlot::RemoveMob(CMobEntity* mob)
 {
-    members.push_back(targid);
-}
-
-// Used when a mob despawns. A mob will feed in its own targid
-// The targid will be removed from the list of mobs that are allowed to spawn, and then replaced with another random available targid (including itself)
-uint16_t spawnGroup::removeAndReplaceWithRandomMember(uint16_t targid)
-{
-    mobsInPoolAllowedToSpawn.erase(targid); // Remove input targid
-
-    return fillSpawnPool(); // Return random member re-added back to pool (which can include self)
-}
-
-// Fill spawn pool until full.
-// Randomly select from the members vector after shuffling but only unique members (uniqueness is checked)
-// return the last targid filled in so the CMobEntity can know which mob to eventually try to respawn
-// return value is not used on db load
-uint16_t spawnGroup::fillSpawnPool()
-{
-    std::shuffle(members.begin(), members.end(), xirand::rng());
-    uint32_t lastTargId = 0;
-
-    for (auto member : members)
+    // clang-format off
+    auto iter = std::find_if(entries.begin(), entries.end(), [&](SpawnSlotEntry const& entry)
     {
-        // We don't support duplicates. Skip.
-        if (mobsInPoolAllowedToSpawn.contains(member))
+        return entry.mob == mob;
+    });
+    // clang-format on
+
+    if (iter != entries.end())
+    {
+        entries.erase(iter);
+    }
+}
+
+bool SpawnSlot::TrySpawn()
+{
+    // Determine which of the mobs in the group can be spawned, and if there's one spawned already
+    std::vector<std::tuple<uint32, CMobEntity*>> chanceSpawns;
+    std::vector<CMobEntity*>                     remainingSpawns;
+
+    CMobEntity* allowedSpawn = nullptr;
+
+    uint32 totalChance = 0;
+
+    for (auto&& entry : entries)
+    {
+        if (entry.mob->isAlive())
+        {
+            allowedSpawn = entry.mob;
+            break;
+        }
+
+        if (!entry.mob->m_CanSpawn)
         {
             continue;
         }
 
-        // Add in a new mob to the allowed spawn list if we're not already full
-        if (mobsInPoolAllowedToSpawn.size() < maxSpawns)
+        if (entry.spawnChance > 0)
         {
-            lastTargId = member;
-            mobsInPoolAllowedToSpawn.insert(member);
+            totalChance += entry.spawnChance;
+            chanceSpawns.push_back({ entry.spawnChance, entry.mob });
+        }
+        else
+        {
+            remainingSpawns.push_back(entry.mob);
         }
     }
 
-    return lastTargId; // return the last targid inserted
-}
-
-void spawnGroup::resetPool()
-{
-    mobsInPoolAllowedToSpawn.clear();
-
-    // return is ignored
-    fillSpawnPool();
-}
-
-// Check if targid is in spawn pool.
-// CMobEntity will use this to check if it can respawn, or the zone time/day change for night/day only mobs.
-bool spawnGroup::isInSpawnPool(uint16_t targid) const
-{
-    return mobsInPoolAllowedToSpawn.contains(targid);
-}
-
-uint32_t spawnGroup::getGroupID()
-{
-    return groupId;
-}
-
-// If there's less total spawns than members then this group is not valid
-// if mob spawn total spawns is the same as member size then this group is not valid
-// if a mob isn't in a valid position then this group is not valid
-bool spawnGroup::isValid(CZone* zone)
-{
-    if (members.size() < maxSpawns)
+    // Don't spawn if there's another mob in this slot already spawned.
+    if (allowedSpawn)
     {
-        ShowError(fmt::format("Mob spawn group {} in zone {} has less members than it does max spawns.", groupId, zoneId));
         return false;
     }
 
-    if (members.size() == maxSpawns)
+    // If there are no remaining spawns available, bail out
+    if (remainingSpawns.empty())
     {
-        ShowError(fmt::format("Mob spawn group {} in zone {} has the same size of members as it does max spawn mobs.", groupId, zoneId));
-
         return false;
     }
 
-    for (const auto& member : members)
+    // Check for chance spawns
+    if (totalChance > 0)
     {
-        if (const CBaseEntity* PMob = zone->GetEntity(member, TYPE_MOB))
+        uint32 roll = xirand::GetRandomNumber(100);
+
+        // Check if roll is low enough number to make one of the chance mobs to spawn.
+        if (roll < totalChance)
         {
-            auto PNavMesh = PMob->loc.zone->m_navMesh.get();
-            if (PNavMesh && !PNavMesh->validPosition(PMob->loc.p))
+            // Find the chance spawn which matches the roll
+            uint32 accumulatedRoll = 0;
+
+            bool spawned = false;
+            for (auto&& entry : chanceSpawns)
             {
-                ShowError(fmt::format("Mob {} ID {} in zone {} is in a spawn group without a valid position. This could have very bad side effects!", PMob->packetName, PMob->id, zone->GetID()));
-
-                return false;
-            }
-
-            if (PMob->loc.p.x == 0 && PMob->loc.p.y == 0 && PMob->loc.p.z == 0)
-            {
-                ShowError(fmt::format("Mob {} ID {} in zone {} is in a spawn group with a position of (0,0,0). That is probably not valid!", PMob->packetName, PMob->id, zone->GetID()));
-
-                return false;
+                auto mob = std::get<1>(entry);
+                accumulatedRoll += std::get<0>(entry);
+                if (!spawned && roll < accumulatedRoll)
+                {
+                    allowedSpawn = mob;
+                    break;
+                }
             }
         }
     }
 
-    return true;
+    if (!allowedSpawn)
+    {
+        if (!remainingSpawns.empty())
+        {
+            // Pick a random mob from the non-chance spawns
+            allowedSpawn = xirand::GetRandomElement(remainingSpawns);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // Finally spawn the mob
+    for (auto&& entry : entries)
+    {
+        if (entry.mob == allowedSpawn)
+        {
+            entry.mob->m_AllowRespawn = true;
+            entry.mob->Spawn();
+        }
+        else
+        {
+            entry.mob->m_AllowRespawn = false;
+        }
+    }
+
+    return allowedSpawn != nullptr;
+}
+
+bool SpawnSlot::IsEmpty()
+{
+    return entries.empty();
 }
