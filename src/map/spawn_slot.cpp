@@ -18,7 +18,7 @@
 
 ===========================================================================
 */
-#include "spawn_group.h"
+#include "spawn_slot.h"
 
 #include "navmesh.h"
 

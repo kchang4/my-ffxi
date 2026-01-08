@@ -1390,11 +1390,7 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 {
                     PMob->SetDespawnTime(0s);
                     PMob->m_AllowRespawn = true;
-
-                    if ((PMob->m_spawnGroup && PMob->CanSpawnFromGroup()) || !PMob->m_spawnGroup)
-                    {
-                        PMob->Spawn();
-                    }
+                    PMob->Spawn();
                 }
             }
         }
@@ -1407,11 +1403,7 @@ void CZoneEntities::TOTDChange(vanadiel_time::TOTD TOTD)
                 {
                     PMob->SetDespawnTime(0s);
                     PMob->m_AllowRespawn = true;
-
-                    if ((PMob->m_spawnGroup && PMob->CanSpawnFromGroup()) || !PMob->m_spawnGroup)
-                    {
-                        PMob->Spawn();
-                    }
+                    PMob->Spawn();
                 }
             }
         }
