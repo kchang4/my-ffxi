@@ -3033,8 +3033,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             actionResult.param = 0;
         }
 
-        // if we did hit, run enspell/spike routines as long as this isn't a Daken swing
-        if (actionResult.resolution == ActionResolution::Hit && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
+        // Run enspell/spike routines for hit, guard, or block as long as this isn't a Daken swing
+        if (actionResult.resolution != ActionResolution::Miss && actionResult.resolution != ActionResolution::Parry && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
         {
             // Handle addtl effects/enspells only if the target is not already dead
             if (PTarget->GetHPP() > 0)
