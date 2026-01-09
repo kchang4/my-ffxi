@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Ship bound for Selbina
+-- Area: Ship bound for Selbina Pirates
 --  Mob: Enagakure
 -- Involved in Quest: I'll Take the Big Box
 -----------------------------------
