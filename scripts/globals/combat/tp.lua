@@ -141,39 +141,47 @@ xi.combat.tp.getTandemBlowBonus = function(actor)
 end
 
 -- TODO: does Ikishoten factor into this as a bonus to baseTPGain if it procs on the hit? Needs verification.
-xi.combat.tp.calculateTPGainOnPhysicalDamage = function(totalDamage, delay, actor, target)
-    -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
-    if totalDamage > 0 and target and actor then
-        local attackOutput       = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
-        local baseTPGain         = xi.combat.tp.calculateTPReturn(target, attackOutput.modifiedDelay)
-        local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
-        local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
-        local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 0.5, 1)                      -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
-        local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)
-        local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
-        local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)
-        local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II) + tandemBlowBonus             -- no known cap
-        local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.25)          -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
-        local storeTPModifier    = 1 + target:getMod(xi.mod.STORETP) / 100
-
-        -- TODO: unknown where/how many floor steps there are. Napkin math seems to be a single floor step, but given x/256 it's hard to tell
-        -- TODO: unknown if player pets (automaton/wyvern/avatars) are affected by dAGI
-
-        -- mob vs mob (via charm) is observed to use the (base * 1/3) formula instead of (base + 30)
-        -- (base + 30) formula appears to be intentional by SE to make mobs 'more dangerous' when hit by players/pets
-        if
-            target:getObjType() == xi.objType.MOB and
-            actor:getObjType() ~= xi.objType.MOB
-        then
-            -- +30 sourced from http://wiki.ffo.jp/html/2621.html and tested in game
-            return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
-        else
-            -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
-            return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
-        end
+xi.combat.tp.calculateTPGainOnPhysicalDamage = function(actor, target, totalDamage, delay)
+    if not actor or not target then
+        return 0
     end
 
-    return 0
+    if totalDamage <= 0 then
+        return 0
+    end
+
+    if actor:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
+        return 0
+    end
+
+    -- TODO: does dAGI penalty work against/for Trusts/Pets? Nothing is documented for this. Currently assuming mob only.
+    local attackOutput       = xi.combat.tp.getModifiedDelayAndCanZanshin(actor, delay)
+    local baseTPGain         = xi.combat.tp.calculateTPReturn(target, attackOutput.modifiedDelay)
+    local dAGI               = actor:getStat(xi.mod.AGI) - target:getStat(xi.mod.AGI)
+    local inhibitTPModifier  = (100 - target:getMod(xi.mod.INHIBIT_TP)) / 100                    -- no known cap: https://www.bg-wiki.com/ffxi/Monster_TP_gain#Inhibit_TP
+    local dAGIModifier       = utils.clamp(200 - (dAGI + 30) / 200, 0.5, 1)                      -- 50% reduction at +70 dAGI: https://www.bg-wiki.com/ffxi/Monster_TP_gain
+    local subtleBlowMerits   = actor:getMerit(xi.merit.SUBTLE_BLOW_EFFECT)
+    local subtleBlowI        = math.min(actor:getMod(xi.mod.SUBTLE_BLOW) + subtleBlowMerits, 50) -- cap of 50% https://www.bg-wiki.com/ffxi/Subtle_Blow
+    local tandemBlowBonus    = xi.combat.tp.getTandemBlowBonus(actor)
+    local subtleBlowII       = actor:getMod(xi.mod.SUBTLE_BLOW_II) + tandemBlowBonus             -- no known cap
+    local subtleBlowModifier = math.max((100 - subtleBlowI + subtleBlowII) / 100, 0.25)          -- combined cap of 75% reduction: https://www.bg-wiki.com/ffxi/Subtle_Blow
+    local storeTPModifier    = 1 + target:getMod(xi.mod.STORETP) / 100
+
+    -- TODO: unknown where/how many floor steps there are. Napkin math seems to be a single floor step, but given x/256 it's hard to tell
+    -- TODO: unknown if player pets (automaton/wyvern/avatars) are affected by dAGI
+
+    -- mob vs mob (via charm) is observed to use the (base * 1/3) formula instead of (base + 30)
+    -- (base + 30) formula appears to be intentional by SE to make mobs 'more dangerous' when hit by players/pets
+    if
+        target:getObjType() == xi.objType.MOB and
+        actor:getObjType() ~= xi.objType.MOB
+    then
+        -- +30 sourced from http://wiki.ffo.jp/html/2621.html and tested in game
+        return math.floor((baseTPGain + 30) * inhibitTPModifier * dAGIModifier * subtleBlowModifier * storeTPModifier)
+    else
+        -- 1/3rd sourced from https://www.bg-wiki.com/ffxi/Tactical_Points and tested in game
+        return math.floor(baseTPGain * inhibitTPModifier * subtleBlowModifier * storeTPModifier * (1 / 3))
+    end
 end
 
 -- USED IN CORE

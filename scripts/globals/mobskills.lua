@@ -621,7 +621,7 @@ xi.mobskills.calculateSkillTPReturn = function(damage, mob, skill, target, attac
 
         if attackType == xi.attackType.BREATH then
             mobTPReturn    = xi.combat.tp.getSingleMeleeHitTPReturn(mob, false)
-            targetTPReturn = xi.combat.tp.calculateTPGainOnPhysicalDamage(damage, mob:getBaseDelay(), mob, target)
+            targetTPReturn = xi.combat.tp.calculateTPGainOnPhysicalDamage(mob, target, damage, mob:getBaseDelay())
             -- TODO: Add TP return for MAGICAL, PHYSICAL, RANGED once added in future PRs.
         end
 
