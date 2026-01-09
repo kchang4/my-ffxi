@@ -839,6 +839,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     -- But other magic WS vary. Some don't even have a component, the general case is dINT/2 + 8
     if attack.slot == xi.slot.RANGED then
         fint = utils.clamp((attacker:getStat(dStat) - target:getStat(xi.mod.INT)) * 2, -32, 32)
+    elseif dStat == xi.mod.CHR then
+        fint = utils.clamp((attacker:getStat(dStat) - target:getStat(xi.mod.INT)) * 1.5, -651, 651) -- TODO: unknown lower cap but on dINT it normally mirrors https://www.bg-wiki.com/ffxi/Primal_Rend
     else
         fint = math.floor(utils.clamp(8 + (attacker:getStat(dStat) - target:getStat(xi.mod.INT)) / 2, -32, 32))
     end
