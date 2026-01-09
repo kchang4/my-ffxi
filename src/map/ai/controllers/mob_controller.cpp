@@ -36,6 +36,7 @@
 #include "mob_spell_container.h"
 #include "mobskill.h"
 #include "party.h"
+#include "recast_container.h"
 #include "status_effect_container.h"
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
@@ -512,11 +513,17 @@ auto CMobController::TryCastSpell() -> bool
         return false; // No spell Id.
     }
 
-    // Check if we can actually cast this spell before committing to it
+    // Check if spell exists.
     CSpell* PSpell = spell::GetSpell(chosenSpellId.value());
     if (!PSpell)
     {
         return false; // No spell object.
+    }
+
+    // Check spell cooldown.
+    if (PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<Recast>(chosenSpellId.value())))
+    {
+        return false; // Spell is on cooldown.
     }
 
     // Check if mob can afford to cast this spell
