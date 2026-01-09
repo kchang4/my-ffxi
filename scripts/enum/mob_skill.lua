@@ -78,6 +78,9 @@ xi.mobSkill =
 
     VELOCIOUS_BLADE               =  347, -- Mammet-800
 
+    WILD_RAGE                     =  354,
+    EARTH_POUNDER                 =  355,
+
     HEAVY_BLOW                    =  357,
     HEAVY_WHISK                   =  358,
     BIONIC_BOOST                  =  359,
