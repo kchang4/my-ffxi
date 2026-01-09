@@ -3,8 +3,12 @@ xi.combat = xi.combat or {}
 xi.combat.tp = xi.combat.tp or {}
 -----------------------------------
 
--- returns a single melee hit's TP return
-xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, target, isZanshin)
+-- Returns attacker TP gain from a single melee hit from itself.
+xi.combat.tp.getSingleMeleeHitTPReturn = function(actor, isZanshin)
+    if actor:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
+        return 0
+    end
+
     isZanshin = isZanshin or false -- optional input, defaults to false.
 
     local delay        = actor:getBaseDelay()
