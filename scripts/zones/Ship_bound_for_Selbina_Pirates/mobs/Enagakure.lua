@@ -20,7 +20,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar('closed', VanadielUniqueDay())
+    mob:setLocalVar('despawnDay', VanadielUniqueDay())
 end
 
 return entity
