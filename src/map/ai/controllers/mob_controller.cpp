@@ -735,8 +735,9 @@ void CMobController::DoCombatTick(timer::time_point tick)
             return;
         }
 
-        if (m_Tick >= m_LastMobSkillTime && (1 + xirand::GetRandomNumber(10000)) <= PMob->TPUseChance() && MobSkill())
+        if (m_Tick >= m_LastMobSkillTime && PMob->shouldUseTPMove(m_tpThreshold) && MobSkill())
         {
+            m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
             return;
         }
     }
@@ -1372,6 +1373,8 @@ auto CMobController::Engage(const uint16 targid) -> bool
             m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) +
                                                                    xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
         }
+
+        m_tpThreshold = xirand::GetRandomNumber(1000, 3000);
 
         // Pet should also fight the target if they can
         if (PMob->PPet && !PMob->PPet->PAI->IsEngaged())
