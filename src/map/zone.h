@@ -658,6 +658,8 @@ public:
     std::unique_ptr<CNavMesh> m_navMesh;
     std::unique_ptr<ZoneLos>  lineOfSight;
 
+    std::map<uint32_t, std::unique_ptr<SpawnSlot>> m_spawnSlots; // add unique slots to zone
+
     timer::time_point m_LoadedAt; // The time the zone was loaded
 
     void LoadNavMesh();

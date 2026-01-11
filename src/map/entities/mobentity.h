@@ -134,10 +134,10 @@ public:
     SpawnSlot*        GetSpawnSlot();
     bool              TrySpawn();
 
-    uint32            GetRandomGil();   // returns a random amount of gil
-    bool              CanRoamHome();    // is it possible for me to walk back?
-    bool              CanRoam();        // check if mob can walk around
-    void              TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
+    uint32 GetRandomGil();   // returns a random amount of gil
+    bool   CanRoamHome();    // is it possible for me to walk back?
+    bool   CanRoam();        // check if mob can walk around
+    void   TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
     bool ShouldForceLink();
@@ -192,8 +192,8 @@ public:
     virtual void FadeOut() override;
     virtual bool isWideScannable() override;
 
-    bool   m_AllowRespawn; // If true, this mob or another mob in the same slot is allowed to spawn
-    bool   m_CanSpawn;     // If true, it can currently spawn (usually based on time of day or weather)
+    bool            m_AllowRespawn; // If true, this mob or another mob in the same slot is allowed to spawn
+    bool            m_CanSpawn;     // If true, it can currently spawn (usually based on time of day or weather)
     timer::duration m_RespawnTime;  // respawn time
     timer::duration m_DropItemTime; // time until monster death animation
 

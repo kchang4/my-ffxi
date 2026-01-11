@@ -65,7 +65,7 @@ bool SpawnSlot::TrySpawn()
         if (entry.spawnChance > 0)
         {
             totalChance += entry.spawnChance;
-            chanceSpawns.push_back({ entry.spawnChance, entry.mob });
+            chanceSpawns.emplace_back(entry.spawnChance, entry.mob);
         }
         else
         {

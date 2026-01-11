@@ -441,7 +441,7 @@ void CZoneEntities::WeatherChange(Weather weather)
             if (weather == Weather::Fog)
             {
                 PCurrentMob->SetDespawnTime(0s);
-                PCurrentMob->m_CanSpawn  = true;
+                PCurrentMob->m_CanSpawn = true;
                 PCurrentMob->TrySpawn();
             }
             else
