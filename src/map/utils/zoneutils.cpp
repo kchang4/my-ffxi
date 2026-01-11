@@ -611,42 +611,45 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
 
 
     ShowInfo("Loading Mob spawn slots");
+
     std::unordered_map<uint32, SpawnSlot*> spawnSlots;
 
-    const char* spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_points.mobid \
-                                    FROM mob_spawn_slots \
-                                    LEFT JOIN mob_spawn_points ON mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid \
-                                    WHERE mob_spawn_slots.zoneid IN (%s);";
+    std::string spawnSlotQuery = "SELECT mob_spawn_slots.spawnslotid, mob_spawn_slots.chance, mob_spawn_points.mobid "
+                                "FROM mob_spawn_slots "
+                                "LEFT JOIN mob_spawn_points ON mob_spawn_slots.spawnslotid = mob_spawn_points.spawnslotid "
+                                "WHERE mob_spawn_slots.zoneid = ?";
 
-    const auto ret = db::preparedStmt(spawnSlotQuery);
-
-    if (ret && ret->rowsCount())
+    for (const auto zoneId : zoneIds)
     {
-        while (ret->next())
+        const auto ret = db::preparedStmt(spawnSlotQuery, zoneId);
+
+        if (ret && ret->rowsCount())
         {
-            uint32 slotId      = ret->get<uint32>("spawnslotid");
-            uint8  spawnChance = ret->get<uint8>("chance");
-            uint32 mobId       = ret->get<uint32>("mobid");
-
-            // Default: no slot
-            if (slotId == 0)
+            while (ret->next())
             {
-                continue;
-            }
+                uint32 slotId      = ret->get<uint32>("spawnslotid");
+                uint8  spawnChance = ret->get<uint8>("chance");
+                uint32 mobId       = ret->get<uint32>("mobid");
 
-            auto& spawnSlot = spawnSlots[slotId];
-            if (!spawnSlot)
-            {
-                spawnSlot = new SpawnSlot();
-            }
+                // Default: no slot
+                if (slotId == 0)
+                {
+                    continue;
+                }
 
-            auto mob = static_cast<CMobEntity*>(GetEntity(mobId));
-            if (!mob)
-            {
-                ShowError("Expected to have mob %u in spawn slot %u, but the mob was not found.", mobId, slotId);
-                continue;
+                auto& spawnSlot = spawnSlots[slotId];
+                if (!spawnSlot)
+                {
+                    spawnSlot = new SpawnSlot();
+                }
+
+                auto mob = static_cast<CMobEntity*>(GetEntity(mobId));
+                if (!mob)
+                {
+                    continue;
+                }
+                spawnSlot->AddMob(mob, spawnChance);
             }
-            spawnSlot->AddMob(mob, spawnChance);
         }
     }
 
@@ -677,6 +680,7 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
                     PMob->saveModifiers();
                     PMob->saveMobModifiers();
 
+                    // Allow the mob to respawn if it is NOT a lottery, scripted, or windowed spawn
                     PMob->m_AllowRespawn = !(PMob->m_SpawnType == SPAWNTYPE_LOTTERY ||
                                          PMob->m_SpawnType == SPAWNTYPE_SCRIPTED ||
                                          PMob->m_SpawnType == SPAWNTYPE_WINDOWED);
@@ -693,21 +697,26 @@ void LoadMOBList(const std::vector<uint16>& zoneIds)
             PZone->ForEachMob(
                 [](CMobEntity* PMob)
                 {
+                    if (PMob->getName() == "Greater_Pugil" && PMob->getZone() == ZONE_KORROLOKA_TUNNEL)
+                    {
+                        ShowDebugFmt("Allow Respawn? {} | ID: {}", PMob->m_AllowRespawn ? 1 : 0, PMob->id);
+                    }
+
                     // PMob->m_AllowRespawn initializes as false, so if it's true then mob:setRespawnTime was executed in OnMobInitialize
                     // This makes mob:setRespawnTime(X) behave consistently, making the mob spawn X seconds in the future
-                    if (PMob->m_CanSpawn && !PMob->m_AllowRespawn && PMob->m_SpawnType == SPAWNTYPE_NORMAL)
+                    if (PMob->m_CanSpawn && PMob->m_AllowRespawn)
                     {
                         PMob->m_AllowRespawn = true;
                         PMob->TrySpawn();
                     }
                     else
                     {
-                        PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
                         // If the mob is a scripted spawn and it has a respawn time defined when the mob initializes then allow it to respawn
                         if (PMob->m_SpawnType == SPAWNTYPE_SCRIPTED && PMob->m_RespawnTime > 0s)
                         {
                             PMob->m_AllowRespawn = true;
                         }
+                        PMob->PAI->Internal_Respawn(PMob->m_RespawnTime);
                     }
                 });
         });

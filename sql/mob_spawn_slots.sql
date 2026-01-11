@@ -2,9 +2,9 @@
 DROP TABLE IF EXISTS `mob_spawn_slots`;
 CREATE TABLE IF NOT EXISTS `mob_spawn_slots` (
     `zoneid`        SMALLINT(3) NOT NULL DEFAULT 0,
-    `spawnsetid`    TINYINT(3)  NOT NULL DEFAULT 0,
+    `spawnslotid`    TINYINT(3)  NOT NULL DEFAULT 0,
     `chance`        TINYINT(4)  DEFAULT '0',
-    PRIMARY KEY (`zoneid`, `spawnsetid`) USING BTREE
+    PRIMARY KEY (`zoneid`, `spawnslotid`) USING BTREE
 )
 ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -182,6 +182,6 @@ LOCK TABLES `mob_spawn_slots` WRITE;
 -- INSERT INTO `mob_spawn_sets` VALUES (150, 41, 1);
 
 -- Korroloka Tunnel
-INSERT INTO `mob_spawn_slots` VALUES (173, 1, 100);
+INSERT INTO `mob_spawn_slots` VALUES (173, 1, 0);
 
 UNLOCK TABLES;

@@ -95,6 +95,7 @@ constexpr timer::duration SPECIAL_DROP_COOLDOWN = 5min; // 5 minutes between spe
 
 CMobEntity::CMobEntity()
 : m_AllowRespawn(false)
+, m_CanSpawn(false)
 , m_RespawnTime(5min)
 , m_DropItemTime(0)
 , m_DropID(0)
