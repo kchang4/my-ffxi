@@ -182,10 +182,6 @@ CMobEntity::~CMobEntity()
     if (spawnSlot)
     {
         spawnSlot->RemoveMob(this);
-        if (spawnSlot->IsEmpty())
-        {
-            destroy(spawnSlot);
-        }
     }
 
     if (PParty)
