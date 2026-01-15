@@ -80,6 +80,9 @@ ai.condition =
     NOT_PT_HAS_TANK    = 22,
     IS_ECOSYSTEM       = 23,
     HP_MISSING         = 24,
+    MY_SONG_COUNT_LT   = 25, -- TRUE if my songs on target < arg
+    OTHER_SONGS_COUNT  = 28, -- TRUE if songs from others on target == arg
+    OTHER_STATUS_TIER  = 34,
 }
 ai.c = ai.condition
 

@@ -14571,6 +14571,12 @@ bool CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint1
                                                tier                            // Tier
     );
 
+    // Set the origin ID so we can track which caster applied this song
+    if (PEntity && PEntity->m_PBaseEntity)
+    {
+        PEffect->SetOriginID(PEntity->m_PBaseEntity->id);
+    }
+
     uint8 maxSongs = 2;
 
     if (PEntity && PEntity->m_PBaseEntity && PEntity->m_PBaseEntity->objtype == TYPE_PC)

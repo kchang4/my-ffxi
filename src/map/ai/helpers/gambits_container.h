@@ -85,6 +85,9 @@ enum class G_CONDITION : uint16
     NOT_PT_HAS_TANK    = 22,
     IS_ECOSYSTEM       = 23,
     HP_MISSING         = 24,
+    MY_SONG_COUNT_LT   = 25, // arg = count threshold; TRUE if my songs on target < arg
+    OTHER_SONGS_COUNT  = 28, // arg = count; TRUE if songs from others on target == arg
+    OTHER_STATUS_TIER  = 34, // arg = (tier << 16) | effectID; TRUE if effect exists from OTHER and tier matches
 };
 
 enum class G_REACTION : uint16
@@ -285,7 +288,7 @@ public:
     uint16                    tp_value;
 
 private:
-    bool CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup);
+    bool CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup, const std::string& debugTag = "");
     bool TryTrustSkill();
     bool PartyHasHealer();
     bool PartyHasTank();
