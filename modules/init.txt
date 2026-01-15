@@ -42,3 +42,7 @@
 # update excenmille
 custom/lua/trust_excenmille.lua
 custom/sql/update_trust_excenmille_subjob.sql
+
+# update teodor
+custom/sql/teodor_data.sql
+custom/sql/teodor_skills.sql
