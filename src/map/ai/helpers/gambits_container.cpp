@@ -41,6 +41,87 @@
 
 #include <ranges>
 
+namespace
+{
+    std::string GetSpellFamilyName(uint32 familyId)
+    {
+        switch (static_cast<SPELLFAMILY>(familyId))
+        {
+            case SPELLFAMILY_MAGES_BALLAD: return "MAGES_BALLAD";
+            case SPELLFAMILY_VALOR_MINUET: return "VALOR_MINUET";
+            case SPELLFAMILY_KNIGHTS_MINNE: return "KNIGHTS_MINNE";
+            case SPELLFAMILY_PRELUDE: return "PRELUDE";
+            case SPELLFAMILY_MADRIGAL: return "MADRIGAL";
+            case SPELLFAMILY_MARCH: return "MARCH";
+            case SPELLFAMILY_STR_ETUDE: return "STR_ETUDE"; 
+            case SPELLFAMILY_DEX_ETUDE: return "DEX_ETUDE";
+            case SPELLFAMILY_VIT_ETUDE: return "VIT_ETUDE";
+            case SPELLFAMILY_AGI_ETUDE: return "AGI_ETUDE";
+            case SPELLFAMILY_INT_ETUDE: return "INT_ETUDE";
+            case SPELLFAMILY_MND_ETUDE: return "MND_ETUDE";
+            case SPELLFAMILY_CHR_ETUDE: return "CHR_ETUDE";
+            case SPELLFAMILY_FOE_REQUIEM: return "FOE_REQUIEM";
+            case SPELLFAMILY_FOE_LULLABY: return "FOE_LULLABY";
+            case SPELLFAMILY_HORDE_LULLABY: return "HORDE_LULLABY";
+            case SPELLFAMILY_ARMYS_PAEON: return "ARMYS_PAEON";
+            case SPELLFAMILY_MAZURKA: return "MAZURKA";
+            case SPELLFAMILY_MAMBO: return "MAMBO";
+            case SPELLFAMILY_ELEGY: return "ELEGY";
+            case SPELLFAMILY_OPERETTA: return "OPERETTA";
+            
+            case SPELLFAMILY_CURE: return "CURE";
+            case SPELLFAMILY_CURAGA: return "CURAGA";
+            case SPELLFAMILY_NA: return "NA";
+            case SPELLFAMILY_RAISE: return "RAISE";
+            case SPELLFAMILY_PROTECT: return "PROTECT";
+            case SPELLFAMILY_SHELL: return "SHELL";
+            case SPELLFAMILY_HASTE: return "HASTE";
+            case SPELLFAMILY_REFRESH: return "REFRESH";
+            case SPELLFAMILY_REGEN: return "REGEN";
+            case SPELLFAMILY_PHALANX: return "PHALANX";
+            
+            case SPELLFAMILY_DIA: return "DIA";
+            case SPELLFAMILY_BIO: return "BIO";
+            case SPELLFAMILY_PARALYZE: return "PARALYZE";
+            case SPELLFAMILY_SLOW: return "SLOW";
+            case SPELLFAMILY_BLIND: return "BLIND";
+            case SPELLFAMILY_POISON: return "POISON";
+            case SPELLFAMILY_SLEEP: return "SLEEP";
+            case SPELLFAMILY_SLEEPGA: return "SLEEPGA";
+            
+            default: return fmt::format("Family_{}", familyId);
+        }
+    }
+
+    std::string GetActionName(const gambits::Action_t& act)
+    {
+        if (act.reaction == gambits::G_REACTION::MA)
+        {
+            if (act.select == gambits::G_SELECT::HIGHEST)
+            {
+                return GetSpellFamilyName(act.select_arg);
+            }
+            else if (act.select == gambits::G_SELECT::SPECIFIC)
+            {
+                if (auto* spell = spell::GetSpell(static_cast<SpellID>(act.select_arg)))
+                {
+                    return spell->getName();
+                }
+                return fmt::format("Spell_{}", act.select_arg);
+            }
+        }
+        else if (act.reaction == gambits::G_REACTION::JA && act.select == gambits::G_SELECT::SPECIFIC)
+        {
+            if (auto* abil = ability::GetAbility(static_cast<ABILITY>(act.select_arg)))
+            {
+                return abil->getName();
+            }
+            return fmt::format("Ability_{}", act.select_arg);
+        }
+        return fmt::format("[R:{},S:{},A:{}]", (int)act.reaction, (int)act.select, act.select_arg);
+    }
+} // namespace
+
 namespace gambits
 {
 
@@ -275,10 +356,19 @@ void CGambitsContainer::Tick(timer::time_point tick)
         for (auto& potentialTarget : potentialTargets)
         {
             // All predicate groups must resolve successfully for the target to be considered
+            // All predicate groups must resolve successfully for the target to be considered
             bool targetMatchAllPredicates = true;
+
+            std::string debugTag = "";
+            if (!gambit.actions.empty())
+            {
+                const auto& act = gambit.actions[0];
+                debugTag = fmt::format("[{}] ", GetActionName(act));
+            }
+
             for (auto& predicateGroup : gambit.predicate_groups)
             {
-                if (!CheckTrigger(potentialTarget, predicateGroup))
+                if (!CheckTrigger(potentialTarget, predicateGroup, debugTag))
                 {
                     targetMatchAllPredicates = false;
                 }
@@ -319,10 +409,16 @@ void CGambitsContainer::Tick(timer::time_point tick)
                 }
                 else if (action.select == G_SELECT::HIGHEST)
                 {
+                    ShowDebug("Gambit Action HIGHEST: Family=%u, Target=%s", static_cast<uint32>(action.select_arg), target->getName().c_str());
                     auto spell_id = POwner->SpellContainer->GetBestAvailable(static_cast<SPELLFAMILY>(action.select_arg));
                     if (spell_id.has_value())
                     {
+                        ShowDebug("Gambit Action HIGHEST: Found spell %u. Casting.", static_cast<uint16>(spell_id.value()));
                         controller->Cast(target->targid, spell_id.value());
+                    }
+                    else
+                    {
+                        ShowDebug("Gambit Action HIGHEST: No spell found for family %u.", static_cast<uint32>(action.select_arg));
                     }
                 }
                 else if (action.select == G_SELECT::LOWEST)
@@ -470,14 +566,14 @@ void CGambitsContainer::Tick(timer::time_point tick)
                     auto currentTP = POwner->health.tp;
 
                     // clang-format off
-                        ABILITY wlist[5] =
-                        {
-                            ABILITY_CURING_WALTZ_V,
-                            ABILITY_CURING_WALTZ_IV,
-                            ABILITY_CURING_WALTZ_III,
-                            ABILITY_CURING_WALTZ_II,
-                            ABILITY_CURING_WALTZ,
-                        };
+                ABILITY wlist[5] =
+                {
+                    ABILITY_CURING_WALTZ_V,
+                    ABILITY_CURING_WALTZ_IV,
+                    ABILITY_CURING_WALTZ_III,
+                    ABILITY_CURING_WALTZ_II,
+                    ABILITY_CURING_WALTZ,
+                };
                     // clang-format on
 
                     for (const auto& waltzId : wlist)
@@ -623,13 +719,14 @@ void CGambitsContainer::Tick(timer::time_point tick)
     }
 }
 
-bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup)
+bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, PredicateGroup_t& predicateGroup, const std::string& debugTag)
 {
     TracyZoneScoped;
 
     auto*             controller = static_cast<CTrustController*>(POwner->PAI->GetController());
     std::vector<bool> predicateResults;
 
+    // Iterate and collect results from all predicates in the group
     // Iterate and collect results from all predicates in the group
     for (auto& predicate : predicateGroup.predicates)
     {
@@ -642,7 +739,10 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             }
             case G_CONDITION::HPP_LT:
             {
-                predicateResults.push_back(triggerTarget->GetHPP() < predicate.condition_arg);
+                bool result = triggerTarget->GetHPP() < predicate.condition_arg;
+                ShowDebug("%s[HPP_LT] Target %s: HPP=%d, Check=%d, Result=%s", 
+                    debugTag.c_str(), triggerTarget->getName().c_str(), triggerTarget->GetHPP(), predicate.condition_arg, result ? "TRUE" : "FALSE");
+                predicateResults.push_back(result);
                 continue;
             }
             case G_CONDITION::HPP_GTE:
@@ -652,7 +752,11 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             }
             case G_CONDITION::MPP_LT:
             {
-                predicateResults.push_back(triggerTarget->GetMPP() < predicate.condition_arg);
+                auto mpp = triggerTarget->GetMPP();
+                bool result = mpp < predicate.condition_arg;
+                ShowDebug("%s[MPP_LT] Target %s: MPP=%d, threshold=%d, result=%s",
+                    debugTag.c_str(), triggerTarget->getName().c_str(), mpp, predicate.condition_arg, result ? "TRUE" : "FALSE");
+                predicateResults.push_back(result);
                 continue;
             }
             case G_CONDITION::TP_LT:
@@ -672,7 +776,11 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             }
             case G_CONDITION::NOT_STATUS:
             {
-                predicateResults.push_back(!triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                bool hasEffect = triggerTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg));
+                ShowDebug("%s[NOT_STATUS] Target %s: effect=%d, hasEffect=%s, result=%s",
+                    debugTag.c_str(), triggerTarget->getName().c_str(), predicate.condition_arg, 
+                    hasEffect ? "YES" : "NO", !hasEffect ? "TRUE" : "FALSE");
+                predicateResults.push_back(!hasEffect);
                 continue;
             }
             case G_CONDITION::NO_SAMBA:
@@ -792,6 +900,80 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
             case G_CONDITION::HP_MISSING:
             {
                 predicateResults.push_back((triggerTarget->health.maxhp - triggerTarget->health.hp) >= (int16)predicate.condition_arg);
+                continue;
+            }
+            case G_CONDITION::MY_SONG_COUNT_LT:
+            {
+                // Count songs on target that were cast by POwner
+                uint8 count = 0;
+                ShowDebug("%s[MY_SONG_COUNT_LT] Checking songs on target %s (id: %d) from owner %s (id: %d)",
+                    debugTag.c_str(), triggerTarget->getName().c_str(), triggerTarget->id,
+                    POwner->getName(), POwner->id);
+                
+                triggerTarget->StatusEffectContainer->ForEachEffect([&](CStatusEffect* effect)
+                {
+                    bool isSong = (effect->GetEffectFlags() & EFFECTFLAG_SONG) != 0;
+                    uint32 originId = effect->GetOriginID();
+                    
+                    ShowDebug("%s[MY_SONG_COUNT_LT]   Effect %d: isSong=%s, originID=%d, flags=0x%08X",
+                        debugTag.c_str(), static_cast<uint16>(effect->GetStatusID()),
+                        isSong ? "YES" : "NO",
+                        originId,
+                        effect->GetEffectFlags());
+                    
+                    if (isSong && originId == POwner->id)
+                    {
+                        count++;
+                        ShowDebug("%s[MY_SONG_COUNT_LT]     -> MATCH! count now = %d", debugTag.c_str(), count);
+                    }
+                });
+                
+                bool result = count < static_cast<uint8>(predicate.condition_arg);
+                ShowDebug("%s[MY_SONG_COUNT_LT] Final: count=%d, threshold=%d, result=%s",
+                    debugTag.c_str(), count, predicate.condition_arg, result ? "TRUE (cast allowed)" : "FALSE (blocked)");
+                
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::OTHER_SONGS_COUNT:
+            {
+                // Count songs on target from sources OTHER than POwner
+                uint8 count = 0;
+                triggerTarget->StatusEffectContainer->ForEachEffect([&](CStatusEffect* effect)
+                {
+                    if ((effect->GetEffectFlags() & EFFECTFLAG_SONG) && effect->GetOriginID() != POwner->id)
+                    {
+                        count++;
+                    }
+                });
+                
+                bool result = count == static_cast<uint8>(predicate.condition_arg);
+                ShowDebug("%s[OTHER_SONGS_COUNT] Target %s: count=%d, expected=%d, result=%s",
+                    debugTag.c_str(), triggerTarget->getName().c_str(), count, predicate.condition_arg, result ? "TRUE" : "FALSE");
+                
+                predicateResults.push_back(result);
+                continue;
+            }
+            case G_CONDITION::OTHER_STATUS_TIER:
+            {
+                uint16 id   = predicate.condition_arg & 0xFFFF;
+                uint16 tier = predicate.condition_arg >> 16;
+
+                auto* PSCEffect = triggerTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(id));
+                bool result = false;
+
+                if (PSCEffect)
+                {
+                    // Check Tier matches AND Source is NOT POwner
+                    if (PSCEffect->GetTier() == tier && PSCEffect->GetOriginID() != POwner->id)
+                    {
+                        result = true;
+                    }
+                }
+
+                ShowDebug("%s[OTHER_STATUS_TIER] Target %s: Effect=%d, Tier=%d, Origin=%d, Result=%s", 
+                    debugTag.c_str(), triggerTarget->getName().c_str(), id, tier, PSCEffect ? PSCEffect->GetOriginID() : 0, result ? "TRUE" : "FALSE");
+                predicateResults.push_back(result);
                 continue;
             }
             default:
