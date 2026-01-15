@@ -20,6 +20,12 @@ end
 spellObject.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.messageOffset.SPAWN)
 
+    local function getEncodedTier(effect, tier)
+        return bit.bor(bit.lshift(tier, 16), effect)
+    end
+
+    local MAX_SONG_COUNT = 2
+
     -- Priority 1: Healing (Cure IV)
     mob:addGambit(ai.t.PARTY, { ai.c.HPP_LT, 75 }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE })
 
@@ -32,20 +38,87 @@ spellObject.onMobSpawn = function(mob)
     mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.DISEASE }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.VIRUNA })
     mob:addGambit(ai.t.PARTY, { ai.c.STATUS, xi.effect.CURSE_I }, { ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA })
 
-    -- Priority 3: Paeon (HP < 90%)
-    mob:addGambit(ai.t.SELF, { ai.c.HPP_LT, 90, ai.c.NOT_STATUS, xi.effect.PAEON }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.ARMYS_PAEON })
+    -- Priority 3: Songs
+    -- joachim always waits till songs expire before casting new ones
 
-    -- Priority 4: Ballad (MP < 75%)
-    mob:addGambit(ai.t.SELF, { ai.c.MPP_LT, 75, ai.c.NOT_STATUS, xi.effect.BALLAD }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MAGES_BALLAD })
+    -- Paeon (cast highest tier paeon)
+    -- joachim has less than 2 songs
+    -- joachim's hp is less than 90%
+    -- joachim can do double paeon
+    mob:addGambit(
+        ai.t.SELF, 
+        { 
+            { ai.c.HPP_LT, 90 },
+            { ai.c.MY_SONG_COUNT_LT, MAX_SONG_COUNT }
 
-    -- Priority 5: Standard Songs (March > Madrigal)
-    -- Victory March grants Haste (~15%), Blade Madrigal grants Accuracy (+60)
-    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.MARCH }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MARCH })
-    mob:addGambit(ai.t.SELF, { ai.c.NOT_STATUS, xi.effect.MADRIGAL }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MADRIGAL })
+        }, 
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.ARMYS_PAEON })
 
-    -- Priority 6: Fallback (Minne)
-    -- If March and Madrigal are already active (e.g. from another Bard), use Minne.
-    mob:addGambit(ai.t.SELF, { ai.c.STATUS, xi.effect.MARCH, ai.c.STATUS, xi.effect.MADRIGAL, ai.c.NOT_STATUS, xi.effect.MINNE }, { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.KNIGHTS_MINNE })
+    -- Ballad (cast highest tier ballad)
+    -- joachim has less than 2 songs
+    -- joachim's mp is less than 75%
+    -- joachim doesn't have ballad currently (prevents double ballad)
+    mob:addGambit(
+        ai.t.SELF, 
+        { 
+            { ai.c.MPP_LT, 75 },
+            { ai.c.MY_SONG_COUNT_LT, MAX_SONG_COUNT },
+            { ai.c.NOT_STATUS, xi.effect.BALLAD }
+        }, 
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MAGES_BALLAD })
+
+    -- March (cast highest tier march)
+    -- joachim has less than 2 songs
+    -- joachim doesnt have march currently (prevents double march)
+    mob:addGambit(
+        ai.t.SELF, 
+        { 
+            { ai.c.MY_SONG_COUNT_LT, MAX_SONG_COUNT },
+            { ai.c.NOT_STATUS, xi.effect.MARCH }
+        }, 
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MARCH })
+
+    -- Blade Madrigal (cast highest tier madrigal)
+    -- joachim has less than 2 songs
+    -- joachim doesn't have madrigal currently (prevents double madrigal)
+    mob:addGambit(
+        ai.t.SELF, 
+        { 
+            { ai.c.NOT_STATUS, xi.effect.MADRIGAL },
+            { ai.c.MY_SONG_COUNT_LT, MAX_SONG_COUNT }
+        }, 
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MADRIGAL })
+
+    -- Minuet (cast highest tier minuet)
+    -- joachim doesn't have minuet currently (prevents double minuet)
+    -- joachim has less than 2 songs
+    -- joachim has double march from another bard
+    mob:addGambit(
+        ai.t.SELF, 
+        { 
+            { ai.c.NOT_STATUS, xi.effect.MINUET },
+            { ai.c.MY_SONG_COUNT_LT, MAX_SONG_COUNT },
+            { ai.c.OTHER_STATUS_TIER, getEncodedTier(xi.effect.MARCH, 1) },
+            { ai.c.OTHER_STATUS_TIER, getEncodedTier(xi.effect.MARCH, 2) }
+        }, 
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.MINUET })
+
+    -- Minne (cast highest tier minne)
+    -- joachim doesn't have minne currently (prevents double minne)
+    -- joachim has less than 2 songs
+    -- joachim has double march from another bard
+    -- joachim has double madrigal from another bard
+    mob:addGambit(
+        ai.t.SELF, 
+        { 
+            { ai.c.NOT_STATUS, xi.effect.MINNE },
+            { ai.c.MY_SONG_COUNT_LT, MAX_SONG_COUNT },
+            { ai.c.OTHER_STATUS_TIER, getEncodedTier(xi.effect.MARCH, 1) },
+            { ai.c.OTHER_STATUS_TIER, getEncodedTier(xi.effect.MARCH, 2) },
+            { ai.c.OTHER_STATUS_TIER, getEncodedTier(xi.effect.MADRIGAL, 1) },
+            { ai.c.OTHER_STATUS_TIER, getEncodedTier(xi.effect.MADRIGAL, 2) }
+        }, 
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.KNIGHTS_MINNE })
 
     -- Ranged Attack (Throwing)
     mob:addGambit(ai.t.TARGET, { ai.c.ALWAYS, 0 }, { ai.r.RATTACK, 0, 0 }, 60)
