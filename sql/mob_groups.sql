@@ -7526,29 +7526,29 @@ INSERT INTO `mob_groups` VALUES (3,6771,100,'Land_Crab_fished',0,128,481,0,0,5,6
 INSERT INTO `mob_groups` VALUES (4,4225,100,'Vermivorous_Crab',0,128,481,0,0,7,8,0);
 INSERT INTO `mob_groups` VALUES (5,3102,100,'Passage_Crab',0,128,481,0,0,9,10,0);
 
-INSERT INTO `mob_groups` VALUES (6,4343,100,'Wild_Rabbit',330,0,894,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (7,4053,100,'Tunnel_Worm',330,0,2496,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (8,1038,100,'Ding_Bats',330,2,82,0,0,1,5,0);
-INSERT INTO `mob_groups` VALUES (9,1404,100,'Forest_Hare',330,0,893,0,0,1,6,0);
-INSERT INTO `mob_groups` VALUES (10,656,100,'Carrion_Worm',330,0,428,0,0,1,6,0);
-INSERT INTO `mob_groups` VALUES (11,3494,100,'Scarab_Beetle',330,0,2174,0,0,3,7,0);
-INSERT INTO `mob_groups` VALUES (12,3013,100,'Orcish_Fodder',330,0,1904,0,0,3,8,0);
-INSERT INTO `mob_groups` VALUES (13,3016,100,'Orcish_Grappler',330,0,1913,0,0,3,8,0);
-INSERT INTO `mob_groups` VALUES (14,2763,100,'Mouse_Bat',330,2,19,0,0,3,6,0);
-INSERT INTO `mob_groups` VALUES (15,1403,100,'Forest_Funguar',330,0,892,0,0,3,6,0);
+INSERT INTO `mob_groups` VALUES (6,4343,100,'Wild_Rabbit',60,0,894,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (7,4053,100,'Tunnel_Worm',60,0,2496,0,0,1,1,0);
+INSERT INTO `mob_groups` VALUES (8,1038,100,'Ding_Bats',180,2,82,0,0,1,5,0); -- TODO: 1 min respawn near Sandy
+INSERT INTO `mob_groups` VALUES (9,1404,100,'Forest_Hare',180,0,893,0,0,1,6,0);
+INSERT INTO `mob_groups` VALUES (10,656,100,'Carrion_Worm',180,0,428,0,0,1,6,0);
+INSERT INTO `mob_groups` VALUES (11,3494,100,'Scarab_Beetle',300,0,2174,0,0,3,7,0);
+INSERT INTO `mob_groups` VALUES (12,3013,100,'Orcish_Fodder',300,0,1904,0,0,3,8,0);
+INSERT INTO `mob_groups` VALUES (13,3016,100,'Orcish_Grappler',300,0,1913,0,0,3,8,0);
+INSERT INTO `mob_groups` VALUES (14,2763,100,'Mouse_Bat',180,2,19,0,0,3,6,0);
+INSERT INTO `mob_groups` VALUES (15,1403,100,'Forest_Funguar',300,0,892,0,0,3,6,0);
 INSERT INTO `mob_groups` VALUES (16,5421,100,'Amanita',3600,0,2941,230,0,5,6,0);
-INSERT INTO `mob_groups` VALUES (17,3022,100,'Orcish_Mesmerizer',330,0,1924,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (18,4344,100,'Wild_Sheep',330,0,367,0,0,5,8,0);
-INSERT INTO `mob_groups` VALUES (19,1737,100,'Goblin_Thug',330,0,1169,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (20,1744,100,'Goblin_Weaver',330,0,1182,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (21,3836,100,'Tainted_Hound',330,1,226,0,0,5,8,0);
-INSERT INTO `mob_groups` VALUES (22,1214,100,'Enchanted_Bones_blm',330,1,769,0,0,5,8,0);
+INSERT INTO `mob_groups` VALUES (17,3022,100,'Orcish_Mesmerizer',300,0,1924,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (18,4344,100,'Wild_Sheep',300,0,367,0,0,5,8,0);
+INSERT INTO `mob_groups` VALUES (19,1737,100,'Goblin_Thug',300,0,1169,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (20,1744,100,'Goblin_Weaver',300,0,1182,0,0,4,8,0);
+INSERT INTO `mob_groups` VALUES (21,3836,100,'Tainted_Hound',300,1,226,0,0,5,8,0);
+INSERT INTO `mob_groups` VALUES (22,1214,100,'Enchanted_Bones_blm',300,1,769,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (23,1438,100,'Fungus_Beetle',0,32,917,320,0,10,15,0);
 INSERT INTO `mob_groups` VALUES (24,490,100,'Bomb',330,8,216,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (25,2125,100,'Jaggedy-Eared_Jack',0,32,1390,220,0,9,10,0);
-INSERT INTO `mob_groups` VALUES (26,1659,100,'Goblin_Fisher',330,0,1051,0,0,5,8,0);
-INSERT INTO `mob_groups` VALUES (27,3371,100,'River_Crab',330,0,2101,0,0,3,6,0);
-INSERT INTO `mob_groups` VALUES (28,1648,100,'Goblin_Digger',330,0,1039,0,0,5,8,0);
+INSERT INTO `mob_groups` VALUES (26,1659,100,'Goblin_Fisher',300,0,1051,0,0,5,8,0);
+INSERT INTO `mob_groups` VALUES (27,3371,100,'River_Crab',180,0,2101,0,0,3,6,0);
+INSERT INTO `mob_groups` VALUES (28,1648,100,'Goblin_Digger',300,0,1039,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (29,2557,100,'Marauder_Dvogzog',0,128,307,16000,0,67,67,0);
 
 -- garrison
