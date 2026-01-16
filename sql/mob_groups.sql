@@ -9458,14 +9458,14 @@ INSERT INTO `mob_groups` VALUES (55,6169,126,'Ophiotaurus',0,128,0,0,0,43,43,0);
 -- Behemoths_Dominion (Zone 127)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2397,127,'Lesser_Gaylas',330,0,1512,0,0,40,42,0);
-INSERT INTO `mob_groups` VALUES (2,1803,127,'Greater_Gayla',330,0,1226,0,0,42,44,0);
-INSERT INTO `mob_groups` VALUES (3,3912,127,'Thunder_Elemental',330,4,2410,0,0,48,50,0);
-INSERT INTO `mob_groups` VALUES (4,2413,127,'Light_Elemental',330,4,1521,0,0,48,50,0);
-INSERT INTO `mob_groups` VALUES (5,980,127,'Demonic_Weapon',330,0,0,0,0,45,46,0);
-INSERT INTO `mob_groups` VALUES (6,2442,127,'Lost_Soul_blm',330,1,1541,0,0,45,47,0);
-INSERT INTO `mob_groups` VALUES (7,2585,127,'Master_Coeurl',330,0,1640,0,0,45,50,0);
-INSERT INTO `mob_groups` VALUES (8,407,127,'Bhuta',330,1,264,0,0,46,48,0);
+INSERT INTO `mob_groups` VALUES (1,2397,127,'Lesser_Gaylas',300,0,1512,0,0,40,42,0);
+INSERT INTO `mob_groups` VALUES (2,1803,127,'Greater_Gayla',300,0,1226,0,0,42,44,0);
+INSERT INTO `mob_groups` VALUES (3,3912,127,'Thunder_Elemental',300,4,2410,0,0,48,50,0);
+INSERT INTO `mob_groups` VALUES (4,2413,127,'Light_Elemental',300,4,1521,0,0,48,50,0);
+INSERT INTO `mob_groups` VALUES (5,980,127,'Demonic_Weapon',300,0,0,0,0,45,46,0);
+INSERT INTO `mob_groups` VALUES (6,2442,127,'Lost_Soul_blm',300,1,1541,0,0,45,47,0);
+INSERT INTO `mob_groups` VALUES (7,2585,127,'Master_Coeurl',900,0,1640,0,0,45,50,0);
+INSERT INTO `mob_groups` VALUES (8,407,127,'Bhuta',300,1,264,0,0,46,48,0);
 INSERT INTO `mob_groups` VALUES (9,387,127,'Behemoth',0,128,251,60000,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (10,2255,127,'King_Behemoth',0,128,1450,75000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (11,3135,127,'Picklix_Longindex',0,128,0,0,0,60,60,0);
@@ -9475,7 +9475,7 @@ INSERT INTO `mob_groups` VALUES (14,130,127,'Ancient_Weapon',0,128,0,7000,0,66,6
 INSERT INTO `mob_groups` VALUES (15,2387,127,'Legendary_Weapon',0,128,0,7000,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (16,1836,127,'Gudanna',0,128,0,0,0,55,60,0);
 INSERT INTO `mob_groups` VALUES (17,4695,127,'Pil-VNM',0,128,0,0,9999,94,95,0);
-INSERT INTO `mob_groups` VALUES (18,6558,127,'Lost_Soul_war',330,1,1541,0,0,45,47,0);
+INSERT INTO `mob_groups` VALUES (18,6558,127,'Lost_Soul_war',300,1,1541,0,0,45,47,0);
 INSERT INTO `mob_groups` VALUES (19,6855,127,'Sovereign_Behemoth',0,128,0,0,0,99,99,0);
 
 -- ------------------------------------------------------------
