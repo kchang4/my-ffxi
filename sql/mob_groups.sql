@@ -1249,45 +1249,45 @@ INSERT INTO `mob_groups` VALUES (13,710,32,'Cherukiki',0,128,0,0,0,99,99,0);
 -- AlTaieu (Zone 33)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,6188,33,'Ulaern_war',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (2,6199,33,'Ulaern_sam',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (3,6191,33,'Ulaern_blm',960,0,2514,0,5000,70,73,0);
-INSERT INTO `mob_groups` VALUES (4,6192,33,'Ulaern_rdm',960,0,2514,0,5000,70,73,0);
-INSERT INTO `mob_groups` VALUES (5,6200,33,'Ulaern_nin',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (6,6198,33,'Ulaern_rng',960,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (1,6188,33,'Ulaern_war',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (2,6199,33,'Ulaern_sam',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (3,6191,33,'Ulaern_blm',300,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (4,6192,33,'Ulaern_rdm',300,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (5,6200,33,'Ulaern_nin',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (6,6198,33,'Ulaern_rng',300,0,2514,0,0,70,73,0);
 INSERT INTO `mob_groups` VALUES (7,4088,33,'Ulxzomit',330,0,2517,0,0,68,71,0); -- Mother Ul'xzomit
-INSERT INTO `mob_groups` VALUES (8,4086,33,'Ulhpemde',960,0,2515,0,0,68,72,0);
-INSERT INTO `mob_groups` VALUES (9,4087,33,'Ulphuabo',960,0,2516,0,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (10,6189,33,'Ulaern_mnk',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (11,6196,33,'Ulaern_bst',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (12,6201,33,'Ulaern_drg',960,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (8,4086,33,'Ulhpemde',300,0,2515,0,0,68,72,0);
+INSERT INTO `mob_groups` VALUES (9,4087,33,'Ulphuabo',300,0,2516,0,0,75,76,0);
+INSERT INTO `mob_groups` VALUES (10,6189,33,'Ulaern_mnk',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (11,6196,33,'Ulaern_bst',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (12,6201,33,'Ulaern_drg',300,0,2514,0,0,70,73,0);
 INSERT INTO `mob_groups` VALUES (13,56,33,'Aerns_Wynav',0,128,0,1500,0,65,69,0);
 INSERT INTO `mob_groups` VALUES (14,57,33,'Aerns_Xzomit',0,128,0,0,0,65,69,0);
-INSERT INTO `mob_groups` VALUES (15,6193,33,'Ulaern_thf',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (16,6195,33,'Ulaern_drk',960,0,2514,0,5000,70,73,0);
-INSERT INTO `mob_groups` VALUES (17,6202,33,'Ulaern_smn',960,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (15,6193,33,'Ulaern_thf',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (16,6195,33,'Ulaern_drk',300,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (17,6202,33,'Ulaern_smn',300,0,2514,0,5000,70,73,0);
 INSERT INTO `mob_groups` VALUES (18,54,33,'Aerns_Elemental',0,128,0,0,0,65,69,0);
-INSERT INTO `mob_groups` VALUES (19,6205,33,'Omaern_whm',960,0,1853,0,5000,75,78,0);
-INSERT INTO `mob_groups` VALUES (20,6211,33,'Omaern_bst',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (21,6216,33,'Omaern_drg',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (22,6217,33,'Omaern_smn',960,0,1853,0,5000,75,78,0);
-INSERT INTO `mob_groups` VALUES (23,2976,33,'Omhpemde',960,0,1854,0,0,73,77,0);
-INSERT INTO `mob_groups` VALUES (24,2978,33,'Omxzomit',960,0,1856,0,0,72,76,0);
-INSERT INTO `mob_groups` VALUES (25,6215,33,'Omaern_nin',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (26,6209,33,'Omaern_pld',960,0,1853,0,5000,75,78,0);
-INSERT INTO `mob_groups` VALUES (27,6210,33,'Omaern_drk',960,0,1853,0,5000,75,78,0);
-INSERT INTO `mob_groups` VALUES (28,6212,33,'Omaern_brd',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (29,6214,33,'Omaern_sam',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (30,6204,33,'Omaern_mnk',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (31,6206,33,'Omaern_blm',960,0,1853,0,5000,75,78,0);
-INSERT INTO `mob_groups` VALUES (32,6203,33,'Omaern_war',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (33,6213,33,'Omaern_rng',960,0,1853,0,0,75,78,0);
-INSERT INTO `mob_groups` VALUES (34,2977,33,'Omphuabo',960,0,1855,0,0,79,81,0);
-INSERT INTO `mob_groups` VALUES (35,6207,33,'Omaern_rdm',960,0,1853,0,5000,75,78,0);
-INSERT INTO `mob_groups` VALUES (36,6208,33,'Omaern_thf',960,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (19,6205,33,'Omaern_whm',300,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (20,6211,33,'Omaern_bst',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (21,6216,33,'Omaern_drg',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (22,6217,33,'Omaern_smn',300,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (23,2976,33,'Omhpemde',300,0,1854,0,0,73,77,0);
+INSERT INTO `mob_groups` VALUES (24,2978,33,'Omxzomit',300,0,1856,0,0,72,76,0);
+INSERT INTO `mob_groups` VALUES (25,6215,33,'Omaern_nin',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (26,6209,33,'Omaern_pld',300,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (27,6210,33,'Omaern_drk',300,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (28,6212,33,'Omaern_brd',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (29,6214,33,'Omaern_sam',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (30,6204,33,'Omaern_mnk',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (31,6206,33,'Omaern_blm',300,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (32,6203,33,'Omaern_war',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (33,6213,33,'Omaern_rng',300,0,1853,0,0,75,78,0);
+INSERT INTO `mob_groups` VALUES (34,2977,33,'Omphuabo',300,0,1855,0,0,79,81,0);
+INSERT INTO `mob_groups` VALUES (35,6207,33,'Omaern_rdm',300,0,1853,0,5000,75,78,0);
+INSERT INTO `mob_groups` VALUES (36,6208,33,'Omaern_thf',300,0,1853,0,5000,75,78,0);
 INSERT INTO `mob_groups` VALUES (37,2979,33,'Omyovra',3600,0,1857,18000,0,84,85,0);
 INSERT INTO `mob_groups` VALUES (38,4089,33,'Ulyovra',3600,0,2518,15000,0,79,82,0);
-INSERT INTO `mob_groups` VALUES (39,299,33,'Aweuvhi',660,0,199,0,0,71,83,0);
+INSERT INTO `mob_groups` VALUES (39,299,33,'Aweuvhi',600,0,199,0,0,71,83,0);
 INSERT INTO `mob_groups` VALUES (40,5879,33,'Ruaern_whm',0,128,0,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (41,5880,33,'Ruaern_war',0,128,0,0,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (42,5881,33,'Ruaern_sam',0,128,0,0,0,70,71,0);
@@ -1305,12 +1305,12 @@ INSERT INTO `mob_groups` VALUES (53,2134,33,'Jailer_of_Love',0,128,1400,57000,25
 INSERT INTO `mob_groups` VALUES (54,3422,33,'Ruphuabo',0,128,0,2500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (55,3270,33,'Qnhpemde',0,128,0,2500,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (56,21,33,'Absolute_Virtue',0,128,3,66000,0,92,92,0);
-INSERT INTO `mob_groups` VALUES (57,6190,33,'Ulaern_whm',960,0,2514,0,5000,70,73,0);
-INSERT INTO `mob_groups` VALUES (58,6197,33,'Ulaern_brd',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (59,6194,33,'Ulaern_pld',960,0,2514,0,0,70,73,0);
-INSERT INTO `mob_groups` VALUES (60,7033,33,'Omhpemde_nodive',960,0,1854,0,0,73,77,0);
+INSERT INTO `mob_groups` VALUES (57,6190,33,'Ulaern_whm',300,0,2514,0,5000,70,73,0);
+INSERT INTO `mob_groups` VALUES (58,6197,33,'Ulaern_brd',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (59,6194,33,'Ulaern_pld',300,0,2514,0,0,70,73,0);
+INSERT INTO `mob_groups` VALUES (60,7033,33,'Omhpemde_nodive',300,0,1854,0,0,73,77,0);
 INSERT INTO `mob_groups` VALUES (61,2615,33,'Ulxzomit',330,0,3231,0,0,68,71,0); -- Follower Ul'Xzomit
-INSERT INTO `mob_groups` VALUES (62,7094,33,'Omxzomit',960,0,1856,0,0,72,76,0); -- Follower Om'Xzomit
+INSERT INTO `mob_groups` VALUES (62,7094,33,'Omxzomit',300,0,1856,0,0,72,76,0); -- Follower Om'Xzomit
 
 -- ------------------------------------------------------------
 -- Grand_Palace_of_HuXzoi (Zone 34)
