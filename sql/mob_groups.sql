@@ -10564,39 +10564,39 @@ INSERT INTO `mob_groups` VALUES (2,6766,141,'Giant_Pugil_fished',0,128,147,0,0,1
 INSERT INTO `mob_groups` VALUES (3,3220,141,'Puffer_Pugil',0,128,975,0,0,14,16,0);
 INSERT INTO `mob_groups` VALUES (4,6764,141,'Land_Pugil_fished',0,128,975,0,0,18,20,0);
 
-INSERT INTO `mob_groups` VALUES (5,3013,141,'Orcish_Fodder',330,0,1905,0,0,8,10,0);
-INSERT INTO `mob_groups` VALUES (6,3022,141,'Orcish_Mesmerizer',330,0,1925,0,0,8,10,0);
-INSERT INTO `mob_groups` VALUES (7,3016,141,'Orcish_Grappler',330,0,1914,0,0,8,10,0);
-INSERT INTO `mob_groups` VALUES (8,3721,141,'Spectacled_Bats',330,2,82,0,0,6,8,0);
-INSERT INTO `mob_groups` VALUES (9,6454,141,'Cheiroptera',330,2,461,0,0,8,10,0);
-INSERT INTO `mob_groups` VALUES (10,3012,141,'Orcish_Flamethrower',330,0,0,0,0,16,18,0);
+INSERT INTO `mob_groups` VALUES (5,3013,141,'Orcish_Fodder',480,0,1905,0,0,8,10,0);
+INSERT INTO `mob_groups` VALUES (6,3022,141,'Orcish_Mesmerizer',480,0,1925,0,0,8,10,0);
+INSERT INTO `mob_groups` VALUES (7,3016,141,'Orcish_Grappler',480,0,1914,0,0,8,10,0);
+INSERT INTO `mob_groups` VALUES (8,3721,141,'Spectacled_Bats',480,2,82,0,0,6,8,0);
+INSERT INTO `mob_groups` VALUES (9,6454,141,'Cheiroptera',480,2,461,0,0,8,10,0);
+INSERT INTO `mob_groups` VALUES (10,3012,141,'Orcish_Flamethrower',480,0,0,0,0,16,18,0);
 INSERT INTO `mob_groups` VALUES (11,2009,141,'Hundredscar_Hajwaj',0,32,1338,0,0,11,13,0);
-INSERT INTO `mob_groups` VALUES (12,3017,141,'Orcish_Grunt',330,0,1918,0,0,11,17,0);
-INSERT INTO `mob_groups` VALUES (13,3033,141,'Orcish_Stonechucker',330,0,1940,0,0,11,17,0);
-INSERT INTO `mob_groups` VALUES (14,3023,141,'Orcish_Neckchopper',330,0,1918,0,0,11,17,0);
-INSERT INTO `mob_groups` VALUES (15,3009,141,'Orcish_Fighter',330,0,1898,0,0,21,23,0);
-INSERT INTO `mob_groups` VALUES (16,3545,141,'Sentry_Lizard',330,0,2199,0,0,11,14,0);
+INSERT INTO `mob_groups` VALUES (12,3017,141,'Orcish_Grunt',480,0,1918,0,0,11,17,0);
+INSERT INTO `mob_groups` VALUES (13,3033,141,'Orcish_Stonechucker',480,0,1940,0,0,11,17,0);
+INSERT INTO `mob_groups` VALUES (14,3023,141,'Orcish_Neckchopper',480,0,1918,0,0,11,17,0);
+INSERT INTO `mob_groups` VALUES (15,3009,141,'Orcish_Fighter',480,0,1898,0,0,21,23,0);
+INSERT INTO `mob_groups` VALUES (16,3545,141,'Sentry_Lizard',480,0,2199,0,0,11,14,0);
 INSERT INTO `mob_groups` VALUES (17,3028,141,'Orcish_Panzer',3600,0,0,760,0,20,21,0);
 INSERT INTO `mob_groups` VALUES (18,3009,141,'Orcish_Fighter',0,128,1898,0,0,21,23,0);
 INSERT INTO `mob_groups` VALUES (19,697,141,'Chariotbuster_Byakzak',0,128,455,1350,0,23,24,0);
 INSERT INTO `mob_groups` VALUES (20,5845,141,'Kegpaunch_Doshgnosh',3600,0,3028,800,0,22,22,0);
-INSERT INTO `mob_groups` VALUES (21,3004,141,'Orcish_Cursemaker',330,0,1887,0,0,21,23,0);
-INSERT INTO `mob_groups` VALUES (22,3032,141,'Orcish_Serjeant',330,0,1936,0,0,21,23,0);
+INSERT INTO `mob_groups` VALUES (21,3004,141,'Orcish_Cursemaker',600,0,1887,0,0,21,23,0);
+INSERT INTO `mob_groups` VALUES (22,3032,141,'Orcish_Serjeant',600,0,1936,0,0,21,23,0);
 
 -- ------------------------------------------------------------
 -- Yughott_Grotto (Zone 142)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,3017,142,'Orcish_Grunt',330,0,1919,0,0,14,18,0);
-INSERT INTO `mob_groups` VALUES (2,3033,142,'Orcish_Stonechucker',330,0,1941,0,0,14,18,0);
-INSERT INTO `mob_groups` VALUES (3,3023,142,'Orcish_Neckchopper',330,0,1919,0,0,14,18,0);
-INSERT INTO `mob_groups` VALUES (4,1825,142,'Grotto_Bats',330,2,82,0,0,8,11,0);
-INSERT INTO `mob_groups` VALUES (5,3363,142,'Riding_Lizard',330,0,2095,0,0,12,15,0);
-INSERT INTO `mob_groups` VALUES (6,3761,142,'Stealth_Bat',330,0,461,0,0,15,18,0);
+INSERT INTO `mob_groups` VALUES (1,3017,142,'Orcish_Grunt',480,0,1919,0,0,14,18,0);
+INSERT INTO `mob_groups` VALUES (2,3033,142,'Orcish_Stonechucker',480,0,1941,0,0,14,18,0);
+INSERT INTO `mob_groups` VALUES (3,3023,142,'Orcish_Neckchopper',480,0,1919,0,0,14,18,0);
+INSERT INTO `mob_groups` VALUES (4,1825,142,'Grotto_Bats',480,2,82,0,0,8,11,0);
+INSERT INTO `mob_groups` VALUES (5,3363,142,'Riding_Lizard',480,0,2095,0,0,12,15,0);
+INSERT INTO `mob_groups` VALUES (6,3761,142,'Stealth_Bat',480,0,461,0,0,15,18,0);
 INSERT INTO `mob_groups` VALUES (7,259,142,'Ashmaker_Gotblut',0,32,178,500,0,17,18,0);
-INSERT INTO `mob_groups` VALUES (8,3009,142,'Orcish_Fighter',330,0,1899,0,0,21,23,0);
-INSERT INTO `mob_groups` VALUES (9,3004,142,'Orcish_Cursemaker',330,0,1887,0,0,21,23,0);
-INSERT INTO `mob_groups` VALUES (10,3032,142,'Orcish_Serjeant',330,0,1937,0,0,21,23,0);
+INSERT INTO `mob_groups` VALUES (8,3009,142,'Orcish_Fighter',600,0,1899,0,0,21,23,0);
+INSERT INTO `mob_groups` VALUES (9,3004,142,'Orcish_Cursemaker',600,0,1887,0,0,21,23,0);
+INSERT INTO `mob_groups` VALUES (10,3032,142,'Orcish_Serjeant',600,0,1937,0,0,21,23,0);
 
 -- ------------------------------------------------------------
 -- Palborough_Mines (Zone 143)
