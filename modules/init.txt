@@ -46,3 +46,6 @@ custom/sql/update_trust_excenmille_subjob.sql
 # update teodor
 custom/sql/teodor_data.sql
 custom/sql/teodor_skills.sql
+
+# update aaev
+custom/sql/aaev_spells_list.sql

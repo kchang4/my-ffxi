@@ -887,6 +887,68 @@ bool CGambitsContainer::CheckTrigger(const CBattleEntity* triggerTarget, Predica
                 predicateResults.push_back(triggerTarget->PAI->IsCurrentState<CMagicState>());
                 continue;
             }
+            case G_CONDITION::CASTING_MA_LEVEL_GTE:
+            {
+                auto* state = dynamic_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState());
+                if (state)
+                {
+                    auto* spell = state->GetSpell();
+                    if (spell)
+                    {
+                        bool  match = false;
+                        for (uint8 i = 1; i < MAX_JOBTYPE; ++i)
+                        {
+                            uint8 lvl = spell->getJob(static_cast<JOBTYPE>(i));
+                            if (lvl > 0 && lvl >= predicate.condition_arg)
+                            {
+                                match = true;
+                                break;
+                            }
+                        }
+                        predicateResults.push_back(match);
+                        continue;
+                    }
+                }
+                predicateResults.push_back(false);
+                continue;
+            }
+            case G_CONDITION::CASTING_SPELL_FAMILY:
+            {
+                auto* state = dynamic_cast<CMagicState*>(triggerTarget->PAI->GetCurrentState());
+                if (state)
+                {
+                    auto* spell = state->GetSpell();
+                    if (spell)
+                    {
+                        predicateResults.push_back(spell->getSpellFamily() == static_cast<SPELLFAMILY>(predicate.condition_arg));
+                        continue;
+                    }
+                }
+                predicateResults.push_back(false);
+                continue;
+            }
+            case G_CONDITION::SELF_STATUS:
+            {
+                predicateResults.push_back(POwner->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                continue;
+            }
+            case G_CONDITION::SELF_NOT_STATUS:
+            {
+                predicateResults.push_back(!POwner->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                continue;
+            }
+            case G_CONDITION::BT_STATUS:
+            {
+                auto* PTarget = POwner->GetBattleTarget();
+                predicateResults.push_back(PTarget && PTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                continue;
+            }
+            case G_CONDITION::BT_NOT_STATUS:
+            {
+                auto* PTarget = POwner->GetBattleTarget();
+                predicateResults.push_back(!PTarget || !PTarget->StatusEffectContainer->HasStatusEffect(static_cast<EFFECT>(predicate.condition_arg)));
+                continue;
+            }
             case G_CONDITION::IS_ECOSYSTEM:
             {
                 predicateResults.push_back(triggerTarget->m_EcoSystem == ECOSYSTEM(predicate.condition_arg));

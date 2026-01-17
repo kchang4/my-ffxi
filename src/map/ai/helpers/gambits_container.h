@@ -60,34 +60,40 @@ enum class G_LOGIC : uint16
 
 enum class G_CONDITION : uint16
 {
-    ALWAYS             = 0,
-    HPP_LT             = 1,
-    HPP_GTE            = 2,
-    MPP_LT             = 3,
-    TP_LT              = 4,
-    TP_GTE             = 5,
-    STATUS             = 6,
-    NOT_STATUS         = 7,
-    STATUS_FLAG        = 8,
-    HAS_TOP_ENMITY     = 9,
-    NOT_HAS_TOP_ENMITY = 10,
-    SC_AVAILABLE       = 11,
-    NOT_SC_AVAILABLE   = 12,
-    MB_AVAILABLE       = 13,
-    READYING_WS        = 14,
-    READYING_MS        = 15,
-    READYING_JA        = 16,
-    CASTING_MA         = 17,
-    RANDOM             = 18,
-    NO_SAMBA           = 19,
-    NO_STORM           = 20,
-    PT_HAS_TANK        = 21,
-    NOT_PT_HAS_TANK    = 22,
-    IS_ECOSYSTEM       = 23,
-    HP_MISSING         = 24,
-    MY_SONG_COUNT_LT   = 25, // arg = count threshold; TRUE if my songs on target < arg
-    OTHER_SONGS_COUNT  = 28, // arg = count; TRUE if songs from others on target == arg
-    OTHER_STATUS_TIER  = 34, // arg = (tier << 16) | effectID; TRUE if effect exists from OTHER and tier matches
+    ALWAYS               = 0,
+    HPP_LT               = 1,
+    HPP_GTE              = 2,
+    MPP_LT               = 3,
+    TP_LT                = 4,
+    TP_GTE               = 5,
+    STATUS               = 6,
+    NOT_STATUS           = 7,
+    STATUS_FLAG          = 8,
+    HAS_TOP_ENMITY       = 9,
+    NOT_HAS_TOP_ENMITY   = 10,
+    SC_AVAILABLE         = 11,
+    NOT_SC_AVAILABLE     = 12,
+    MB_AVAILABLE         = 13,
+    READYING_WS          = 14,
+    READYING_MS          = 15,
+    READYING_JA          = 16,
+    CASTING_MA           = 17,
+    RANDOM               = 18,
+    NO_SAMBA             = 19,
+    NO_STORM             = 20,
+    PT_HAS_TANK          = 21,
+    NOT_PT_HAS_TANK      = 22,
+    IS_ECOSYSTEM         = 23,
+    HP_MISSING           = 24,
+    MY_SONG_COUNT_LT     = 25, // arg = count threshold; TRUE if my songs on target < arg
+    OTHER_SONGS_COUNT    = 28, // arg = count; TRUE if songs from others on target == arg
+    OTHER_STATUS_TIER    = 34, // arg = (tier << 16) | effectID; TRUE if effect exists from OTHER and tier matches
+    CASTING_MA_LEVEL_GTE = 35, // arg = level; TRUE if target is casting a spell of level >= arg
+    CASTING_SPELL_FAMILY = 36, // arg = family; TRUE if target is casting a spell of specific family
+    SELF_STATUS          = 37, // arg = effectID; TRUE if CASTER has effect
+    SELF_NOT_STATUS      = 38, // arg = effectID; TRUE if CASTER does NOT have effect
+    BT_STATUS            = 39,
+    BT_NOT_STATUS        = 40,
 };
 
 enum class G_REACTION : uint16
