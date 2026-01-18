@@ -147,7 +147,16 @@ void CLuaSimulation::skipTime(uint32 seconds) const
 void CLuaSimulation::setVanaTime(const uint8 vanaHour, const uint8 vanaMinute) const
 {
     ShowInfoFmt("Skipping to Vana'diel time {:02d}:{:02d}", vanaHour, vanaMinute);
+
+    const auto prevTotd = vanadiel_time::get_totd();
     earth_time::add_offset(durationToVanaTime(vanaHour, vanaMinute));
+    const auto newTotd = vanadiel_time::get_totd();
+
+    if (newTotd != prevTotd)
+    {
+        zoneutils::TOTDChange(newTotd);
+    }
+
     DebugTestFmt("Vana'Diel time is now {:02d}:{:02d} (day {})", vanadiel_time::get_hour(), vanadiel_time::get_minute(), vanadiel_time::get_weekday());
 }
 
