@@ -8233,7 +8233,7 @@ INSERT INTO `mob_groups` VALUES (25,3912,109,'Thunder_Elemental',300,4,2410,0,0,
 INSERT INTO `mob_groups` VALUES (26,646,109,'Carnivorous_Crawler',300,0,256,0,0,20,23,0);
 INSERT INTO `mob_groups` VALUES (27,4314,109,'Water_Wasp',300,0,584,0,0,15,18,0);
 INSERT INTO `mob_groups` VALUES (28,4832,109,'NiZho_Bladebender',0,32,3022,0,0,43,45,0);
-INSERT INTO `mob_groups` VALUES (29,2155,109,'Jolly_Green',0,32,1409,0,0,27,28,0);
+INSERT INTO `mob_groups` VALUES (29,2155,109,'Jolly_Green',0,32,1409,1030,0,27,28,0);
 INSERT INTO `mob_groups` VALUES (30,1690,109,'Goblin_Mugger',300,0,1117,0,0,21,25,0);
 INSERT INTO `mob_groups` VALUES (31,1635,109,'Goblin_Ambusher',300,0,1017,0,0,16,20,0);
 INSERT INTO `mob_groups` VALUES (32,1683,109,'Goblin_Leecher',300,0,1098,0,0,21,25,0);
@@ -8243,8 +8243,8 @@ INSERT INTO `mob_groups` VALUES (35,1643,109,'Goblin_Butcher',300,0,1032,0,0,16,
 INSERT INTO `mob_groups` VALUES (36,2579,109,'Marsh_Funguar',300,0,1632,0,0,21,25,0);
 INSERT INTO `mob_groups` VALUES (37,1419,109,'Fox_Fire',300,8,569,0,0,24,25,0);
 INSERT INTO `mob_groups` VALUES (38,6831,109,'Toxic_Tamlyn',0,128,3320,0,0,44,44,0);
-INSERT INTO `mob_groups` VALUES (39,460,109,'Bloodpool_Vorax',0,32,301,0,0,24,25,0);
-INSERT INTO `mob_groups` VALUES (40,519,109,'BoWho_Warmonger',0,128,2852,2250,0,37,37,0);
+INSERT INTO `mob_groups` VALUES (39,460,109,'Bloodpool_Vorax',0,32,301,800,0,24,25,0);
+INSERT INTO `mob_groups` VALUES (40,519,109,'BoWho_Warmonger',0,128,2852,2750,0,36,37,0);
 INSERT INTO `mob_groups` VALUES (41,6658,109,'Goblin_Digger',300,0,1040,0,0,18,21,0);
 INSERT INTO `mob_groups` VALUES (42,1983,109,'Hobgoblin_Warrior',0,128,0,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (43,1984,109,'Hobgoblin_White_Mage',0,128,0,0,0,30,35,0);
