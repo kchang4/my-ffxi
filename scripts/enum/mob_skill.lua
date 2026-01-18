@@ -160,6 +160,11 @@ xi.mobSkill =
     FRIGHTFUL_ROAR_1              =  501,
     MORTAL_RAY_1                  =  502,
     UNBLESSED_ARMOR               =  503,
+    GAS_SHELL_1                   =  504,
+    VENOM_SHELL_1                 =  505,
+    PALSYNYXIS_1                  =  506,
+    PAINFUL_WHIP_1                =  507,
+    SUCTORIAL_TENTACLE_1          =  508,
 
     SELF_DESTRUCT_BOMB            =  509,
 
