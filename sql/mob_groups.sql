@@ -8305,7 +8305,7 @@ INSERT INTO `mob_groups` VALUES (3,1991,110,'Horrid_Fluke',0,128,895,0,0,28,30,0
 INSERT INTO `mob_groups` VALUES (4,5868,110,'Greater_Pugil_fished',0,128,147,0,0,31,33,0);
 INSERT INTO `mob_groups` VALUES (5,418,110,'Big_Leech',0,128,79,0,0,34,36,0);
 
-INSERT INTO `mob_groups` VALUES (6,3625,110,'Silk_Caterpillar',0,128,2248,675,0,28,30,0);
+INSERT INTO `mob_groups` VALUES (6,3625,110,'Silk_Caterpillar',0,128,2248,700,0,28,30,0);
 INSERT INTO `mob_groups` VALUES (7,941,110,'Death_Wasp',300,0,584,0,0,22,26,0);
 INSERT INTO `mob_groups` VALUES (8,2735,110,'Moon_Bat',300,2,461,0,0,23,26,0);
 INSERT INTO `mob_groups` VALUES (9,1757,110,'Goobbue_Farmer',300,0,1200,0,0,28,32,0);
@@ -8338,7 +8338,7 @@ INSERT INTO `mob_groups` VALUES (35,1267,110,'Evil_Weapon',300,0,0,0,0,36,38,0);
 INSERT INTO `mob_groups` VALUES (36,6025,110,'Ravenous_Crawler',7200,0,3097,3500,0,42,42,0);
 INSERT INTO `mob_groups` VALUES (37,1266,110,'Evil_Spirit',300,1,264,0,0,35,38,0);
 INSERT INTO `mob_groups` VALUES (38,5729,110,'Eldritch_Edge',0,32,2993,5096,0,55,55,0);
-INSERT INTO `mob_groups` VALUES (39,1124,110,'Drooling_Daisy',0,32,712,0,0,39,40,0);
+INSERT INTO `mob_groups` VALUES (39,1124,110,'Drooling_Daisy',0,32,712,1400,0,39,40,0);
 INSERT INTO `mob_groups` VALUES (40,6658,110,'Goblin_Digger',300,0,1040,0,0,28,32,0);
 INSERT INTO `mob_groups` VALUES (41,3630,110,'Simurgh',0,128,2255,46200,0,58,58,0);
 INSERT INTO `mob_groups` VALUES (42,3745,110,'Sprite',0,128,2001,0,0,61,63,0);
