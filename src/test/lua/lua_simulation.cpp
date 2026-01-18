@@ -41,6 +41,7 @@
 #include "map/utils/zoneutils.h"
 #include "map/zone.h"
 #include "map/zone_entities.h"
+#include "spawn_handler.h"
 #include "test_char.h"
 #include "test_common.h"
 
@@ -300,6 +301,9 @@ void CLuaSimulation::tick(const std::optional<TickType> boundary) const
             case TickType::VanadielDaily:
                 TracyZoneCString("Vanadiel Daily Tick");
                 break;
+            case TickType::SpawnHandler:
+                TracyZoneCString("Spawn Handler Tick");
+                break;
         }
     }
     else
@@ -414,6 +418,17 @@ void CLuaSimulation::tick(const std::optional<TickType> boundary) const
             timer::add_offset(kTimeServerTickInterval);
             earth_time::add_offset(vanadiel_time::to_earth_time(nextVDailyUpdate) - timerAdjustedUtcTime);
             time_server(timer::now(), nullptr);
+        }
+        break;
+        case TickType::SpawnHandler:
+        {
+            // Tick spawn handlers for all zones
+            timer::add_offset(kSpawnHandlerInterval);
+            const auto timePoint = timer::now();
+            for (const auto* PZone : g_PZoneList | std::views::values)
+            {
+                PZone->spawnHandler()->Tick(timePoint);
+            }
         }
         break;
     }
