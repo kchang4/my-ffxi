@@ -20,6 +20,8 @@
 */
 
 #include "lua_simulation.h"
+
+#include "common/lua.h"
 #include "common/vana_time.h"
 #include "enums/packet_c2s.h"
 #include "enums/tick_type.h"
@@ -27,15 +29,19 @@
 #include "in_memory_sink.h"
 #include "lua_client_entity_pair.h"
 #include "lua_spy.h"
+#include "lua_test_entity.h"
 #include "map/ai/ai_container.h"
 #include "map/conquest_data.h"
 #include "map/conquest_system.h"
 #include "map/entities/baseentity.h"
+#include "map/entities/mobentity.h"
 #include "map/lua/lua_baseentity.h"
 #include "map/lua/luautils.h"
+#include "map/map_constants.h"
 #include "map/map_engine.h"
 #include "map/map_networking.h"
 #include "map/packets/c2s/0x00a_login.h"
+#include "map/spawn_slot.h"
 #include "map/time_server.h"
 #include "map/utils/charutils.h"
 #include "map/utils/zoneutils.h"
@@ -47,6 +53,7 @@
 
 #include <algorithm>
 #include <array>
+#include <ranges>
 
 namespace
 {
@@ -533,6 +540,46 @@ void CLuaSimulation::setSetupContext(const bool inSetup)
     inSetupContext_ = inSetup;
 }
 
+/************************************************************************
+ *  Function: getSpawnSlot()
+ *  Purpose : Returns mobs in a spawn slot as a Lua table.
+ *  Example : local mobs = xi.test.world:getSpawnSlot(xi.zone.GHELSBA_OUTPOST, 1)
+ *  Notes   : Throws an error if slot not found.
+ ************************************************************************/
+
+auto CLuaSimulation::getSpawnSlot(const ZONEID zoneId, const uint32 slotId) const -> sol::table
+{
+    auto result = lua.create_table();
+
+    auto* PZone = zoneutils::GetZone(zoneId);
+    if (!PZone)
+    {
+        TestError("Zone {} not found", static_cast<uint16_t>(zoneId));
+        return result;
+    }
+
+    const auto slotIt = PZone->m_spawnSlots.find(slotId);
+    if (slotIt == PZone->m_spawnSlots.end() || !slotIt->second)
+    {
+        TestError("Spawn slot {} not found in zone {}", slotId, static_cast<uint16_t>(zoneId));
+        return result;
+    }
+
+    const auto& entries = slotIt->second->GetEntries();
+    auto        i       = 1;
+    for (const auto& [mob, spawnChance] : entries)
+    {
+        if (mob)
+        {
+            result[i] = CLuaTestEntity(mob);
+        }
+
+        ++i;
+    }
+
+    return result;
+}
+
 void CLuaSimulation::Register()
 {
     SOL_USERTYPE("CSimulation", CLuaSimulation);
@@ -546,4 +593,5 @@ void CLuaSimulation::Register()
     SOL_REGISTER("setSeed", CLuaSimulation::setSeed);
     SOL_REGISTER("seed", CLuaSimulation::seed);
     SOL_REGISTER("spawnPlayer", CLuaSimulation::spawnPlayer);
+    SOL_REGISTER("getSpawnSlot", CLuaSimulation::getSpawnSlot);
 };

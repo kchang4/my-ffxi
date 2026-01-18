@@ -39,6 +39,7 @@ public:
     void RemoveMob(const CMobEntity* mob);
     auto TrySpawn(std::optional<uint32> specificMobId = std::nullopt) -> bool;
     auto IsEmpty() const -> bool;
+    auto GetEntries() const -> const std::vector<SpawnSlotEntry>&;
 
 private:
     std::vector<SpawnSlotEntry> entries;

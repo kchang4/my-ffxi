@@ -168,3 +168,8 @@ auto SpawnSlot::IsEmpty() const -> bool
 {
     return entries.empty();
 }
+
+auto SpawnSlot::GetEntries() const -> const std::vector<SpawnSlotEntry>&
+{
+    return entries;
+}
