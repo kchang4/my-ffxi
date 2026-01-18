@@ -116,5 +116,4 @@ describe('Elementals', function()
         thunderEle.assert.no:isAlive()
         earthEle.assert.no:isAlive()
     end)
-
 end)

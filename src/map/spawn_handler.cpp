@@ -39,7 +39,7 @@ SpawnHandler::SpawnHandler(CZone* PZone)
 // Respawn timer can optionally be overriden for deaggro/scripting purposes.
 void SpawnHandler::registerForRespawn(CMobEntity* PMob, const std::optional<timer::duration> respawnTime)
 {
-    if (!PMob || !PMob->m_AllowRespawn)
+    if (!PMob || !PMob->m_AllowRespawn || PMob->PInstance != nullptr)
     {
         return;
     }
