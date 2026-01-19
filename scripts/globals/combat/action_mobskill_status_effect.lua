@@ -1,6 +1,9 @@
 -----------------------------------
 -- Global file for mobskills that apply status effects.
 -----------------------------------
+require('scripts/globals/combat/damage_multipliers')
+require('scripts/globals/combat/magic_hit_rate')
+-----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.action = xi.combat.action or {}
@@ -17,23 +20,23 @@ local step =
     APPLICATION_FAIL    = 7,
 }
 
-local function validateParameters(effectData)
+local function validateParameters(fedData)
     local params = {}
 
     -- Status effect application parameters.
-    params.effectId = effectData.effectId or 0
-    params.power    = effectData.power or 0
-    params.tick     = effectData.tick or 0
-    params.duration = effectData.duration or 0
-    params.subType  = effectData.subType or 0
-    params.subPower = effectData.subPower or 0
-    params.tier     = effectData.tier or 0
+    params.effectId = fedData.effectId or 0
+    params.power    = fedData.power or 0
+    params.tick     = fedData.tick or 0
+    params.duration = fedData.duration or 0
+    params.subType  = fedData.subType or 0
+    params.subPower = fedData.subPower or 0
+    params.tier     = fedData.tier or 0
 
     -- Calculation parameters.
-    params.resist = effectData.resist or 0.125             -- The amount of resists this effect allows. Example: Sleep can only resist once before failing, so value = 1/2 (No 1/4 nor 1/8)
-    params.rank   = effectData.rank or xi.skillRank.A_PLUS -- The skill rank used for macc.
-    params.stat   = effectData.stat or xi.mod.INT          -- Stat used for macc.
-    params.macc   = effectData.macc or 0                   -- Flat macc bonus addition.
+    params.resist = fedData.resist or 0.125             -- The amount of resists this effect allows. Example: Sleep can only resist once before failing, so value = 1/2 (No 1/4 nor 1/8)
+    params.rank   = fedData.rank or xi.skillRank.A_PLUS -- The skill rank used for macc.
+    params.stat   = fedData.stat or xi.mod.INT          -- Stat used for macc.
+    params.macc   = fedData.macc or 0                   -- Flat macc bonus addition.
 
     return params
 end

@@ -1,27 +1,31 @@
 -----------------------------------
--- Global file for additional effects.
+-- Global file for additional effects (damage)
+-----------------------------------
+require('scripts/globals/combat/damage_multipliers')
+require('scripts/globals/combat/magic_hit_rate')
 -----------------------------------
 xi = xi or {}
 xi.combat = xi.combat or {}
 xi.combat.action = xi.combat.action or {}
 -----------------------------------
 
-local damageAnimationDefaults =
+local defaultsTable =
 {
-    [xi.element.NONE   ] = {  xi.subEffect.LIGHT_DAMAGE     }, -- Like Excalibur.
-    [xi.element.FIRE   ] = {  xi.subEffect.FIRE_DAMAGE      },
-    [xi.element.ICE    ] = {  xi.subEffect.ICE_DAMAGE       },
-    [xi.element.WIND   ] = {  xi.subEffect.WIND_DAMAGE      },
-    [xi.element.EARTH  ] = {  xi.subEffect.EARTH_DAMAGE     },
-    [xi.element.THUNDER] = {  xi.subEffect.LIGHTNING_DAMAGE },
-    [xi.element.WATER  ] = {  xi.subEffect.WATER_DAMAGE     },
-    [xi.element.LIGHT  ] = {  xi.subEffect.LIGHT_DAMAGE     },
-    [xi.element.DARK   ] = {  xi.subEffect.DARKNESS_DAMAGE  },
+    [xi.element.NONE   ] = { xi.subEffect.LIGHT_DAMAGE     }, -- Like Excalibur.
+    [xi.element.FIRE   ] = { xi.subEffect.FIRE_DAMAGE      },
+    [xi.element.ICE    ] = { xi.subEffect.ICE_DAMAGE       },
+    [xi.element.WIND   ] = { xi.subEffect.WIND_DAMAGE      },
+    [xi.element.EARTH  ] = { xi.subEffect.EARTH_DAMAGE     },
+    [xi.element.THUNDER] = { xi.subEffect.LIGHTNING_DAMAGE },
+    [xi.element.WATER  ] = { xi.subEffect.WATER_DAMAGE     },
+    [xi.element.LIGHT  ] = { xi.subEffect.LIGHT_DAMAGE     },
+    [xi.element.DARK   ] = { xi.subEffect.DARKNESS_DAMAGE  },
 }
+
 -----------------------------------
 -- Local functions to ensure defaults are set.
 -----------------------------------
-local function validateDamageParameters(fedData)
+local function validateParameters(fedData)
     local params = {}
 
     -- Chance.
@@ -42,7 +46,7 @@ local function validateDamageParameters(fedData)
     params.canResist       = fedData.canResist or false
 
     -- Animations and messaging.
-    params.animation       = fedData.animation or damageAnimationDefaults[params.magicalElement]
+    params.animation       = fedData.animation or defaultsTable[params.magicalElement][1]
     params.messageDamage   = fedData.messageDamage or xi.msg.basic.ADD_EFFECT_DMG
     params.messageHeal     = fedData.messageHeal or xi.msg.basic.ADD_EFFECT_HEAL
 
@@ -53,7 +57,7 @@ end
 -- Global functions called from "emtity.onAdditionalEffect()"
 -----------------------------------
 xi.combat.action.executeAdditionalDamage = function(actor, target, fedData)
-    local params = validateDamageParameters(fedData)
+    local params = validateParameters(fedData)
 
     -- Early return: No proc.
     if math.random(1, 100) > params.chance then
