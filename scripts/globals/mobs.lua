@@ -567,7 +567,7 @@ local additionalEffects =
     {
         chance      = 25,
         ele         = xi.element.DARK,
-        sub         = xi.subEffect.DISPEL,
+        sub         = xi.subEffect.DARKNESS_DAMAGE,
         msg         = xi.msg.basic.ADD_EFFECT_DISPEL,
         applyEffect = false,
         power       = 1,
@@ -577,7 +577,7 @@ local additionalEffects =
     {
         chance      = 10,
         ele         = xi.element.ICE,
-        sub         = xi.subEffect.DISPEL, -- TODO
+        sub         = xi.subEffect.DARKNESS_DAMAGE,
         msg         = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,
         eff         = xi.effect.BIND,
