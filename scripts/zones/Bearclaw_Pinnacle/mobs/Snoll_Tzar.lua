@@ -12,6 +12,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 200)
+
     mob:addListener('WEAPONSKILL_STATE_EXIT', 'SNOLL_EXPLOSION', function(snoll, skillID)
         if skillID == xi.mobSkill.HYPOTHERMAL_COMBUSTION_2 then
             snoll:getBattlefield():lose()
