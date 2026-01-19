@@ -73,8 +73,8 @@ xi.combat.action.executeAdditionalDamage = function(actor, target, fedData)
     local multiplierAbsorption         = xi.spells.damage.calculateAbsorption(target, params.magicalElement, params.isMagical)
     local multiplierNullification      = xi.spells.damage.calculateNullification(target, params.magicalElement, isMagical, isBreath)
     local multiplierDamageTypeSDT      = xi.spells.damage.calculateDamageAdjustment(target, isPhysical, isMagical, isRanged, isBreath)
-    local multiplierPhysicalElementSDT = 1 -- TODO: Create function for physical elements.
-    local multiplierMagicalElementSDT  = xi.spells.damage.calculateSDT(target, params.magicalElement)
+    local multiplierPhysicalElementSDT = xi.combat.damage.physicalElementSDT(target, params.physicalElement)
+    local multiplierMagicalElementSDT  = xi.combat.damage.magicalElementSDT(target, params.magicalElement)
     local multiplierElementalStaff     = xi.spells.damage.calculateElementalStaffBonus(actor, params.magicalElement)
     local multiplierElementalAffinity  = xi.spells.damage.calculateElementalAffinityBonus(actor, params.magicalElement)
     local multiplierDayWeather         = xi.spells.damage.calculateDayAndWeather(actor, params.magicalElement, false)
@@ -119,12 +119,4 @@ xi.combat.action.executeAdditionalDamage = function(actor, target, fedData)
     else
         return 0, 0, 0
     end
-end
-
-xi.combat.action.executeAdditionalEffect = function(actor, target, fedData)
-    return 0, 0, 0
-end
-
-xi.combat.action.executeAdditionalDispel = function(actor, target, fedData)
-    return 0, 0, 0
 end
