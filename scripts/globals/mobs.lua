@@ -295,16 +295,6 @@ local additionalEffects =
         bonusAbilityParams = { bonusmab = 0, includemab = false },
     },
 
-    [xi.mob.ae.ENDARK] =
-    {
-        ele                = xi.element.DARK,
-        sub                = xi.subEffect.DARKNESS_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
     [xi.mob.ae.ENFIRE] =
     {
         ele                = xi.element.FIRE,
