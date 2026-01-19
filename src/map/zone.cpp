@@ -846,12 +846,6 @@ void CZone::ZoneServer(timer::time_point tick)
 
         ZoneTimerTriggerAreas->m_type = CTaskManager::TASK_REMOVE;
         ZoneTimerTriggerAreas         = nullptr;
-
-        if (SpawnHandlerTimer)
-        {
-            SpawnHandlerTimer->m_type = CTaskManager::TASK_REMOVE;
-            SpawnHandlerTimer         = nullptr;
-        }
     }
 }
 
@@ -960,14 +954,16 @@ void CZone::createZoneTimers()
         return 0;
     });
 
-    SpawnHandlerTimer = CTaskManager::getInstance()->AddTask(m_zoneName + "_SpawnHandler", timer::now(), this, CTaskManager::TASK_INTERVAL, kSpawnHandlerInterval,
-    [](const timer::time_point tick, const CTaskManager::CTask* PTask)
+    if (!SpawnHandlerTimer)
     {
-        const auto*  PZone = std::any_cast<CZone*>(PTask->m_data);
-        PZone->spawnHandler()->Tick(tick);
-        return 0;
-    });
-    // clang-format on
+        SpawnHandlerTimer = CTaskManager::getInstance()->AddTask(m_zoneName + "_SpawnHandler", timer::now(), this, CTaskManager::TASK_INTERVAL, kSpawnHandlerInterval,
+        [](const timer::time_point tick, const CTaskManager::CTask* PTask)
+        {
+            const auto*  PZone = std::any_cast<CZone*>(PTask->m_data);
+            PZone->spawnHandler()->Tick(tick);
+            return 0;
+        });
+    }
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)
