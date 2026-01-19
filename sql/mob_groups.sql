@@ -129,15 +129,15 @@ INSERT INTO `mob_groups` VALUES (52,6809,2,'Orcfeltrap',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (1,1516,3,'Ghost_Crab_fished',0,128,93,0,0,30,34,0);
 INSERT INTO `mob_groups` VALUES (2,5868,3,'Greater_Pugil_fished',0,128,147,0,0,35,39,0);
 INSERT INTO `mob_groups` VALUES (3,6029,3,'Kraken_fished',0,128,504,0,0,40,42,0);
-INSERT INTO `mob_groups` VALUES (4,1891,3,'Harajnite',0,128,1276,10000,0,44,46,0);
-INSERT INTO `mob_groups` VALUES (5,881,3,'Cyclopean_Conch',0,128,556,0,0,44,46,0);
+INSERT INTO `mob_groups` VALUES (4,1891,3,'Harajnite',0,128,1276,6800,0,51,51,0);
+INSERT INTO `mob_groups` VALUES (5,881,3,'Cyclopean_Conch',0,128,556,5600,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (6,5864,3,'Cutter_fished',0,128,93,0,0,25,35,0);
 
 INSERT INTO `mob_groups` VALUES (7,1304,3,'Fatty_Pugil',0,128,248,0,0,25,35,0);
 INSERT INTO `mob_groups` VALUES (8,4106,3,'Uragnite',0,128,2527,0,0,30,37,0);
 INSERT INTO `mob_groups` VALUES (9,746,3,'Clot',0,128,487,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (10,769,3,'Colossal_Calamari',0,128,504,0,0,40,42,0);
-INSERT INTO `mob_groups` VALUES (11,4519,3,'Zoredonite',0,128,2811,2000,0,62,62,0);
+INSERT INTO `mob_groups` VALUES (11,4519,3,'Zoredonite',0,128,2811,3200,0,61,62,0);
 
 -- ------------------------------------------------------------
 -- Bibiki_Bay (Zone 4)
@@ -181,7 +181,7 @@ INSERT INTO `mob_groups` VALUES (33,660,4,'Catoblepas',300,0,432,0,0,76,80,0);
 INSERT INTO `mob_groups` VALUES (34,1975,4,'Hobgoblin_Fascinator',300,0,1024,0,0,72,74,0);
 INSERT INTO `mob_groups` VALUES (35,3984,4,'Tragopan',300,0,208,0,0,71,73,0);
 INSERT INTO `mob_groups` VALUES (36,3848,4,'Tartarus_Eft',300,0,2379,0,0,76,78,0);
-INSERT INTO `mob_groups` VALUES (37,5762,4,'Splacknuck',0,32,3046,0,0,69,69,0);
+INSERT INTO `mob_groups` VALUES (37,5762,4,'Splacknuck',0,32,3046,7720,0,69,70,0);
 INSERT INTO `mob_groups` VALUES (38,1973,4,'Hobgoblin_Blagger',300,0,0,0,0,82,84,0);
 INSERT INTO `mob_groups` VALUES (39,1981,4,'Hobgoblin_Toreador',300,0,1024,0,0,82,84,0);
 INSERT INTO `mob_groups` VALUES (40,4085,4,'Bight_Rarab',300,0,326,0,0,81,83,0);
