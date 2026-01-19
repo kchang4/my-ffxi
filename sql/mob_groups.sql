@@ -13400,11 +13400,11 @@ INSERT INTO `mob_groups` VALUES (46,1807,196,'Greater_Pugil',300,0,1232,0,0,29,3
 -- Crawlers_Nest (Zone 197)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,1830,197,'Guardian_Crawler',0,128,1244,3100,0,45,50,0);
-INSERT INTO `mob_groups` VALUES (2,1123,197,'Drone_Crawler',0,128,711,0,0,50,50,0);
-INSERT INTO `mob_groups` VALUES (3,3281,197,'Queen_Crawler',0,128,1641,0,0,64,64,0);
-INSERT INTO `mob_groups` VALUES (4,2586,197,'Matron_Crawler',0,128,1641,0,0,64,64,0);
-INSERT INTO `mob_groups` VALUES (5,297,197,'Awd_Goggie',0,128,197,0,0,68,68,0);
+INSERT INTO `mob_groups` VALUES (1,1830,197,'Guardian_Crawler',0,128,1244,2100,0,45,45,0);
+INSERT INTO `mob_groups` VALUES (2,1123,197,'Drone_Crawler',0,128,711,2560,0,50,50,0);
+INSERT INTO `mob_groups` VALUES (3,3281,197,'Queen_Crawler',0,128,1641,3720,0,64,64,0);
+INSERT INTO `mob_groups` VALUES (4,2586,197,'Matron_Crawler',0,128,1641,3800,0,64,64,0);
+INSERT INTO `mob_groups` VALUES (5,297,197,'Awd_Goggie',0,128,197,4170,0,68,68,0);
 INSERT INTO `mob_groups` VALUES (6,6316,197,'Worker_Crawler',300,0,256,0,0,40,44,0);
 INSERT INTO `mob_groups` VALUES (7,6305,197,'Death_Jacket',300,0,586,0,0,40,42,0);
 INSERT INTO `mob_groups` VALUES (8,2598,197,'Maze_Lizard',300,0,1645,0,0,41,43,0);
@@ -13422,7 +13422,7 @@ INSERT INTO `mob_groups` VALUES (19,6344,197,'Olid_Funguar',300,0,1440,0,0,93,96
 INSERT INTO `mob_groups` VALUES (20,1341,197,'Fire_Elemental',300,4,832,0,0,52,54,0);
 INSERT INTO `mob_groups` VALUES (21,4309,197,'Water_Elemental',300,4,2631,0,0,52,54,0);
 INSERT INTO `mob_groups` VALUES (22,447,197,'Blazer_Beetle',300,0,292,0,0,52,54,0);
-INSERT INTO `mob_groups` VALUES (23,5854,197,'Dynast_Beetle',0,128,3065,5500,0,56,65,0);
+INSERT INTO `mob_groups` VALUES (23,5854,197,'Dynast_Beetle',0,128,3065,5500,0,56,56,0);
 INSERT INTO `mob_groups` VALUES (24,6075,197,'Helm_Beetle',300,0,1298,0,0,59,62,0);
 INSERT INTO `mob_groups` VALUES (25,6318,197,'Knight_Crawler',300,0,1457,0,0,60,63,0);
 INSERT INTO `mob_groups` VALUES (26,3232,197,'Puroboros',3600,0,2043,0,0,45,45,0);
