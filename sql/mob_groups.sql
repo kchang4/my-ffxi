@@ -10875,10 +10875,10 @@ INSERT INTO `mob_groups` VALUES (1,125,148,'Ancient_Quadav',960,0,89,0,0,69,72,0
 INSERT INTO `mob_groups` VALUES (2,907,148,'Darksteel_Quadav',960,0,560,0,0,69,72,0);
 INSERT INTO `mob_groups` VALUES (3,3156,148,'Platinum_Quadav',960,0,2006,0,0,69,72,0);
 INSERT INTO `mob_groups` VALUES (4,3463,148,'Sapphire_Quadav',960,0,2159,0,0,69,72,0);
-INSERT INTO `mob_groups` VALUES (5,3410,148,'Ruby_Quadav',1200,0,2129,3700,0,72,74,0);
-INSERT INTO `mob_groups` VALUES (6,46,148,'Adaman_Quadav',1200,0,23,0,0,72,74,0);
-INSERT INTO `mob_groups` VALUES (7,1034,148,'Diamond_Quadav',0,128,650,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (8,6683,148,'ZaDha_Adamantking',0,128,2830,42000,42000,85,85,0);
+INSERT INTO `mob_groups` VALUES (5,3410,148,'Ruby_Quadav',1200,0,2129,3600,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (6,46,148,'Adaman_Quadav',1200,0,23,4100,0,72,74,0);
+INSERT INTO `mob_groups` VALUES (7,1034,148,'Diamond_Quadav',0,128,650,4000,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (8,6683,148,'ZaDha_Adamantking',0,128,2830,30000,42000,85,85,0);
 INSERT INTO `mob_groups` VALUES (9,2780,148,'MuZha_Infernoblade',0,128,0,0,0,72,75,0);
 INSERT INTO `mob_groups` VALUES (10,2017,148,'HuRhe_Marrowgorger',0,128,0,0,0,72,75,0);
 INSERT INTO `mob_groups` VALUES (11,1022,148,'DePha_Unscarred',0,128,0,0,0,72,75,0);
