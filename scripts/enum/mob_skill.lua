@@ -143,6 +143,8 @@ xi.mobSkill =
 
     MIND_WALL                     =  471, -- Mammet-800
 
+    GRAVE_REEL                    =  472,
+
     PETRIFACTIVE_BREATH           =  480,
 
     CHARGED_WHISKER               =  483,
