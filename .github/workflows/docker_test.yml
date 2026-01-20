@@ -130,7 +130,7 @@ jobs:
           github-report: true
           summary: true
           pull-request: false
-          status-check: true
+          status-check: ${{ github.event_name != 'pull_request' }}
           status-check-name: "xi_test (${{ format('docker-{0}', inputs.os) }})"
           annotate: true
           upload-artifact: true
