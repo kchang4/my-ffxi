@@ -24,19 +24,20 @@ local function validateParameters(fedData)
     local params = {}
 
     -- Status effect application parameters.
-    params.effectId = fedData.effectId or 0
-    params.power    = fedData.power or 0
-    params.tick     = fedData.tick or 0
-    params.duration = fedData.duration or 0
-    params.subType  = fedData.subType or 0
-    params.subPower = fedData.subPower or 0
-    params.tier     = fedData.tier or 0
+    params.effectId   = fedData.effectId or 0
+    params.power      = fedData.power or 0
+    params.tick       = fedData.tick or 0
+    params.duration   = fedData.duration or 0
+    params.subType    = fedData.subType or 0
+    params.subPower   = fedData.subPower or 0
+    params.tier       = fedData.tier or 0
 
     -- Calculation parameters.
-    params.resist = fedData.resist or 0.125             -- The amount of resists this effect allows. Example: Sleep can only resist once before failing, so value = 1/2 (No 1/4 nor 1/8)
-    params.rank   = fedData.rank or xi.skillRank.A_PLUS -- The skill rank used for macc.
-    params.stat   = fedData.stat or xi.mod.INT          -- Stat used for macc.
-    params.macc   = fedData.macc or 0                   -- Flat macc bonus addition.
+    params.element    = fedData.element or xi.data.statusEffect.getAssociatedElement(params.effectId, xi.element.NONE)
+    params.rank       = fedData.rank or xi.skillRank.A_PLUS -- The skill rank used for macc.
+    params.stat       = fedData.stat or xi.mod.INT          -- Stat used for macc.
+    params.macc       = fedData.macc or 0                   -- Flat macc bonus addition.
+    params.resistRate = fedData.resistRate or 0
 
     return params
 end
@@ -62,10 +63,8 @@ xi.combat.action.executeMobskillStatusEffect = function(actor, target, skill, ef
         return handleReturn(skill, setMessage, xi.msg.basic.SKILL_NO_EFFECT, step.CANT_GAIN)
     end
 
-    local element = xi.data.statusEffect.getAssociatedElement(params.effectId, actor:getStatusEffectElement(params.effectId))
-
     -- Check immunity.
-    if xi.data.statusEffect.isTargetImmune(target, params.effectId, element) then
+    if xi.data.statusEffect.isTargetImmune(target, params.effectId, params.element) then
         return handleReturn(skill, setMessage, xi.msg.basic.SKILL_MISS, step.IMMUNE_CHECK)
 
     -- Check resist traits.
@@ -78,13 +77,13 @@ xi.combat.action.executeMobskillStatusEffect = function(actor, target, skill, ef
     end
 
     -- Calculate resist state.
-    local resistRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, params.rank, element, params.stat, params.effectId, params.macc)
-    if resistRate < params.resist then
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, params.rank, params.element, params.stat, params.effectId, params.macc)
+    if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
         return handleReturn(skill, setMessage, xi.msg.basic.SKILL_MISS, step.RESIST_RATE_CHECK)
     end
 
     -- Calculate duration.
-    local totalDuration = math.floor(params.duration * resistRate)
+    local totalDuration = math.floor(params.duration * resistanceRate)
 
     -- Apply effect.
     if target:addStatusEffect(params.effectId, params.power, params.tick, totalDuration, params.subType, params.subPower, params.tier) then
