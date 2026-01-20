@@ -213,7 +213,6 @@ end
 
 xi.mob.additionalEffect =
 {
-    BLIND        = 0,
     CURSE        = 1,
     ENAERO       = 2,
     ENBLIZZARD   = 3,
@@ -247,20 +246,6 @@ xi.mob.ae = xi.mob.additionalEffect
 
 local additionalEffects =
 {
-    [xi.mob.ae.BLIND] =
-    {
-        chance = 25,
-        ele         = xi.element.DARK,
-        sub         = xi.subEffect.BLIND,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.BLINDNESS,
-        power       = 20,
-        duration    = 30,
-        minDuration = 1,
-        maxDuration = 45,
-    },
-
     [xi.mob.ae.CURSE] =
     {
         chance      = 20,
