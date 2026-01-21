@@ -10,6 +10,19 @@ ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `mob_spawn_slots` WRITE;
 
+-- Oldton Movalpolos
+INSERT INTO `mob_spawn_slots` VALUES (11,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (11,11,0);
+
 -- Ghelsba Outpost (Zone 140)
 INSERT INTO `mob_spawn_slots` VALUES (140,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (140,2,0);
