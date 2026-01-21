@@ -371,6 +371,47 @@ INSERT INTO `mob_spawn_slots` VALUES (145,113,0);
 INSERT INTO `mob_spawn_slots` VALUES (150, 1, 0);
 INSERT INTO `mob_spawn_slots` VALUES (150, 2, 0);
 
+-- Oldton Movalpolos
+INSERT INTO `mob_spawn_slots` VALUES (151,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,17,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,18,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,19,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,20,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,21,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,22,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,23,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,24,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,25,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,26,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,27,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,28,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,29,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,30,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,31,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,32,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,33,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,34,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,35,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,36,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,37,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,38,0);
+INSERT INTO `mob_spawn_slots` VALUES (151,39,0);
+
 -- Korroloka Tunnel
 INSERT INTO `mob_spawn_slots` VALUES (173, 1, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 2, 0);
