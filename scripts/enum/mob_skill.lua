@@ -180,7 +180,7 @@ xi.mobSkill =
     BLITZSTRAHL                   =  535,
     PANZERFAUST                   =  536,
     BERSERK_DOLL                  =  537,
-
+    PANZERSCHRECK                 =  538,
     TYPHOON                       =  539,
 
     TREMOROUS_TREAD               =  540, -- Mammet-800

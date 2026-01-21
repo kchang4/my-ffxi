@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 10)
     mob:setMod(xi.mod.STORETP, 62)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
-    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 25)
+    mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
 entity.onMobMobskillChoose = function(mob, target)

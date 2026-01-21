@@ -12701,7 +12701,7 @@ INSERT INTO `mob_groups` VALUES (22,2483,184,'Magic_Urn',300,0,1571,0,0,34,35,0)
 INSERT INTO `mob_groups` VALUES (23,1961,184,'Hippolytos',0,32,787,0,0,28,32,0);
 INSERT INTO `mob_groups` VALUES (24,2480,184,'Magic_Pot',300,0,606,0,0,28,29,0);
 INSERT INTO `mob_groups` VALUES (25,1261,184,'Eurymedon',0,32,787,0,0,30,34,0);
-INSERT INTO `mob_groups` VALUES (26,1049,184,'Disaster_Idol',0,128,0,4300,0,55,55,0);
+INSERT INTO `mob_groups` VALUES (26,1049,184,'Disaster_Idol',0,128,0,4300,10000,55,55,0);
 INSERT INTO `mob_groups` VALUES (27,3055,184,'Orna',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (28,1379,184,'Fomorian_Spear',0,128,0,0,0,32,32,0);
 INSERT INTO `mob_groups` VALUES (29,2058,184,'Illusory_Pot',0,128,0,0,0,45,50,0);

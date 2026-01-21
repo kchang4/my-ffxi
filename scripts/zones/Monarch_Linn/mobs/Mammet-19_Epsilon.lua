@@ -36,6 +36,7 @@ local tpMoves =
 entity.onMobInitialize = function(mob)
     mob:addImmunity(xi.immunity.DARK_SLEEP)
     mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
 end
 
 entity.onMobSpawn = function(mob)
