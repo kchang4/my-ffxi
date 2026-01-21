@@ -383,7 +383,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     ------------------------------
     -- STEP 3: Check if spell resists and Immunobreak.
     ------------------------------
-    if xi.data.statusEffect.isResistRateSuccessfull(spellEffect, resistRate, 0) then
+    if not xi.data.statusEffect.isResistRateSuccessfull(spellEffect, resistRate, 0) then
         -- Decide which resistance rank modifier to use:
         -- 1: If an effect exists, check if said effect has a specialized resistance rank.
         -- 2: If an effect doesn't exist, or does but doesn't have a specialized resistance rank, default to action element.
