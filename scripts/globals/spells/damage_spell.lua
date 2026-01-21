@@ -683,44 +683,6 @@ xi.spells.damage.calculateMagicCriticalMultiplier = function(caster)
     return criticalMultiplier
 end
 
--- Calculate: Target Magic Damage Adjustment (TMDA)
--- SDT follow-up. This time for specific modifiers.
--- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
-xi.spells.damage.calculateDamageAdjustment = function(target, isPhysical, isMagical, isRanged, isBreath)
-    local targetDamageTaken = 1
-
-    -- The values set for this modifiers are base 10000.
-    -- -2500 in item_mods.sql means -25% damage recived.
-    -- 2500 would mean 25% ADDITIONAL damage taken.
-
-    local globalDamageTaken           = target:getMod(xi.mod.DMG) / 10000
-
-    local physicalDamageTaken         = isPhysical and target:getMod(xi.mod.DMGPHYS) / 10000 or 0
-    local physicalDamageTakenII       = isPhysical and target:getMod(xi.mod.DMGPHYS_II) / 10000 or 0
-    local physicalDamageTakenUncapped = isPhysical and target:getMod(xi.mod.UDMGPHYS) / 10000 or 0
-
-    local magicDamageTaken            = isMagical and target:getMod(xi.mod.DMGMAGIC) / 10000 or 0
-    local magicDamageTakenII          = isMagical and target:getMod(xi.mod.DMGMAGIC_II) / 10000 or 0
-    local magicDamageTakenUncapped    = isMagical and target:getMod(xi.mod.UDMGMAGIC) / 10000 or 0
-
-    local rangedDamageTaken           = isRanged and target:getMod(xi.mod.DMGRANGE) / 10000 or 0
-    local rangedDamageTakenUncapped   = isRanged and target:getMod(xi.mod.UDMGRANGE) / 10000 or 0
-
-    local breathDamageTaken           = isBreath and target:getMod(xi.mod.DMGBREATH) / 10000 or 0
-    local breathDamageTakenUncapped   = isBreath and target:getMod(xi.mod.UDMGBREATH) / 10000 or 0
-
-     -- The combination of regular "Damage Taken" and "X Damage Taken" caps at 50% both ways.
-    local combinedDamageTaken = utils.clamp(globalDamageTaken + physicalDamageTaken + magicDamageTaken + rangedDamageTaken + breathDamageTaken, -0.5, 0.5)
-
-    -- "X Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
-    targetDamageTaken = utils.clamp(targetDamageTaken + combinedDamageTaken + physicalDamageTakenII + magicDamageTakenII, 0.125, 1.875)
-
-     -- Uncapped damage modifiers. Cap is 100% both ways anyway, just in case.
-    targetDamageTaken = utils.clamp(targetDamageTaken + physicalDamageTakenUncapped + magicDamageTakenUncapped + rangedDamageTakenUncapped + breathDamageTakenUncapped, 0, 2)
-
-    return targetDamageTaken
-end
-
 -- Divine seal applies its own multiplier to healing spells when used against undead.
 -- NOTE: If we have reached this far with a heling spell, the target is confirmed to be undead.
 xi.spells.damage.calculateDivineSealMultiplier = function(caster, skillType)
@@ -1114,7 +1076,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
 
     if absorb > 0 then
         resistTier                  = xi.combat.magicHitRate.calculateResistRate(caster, target, spellGroup, skillType, 0, spellElement, statUsed, 0, bonusMacc)
-        targetMagicDamageAdjustment = xi.spells.damage.calculateDamageAdjustment(target, false, true, false, false)
+        targetMagicDamageAdjustment = xi.combat.damage.calculateDamageAdjustment(target, false, true, false, false)
 
         -- If spell is NOT blue magic OR (if its blue magic AND has status effect)
         if
