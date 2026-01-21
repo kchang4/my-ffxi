@@ -211,7 +211,7 @@ end
 -- mob additional melee effects
 -----------------------------------
 
-xi.mob.additionalEffect =
+xi.mob.ae =
 {
     CURSE        = 1,
     ENAERO       = 2,
@@ -242,7 +242,6 @@ xi.mob.additionalEffect =
     DEFENSE_DOWN = 27,
     ATTACK_DOWN  = 28,
 }
-xi.mob.ae = xi.mob.additionalEffect
 
 local additionalEffects =
 {
@@ -538,16 +537,6 @@ local additionalEffects =
         maxDuration = 45,
     },
 
-    [xi.mob.ae.DISPEL] =
-    {
-        chance      = 25,
-        ele         = xi.element.DARK,
-        sub         = xi.subEffect.DARKNESS_DAMAGE,
-        msg         = xi.msg.basic.ADD_EFFECT_DISPEL,
-        applyEffect = false,
-        power       = 1,
-    },
-
     [xi.mob.ae.BIND] =
     {
         chance      = 10,
@@ -620,19 +609,6 @@ local addEffectStatus = function(mob, target, ae, params)
     end
 
     return 0, 0, 0
-end
-
---[[
-    Helper function for xi.mob.onAddEffect that dispels an effect.
---]]
-local addEffectDispel = function(target, ae)
-    local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
-
-    if dispelledEffect == xi.effect.NONE then
-        return 0, 0, 0
-    end
-
-    return ae.sub, ae.msg, dispelledEffect
 end
 
 --[[
@@ -729,10 +705,6 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
             if ae.applyEffect then
                 return addEffectStatus(mob, target, ae, params)
 
-            -- DISPEL
-            elseif effect == xi.mob.ae.DISPEL and target then
-                return addEffectDispel(target, ae)
-
             -- IMMEDIATE EFFECT
             else
                 return addEffectImmediate(mob, target, damage, ae, params)
@@ -744,24 +716,6 @@ xi.mob.onAddEffect = function(mob, target, damage, effect, params)
 
     return 0, 0, 0
 end
-
------------------------------------
--- mob difficulty enums for checkDifficulty()
------------------------------------
-
-xi.mob.difficulty =
-{
-    TOO_WEAK             = 0,
-    INCREDIBLY_EASY_PREY = 1,
-    EASY_PREY            = 2,
-    DECENT_CHALLENGE     = 3,
-    EVEN_MATCH           = 4,
-    TOUGH                = 5,
-    VERY_TOUGH           = 6,
-    INCREDIBLY_TOUGH     = 7,
-    MAX                  = 8,
-}
-xi.mob.diff = xi.mob.difficulty
 
 -----------------------------------
 -- Centralized function for calling one or more mob "pets"
