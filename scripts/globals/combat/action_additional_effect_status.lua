@@ -18,6 +18,7 @@ local defaultsTable =
     [xi.effect.DEFENSE_DOWN ] = { xi.subEffect.DEFENSE_DOWN    },
     [xi.effect.EVASION_DOWN ] = { xi.subEffect.EVASION_DOWN    },
     [xi.effect.KO           ] = { xi.subEffect.DEATH           },
+    [xi.effect.NONE         ] = { xi.subEffect.DARKNESS_DAMAGE },
     [xi.effect.PARALYSIS    ] = { xi.subEffect.PARALYSIS       },
     [xi.effect.PETRIFICATION] = { xi.subEffect.PETRIFY         },
     [xi.effect.PLAGUE       ] = { xi.subEffect.PLAGUE          },
@@ -111,4 +112,37 @@ xi.combat.action.executeAdditionalStatus = function(actor, target, fedData)
     end
 
     return 0, 0, 0
+end
+
+xi.combat.action.executeAdditionalDispel = function(actor, target, fedData)
+    local params = validateParameters(fedData)
+
+    -- Early return: Incorrect effect ID.
+    if params.effectId ~= xi.effect.NONE then
+        return 0, 0, 0
+    end
+
+    -- Early return: No proc.
+    if math.random(1, 100) > params.chance then
+        return 0, 0, 0
+    end
+
+    -- Early return: No dispelable effect.
+    if not target:hasStatusEffectByFlag(xi.effectFlag.DISPELABLE) then
+        return 0, 0, 0
+    end
+
+    -- Early return: Resist rate too high.
+    local resistanceRate = xi.combat.magicHitRate.calculateResistRate(actor, target, 0, 0, xi.skillRank.A_PLUS, params.element, params.actorStat, params.effectId, params.macc)
+    if not xi.data.statusEffect.isResistRateSuccessfull(params.effectId, resistanceRate, params.resistRate) then
+        return 0, 0, 0
+    end
+
+    -- Early return: No effect fetched.
+    local dispelledEffect = target:dispelStatusEffect(xi.effectFlag.DISPELABLE)
+    if dispelledEffect == xi.effect.NONE then
+        return 0, 0, 0
+    end
+
+    return params.animation, xi.msg.basic.ADD_EFFECT_DISPEL, dispelledEffect
 end
