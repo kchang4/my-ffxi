@@ -65,8 +65,7 @@ local function initGamibits(mob)
     mob:addGambit(
         ai.t.SELF,
         { ai.c.NOT_STATUS, xi.effect.PHALANX },
-        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX },
-        
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PHALANX }
     )
 
     -- Rampart - Use when battle target has Manafont, Chainspell, or Astral Flow

@@ -121,7 +121,7 @@ spellObject.onMobSpawn = function(mob)
                 {ai.c.STATUS, xi.effect.EMBOLDEN }
             )
         },
-        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PROTECT },
+        { ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PROTECT }
     )
 
     -- cast shell on himself
