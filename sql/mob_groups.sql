@@ -7766,7 +7766,7 @@ INSERT INTO `mob_groups` VALUES (30,4124,103,'Valkurm_Emperor',0,32,2533,1180,0,
 INSERT INTO `mob_groups` VALUES (31,1522,103,'Giant_Bat',300,0,461,0,0,20,22,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,1751,103,'Golden_Bat',0,32,1191,640,0,26,27,0,NULL);
 INSERT INTO `mob_groups` VALUES (33,6658,103,'Goblin_Digger',300,0,1040,0,0,19,21,0,NULL);
-INSERT INTO `mob_groups` VALUES (34,2558,103,'Marchelute',0,128,1616,0,0,41,41,0,NULL);
+INSERT INTO `mob_groups` VALUES (34,2558,103,'Marchelute',0,128,1616,6500,0,41,41,0,NULL);
 INSERT INTO `mob_groups` VALUES (35,1077,103,'Doman',0,128,0,0,0,52,52,0,NULL);
 INSERT INTO `mob_groups` VALUES (36,2984,103,'Onryo',0,128,0,0,0,52,52,0,NULL);
 INSERT INTO `mob_groups` VALUES (37,1983,103,'Hobgoblin_Warrior',0,128,0,0,0,30,35,0,NULL);
@@ -11335,9 +11335,9 @@ INSERT INTO `mob_groups` VALUES (30,2988,157,'Ophion',0,32,787,0,0,33,38,0,NULL)
 INSERT INTO `mob_groups` VALUES (31,3359,157,'Rhoikos',0,32,787,0,0,33,38,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,2124,157,'Jagd_Doll',300,0,192,0,0,33,34,0,NULL);
 INSERT INTO `mob_groups` VALUES (33,2956,157,'Ogygos',0,32,1844,0,0,33,38,0,NULL);
-INSERT INTO `mob_groups` VALUES (34,1502,157,'Gerwitzs_Scythe',0,128,0,0,0,60,60,0,NULL);
-INSERT INTO `mob_groups` VALUES (35,3514,157,'Scythe_Victim_war',0,128,0,0,0,58,58,0,NULL);
-INSERT INTO `mob_groups` VALUES (36,6564,157,'Scythe_Victim_blm',0,128,0,0,0,58,58,0,NULL);
+INSERT INTO `mob_groups` VALUES (34,1502,157,'Gerwitzs_Scythe',0,128,0,10000,10000,60,60,0,NULL);
+INSERT INTO `mob_groups` VALUES (35,3514,157,'Scythe_Victim_war',0,128,0,6500,0,58,58,0,NULL);
+INSERT INTO `mob_groups` VALUES (36,6564,157,'Scythe_Victim_blm',0,128,0,8000,8000,58,58,0,NULL);
 
 -- ------------------------------------------------------------
 -- Upper_Delkfutts_Tower (Zone 158)
@@ -11525,7 +11525,7 @@ INSERT INTO `mob_groups` VALUES (44,2569,161,'Marquis_Amon',0,128,1623,3500,0,76
 INSERT INTO `mob_groups` VALUES (45,1134,161,'Duke_Haborym',0,128,716,4400,0,76,76,0,NULL);
 INSERT INTO `mob_groups` VALUES (46,1786,161,'Grand_Duke_Batym',0,128,1213,4000,0,76,76,0,NULL);
 INSERT INTO `mob_groups` VALUES (47,993,161,'Demons_Avatar',0,128,0,0,0,52,54,0,NULL);
-INSERT INTO `mob_groups` VALUES (48,917,161,'Dark_Spark',0,128,0,8500,0,55,55,0,NULL);
+INSERT INTO `mob_groups` VALUES (48,917,161,'Dark_Spark',0,128,0,8600,0,55,55,0,NULL);
 INSERT INTO `mob_groups` VALUES (49,2664,161,'Mimic',0,128,1683,0,0,60,60,0,NULL);
 INSERT INTO `mob_groups` VALUES (50,2571,161,'Marquis_Andrealphus',0,128,0,0,0,76,76,0,NULL);
 INSERT INTO `mob_groups` VALUES (51,982,161,'Demon_Banneret',0,128,0,0,0,61,61,0,NULL);
@@ -13196,9 +13196,9 @@ INSERT INTO `mob_groups` VALUES (42,71,193,'Air_Elemental',720,4,39,0,0,33,36,0,
 INSERT INTO `mob_groups` VALUES (43,4309,193,'Water_Elemental',720,4,2630,0,0,33,36,0,NULL);
 INSERT INTO `mob_groups` VALUES (44,5169,193,'Bombast',5400,0,3223,3050,5000,42,44,0,NULL);
 INSERT INTO `mob_groups` VALUES (45,3169,193,'Polevik',0,128,0,0,0,45,45,0,NULL);
-INSERT INTO `mob_groups` VALUES (46,1501,193,'Gerwitzs_Axe',0,128,947,0,0,50,50,0,NULL);
-INSERT INTO `mob_groups` VALUES (47,1504,193,'Gerwitzs_Sword',0,128,948,0,0,52,52,0,NULL);
-INSERT INTO `mob_groups` VALUES (48,1503,193,'Gerwitzs_Soul',0,128,0,0,0,54,54,0,NULL);
+INSERT INTO `mob_groups` VALUES (46,1501,193,'Gerwitzs_Axe',0,128,947,7500,0,50,50,0,NULL);
+INSERT INTO `mob_groups` VALUES (47,1504,193,'Gerwitzs_Sword',0,128,948,3000,3000,52,52,0,NULL);
+INSERT INTO `mob_groups` VALUES (48,1503,193,'Gerwitzs_Soul',0,128,0,5600,5600,54,54,0,NULL);
 INSERT INTO `mob_groups` VALUES (49,2817,193,'Necroplasm',0,128,0,0,0,37,37,0,NULL);
 INSERT INTO `mob_groups` VALUES (50,5534,193,'Air_Elemental',0,128,39,0,0,75,75,0,NULL);
 INSERT INTO `mob_groups` VALUES (51,2633,193,'Metallic_Slime',0,128,0,0,0,34,38,0,NULL);
