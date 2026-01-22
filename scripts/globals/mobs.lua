@@ -259,16 +259,6 @@ local additionalEffects =
         maxDuration = 300,
     },
 
-    [xi.mob.ae.ENAERO] =
-    {
-        ele                = xi.element.WIND,
-        sub                = xi.subEffect.WIND_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
     [xi.mob.ae.ENBLIZZARD] =
     {
         ele                = xi.element.ICE,
