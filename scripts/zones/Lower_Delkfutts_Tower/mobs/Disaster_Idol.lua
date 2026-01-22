@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 5)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local skillList =
     {
         xi.mobSkill.KARTSTRAHL,

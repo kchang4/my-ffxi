@@ -85,7 +85,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     switch (mob:getAnimationSub()): caseof
     {
         [forms.UNARMED] = function()
