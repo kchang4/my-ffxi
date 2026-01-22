@@ -23,7 +23,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STORETP, 62)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.SPIRIT_ABSORPTION_2,

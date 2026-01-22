@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.BASE_DAMAGE_MULTIPLIER, 150)
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     local tpMoves =
     {
         xi.mobSkill.CAROUSEL_1,

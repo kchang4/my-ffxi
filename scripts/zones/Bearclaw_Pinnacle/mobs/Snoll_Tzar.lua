@@ -75,7 +75,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if
         mob:getAnimationSub() == 7 and
         math.random(1, 100) <= 75

@@ -205,7 +205,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobMobskillChoose = function(mob, target)
+entity.onMobMobskillChoose = function(mob, target, skillId)
     if mob:getAnimationSub() == 1 then
         mob:setLocalVar('skill_tp', mob:getTP())
     end
