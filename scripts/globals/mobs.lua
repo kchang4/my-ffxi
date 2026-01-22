@@ -259,16 +259,6 @@ local additionalEffects =
         maxDuration = 300,
     },
 
-    [xi.mob.ae.ENBLIZZARD] =
-    {
-        ele                = xi.element.ICE,
-        sub                = xi.subEffect.ICE_DAMAGE,
-        msg                = xi.msg.basic.ADD_EFFECT_DMG,
-        negMsg             = xi.msg.basic.ADD_EFFECT_HEAL,
-        mod                = xi.mod.INT,
-        bonusAbilityParams = { bonusmab = 0, includemab = false },
-    },
-
     [xi.mob.ae.ENLIGHT] =
     {
         ele                = xi.element.LIGHT,
