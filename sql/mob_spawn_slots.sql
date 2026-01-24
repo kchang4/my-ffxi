@@ -486,4 +486,34 @@ INSERT INTO `mob_spawn_slots` VALUES (173, 2, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 3, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 4, 0);
 
+-- Gusgen Mines
+INSERT INTO `mob_spawn_slots` VALUES (196,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,17,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,18,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,19,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,20,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,21,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,22,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,23,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,24,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,25,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,26,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,27,0);
+INSERT INTO `mob_spawn_slots` VALUES (196,28,0);
+
 UNLOCK TABLES;
