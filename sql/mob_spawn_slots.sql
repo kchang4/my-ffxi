@@ -416,6 +416,16 @@ INSERT INTO `mob_spawn_slots` VALUES (151,37,0);
 INSERT INTO `mob_spawn_slots` VALUES (151,38,0);
 INSERT INTO `mob_spawn_slots` VALUES (151,39,0);
 
+-- Ranguemont Pass
+INSERT INTO `mob_spawn_slots` VALUES (166,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (166,8,0);
+
 -- Korroloka Tunnel
 INSERT INTO `mob_spawn_slots` VALUES (173, 1, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 2, 0);
