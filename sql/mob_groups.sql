@@ -561,11 +561,11 @@ INSERT INTO `mob_groups` VALUES (12,1299,13,'Fantoccini_Monster',0,128,0,0,0,0,N
 INSERT INTO `mob_groups` VALUES (13,1300,13,'Fantoccini_Wyvern',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,1298,13,'Fantoccini_Avatar',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (15,1297,13,'Fantoccini_Automaton',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (16,2006,13,'Hume_Automaton',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (17,1206,13,'Elvaan_Automaton',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (18,3850,13,'Tarutaru_Automaton',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (19,2680,13,'Mithran_Automaton',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (20,1452,13,'Galkan_Automaton',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (16,2006,13,'Hume_Automaton',0,128,0,3000,3000,0,NULL);
+INSERT INTO `mob_groups` VALUES (17,1206,13,'Elvaan_Automaton',0,128,0,3000,3000,0,NULL);
+INSERT INTO `mob_groups` VALUES (18,3850,13,'Tarutaru_Automaton',0,128,0,2000,2000,0,NULL);
+INSERT INTO `mob_groups` VALUES (19,2680,13,'Mithran_Automaton',0,128,0,2900,2900,0,NULL);
+INSERT INTO `mob_groups` VALUES (20,1452,13,'Galkan_Automaton',0,128,0,3600,3600,0,NULL);
 INSERT INTO `mob_groups` VALUES (21,0,13,'Buggesy',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (22,0,13,'Bugafrod',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (23,0,13,'Viovek',0,128,0,0,0,0,NULL);
