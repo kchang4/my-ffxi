@@ -115,7 +115,7 @@ xi.combat.action.executeAdditionalStatus = function(actor, target, fedData)
     return 0, 0, 0
 end
 
-xi.combat.action.executeAdditionalDispel = function(actor, target, fedData)
+xi.combat.action.executeAddEffectDispel = function(actor, target, fedData)
     local params = validateParameters(fedData)
 
     -- Early return: Incorrect effect ID.
