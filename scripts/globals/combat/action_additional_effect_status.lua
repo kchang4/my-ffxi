@@ -70,7 +70,7 @@ end
 -----------------------------------
 -- Global functions called from "emtity.onAdditionalEffect()"
 -----------------------------------
-xi.combat.action.executeAdditionalStatus = function(actor, target, fedData)
+xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     local params = validateParameters(fedData)
 
     -- Early return: Incorrect effect ID.
