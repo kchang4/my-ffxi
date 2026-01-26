@@ -56,7 +56,7 @@ end
 -----------------------------------
 -- Global functions called from "emtity.onAdditionalEffect()"
 -----------------------------------
-xi.combat.action.executeAdditionalDamage = function(actor, target, fedData)
+xi.combat.action.executeAddEffectDamage = function(actor, target, fedData)
     local params = validateParameters(fedData)
 
     -- Early return: No proc.
