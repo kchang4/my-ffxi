@@ -583,6 +583,43 @@ INSERT INTO `mob_spawn_slots` VALUES (173, 2, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 3, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 4, 0);
 
+-- Ordelle's Caves
+INSERT INTO `mob_spawn_slots` VALUES (193,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,17,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,18,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,19,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,20,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,21,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,22,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,23,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,24,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,25,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,26,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,27,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,28,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,29,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,30,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,31,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,32,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,33,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,34,0);
+INSERT INTO `mob_spawn_slots` VALUES (193,35,0);
+
 -- Gusgen Mines
 INSERT INTO `mob_spawn_slots` VALUES (196,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (196,2,0);
