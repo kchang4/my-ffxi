@@ -3673,7 +3673,7 @@ INSERT INTO `mob_groups` VALUES (1,3145,71,'Pit_Monster',0,128,0,0,0,0,NULL);
 -- Alzadaal_Undersea_Ruins (Zone 72)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2834,72,'Nepionic_Soulflayer',0,128,0,6800,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (1,2834,72,'Nepionic_Soulflayer',0,128,0,9600,9600,0,NULL);
 INSERT INTO `mob_groups` VALUES (2,3263,72,'Qiqirn_Poulterer',300,0,2050,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (3,3254,72,'Qiqirn_Goldsmith',300,0,2050,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (4,6713,72,'Qiqirn_Mine',0,128,0,0,0,0,NULL);
