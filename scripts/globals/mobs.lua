@@ -245,20 +245,6 @@ xi.mob.ae =
 
 local additionalEffects =
 {
-    [xi.mob.ae.CURSE] =
-    {
-        chance      = 20,
-        ele         = xi.element.DARK,
-        sub         = xi.subEffect.CURSE,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.CURSE_I,
-        power       = 50,
-        duration    = 300,
-        minDuration = 1,
-        maxDuration = 300,
-    },
-
     [xi.mob.ae.HP_DRAIN] =
     {
         chance             = 10,
