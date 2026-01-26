@@ -82,6 +82,25 @@ INSERT INTO `mob_spawn_slots` VALUES (103,55,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,56,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,57,0);
 
+-- RuAun Gardens
+INSERT INTO `mob_spawn_slots` VALUES (130,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (130,17,0);
+
 -- Ghelsba Outpost (Zone 140)
 INSERT INTO `mob_spawn_slots` VALUES (140,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (140,2,0);
