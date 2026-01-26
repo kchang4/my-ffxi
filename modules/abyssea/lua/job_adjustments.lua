@@ -3,7 +3,7 @@
 -- Desc: Removes traits/abilities/effects that were added to jobs during the Abyssea era
 -----------------------------------
 -- Source: https://www.bg-wiki.com/ffxi/Version_Update_(03/26/2012)
-------------------------------------
+-----------------------------------
 require('modules/module_utils')
 -----------------------------------
 
