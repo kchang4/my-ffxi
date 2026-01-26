@@ -35,11 +35,11 @@ end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     -- Vilma randomly effects its target with one of the following effects
-    local effectTable
+    local effectTable =
     {
         [1] = xi.effect.BLINDNESS,
         [2] = xi.effect.BIND,
-        [3] = xi.effect.PARALYZE,
+        [3] = xi.effect.PARALYSIS,
         [4] = xi.effect.POISON,
         [5] = xi.effect.SILENCE,
         [6] = xi.effect.SLOW,
@@ -49,7 +49,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     local pTable =
     {
         chance   = 25,
-        effectId = effects[math.random(1, #effects)],
+        effectId = effectTable[math.random(1, #effectTable)],
         power    = 20,
         duration = 60,
     }

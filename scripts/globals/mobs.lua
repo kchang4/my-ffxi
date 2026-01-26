@@ -213,19 +213,8 @@ end
 
 xi.mob.ae =
 {
-    CURSE        = 1,
-    ENAERO       = 2,
-    ENBLIZZARD   = 3,
-    ENDARK       = 4,
-    ENFIRE       = 5,
-    ENLIGHT      = 6,
-    ENSTONE      = 7,
-    ENTHUNDER    = 8,
-    ENWATER      = 9,
-    EVASION_DOWN = 10,
     HP_DRAIN     = 11,
     MP_DRAIN     = 12,
-    PARALYZE     = 13,
     PETRIFY      = 14,
     PLAGUE       = 15,
     POISON       = 16,
@@ -236,7 +225,6 @@ xi.mob.ae =
     TP_DRAIN     = 21,
     WEIGHT       = 22,
     ENAMNESIA    = 23,
-    DISPEL       = 24,
     BIND         = 25,
     SLEEP        = 26,
     DEFENSE_DOWN = 27,

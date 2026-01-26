@@ -76,7 +76,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-
 entity.onMobDespawn = function(mob)
     xi.mob.updateNMSpawnPoint(mob)
 
