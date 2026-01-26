@@ -273,20 +273,6 @@ local additionalEffects =
         end,
     },
 
-    [xi.mob.ae.PARALYZE] =
-    {
-        chance      = 25,
-        ele         = xi.element.ICE,
-        sub         = xi.subEffect.PARALYSIS,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.PARALYSIS,
-        power       = 20,
-        duration    = 30,
-        minDuration = 1,
-        maxDuration = 60,
-    },
-
     [xi.mob.ae.PETRIFY] =
     {
         chance      = 20,
