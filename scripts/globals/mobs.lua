@@ -259,20 +259,6 @@ local additionalEffects =
         maxDuration = 300,
     },
 
-    [xi.mob.ae.EVASION_DOWN] =
-    {
-        chance      = 25,
-        ele         = xi.element.ICE,
-        sub         = xi.subEffect.EVASION_DOWN,
-        msg         = xi.msg.basic.ADD_EFFECT_STATUS,
-        applyEffect = true,
-        eff         = xi.effect.EVASION_DOWN,
-        power       = 25,
-        duration    = 30,
-        minDuration = 1,
-        maxDuration = 60,
-    },
-
     [xi.mob.ae.HP_DRAIN] =
     {
         chance             = 10,
