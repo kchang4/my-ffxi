@@ -64,8 +64,8 @@ local function validateParameters(actor, target, fedData)
     params.absorbEffect = fedData.absorbEffect or false
 
     -- Animations and messaging.
-    params.animation    = fedData.animation or defaultsTable[params.effectId][1]
-    params.message      = fedData.message or defaultsTable[params.effectId][2]
+    params.animation    = fedData.animation or (defaultsTable[params.effectId][1] or 0)
+    params.message      = fedData.message or (defaultsTable[params.effectId][2] or 0)
 
     return params
 end
@@ -73,6 +73,32 @@ end
 -----------------------------------
 -- Global functions called from "emtity.onAdditionalEffect()"
 -----------------------------------
+xi.combat.action.executeAddEffectEnhancement = function(actor, target, fedData)
+    local params = validateParameters(actor, target, fedData)
+
+    -- Early return: Incorrect effect ID.
+    if params.effectId == xi.effect.NONE then
+        return 0, 0, 0
+    end
+
+    -- Early return: No proc.
+    if math.random(1, 100) > params.chance then
+        return 0, 0, 0
+    end
+
+    -- Early return: Target has an status effect that invalidates current (Outright incompatible or higher tier).
+    if xi.data.statusEffect.isEffectNullified(params.aeTarget, params.effectId, params.tier) then
+        return 0, 0, 0
+    end
+
+    -- Apply effect.
+    if params.aeTarget:addStatusEffect(params.effectId, params.power, params.tick, params.duration, params.subType, params.subPower, params.tier) then
+        return params.animation, params.message, params.effectId
+    end
+
+    return 0, 0, 0
+end
+
 xi.combat.action.executeAddEffectEnfeeblement = function(actor, target, fedData)
     local params = validateParameters(actor, target, fedData)
 
