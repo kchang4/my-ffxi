@@ -146,7 +146,7 @@ local function getSanctionDuration(player)
     local duration = 10800 + 1200 * (xi.besieged.getMercenaryRank(player) - 1)
 
     if xi.besieged.getAstralCandescence() == 0 then
-        duration = duration / 2
+        duration = math.floor(duration / 2)
     end
 
     return duration
@@ -171,30 +171,51 @@ xi.besieged.onEventUpdate = function(player, csid, option, npc)
 end
 
 xi.besieged.onEventFinish = function(player, csid, option, npc)
-    local ID = zones[player:getZoneID()]
+    local ID               = zones[player:getZoneID()]
+    local imperialStanding = player:getCurrency('imperial_standing')
+
+    -- Sanction
     if option == 0 or option == 16 or option == 32 or option == 48 then
-        -- Sanction
-        if option ~= 0 then
-            player:delCurrency('imperial_standing', 100)
+        local sanctionCost = 100
+        if option == 0 then
+            sanctionCost = 0
         end
 
-        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
+        if imperialStanding < sanctionCost then
+            return
+        end
+
         local duration = getSanctionDuration(player)
         local subPower = 0 -- getImperialDefenseStats()
+
+        player:delCurrency('imperial_standing', 100)
+        player:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
         player:addStatusEffect(xi.effect.SANCTION, option / 16, 0, duration, subPower)
         player:messageSpecial(ID.text.SANCTION)
+
+    -- Player bought a map
     elseif bit.band(option, 0xFF) == 17 then
-        -- Player bought a map
+        if imperialStanding < 1000 then
+            return
+        end
+
         local ki = xi.ki.MAP_OF_MAMOOK + bit.rshift(option, 8)
         npcUtil.giveKeyItem(player, ki)
         player:delCurrency('imperial_standing', 1000)
+
+    -- Player bought an item
     elseif option < 0x40000000 then
-        -- Player bought an item
-        local item, price = getISPItem(option)
-        if item then
-            if npcUtil.giveItem(player, item) then
-                player:delCurrency('imperial_standing', price)
-            end
+        local item, itemCost = getISPItem(option)
+        if not item then
+            return
+        end
+
+        if imperialStanding < itemCost then
+            return
+        end
+
+        if npcUtil.giveItem(player, item) then
+            player:delCurrency('imperial_standing', itemCost)
         end
     end
 end
