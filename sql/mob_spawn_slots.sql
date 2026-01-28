@@ -82,7 +82,7 @@ INSERT INTO `mob_spawn_slots` VALUES (103,55,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,56,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,57,0);
 
--- Behemoth's Dominion
+-- Behemoth's Dominion  
 INSERT INTO `mob_spawn_slots` VALUES (127,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (127,2,0);
 INSERT INTO `mob_spawn_slots` VALUES (127,3,0);
@@ -507,6 +507,11 @@ INSERT INTO `mob_spawn_slots` VALUES (145,110,0);
 INSERT INTO `mob_spawn_slots` VALUES (145,111,0);
 INSERT INTO `mob_spawn_slots` VALUES (145,112,0);
 INSERT INTO `mob_spawn_slots` VALUES (145,113,0);
+
+-- Qulun Dome
+INSERT INTO `mob_spawn_slots` VALUES (148,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (148,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (148,3,0);
 
 -- Monastic Cavern
 INSERT INTO `mob_spawn_slots` VALUES (150, 1, 0);
