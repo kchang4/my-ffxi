@@ -621,6 +621,31 @@ INSERT INTO `mob_spawn_slots` VALUES (173, 2, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 3, 0);
 INSERT INTO `mob_spawn_slots` VALUES (173, 4, 0);
 
+-- Dangruf Wadi
+INSERT INTO `mob_spawn_slots` VALUES (191,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,17,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,18,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,19,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,20,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,21,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,22,0);
+INSERT INTO `mob_spawn_slots` VALUES (191,23,0);
+
 -- Ordelle's Caves
 INSERT INTO `mob_spawn_slots` VALUES (193,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (193,2,0);
