@@ -10,6 +10,34 @@ ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 LOCK TABLES `mob_spawn_slots` WRITE;
 
+-- Carpenter's Landing
+INSERT INTO `mob_spawn_slots` VALUES (2,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,11,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,12,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,13,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,14,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,15,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,16,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,17,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,18,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,19,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,20,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,21,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,22,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,23,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,24,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,25,0);
+INSERT INTO `mob_spawn_slots` VALUES (2,26,0);
+
 -- Oldton Movalpolos
 INSERT INTO `mob_spawn_slots` VALUES (11,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (11,2,0);
