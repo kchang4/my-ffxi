@@ -82,6 +82,11 @@ INSERT INTO `mob_spawn_slots` VALUES (103,55,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,56,0);
 INSERT INTO `mob_spawn_slots` VALUES (103,57,0);
 
+-- Behemoth's Dominion
+INSERT INTO `mob_spawn_slots` VALUES (127,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (127,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (127,3,0);
+
 -- RuAun Gardens
 INSERT INTO `mob_spawn_slots` VALUES (130,1,0);
 INSERT INTO `mob_spawn_slots` VALUES (130,2,0);
