@@ -13,9 +13,10 @@ entity.onTrigger = function(player, npc)
 
     if
         player:getCharVar('ChasingQuotas_Progress') == 5 and
-        sturmtigerKilled == 0
+        sturmtigerKilled == 0 and
+        npcUtil.popFromQM(player, npc, ID.mob.STURMTIGER)
     then
-        SpawnMob(ID.mob.STURMTIGER, 300):updateClaim(player)
+        player:messageSpecial(ID.text.SENSE_AN_EVIL_PRESENCE)
     elseif sturmtigerKilled == 1 then
         npcUtil.giveKeyItem(player, xi.ki.RANCHURIOMES_LEGACY)
         player:setCharVar('ChasingQuotas_Progress', 6)
