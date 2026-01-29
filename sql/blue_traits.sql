@@ -19,6 +19,8 @@ CREATE TABLE `blue_traits` (
 -- ----------------------------
 INSERT INTO `blue_traits` VALUES (1,2,32,230,8,1,0);     -- Beast Killer (1)
 INSERT INTO `blue_traits` VALUES (2,2,9,370,1,1,0);      -- Auto Regen (1)
+INSERT INTO `blue_traits` VALUES (2,4,9,370,2,2,1);      -- Auto Regen (2) (JP only)
+INSERT INTO `blue_traits` VALUES (2,6,9,370,3,3,1);      -- Auto Regen (3) (JP only)
 INSERT INTO `blue_traits` VALUES (3,2,35,227,8,1,0);     -- Lizard Killer (1)
 INSERT INTO `blue_traits` VALUES (4,2,24,295,1,1,0);     -- Clear Mind (1)
 INSERT INTO `blue_traits` VALUES (4,4,24,295,2,2,0);     -- Clear Mind (2)
@@ -45,7 +47,7 @@ INSERT INTO `blue_traits` VALUES (10,4,8,5,20,2,0);      -- Max MP Boost (2)
 INSERT INTO `blue_traits` VALUES (11,2,4,1,10,1,0);      -- Defense Bonus (1)
 INSERT INTO `blue_traits` VALUES (12,2,33,229,8,1,0);    -- Plantoid Killer (1)
 INSERT INTO `blue_traits` VALUES (13,2,6,29,10,1,0);     -- Magic Defense Bonus (1)
-INSERT INTO `blue_traits` VALUES (14,8,10,369,1,1,0);    -- Auto Refresh (1)
+INSERT INTO `blue_traits` VALUES (14,2,10,369,1,1,0);    -- Auto Refresh (1) -- Only tier available to BLU
 INSERT INTO `blue_traits` VALUES (15,8,7,1095,30,1,0);   -- Max HP Boost (1)
 INSERT INTO `blue_traits` VALUES (15,16,7,1095,60,2,0);  -- Max HP Boost (2)
 INSERT INTO `blue_traits` VALUES (15,24,7,1095,120,3,0); -- Max HP Boost (3)
