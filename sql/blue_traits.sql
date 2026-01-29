@@ -18,6 +18,8 @@ CREATE TABLE `blue_traits` (
 -- Records
 -- ----------------------------
 INSERT INTO `blue_traits` VALUES (1,2,32,230,8,1,0);     -- Beast Killer (1)
+INSERT INTO `blue_traits` VALUES (1,4,32,230,10,2,0);    -- Beast Killer (2)
+INSERT INTO `blue_traits` VALUES (1,6,32,230,12,3,0);    -- Beast Killer (3)
 INSERT INTO `blue_traits` VALUES (2,2,9,370,1,1,0);      -- Auto Regen (1)
 INSERT INTO `blue_traits` VALUES (2,4,9,370,2,2,1);      -- Auto Regen (2) (JP only)
 INSERT INTO `blue_traits` VALUES (2,6,9,370,3,3,1);      -- Auto Regen (3) (JP only)
