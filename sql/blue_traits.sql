@@ -61,6 +61,8 @@ INSERT INTO `blue_traits` VALUES (11,8,4,1,48,4,0);      -- Defense Bonus (4)
 INSERT INTO `blue_traits` VALUES (11,10,4,1,60,5,1);     -- Defense Bonus (5)
 INSERT INTO `blue_traits` VALUES (11,12,4,1,72,6,1);     -- Defense Bonus (6)
 INSERT INTO `blue_traits` VALUES (12,2,33,229,8,1,0);    -- Plantoid Killer (1)
+INSERT INTO `blue_traits` VALUES (12,4,33,229,10,2,0);   -- Plantoid Killer (2)
+INSERT INTO `blue_traits` VALUES (12,6,33,229,12,3,1);   -- Plantoid Killer (3) (JP only)
 INSERT INTO `blue_traits` VALUES (13,2,6,29,10,1,0);     -- Magic Defense Bonus (1)
 INSERT INTO `blue_traits` VALUES (14,2,10,369,1,1,0);    -- Auto Refresh (1) -- Only tier available to BLU
 INSERT INTO `blue_traits` VALUES (15,2,7,1095,30,1,0);   -- Max HP Boost (1)
