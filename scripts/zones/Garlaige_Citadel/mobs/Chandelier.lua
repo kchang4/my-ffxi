@@ -21,7 +21,7 @@ entity.onMobEngage = function(mob, target)
     local ve = mob:getVE(target)
     if ce == 0 and ve == 0 then
         mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-        mob:useMobAbility(509) -- Chandelier's self-destruct is similar to Volcanic Bomb's with a 1600ish cap and should be adjusted accordingly when its rewritten
+        mob:useMobAbility(xi.mobSkill.SELF_DESTRUCT_BOMB) -- Chandelier's self-destruct is similar to Volcanic Bomb's with a 1600ish cap and should be adjusted accordingly when its rewritten
     end
 end
 
