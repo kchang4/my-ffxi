@@ -8605,7 +8605,7 @@ INSERT INTO `mob_groups` VALUES (25,5891,114,'Sabotender_Corrido',7200,0,3090,90
 INSERT INTO `mob_groups` VALUES (26,1709,114,'Goblin_Robber',300,0,1145,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (27,676,114,'Centurio_XII-I',0,128,444,5000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (28,1701,114,'Goblin_Poacher',300,0,1138,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (29,1138,114,'Dune_Widow',0,32,720,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (29,1138,114,'Dune_Widow',0,32,720,4300,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (30,1705,114,'Goblin_Reaper',300,0,1142,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (31,1741,114,'Goblin_Trader',300,0,1179,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (32,1732,114,'Goblins_Spider',0,128,0,0,0,0,NULL);
@@ -8628,7 +8628,7 @@ INSERT INTO `mob_groups` VALUES (48,781,114,'Contantican_Warrior',0,128,0,0,0,0,
 INSERT INTO `mob_groups` VALUES (49,778,114,'Contantican_Black_Mage',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (50,779,114,'Contantican_Paladin',0,128,0,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (51,780,114,'Contantican_Ranger',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (52,595,114,'Cactrot_Rapido',0,128,395,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (52,595,114,'Cactrot_Rapido',0,128,395,9800,0,0,NULL);
 
 -- garrison
 INSERT INTO `mob_groups` VALUES (53,1896,114,'Hastatus_XIII-LXXV',0,128,3226,0,0,0,NULL);
