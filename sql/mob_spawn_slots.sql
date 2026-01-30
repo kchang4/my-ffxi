@@ -713,4 +713,17 @@ INSERT INTO `mob_spawn_slots` VALUES (196,26,0);
 INSERT INTO `mob_spawn_slots` VALUES (196,27,0);
 INSERT INTO `mob_spawn_slots` VALUES (196,28,0);
 
+-- Gustav Tunnel
+INSERT INTO `mob_spawn_slots` VALUES (212,1,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,2,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,3,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,4,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,5,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,6,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,7,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,8,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,9,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,10,0);
+INSERT INTO `mob_spawn_slots` VALUES (212,11,0);
+
 UNLOCK TABLES;
