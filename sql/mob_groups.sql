@@ -9467,9 +9467,9 @@ INSERT INTO `mob_groups` VALUES (7,2585,127,'Master_Coeurl',900,0,1640,0,0,0,NUL
 INSERT INTO `mob_groups` VALUES (8,407,127,'Bhuta',300,1,264,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (9,387,127,'Behemoth',0,128,251,60000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (10,2255,127,'King_Behemoth',0,128,1450,75000,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (11,3135,127,'Picklix_Longindex',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (12,2767,127,'Moxnix_Nightgoggle',0,128,0,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (13,1074,127,'Doglix_Muttsnout',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (11,3135,127,'Picklix_Longindex',0,128,0,9400,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (12,2767,127,'Moxnix_Nightgoggle',0,128,0,8700,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (13,1074,127,'Doglix_Muttsnout',0,128,0,8500,8500,0,NULL);
 INSERT INTO `mob_groups` VALUES (14,130,127,'Ancient_Weapon',0,128,0,7000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (15,2387,127,'Legendary_Weapon',0,128,0,7000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (16,1836,127,'Gudanna',0,128,0,0,0,0,NULL);
@@ -10627,7 +10627,7 @@ INSERT INTO `mob_groups` VALUES (21,791,143,'Copper_Quadav',600,0,514,0,0,0,NULL
 INSERT INTO `mob_groups` VALUES (22,5774,143,'BeHya_Hundredwall',0,32,3058,775,0,0,'WOTG');
 INSERT INTO `mob_groups` VALUES (23,525,143,'Brass_Quadav',600,0,352,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (24,2916,143,'NoMho_Crimsonarmor',86400,0,2839,880,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (25,2897,143,'NiGhu_Nestfender',0,128,2825,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (25,2897,143,'NiGhu_Nestfender',0,128,2825,5500,3000,0,NULL);
 INSERT INTO `mob_groups` VALUES (26,6725,143,'Incensed_Pineapple',0,128,0,0,0,0,NULL); -- TODO: capture level from retail
 
 -- Cornelia's Call to Action
@@ -10933,8 +10933,8 @@ INSERT INTO `mob_groups` VALUES (39,925,149,'Davoi_Mush',780,0,1845,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (40,475,149,'Blubbery_Bulge',0,32,1845,2100,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (41,3006,149,'Orcish_Dragoon',960,0,1891,0,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (42,1046,149,'Dirtyhanded_Gochakzuk',300,0,666,5700,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (43,1478,149,'Gavotvut',0,128,307,0,0,0,NULL);
-INSERT INTO `mob_groups` VALUES (44,340,149,'Barakbok',0,128,0,0,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (43,1478,149,'Gavotvut',0,128,307,6800,0,0,NULL);
+INSERT INTO `mob_groups` VALUES (44,340,149,'Barakbok',0,128,0,4075,2000,0,NULL);
 INSERT INTO `mob_groups` VALUES (45,419,149,'Bilopdop',0,128,0,10800,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (46,964,149,'Deloknok',0,128,0,6000,0,0,NULL);
 INSERT INTO `mob_groups` VALUES (47,3233,149,'Purpleflash_Brukdok',600,0,2044,7900,0,0,NULL);
