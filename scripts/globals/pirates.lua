@@ -190,17 +190,105 @@ xi.pirates.pirateNPCTimeTrigger = function(npc, triggerId, zoneKey)
     xi.pirates.zoneStateChange(pirateZone, triggerId)
 end
 
+-- Spawn all pirate mobs for the encounter
+local function spawnPirateMobs(zone)
+    local zoneId = zone:getID()
+    local zoneData = zones[zoneId]
+    if not zoneData or not zoneData.mob then
+        return
+    end
+
+    -- Spawn all Crossbones (skeleton pirates)
+    if zoneData.mob.CROSSBONES then
+        for _, mobId in ipairs(zoneData.mob.CROSSBONES) do
+            local mob = GetMobByID(mobId)
+            if mob and not mob:isSpawned() then
+                SpawnMob(mobId)
+            end
+        end
+    end
+
+    -- Spawn Ship Wight
+    local shipWightId = zoneData.mob.SHIP_WIGHT
+    if shipWightId then
+        local shipWight = GetMobByID(shipWightId)
+        if shipWight and not shipWight:isSpawned() then
+            SpawnMob(shipWightId)
+        end
+    end
+
+    -- Spawn NM if the middle pirate wore a Vermillion Cloak
+    local nmCanSpawn = zone:getLocalVar('nmCanSpawn')
+    if nmCanSpawn == 1 then
+        local nmId = nil
+
+        -- Blackbeard spawns on Ship bound for Selbina (Mhaura -> Selbina route)
+        if zoneId == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES and zoneData.mob.BLACKBEARD then
+            nmId = zoneData.mob.BLACKBEARD
+        -- Silverhook spawns on Ship bound for Mhaura (Selbina -> Mhaura route)
+        elseif zoneId == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES and zoneData.mob.SILVERHOOK then
+            nmId = zoneData.mob.SILVERHOOK
+        end
+
+        if nmId then
+            local nm = GetMobByID(nmId)
+            if nm and not nm:isSpawned() then
+                SpawnMob(nmId)
+            end
+        end
+    end
+end
+
+-- Despawn all pirate mobs that are not currently engaged in combat
+local function despawnPirateMobs(zone)
+    local zoneId = zone:getID()
+    local zoneData = zones[zoneId]
+    if not zoneData or not zoneData.mob then
+        return
+    end
+
+    -- Helper function to despawn a mob if not engaged
+    local function despawnIfNotEngaged(mobId)
+        if not mobId then
+            return
+        end
+
+        local mob = GetMobByID(mobId)
+        if mob and mob:isSpawned() and not mob:isEngaged() then
+            DespawnMob(mobId)
+        end
+    end
+
+    -- Despawn Crossbones
+    if zoneData.mob.CROSSBONES then
+        for _, mobId in ipairs(zoneData.mob.CROSSBONES) do
+            despawnIfNotEngaged(mobId)
+        end
+    end
+
+    -- Despawn Ship Wight
+    despawnIfNotEngaged(zoneData.mob.SHIP_WIGHT)
+
+    -- Despawn NM
+    if zoneId == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
+        despawnIfNotEngaged(zoneData.mob.BLACKBEARD)
+    elseif zoneId == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
+        despawnIfNotEngaged(zoneData.mob.SILVERHOOK)
+    end
+end
+
 xi.pirates.zoneStateChange = function(zone, action)
     -- change the zone's state once per action cycle (this function is called by each NPC)
     if zone:getLocalVar('currPiratesAction') ~= action then
         zone:setLocalVar('currPiratesAction', action)
 
         if action == actions.MOBS_SPAWN then
-            -- TODO enable mob spawns (and NM spawns if nmCanSpawn is set to 1)
-            -- set them to setRespawn(1s), then set normal respawnTime in onMobSpawn
+            -- Spawn pirate mobs when the pirates finish their summoning ritual
+            spawnPirateMobs(zone)
         elseif action == actions.PIRATES_RETREAT then
-            -- TODO disable all spawns and despawn any not in combat
-            -- mobs in combat do not despawn when the ship leaves
+            -- Despawn any pirate mobs that are not engaged in combat
+            -- Mobs that are in combat will remain until killed or the player leaves
+            despawnPirateMobs(zone)
         end
     end
 end

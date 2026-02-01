@@ -23,9 +23,10 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
     },
     mob =
     {
-        BLACKBEARD = GetFirstID('Blackbeard'),
-        ENAGAKURE  = GetFirstID('Enagakure'),
-        SHIP_WIGHT = GetFirstID('Ship_Wight'),
+        BLACKBEARD      = GetFirstID('Blackbeard'),
+        CROSSBONES      = GetTableOfIDs('Crossbones'),
+        ENAGAKURE       = GetFirstID('Enagakure'),
+        SHIP_WIGHT      = GetFirstID('Ship_Wight'),
     },
     npc =
     {
