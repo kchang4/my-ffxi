@@ -22,6 +22,7 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
         MEMBERS_LEVELS_ARE_RESTRICTED    = 7213,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET           = 7257,  -- You can't fish here.
         SOMETHING_HUGE_BEARING_DOWN      = 7505,  -- Something huge is bearing down upon you!
+        BLOODTHIRSTY_MONSTER_APPEARED    = 7521,  -- A bloodthirsty monster has appeared!
         PLAYER_OBTAINS_ITEM              = 8640,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM            = 8641,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM         = 8642,  -- <name> obtains the temporary item: <item>!
@@ -34,14 +35,16 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
     },
     mob =
     {
-        HIPPOLYTOS    = GetFirstID('Hippolytos'),
-        EPIALTES      = GetFirstID('Epialtes'),
-        EURYMEDON     = GetFirstID('Eurymedon'),
-        DISASTER_IDOL = GetFirstID('Disaster_Idol'),
+        HIPPOLYTOS            = GetFirstID('Hippolytos'),
+        EPIALTES              = GetFirstID('Epialtes'),
+        EURYMEDON             = GetFirstID('Eurymedon'),
+        DISASTER_IDOL         = GetFirstID('Disaster_Idol'),
+        ORNA                  = GetFirstID('Orna'),
+        FOMORIAN_SPEAR_OFFSET = GetFirstID('Fomorian_Spear'),
     },
     npc =
     {
-        TALES_BEGINNING = GetFirstID('Tales_Beginning'), -- CoP 1-1 mission script uses this
+
     },
 }
 
