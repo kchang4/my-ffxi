@@ -366,6 +366,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,650); -- Thornsong
 INSERT INTO `mob_skill_lists` VALUES ('Dragon',87,651); -- Lodesong
 -- 88: Bloody Bones
 -- 89: Draugar
+INSERT INTO `mob_skill_lists` VALUES ('Draugar',89,732); -- call_wyvern
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2113);
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2114);
 INSERT INTO `mob_skill_lists` VALUES ('Dvergr',90,2115);
