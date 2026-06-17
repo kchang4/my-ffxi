@@ -12,12 +12,6 @@ entity.onMobInitialize = function(mob)
     xi.pet.setMobPet(mob, 1, 'Draugars_Wyvern')
 end
 
-entity.onMobSpawn = function(mob)
-    if mob:getPet() ~= nil then
-        mob:setTP(1000)
-    end
-end
-
 entity.onMobDeath = function(mob, player, optParams)
 end
 
