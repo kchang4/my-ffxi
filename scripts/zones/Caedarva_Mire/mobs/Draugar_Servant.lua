@@ -6,6 +6,7 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    xi.pet.setMobPet(mob,  1, 'Draugars_Wyvern')
     xi.pet.setMobPet(mob, -1, 'Draugars_Wyvern')
 end
 
