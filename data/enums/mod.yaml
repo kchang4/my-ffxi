@@ -126,6 +126,7 @@ values:
   tactical_parry:           486 # Tactical Parry Tp Bonus
   inhibit_tp:               488 # Inhibits TP Gain (percent)
   eva_percent:             1214 # % Evasion Multiplier
+  equip_offjob:            1215 # Worn item lets other armor be equipped regardless of job. Value is a bitmask of equip slots: 1 << (slot - 4), HEAD=1 BODY=2 HANDS=4 LEGS=8 FEET=16 NECK=32 WAIST=64 EAR1=128 EAR2=256 RING1=512 RING2=1024 BACK=2048. Weapons never qualify. Level, race and Superior Level limits still apply.
   # Working Skills (weapon combat skills)
   # These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
   hth:                80 # Hand To Hand Skill

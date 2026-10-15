@@ -1131,35 +1131,48 @@ void LoadEquip(CCharEntity* PChar)
         CItemLinkshell* PLinkshell2   = nullptr;
         bool            hasMainWeapon = false;
 
-        for (const auto& [equipSlotId, inventoryLoc] : equipSlotData)
+        // Two passes: EQUIP_OFFJOB providers go on first, otherwise the gear they unlock (head before ring, say) would be refused at login
+        for (const bool providerPass : { true, false })
         {
-            if (equipSlotId < 16)
+            for (const auto& [equipSlotId, inventoryLoc] : equipSlotData)
             {
-                if (equipSlotId == SLOT_MAIN)
+                if (equipSlotId < 16)
                 {
-                    hasMainWeapon = true;
-                }
-
-                EquipItem(PChar, inventoryLoc.first, equipSlotId, inventoryLoc.second);
-            }
-            else
-            {
-                CItem* PItem = PChar->getStorage(inventoryLoc.second)->GetItem(inventoryLoc.first);
-
-                if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
-                {
-                    if (!PChar->bindEquip(equipSlotId, PItem))
+                    if (providesOffJobEquip(PChar->getStorage(inventoryLoc.second)->GetItem(inventoryLoc.first)) != providerPass)
                     {
                         continue;
                     }
 
-                    if (equipSlotId == SLOT_LINK1)
+                    if (equipSlotId == SLOT_MAIN)
                     {
-                        PLinkshell1 = (CItemLinkshell*)PItem;
+                        hasMainWeapon = true;
                     }
-                    else if (equipSlotId == SLOT_LINK2)
+
+                    EquipItem(PChar, inventoryLoc.first, equipSlotId, inventoryLoc.second);
+                }
+                else if (providerPass)
+                {
+                    continue; // linkshells are handled in the second pass
+                }
+                else
+                {
+                    CItem* PItem = PChar->getStorage(inventoryLoc.second)->GetItem(inventoryLoc.first);
+
+                    if ((PItem != nullptr) && PItem->isType(ITEM_LINKSHELL))
                     {
-                        PLinkshell2 = (CItemLinkshell*)PItem;
+                        if (!PChar->bindEquip(equipSlotId, PItem))
+                        {
+                            continue;
+                        }
+
+                        if (equipSlotId == SLOT_LINK1)
+                        {
+                            PLinkshell1 = (CItemLinkshell*)PItem;
+                        }
+                        else if (equipSlotId == SLOT_LINK2)
+                        {
+                            PLinkshell2 = (CItemLinkshell*)PItem;
+                        }
                     }
                 }
             }
@@ -2035,6 +2048,13 @@ void UnequipItem(CCharEntity* PChar, uint8 equipSlotID, Recalculate recalculate,
             PChar->updatemask |= UPDATE_LOOK;
         }
 
+        // Removing an EQUIP_OFFJOB provider takes the armor it unlocked off with it.
+        // (Recalculate::No is only used mid-swap by EquipArmor, where EquipItem re-validates once the swap is done.)
+        if (recalculate && providesOffJobEquip(PItem))
+        {
+            StripInvalidOffJobGear(PChar);
+        }
+
         // Racing silks change a personal chocobo's speed while worn; the client reads its own speed from 0x037.
         if (mountutils::isPersonalChocobo(PChar))
         {
@@ -2075,7 +2095,12 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
         return false;
     }
 
-    if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1))) ||
+    // Job-locked gear can also be worn when something already worn unlocks this slot (EQUIP_OFFJOB). The item currently in
+    // the target slot is about to be replaced, so it must not count as an unlocker.
+    const bool jobAllowed = (PItem->getJobs() & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1))) ||
+                            isOffJobEquipAllowed(PItem, equipSlotID, offJobUnlockedSlots(PChar, equipSlotID));
+
+    if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !jobAllowed ||
         (PItem->getSuperiorLevel() > PChar->getMod(xi::Mod::SUPERIOR_LEVEL)) ||
         (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[static_cast<uint8>(PChar->GetMJob())])) ||
         !PItem->isEquippableByRace(PChar->look.race))
@@ -2342,6 +2367,108 @@ bool EquipArmor(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 conta
         return false;
     }
     return true;
+}
+
+// EQUIP_OFFJOB: the mod value is a bitmask of armor equip slots, bit = (slot - SLOT_HEAD). Weapons (main/sub/range/ammo) never qualify.
+constexpr uint16 OFFJOB_SLOT_MASK = 0x0FFF;
+
+auto offJobSlotBit(uint8 equipSlotID) -> uint16
+{
+    if (equipSlotID < SLOT_HEAD || equipSlotID > SLOT_BACK)
+    {
+        return 0;
+    }
+    return static_cast<uint16>(1u << (equipSlotID - SLOT_HEAD));
+}
+
+// Can PChar wear PItem on their current main job as-is (job, level, race, Superior Level)? Used to decide who may *provide* an unlock.
+auto isEquippableByCurrentJob(CCharEntity* PChar, CItemEquipment* PItem) -> bool
+{
+    const auto mjob = static_cast<uint8>(PChar->GetMJob());
+
+    return (PItem->getJobs() & (1u << (mjob - 1))) &&
+           PItem->getSuperiorLevel() <= PChar->getMod(xi::Mod::SUPERIOR_LEVEL) &&
+           PItem->getReqLvl() <= (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[mjob]) &&
+           PItem->isEquippableByRace(PChar->look.race);
+}
+
+// Slots currently unlocked by worn items. Only items the character can wear normally count, so an off-job item can never unlock others.
+// Stateless: depends only on what is worn right now, never on the order things were equipped in.
+// ignoreSlot: treat that slot as empty (the item in it is about to be replaced).
+auto offJobUnlockedSlots(CCharEntity* PChar, std::optional<uint8> ignoreSlot) -> uint16
+{
+    uint16 slots = 0;
+
+    for (uint8 slotID = 0; slotID < 16; ++slotID)
+    {
+        if (ignoreSlot && *ignoreSlot == slotID)
+        {
+            continue;
+        }
+
+        auto* PEquip = PChar->getEquip(static_cast<SLOTTYPE>(slotID));
+        if (PEquip == nullptr || !PEquip->isType(ITEM_EQUIPMENT))
+        {
+            continue;
+        }
+
+        const auto provided = PEquip->getModifier(xi::Mod::EQUIP_OFFJOB);
+        if (provided <= 0 || !isEquippableByCurrentJob(PChar, PEquip))
+        {
+            continue;
+        }
+
+        slots |= static_cast<uint16>(provided) & OFFJOB_SLOT_MASK;
+    }
+
+    return slots;
+}
+
+auto isOffJobEquipAllowed(const CItemEquipment* PItem, uint8 equipSlotID, uint16 unlockedSlots) -> bool
+{
+    return PItem != nullptr && !PItem->isType(ITEM_WEAPON) && (offJobSlotBit(equipSlotID) & unlockedSlots) != 0;
+}
+
+auto providesOffJobEquip(const CItem* PItem) -> bool
+{
+    const auto* PEquip = dynamic_cast<const CItemEquipment*>(PItem);
+    return PEquip != nullptr && PEquip->getModifier(xi::Mod::EQUIP_OFFJOB) > 0;
+}
+
+// Take off any armor that is no longer wearable: not job-legal and no longer unlocked by something worn.
+// Called whenever gear changes so an unlock can't outlive its provider (ring swapped/removed after equipping the piece it unlocked).
+void StripInvalidOffJobGear(CCharEntity* PChar)
+{
+    // UnequipItem calls back into here when the item removed was a provider; the loop below already handles that case
+    static thread_local bool running = false;
+    if (running)
+    {
+        return;
+    }
+    running = true;
+
+    const auto jobBit = 1u << (static_cast<uint8>(PChar->GetMJob()) - 1);
+
+    bool removed = false;
+    do
+    {
+        removed             = false;
+        const auto unlocked = offJobUnlockedSlots(PChar);
+
+        for (uint8 slotID = SLOT_HEAD; slotID <= SLOT_BACK; ++slotID)
+        {
+            const auto* PEquip = PChar->getEquip(static_cast<SLOTTYPE>(slotID));
+            if (PEquip == nullptr || !PEquip->isType(ITEM_EQUIPMENT) || (PEquip->getJobs() & jobBit) || isOffJobEquipAllowed(PEquip, slotID, unlocked))
+            {
+                continue;
+            }
+
+            UnequipItem(PChar, slotID);
+            removed = true;
+        }
+    } while (removed);
+
+    running = false;
 }
 
 auto canEquipItemOnAnyJob(CCharEntity* PChar, const CItemEquipment* PItem) -> bool
@@ -2893,42 +3020,46 @@ void LoadJobChangeGear(CCharEntity* PChar)
     {
         const std::vector<uint8> validContainers = { LOC_INVENTORY, LOC_WARDROBE, LOC_WARDROBE2, LOC_WARDROBE3, LOC_WARDROBE4, LOC_WARDROBE5, LOC_WARDROBE6, LOC_WARDROBE7, LOC_WARDROBE8 };
 
-        for (uint8 equipSlot = SLOT_MAIN; equipSlot <= SLOT_BACK; equipSlot++)
+        // Two passes: EQUIP_OFFJOB providers first, so the armor they unlock isn't refused just because its slot comes earlier
+        for (const bool providerPass : { true, false })
         {
-            const auto itemId = rset->get<uint16>(equipSlot);
-
-            if (itemId > 0)
+            for (uint8 equipSlot = SLOT_MAIN; equipSlot <= SLOT_BACK; equipSlot++)
             {
-                CItemEquipment* compareItem = nullptr;
+                const auto itemId = rset->get<uint16>(equipSlot);
 
-                // Get item that theoretically could be equipped an adjacent slot
-                if (equipSlot == SLOT_MAIN || equipSlot == SLOT_EAR1 || equipSlot == SLOT_RING1)
+                if (itemId > 0 && providesOffJobEquip(xi::items::lookup<CItemEquipment>(itemId)) == providerPass)
                 {
-                    // Check one item to the "right"
-                    compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1));
-                }
-                else if (equipSlot == SLOT_SUB || equipSlot == SLOT_EAR2 || equipSlot == SLOT_RING2)
-                {
-                    // Check one item to the "left"
-                    compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1));
-                }
+                    CItemEquipment* compareItem = nullptr;
 
-                for (const auto container : validContainers)
-                {
-                    auto* PContainer = PChar->getStorage(container);
-
-                    const auto* PEquip = PContainer->FindItem(
-                        [&](CItem* PItem)
-                        {
-                            // ensure this is the item we actually want from the db
-                            // Validate that we're not trying to equip the same item to two different slots
-                            return dynamic_cast<CItemEquipment*>(PItem) && PItem->getID() == itemId && PItem != compareItem;
-                        });
-
-                    if (PEquip)
+                    // Get item that theoretically could be equipped an adjacent slot
+                    if (equipSlot == SLOT_MAIN || equipSlot == SLOT_EAR1 || equipSlot == SLOT_RING1)
                     {
-                        charutils::EquipItem(PChar, PEquip->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
-                        break;
+                        // Check one item to the "right"
+                        compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1));
+                    }
+                    else if (equipSlot == SLOT_SUB || equipSlot == SLOT_EAR2 || equipSlot == SLOT_RING2)
+                    {
+                        // Check one item to the "left"
+                        compareItem = PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1));
+                    }
+
+                    for (const auto container : validContainers)
+                    {
+                        auto* PContainer = PChar->getStorage(container);
+
+                        const auto* PEquip = PContainer->FindItem(
+                            [&](CItem* PItem)
+                            {
+                                // ensure this is the item we actually want from the db
+                                // Validate that we're not trying to equip the same item to two different slots
+                                return dynamic_cast<CItemEquipment*>(PItem) && PItem->getID() == itemId && PItem != compareItem;
+                            });
+
+                        if (PEquip)
+                        {
+                            charutils::EquipItem(PChar, PEquip->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
+                            break;
+                        }
                     }
                 }
             }
@@ -3163,6 +3294,9 @@ void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 contai
         BuildingCharWeaponSkills(PChar);
     }
 
+    // A provider may have been swapped out (ring replaced, or a bigger item displaced it): make sure nothing it unlocked is left behind
+    StripInvalidOffJobGear(PChar);
+
     charutils::BuildingCharSkillsTable(PChar);
     PChar->UpdateHealth();
 
@@ -3212,7 +3346,9 @@ void CheckValidEquipment(CCharEntity* PChar, bool isDelevel /* = false */)
             }
         }
 
-        if ((PItem->getJobs() & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1))) && (PItem->getEquipSlotId() & (1 << slotID)))
+        // recomputed per slot: unequipping a provider above must immediately affect the slots checked after it
+        const bool jobAllowed = (PItem->getJobs() & (1 << (static_cast<uint8>(PChar->GetMJob()) - 1))) || isOffJobEquipAllowed(PItem, slotID, offJobUnlockedSlots(PChar));
+        if (jobAllowed && (PItem->getEquipSlotId() & (1 << slotID)))
         {
             continue;
         }

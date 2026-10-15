@@ -25,6 +25,7 @@
 #include "common/types/flag.h"
 
 #include <memory>
+#include <optional>
 #include <string>
 #include <utility>
 #include <vector>
@@ -153,6 +154,14 @@ void SetStyleLock(CCharEntity* PChar, bool isStyleLocked);
 void UpdateWeaponStyle(CCharEntity* PChar, uint8 equipSlotID, CItemEquipment* PItem);
 void UpdateArmorStyle(CCharEntity* PChar, uint8 equipSlotID);
 auto canEquipItemOnAnyJob(CCharEntity* PChar, const CItemEquipment* PItem) -> bool;
+
+// EQUIP_OFFJOB: a worn item whose job/level/race it can wear itself may unlock other armor slots (see data/enums/mod.yaml)
+auto offJobSlotBit(uint8 equipSlotID) -> uint16;
+auto isEquippableByCurrentJob(CCharEntity* PChar, CItemEquipment* PItem) -> bool;
+auto offJobUnlockedSlots(CCharEntity* PChar, std::optional<uint8> ignoreSlot = std::nullopt) -> uint16;
+auto isOffJobEquipAllowed(const CItemEquipment* PItem, uint8 equipSlotID, uint16 unlockedSlots) -> bool;
+auto providesOffJobEquip(const CItem* PItem) -> bool;
+void StripInvalidOffJobGear(CCharEntity* PChar);
 auto hasValidStyle(CCharEntity* PChar, const CItemEquipment* PItem, const CItemEquipment* AItem) -> bool;
 void UpdateRemovedSlotsLookForLockStyle(CCharEntity* PChar);
 void UpdateRemovedSlotsLook(CCharEntity* PChar);
